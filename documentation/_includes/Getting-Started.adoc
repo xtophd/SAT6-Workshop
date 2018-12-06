@@ -78,6 +78,149 @@ Now you are ready to proceed with executing the pre-install steps.  This typical
 bash 01-pre-install-script.sh
 ----
 
+
+.[root@workstation OCP-Workshop]# - THINGS I NEED TO PUT IN PLAYBOOKS
+----
+Create RHEL 7 from template
+
+Added 200 GB disk
+Created 200 GB sat64vg volume group
+
+fdisk /dev/sdb
+
+# Create LVM
+pvcreate /dev/sdb1
+vgcreate sat64vg /dev/sdb1
+lvcreate -L 50GB -n mongodb sat64vg
+lvcreate -L 100GB -n pulp sat64vg
+lvcreate -L 5GB -n pgsql sat64vg
+lvcreate -L 5GB -n squid sat64vg
+lvcreate -L 20GB -n cache sat64vg
+
+#Created xfs filesystems
+mkfs -t xfs /dev/sat64vg/mongodb
+mkfs -t xfs /dev/sat64vg/pulp
+mkfs -t xfs /dev/sat64vg/pgsql
+mkfs -t xfs /dev/sat64vg/squid
+mkfs -t xfs /dev/sat64vg/cache
+
+#Created Mount point in fstab
+/dev/mapper/sat64vg-pulp      /var/lib/pulp           xfs     defaults        0 0
+/dev/mapper/sat64vg-pgsql     /var/lib/pgsql          xfs     defaults        0 0
+/dev/mapper/sat64vg-mongodb   /var/lib/mongodb        xfs     defaults        0 0
+/dev/mapper/sat64vg-squid     /var/spool/squid        xfs     defaults        0 0
+/dev/mapper/sat64vg-cache      /var/cache           xfs     defaults        0 0
+
+## We are going to create a new /var/cache
+mv /var/cache /var/cache.old
+
+#Create Mount Points
+mkdir -p /var/lib/{pulp,pgsql,mongodb} /var/spool/squid /var/cache
+
+## Mount everything
+mount -a
+
+## Restore cache directory contents
+cd /var/cache
+tar cf - -C /var/cache.old . | tar xvpf -
+
+## Remove old cache directory
+rm -rf /var/cache.old
+
+# If registered, unregister
+subscription-manager unregister
+subscription-manager clean
+
+# Subscription Manager Register
+subscription-manager register
+subscription-manager remove --all
+subscription-manager list --available
+subscription-manager attach --pool=<>
+
+# Subscription manager disable repos
+subscription-manager repos --disable=*
+
+# Subscribe to repos
+subscription-manager repos --enable=rhel-7-server-rpms \
+--enable=rhel-server-rhscl-7-rpms \
+--enable=rhel-7-server-satellite-6.4-rpms \
+--enable=rhel-7-server-satellite-maintenance-6-rpms \
+--enable=rhel-7-server-ansible-2.6-rpms
+
+# Ensure sub manager not locked into specific release of RHEL
+subscription-manager release --unset
+
+# Clean yum cache, etc
+yum clean all
+
+# Update box
+yum update -y
+
+# If host is on RHV virtulization platform
+subscription-manager repos --enable=rhel-7-server-rh-common-rpms
+yum install rhevm-guest-agent-common
+subscription-manager repos --disable=rhel-7-server-rh-common-rpms
+
+# other tools I like
+yum install bind-utils,screen
+
+#check selinux policy
+
+# start and enable firewalld
+
+# firewall rules
+
+firewall-cmd --add-port="53/udp" --add-port="53/tcp" \
+--add-port="67/udp" --add-port="69/udp" \
+--add-port="80/tcp" --add-port="443/tcp" \
+--add-port="5000/tcp" --add-port="5647/tcp" \
+--add-port="8000/tcp" --add-port="8140/tcp" \
+--add-port="9090/tcp"
+
+firewall-cmd --runtime-to-permanent
+
+##
+## REBOOT
+##
+systemctl reboot
+
+##
+## RPM Installation - satellite
+##
+yum install -y satellite 
+
+## RPM Installation - sos
+yum install -y sos
+
+## RPM Installation - discovery tools
+yum install -y foreman-discovery-image
+
+##
+## SATELLITE Installation
+##
+satellite-installer --scenario satellite \
+--foreman-initial-organization "Linuxsoup Test Lab" \
+--foreman-initial-location "Irving, Tx" \
+--foreman-admin-username admin \
+--foreman-admin-password redhat \
+--foreman-proxy-dns-managed=false \
+--foreman-proxy-dhcp-managed=false
+
+## Log on to Red Hat Access Portal
+## Create manifest
+Subscriptions->Subscription Allocation->Red Hat Satellite
+
+## Log on to WebUI (admin/redhat)
+## Manifest Import
+Content->Subscriptions / Manage Manifest
+Import Manifest
+
+##
+## DONE!!!
+##
+----
+
+
 == Conclusion
 
 The installation of Red Hat Satellite is now complete and you should be ready to begin with the exercises.  A couple of remaining words of advice:
