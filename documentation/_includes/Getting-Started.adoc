@@ -83,12 +83,14 @@ bash 01-pre-install-script.sh
 ----
 Create RHEL 7 from template
 
+## PLAYBOOK SHOULD HAVE VARIABLE TO IDENTIFY WHICH DISK / VOLUME TO USE
+
 Added 200 GB disk
 Created 200 GB sat64vg volume group
 
 fdisk /dev/sdb
 
-# Create LVM
+# Create LVM - USE SSM TO DO ALL THIS WORK
 pvcreate /dev/sdb1
 vgcreate sat64vg /dev/sdb1
 lvcreate -L 50GB -n mongodb sat64vg
