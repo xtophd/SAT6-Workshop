@@ -92,26 +92,26 @@ fdisk /dev/sdb
 
 # Create LVM - USE SSM TO DO ALL THIS WORK
 pvcreate /dev/sdb1
-vgcreate sat64vg /dev/sdb1
-lvcreate -L 50GB -n mongodb sat64vg
-lvcreate -L 100GB -n pulp sat64vg
-lvcreate -L 5GB -n pgsql sat64vg
-lvcreate -L 5GB -n squid sat64vg
-lvcreate -L 20GB -n cache sat64vg
+vgcreate vg_sat /dev/sdb1
+lvcreate -L 50GB -n mongodb vg_sat
+lvcreate -L 100GB -n pulp vg_sat
+lvcreate -L 5GB -n pgsql vg_sat
+lvcreate -L 5GB -n squid vg_sat
+lvcreate -L 20GB -n cache vg_sat
 
 #Created xfs filesystems
-mkfs -t xfs /dev/sat64vg/mongodb
-mkfs -t xfs /dev/sat64vg/pulp
-mkfs -t xfs /dev/sat64vg/pgsql
-mkfs -t xfs /dev/sat64vg/squid
-mkfs -t xfs /dev/sat64vg/cache
+mkfs -t xfs /dev/vg_/mongodb
+mkfs -t xfs /dev/vg_sat/pulp
+mkfs -t xfs /dev/vg_sat/pgsql
+mkfs -t xfs /dev/vg_sat/squid
+mkfs -t xfs /dev/vg_sat/cache
 
 #Created Mount point in fstab
-/dev/mapper/sat64vg-pulp      /var/lib/pulp           xfs     defaults        0 0
-/dev/mapper/sat64vg-pgsql     /var/lib/pgsql          xfs     defaults        0 0
-/dev/mapper/sat64vg-mongodb   /var/lib/mongodb        xfs     defaults        0 0
-/dev/mapper/sat64vg-squid     /var/spool/squid        xfs     defaults        0 0
-/dev/mapper/sat64vg-cache      /var/cache           xfs     defaults        0 0
+/dev/mapper/vg_sat-pulp      /var/lib/pulp     xfs     defaults        0 0
+/dev/mapper/vg_sat-pgsql     /var/lib/pgsql    xfs     defaults        0 0
+/dev/mapper/vg_sat-mongodb   /var/lib/mongodb  xfs     defaults        0 0
+/dev/mapper/vg_sat-squid     /var/spool/squid  xfs     defaults        0 0
+/dev/mapper/vg_sat-cache     /var/cache        xfs     defaults        0 0
 
 ## We are going to create a new /var/cache
 mv /var/cache /var/cache.old
