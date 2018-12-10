@@ -167,8 +167,11 @@ subscription-manager repos --disable=rhel-7-server-rh-common-rpms
 yum install bind-utils,screen
 
 #check selinux policy
+getenforce
 
 # start and enable firewalld
+systemctl start firewalld
+systemctl enable firewalld
 
 # firewall rules
 
