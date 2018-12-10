@@ -100,7 +100,7 @@ lvcreate -L 5GB -n squid vg_sat
 lvcreate -L 20GB -n cache vg_sat
 
 #Created xfs filesystems
-mkfs -t xfs /dev/vg_/mongodb
+mkfs -t xfs /dev/vg_sat/mongodb
 mkfs -t xfs /dev/vg_sat/pulp
 mkfs -t xfs /dev/vg_sat/pgsql
 mkfs -t xfs /dev/vg_sat/squid
