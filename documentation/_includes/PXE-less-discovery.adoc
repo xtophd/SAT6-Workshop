@@ -1,0 +1,387 @@
+:sectnums:
+:sectnumlevels: 3
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= PXE-Less Discovery
+
+[discrete]
+== Additional Reference Materials
+
+NOTE: You are not required to reference outside documentation for these exercises.  This is informational only.
+
+Red Hat's official documentation can be found publicly with the links provided below.  It is important to note that this workshop guide supports a very narrowly scoped and simple installation of the Openshift Container Platform (OCP).  Please refer to the official Red Hat documentation for complete information on the installation procedures.
+
+
+    * PUT LINK TO PXE-LESS DISCVOERY REFERENCES HERE
+    
+.[root@workstation OCP-Workshop]# - RAW INSTRUCTIONS
+----
+
+
+Synchronize Content 
+
+
+Enable Repos
+
+## Enable Red Hat Repos
+    Content -> Red Hat Repos
+    Kickstart trees are under kickstart tab
+
+## Enable following Repos (enable to the "recommended" button)
+   7.5 Kickstart    {search 'linux 7 server kickstart', open rhel7-7-server-kickstart, pick 7.5}
+   7Server
+   7Server Optional
+   7 Server Extras
+   Red Hat Satellite Tools 6.4 (for RHEL 7 Server)
+
+## Content I probably DON'T need
+   7.5 Server (probably don't need this)
+   Satellite 6.4 for RHEL 7 Server (probably don't need this)
+   7Server RH Common (probably don't need this)
+
+
+  ** NOTES:
+  ** 7Server is the general GA stream of RHEL
+  ** you will need kickstarts of specific dot release
+  ** kickstarts need to be included in the content views expecting to use them
+
+
+Sync Content
+
+## Set Download Policies to Immediate
+  Content->Products->Red Hat Enterprise Linux Server-><click each one>
+  set "Download Policy" to "Immediate"
+
+## Sync stuff
+  Content->Sync Status
+  Expand All
+  Select All
+  Synchronize Now
+
+  ** NOTE:
+  ** Go to lunch/dinner
+
+Create Life Cycle
+ 
+## POC NOTE::
+## Oath-Workstation-LC -> qa -> prod
+ 
+##Create a LifeCycle Environment : "RHEL-Workstation-LC"
+Content->Life Cycle Environments / Create Environment Path
+ 
+##Add New Environments: qa, prod
+->Add New Environment
+->Add New Environment
+ 
+##    Promote to "Library"
+ 
+##    Promote to "RHEL 7 Workstations"
+ 
+
+
+
+
+Create Content View
+
+## POC NOTE::
+## Oath-Workstations-CV
+
+
+##Create a Content View: RHEL-Workstation-CV
+Content->ContenViews->Create
+    
+
+##Yum Content/Repos Add the following:
+Content->ContenViews / Yum Content->Repositories
+
+Select 'Add' Tab
+
+    7 Server
+    7 Server Optional
+    7 Server Extras
+    Satellite Tools 6.4 for 7 Server
+    7.5 Kickstart
+
+## Publish
+
+## Promote
+
+
+Configure the Discovery Red Hat Kexec
+
+Switch to "Any Organization"
+Hosts->Provisioning Templates
+Select "Discovery Red Hat kexec"
+Verify Associations
+Add our custom Location
+Add our custom Org
+
+
+Create Custom Partition Table
+Hosts->Templates/Partition Tables
+Clone "Kickstart default"
+Make adjustments:
+Name: Oath-Workstation-PT
+OS Family: Red Hat
+
+
+EXAMPLE:
+
+<%#
+kind: ptable
+name: My Workstation Partitions
+model: Ptable
+oses:
+- CentOS
+- Fedora
+- RedHat
+%>
+zerombr
+clearpart --all --initlabel
+
+clearpart --drives=sda --all
+part /boot --fstype=xfs --size=512 --ondisk=sda --asprimary
+part pv.01 --size=1024 --grow --ondisk=sda --asprimary
+volgroup vg_rhel pv.01
+logvol /     --fstype=xfs  --vgname=vg_rhel --name=root   --size=6144 --grow
+logvol /var  --fstype=xfs  --vgname=vg_rhel --name=var    --size=4096
+logvol /home --fstype=xfs  --vgname=vg_rhel --name=home   --size=2048
+logvol /tmp  --fstype=xfs  --vgname=vg_rhel --name=tmp    --size=2048
+logvol swap  --fstype=swap --vgname=vg_rhel --name=swap01 --size=2048
+
+
+## Associate with Organization
+
+## Associate with with Operating System 
+
+Hosts->Operating Systems
+Partition Table Tab, add new custom partitioning scheme to  association table
+
+Create Domain
+
+
+
+Create Subnet
+
+
+
+Create Activation Key
+
+## Create Activation Key
+Oath-Workstation-AK
+Select Environment
+Select Content View
+
+## Add subscription
+
+## Add Repository Sets
+
+
+Hostgroup
+
+## Create Host Group
+Configure->Host Groups
+
+## Network
+Select Domain
+I did not have to select Subnets
+
+## Select Custom Partitioning Template
+Operating System tab, select new partition scheme
+
+## Parameters
+
+## Global Parameter: don't upgrade packages during installation
+package_upgrade=false
+
+## Associate Activation Key
+
+
+
+Create Ansible Role
+
+cd /etc/ansible/roles
+ansible-galaxy init Oath-Workstation-20181204
+
+## ../tasks/main.yml
+
+---
+- name: INCLUDE| additional-pkgs.yml
+  include_tasks: additional-pkgs.yml
+
+---
+- name: INCLUDE| enable-gui.yml
+  include_tasks: enable-gui.yml
+
+
+## ../tasks/additional-pkgs.yml
+
+---
+- name: YUM| Install misc required packages for desktop
+  yum: name=screen,wget,git,net-tools,bind-utils,yum-utils,bash-completion,sos,psacct,lynx state=installed
+
+## ../tasks/enable-gui.yml
+
+---
+- name: SHELL| Call systemctl to set graphical mode
+  shell:
+    cmd: systemctl set-default graphical.target
+
+
+## Import Ansible Role
+Configure->Ansible->Roles
+
+## Add Ansible Role to Host Group
+
+
+## Create Subnet
+
+
+## Create Domains
+
+Discovery Rule
+
+Configure->Discovery Ruless
+
+## Add Search
+facts.oath-workstation=true
+
+## Host Group
+Select whatever we created above
+
+## Enable Auto Discovery Provisioning
+Administer->Settings / Discovered / "Auto provisioning"
+
+POST Install Setup
+## Continued Installation/Customization
+?? updates
+
+PROVISIONING BARE METAL HOSTS
+Reference Documentation
+https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/provisioning_guide/provisioning_bare_metal_hosts
+
+## Associate Kexec provisioning template with our org/location
+Select Organization to Any Organization
+Select Location to Any Location
+Hosts->Templates/Provisioning
+Search kexec
+Location & Org Tab, add our org and location
+Save
+
+## Create Puppet Environment and Associate it org/loc
+
+## Create Host Group and Associate it org/loc
+
+## Create Subnet and Associate it org/loc
+
+## Copy ISO image to CD or USB thumb 
+cd /usr/share/foreman-discovery-image
+
+
+
+
+
+At the Client Procedures
+
+INSTALLATION
+
+## Boot Host/VM with Discovery ISO (non-auto / customized)
+select DHCP / Manual
+select provisioning interface
+enter any facts (key=value pairs)
+submit and be-discovered
+
+
+## Back at the WebUI (If NOT Auto Provisioned)
+Hosts->Discovered Host
+  select provision
+  if all options at correct stored in the Host Group it should kexec and launch
+
+## Upgrade Host
+
+
+
+
+
+
+
+
+EXTRA JUNK
+
+## Remaster Discovery ISO
+
+## Create custom discovery image (only if customizing the iso)
+cd /usr/share/foreman-discovery-image
+
+##
+discovery-remaster foreman-discovery-image-3.5.3-1.iso "proxy.url=https://sat64-test.lab.linuxsoup.com proxy.type=server fdi.pxfactname1=oath fdi.pxfactvalue1=true fdi.pxauto=1"
+
+
+##
+goferd was pointing to wrong port (ie: old package from Common is NOT was to use)
+
+
+## Hostname examples for Discovery Rules
+
+
+<%= @host.facts['nmprimary_dhcp4_option_host_name'] %>
+
+
+## Provisioning Template Customization Example for %packages block
+## set a parameter in the HostGroup "oath_workstation_pkgs = true"
+
+<% if host_param('oath_workstation_pkgs') == 'true' %>
+@GNOME
+@Graphical Administration Tools
+@Guest Desktop Agents
+@Remote Desktop Clients
+@Virtualization Client
+@Virtualization Tools
+@Fonts
+@X11
+<% end -%>
+
+## Provisioning Template Customization Example for %post-install, right before ansible callback
+## set a parameter in the HostGroup "oath_workstation_pkgs = true"
+
+<% if host_param('oath_workstation_pkgs') == 'true' -%>
+systemctl set-default graphical.target
+<% end -%>
+
+
+
+
+##Building Satellite Discovery Image
+https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/provisioning_guide/provisioning_bare_metal_hosts#building_a_satellite_discovery_image
+
+
+## Start & Stop Satellite Services
+katello-service start
+katello-service stop
+
+
+## If you monkey with filesystems and volumes (ie: move things around)
+restorecon -R {directory}
+
+
+## Task cleanup
+https://access.redhat.com/solutions/275573
+
+----
+
+[discrete]
+== End of Unit
+
+*Next:* link:PXE-less-Discovery.adoc[Provisioning with PXE-less Discovery]
+
+link:../SAT6-Workshop.adoc[Return to TOC]
+
+////
+Always end files with a blank line to avoid include problems.
+////
