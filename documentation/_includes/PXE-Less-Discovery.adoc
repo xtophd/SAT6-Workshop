@@ -319,7 +319,7 @@ EXTRA JUNK
 ## Create custom discovery image (only if customizing the iso)
 cd /usr/share/foreman-discovery-image
 
-##
+#
 discovery-remaster foreman-discovery-image-3.5.3-1.iso "proxy.url=https://sat64-test.lab.linuxsoup.com proxy.type=server fdi.pxfactname1=oath fdi.pxfactvalue1=true fdi.pxauto=1"
 
 
@@ -332,6 +332,22 @@ goferd was pointing to wrong port (ie: old package from Common is NOT was to use
 
 <%= @host.facts['nmprimary_dhcp4_option_host_name'] %>
 
+## GRUB2 config for discovery iso
+cp foreman-discovery-iso-W.X.Y-Z.iso /boot
+
+vi /etc/grub.d/40_custom
+
+#!/bin/sh
+exec tail -n +3 $0
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+menuentry "Discovery Image ISO" {
+        set isofile="/foreman-discovery-image-3.5.3-1.iso"
+        loopback loop (hd0,1)${isofile}
+        syslinux_source (loop)/isolinux/isolinux.bin
+        syslinux_configfile (loop)/isolinux/isolinux.cfg
+}
 
 ## Provisioning Template Customization Example for %packages block
 ## set a parameter in the HostGroup "oath_workstation_pkgs = true"
