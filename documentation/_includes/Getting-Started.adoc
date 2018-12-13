@@ -85,6 +85,14 @@ Create RHEL 7 from template
 
 ## PLAYBOOK SHOULD HAVE VARIABLE TO IDENTIFY WHICH DISK / VOLUME TO USE
 
+# Become root on Workstation
+sudo -i
+
+# SSH to Satellite host
+ssh sat.example.com
+
+# Prepare the additional storage requiements
+
 Added 200 GB disk
 Created 200 GB sat64vg volume group
 
