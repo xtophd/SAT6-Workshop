@@ -168,7 +168,7 @@ yum install rhevm-guest-agent-common
 subscription-manager repos --disable=rhel-7-server-rh-common-rpms
 
 # other tools I like
-yum install bind-utils,screen
+yum install bind-utils screen
 
 #check selinux policy
 getenforce
