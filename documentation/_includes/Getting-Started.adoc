@@ -88,11 +88,11 @@ Create RHEL 7 from template
 Added 200 GB disk
 Created 200 GB sat64vg volume group
 
-fdisk /dev/sdb
+fdisk /dev/vdb
 
 # Create LVM - USE SSM TO DO ALL THIS WORK
-pvcreate /dev/sdb1
-vgcreate vg_sat /dev/sdb1
+pvcreate /dev/vdb1
+vgcreate vg_sat /dev/vdb1
 lvcreate -L 50GB -n mongodb vg_sat
 lvcreate -L 100GB -n pulp vg_sat
 lvcreate -L 5GB -n pgsql vg_sat
