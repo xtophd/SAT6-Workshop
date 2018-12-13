@@ -133,6 +133,10 @@ rm -rf /var/cache.old
 subscription-manager unregister
 subscription-manager clean
 
+## This is only required until I update the blueprint (If I chose to use RedHat CND on not local repos)
+# Restore rhsm.conf from original
+cp /etc/rhsm/rhsm.conf.rpmnew /etc/rhsm/rhsm.conf
+
 # Subscription Manager Register
 subscription-manager register
 subscription-manager remove --all
