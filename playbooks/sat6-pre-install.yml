@@ -33,7 +33,7 @@
       
     - name: "TEMPLATE modify /etc/motd"
       template:
-        src: motd-openshift.j2
+        src: motd-sat6-workshop.j2
         dest: /etc/motd
         owner: root
         group: root
