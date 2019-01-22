@@ -1,0 +1,6 @@
+---
+- hosts: nodes
+  tasks:
+  
+    - name: "PING all hosts to ensure we are alive and ready"
+      ping:
