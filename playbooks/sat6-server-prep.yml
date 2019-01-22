@@ -18,11 +18,11 @@
         cmd: |
           pvcreate /dev/vdb
           vgcreate sat6_vg /dev/vdb
-          lvcreate -L 50GB  -n mongodb sat_vg
-          lvcreate -L 100GB -n pulp    sat_vg
-          lvcreate -L 5GB   -n pgsql   sat_vg
-          lvcreate -L 5GB   -n squid   sat_vg
-          lvcreate -L 20GB  -n cache   sat_vg
+          lvcreate -L 50GB  -n mongodb sat6_vg
+          lvcreate -L 100GB -n pulp    sat6_vg
+          lvcreate -L 5GB   -n pgsql   sat6_vg
+          lvcreate -L 5GB   -n squid   sat6_vg
+          lvcreate -L 20GB  -n cache   sat6_vg
 
     - name: "CMD remove old cache directory (eventually)"
       shell: 
