@@ -1,5 +1,5 @@
 ---
-- hosts: nodes
+- hosts: nodes, satellite
   tasks:
   
     - name: "PING all hosts to ensure we are alive and ready"
@@ -17,10 +17,6 @@
         cmd: |                                                                                         
           tuned-adm profile virtual-guest                                                              
           mount -o remount,nobarrier /                                                                 
-
-
-- hosts: nodes
-  tasks:
   
     - name: "CMD disable yum plugins for rhn and subscription-manager"
       shell: 
