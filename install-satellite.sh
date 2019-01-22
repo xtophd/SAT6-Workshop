@@ -11,12 +11,7 @@ if [ ! -e "${myInventory}" ] ; then
     exit
 fi
 
-time ansible-playbook -i ${myInventory} -f 5 ./playbooks/sat6-nodes-prep.yml
-   
-## If previous cmd exited non-zero then exit
-if [ "$?" -ne "0" ] ; then
-    echo "ERROR: previous command exited non-zero, check errors and try again"
-    exit
-fi
-   
-time ansible-playbook -i ${myInventory} -f 5 ./playbooks/sat6-install.yml
+time ansible-playbook -i ${myInventory} -f 5 \
+    ./playbooks/sat6-nodes-prep.yml \
+    ./playbooks/sat6-server-prep.yml \
+    ./playbooks/sat6-install.yml
