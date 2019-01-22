@@ -1,3 +1,7 @@
+[SAT6:vars]
+myDisk=/dev/vdb
+myVolumeGroup=sat_vg
+
 [workstation]
 workstation.example.com
 
