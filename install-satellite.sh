@@ -11,7 +11,7 @@ if [ ! -e "${myInventory}" ] ; then
     exit
 fi
 
-time ansible-playbook -i ${myInventory} -f 5 ./playbooks/satellite-pre-install.yml
+time ansible-playbook -i ${myInventory} -f 5 ./playbooks/sat6-pre-install.yml
    
 ## If previous cmd exited non-zero then exit
 if [ "$?" -ne "0" ] ; then
@@ -19,4 +19,4 @@ if [ "$?" -ne "0" ] ; then
     exit
 fi
    
-time ansible-playbook -i ${myInventory} -f 5 ./playbooks/satellite-install.yml
+time ansible-playbook -i ${myInventory} -f 5 ./playbooks/sat6-install.yml
