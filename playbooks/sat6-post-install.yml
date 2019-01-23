@@ -11,13 +11,3 @@
         cmd: |                                                                                         
           yum clean all
   
-- hosts: satellite
-  tasks:
-  
-    - name: "TEMPLATE modify /root/.hammer/cli_config.yml"
-      template:
-        src: hammer-cli-config.j2
-        dest: /root/.hammer/cli_config.yml
-        owner: root
-        group: root
-        mode: 0600
