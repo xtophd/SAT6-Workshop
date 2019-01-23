@@ -59,3 +59,25 @@
         cmd: |
           mount -a
           
+    - name: "CMD configure firewalld"
+      shell:
+        cmd: |
+          firewall-cmd --add-port="{{ item.port }}"
+      with_items:
+        - {port: "53/udp"}
+        - {port: "53/tcp"}
+        - {port: "67/udp"}
+        - {port: "69/udp"}
+        - {port: "80/tcp"}
+        - {port: "443/tcp"} 
+        - {port: "5000/tcp"}
+        - {port: "5647/tcp"}
+        - {port: "8000/tcp"}
+        - {port: "8140/tcp"}
+        - {port: "9090/tcp"}
+
+    - name: "CMD save firewalld state"
+      shell:
+        cmd: |
+          firewall-cmd --runtime-to-permanent
+          
