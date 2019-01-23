@@ -1,20 +1,31 @@
 ---
 - hosts: satellite
   tasks:
-  
+
     - name: "PING all hosts to ensure we are alive and ready"
       ping:
 
+    - name: "CMD unmount previous satellite filesystems"
+      shell:
+        cmd: |
+          if grep -q {{ item.mount }} /proc/mounts ; then umount {{ item.mount }} ; fi
+      with_items:
+        - {vg: 'sat6_vg', lv: 'pulp',    mount: '/var/lib/pulp'}
+        - {vg: 'sat6_vg', lv: 'pgsql',   mount: '/var/lib/pgsql'}
+        - {vg: 'sat6_vg', lv: 'mongodb', mount: '/var/libm/mongodb'}
+        - {vg: 'sat6_vg', lv: 'squid',   mount: '/var/spool/squid'}
+        - {vg: 'sat6_vg', lv: 'cache',   mount: '/var/cache'}
+
     - name: "CMD cleanup previous satellite storage"
-      shell: 
+      shell:
         cmd: |
           echo "need to check mounts && umount"
           vgs sat6_vg && vgremove --force sat6_vg
           pvs /dev/vdb && pvremove --force /dev/vdb
           wipefs -a /dev/vdb
-          
-    - name: "CMD prepare previous satellite storage"
-      shell: 
+
+    - name: "CMD prepare satellite storage"
+      shell:
         cmd: |
           pvcreate /dev/vdb
           vgcreate sat6_vg /dev/vdb
@@ -24,25 +35,27 @@
           lvcreate -L 5GB   -n squid   sat6_vg
           lvcreate -L 20GB  -n cache   sat6_vg
 
-    - name: "CMD remove old cache directory (eventually)"
-      shell: 
+    - name: "CMD remove old cache directory"
+      shell:
         cmd: |
-          mv /var/cache /var/cache.old
+          rm -rf /var/cache
+          mkdir -p /var/cache
 
     - name: "CMD create filesystems, mount points and fstab entries"
-      shell: 
+      shell:
         cmd: |
-          mkfs -t fs /dev/{{ item.vg }}/{{ item.lv }}
+          mkfs -t xfs /dev/{{ item.vg }}/{{ item.lv }}
           mkdir -p {{ item.mount }}
           grep -q {{ item.mount }} /etc/fstab || echo "/dev/mapper/{{item.vg}}-{{ item.lv }} {{ item.mount }} xfs defaults 0 0" >> /etc/fstab
-      with_items
-        - {vg:'sat6_vg', lv:'pulp',    mount:'/var/lib/pulp'} 
-        - {vg:'sat6_vg', lv:'pgsql',   mount:'/var/lib/pgsql'} 
-        - {vg:'sat6_vg', lv:'mongodb', mount:'/var/libm/mongodb'} 
-        - {vg:'sat6_vg', lv:'squid',   mount:'/var/spool/squid'} 
-        - {vg:'sat6_vg', lv:'cache',   mount:'/var/cache'} 
-        
+      with_items:
+        - {vg: 'sat6_vg', lv: 'pulp',    mount: '/var/lib/pulp'}
+        - {vg: 'sat6_vg', lv: 'pgsql',   mount: '/var/lib/pgsql'}
+        - {vg: 'sat6_vg', lv: 'mongodb', mount: '/var/libm/mongodb'}
+        - {vg: 'sat6_vg', lv: 'squid',   mount: '/var/spool/squid'}
+        - {vg: 'sat6_vg', lv: 'cache',   mount: '/var/cache'}
+
     - name: "CMD mount everything"
-      shell: 
+      shell:
         cmd: |
           mount -a
+          
