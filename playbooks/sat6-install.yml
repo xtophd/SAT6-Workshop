@@ -5,10 +5,10 @@
     - name: "PING all hosts to ensure we are alive and ready"
       ping:
       
-    - name: "YUM install misc required packages"
+    - name: "YUM install satellite"
       yum: name=satellite,sos,foreman-discovery-image state=installed
 
-    - name: "CMD disable yum plugins for rhn and subscription-manager"
+    - name: "CMD satellite-installer"
       shell: 
         cmd: |
           satellite-installer --scenario satellite \
