@@ -1,6 +1,21 @@
 ---
-- hosts: nodes
+- hosts: satellite
   tasks:
   
     - name: "PING all hosts to ensure we are alive and ready"
       ping:
+      
+    - name: "YUM install misc required packages"
+      yum: name=satellite,sos,foreman-discovery-image state=installed
+
+    - name: "CMD disable yum plugins for rhn and subscription-manager"
+      shell: 
+        cmd: |
+          satellite-installer --scenario satellite \
+          --foreman-initial-organization "ExampleCom Test Lab" \
+          --foreman-initial-location "Irving, Tx" \
+          --foreman-admin-username admin \
+          --foreman-admin-password redhat \
+          --foreman-proxy-dns-managed=false \
+          --foreman-proxy-dhcp-managed=false
+          
