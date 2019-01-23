@@ -78,7 +78,7 @@ hammer repository-set enable \
 --product "Red Hat Enterprise Linux Server" \
 --organization "ExampleCom Test Lab" \
 --basearch "x86_64" \
---name "Red Hat Satellite Tools 6.4 for RHEL 7 Server (RPMs)"
+--name "Red Hat Satellite Tools 6.4 (for RHEL 7 Server) (RPMs)"
 ----
 
 
