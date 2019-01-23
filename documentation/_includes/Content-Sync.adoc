@@ -36,32 +36,36 @@ Our installation automatically configured the foreman username and password.  If
 .[root@workstation ~]$ 
 ----
 hammer repository-set enable \
+--organization "ExampleCom Test Lab"
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
 --releasever "7Server" \
---name "Red Hat Enterprise Linux 7 Server RPMs"
+--name "Red Hat Enterprise Linux 7 Server (RPMs)"
 ----
 
 .[root@workstation ~]$ 
 ----
 hammer repository-set enable \
+--organization "ExampleCom Test Lab"
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
 --releasever "7Server" \
---name "Red Hat Enterprise Linux 7 Server - Optional RPMs"
+--name "Red Hat Enterprise Linux 7 Server - Optional (RPMs)"
 ----
 
 .[root@workstation ~]$ 
 ----
 hammer repository-set enable \
+--organization "ExampleCom Test Lab"
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
---name "Red Hat Enterprise Linux 7 Server - Extras RPMs"
+--name "Red Hat Enterprise Linux 7 Server - Extras (RPMs)"
 ----
 
 .[root@workstation ~]$ 
 ----
 hammer repository-set enable \
+--organization "ExampleCom Test Lab"
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
 --releasever "7.5" \
