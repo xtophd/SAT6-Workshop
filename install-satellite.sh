@@ -14,4 +14,5 @@ fi
 time ansible-playbook -i ${myInventory} -f 5 \
     ./playbooks/sat6-nodes-prep.yml \
     ./playbooks/sat6-server-prep.yml \
-    ./playbooks/sat6-install.yml
+    ./playbooks/sat6-install.yml \
+    ./playbooks/sat6-post-install.yml
