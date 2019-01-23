@@ -297,9 +297,14 @@ satellite-installer --scenario satellite \
 Subscriptions->Subscription Allocation->Red Hat Satellite
 
 ## Log on to WebUI (admin/redhat)
-## Manifest Import
+## Manifest Import via WebUI
 Content->Subscriptions / Manage Manifest
 Import Manifest
+
+
+## OR Log on to Satellite (admin/redhat)
+## Manifest Import via hammer cli
+hammer -u <USER> -p <PASSWORD> subscription upload --file manifest.zip --organization "ExampleCom Test Lab"
 
 ##
 ## DONE!!!
