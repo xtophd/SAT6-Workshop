@@ -141,20 +141,30 @@ rm -rf /var/cache.old
 subscription-manager unregister
 subscription-manager clean
 
-## This is only required until I update the blueprint (If I chose to use RedHat CND on not local repos)
+## This is only required until I update the blueprint (If I chose to use RedHat CDN and not local repos)
 # Restore rhsm.conf from original
 cp /etc/rhsm/rhsm.conf.rpmnew /etc/rhsm/rhsm.conf
 
+----
+
+[NOTE]
+====
+_Native command(s) to register to required content
+----
 # Subscription Manager Register
 subscription-manager register
 subscription-manager remove --all
-subscription-manager list --available
-subscription-manager attach --pool=<>
 
-# Subscription manager disable repos
+# List available entitlements
+subscription-manager list --available
+
+# Using an appropriate entitlement that includes Satellite and RHSCL
+subscription-manager attach --pool=<POOL-ID>
+
+# Subscription manager disable all repos
 subscription-manager repos --disable=*
 
-# Subscribe to repos
+# Subscribe to only repos we want
 subscription-manager repos --enable=rhel-7-server-rpms \
 --enable=rhel-server-rhscl-7-rpms \
 --enable=rhel-7-server-satellite-6.4-rpms \
@@ -163,6 +173,12 @@ subscription-manager repos --enable=rhel-7-server-rpms \
 
 # Ensure sub manager not locked into specific release of RHEL
 subscription-manager release --unset
+----
+====
+
+
+.[root@workstation OCP-Workshop]# - BACK TO THINGS I NEED TO PUT IN PLAYBOOKS
+----
 
 # Clean yum cache, etc
 yum clean all
