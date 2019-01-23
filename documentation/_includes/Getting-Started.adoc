@@ -319,7 +319,7 @@ The installation of Red Hat Satellite is now complete and you should be ready to
 [discrete]
 == End of Unit
 
-*Next:* link:PXE-Less-Discovery.adoc[Provisioning with PXE-less Discovery]
+*Next:* link:Content-Sync.adoc[Content Synchronization]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
