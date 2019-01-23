@@ -24,6 +24,7 @@ Red Hat's official documentation can be found publicly with the links provided b
    
    * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/quick_start_guide/[Satellite 6.4 Quick Start Guide]
 
+   * link:https://access.redhat.com/articles/2258471[Hammer cheat-sheat]
 
 With that said, the steps of preparing and installing Satellite in this workshop environment have been condensed into 3 scripts which execute a set of Ansible Playbooks.  Please follow the steps below to begin your installation of the Openshift Container Platform.
 
