@@ -33,6 +33,9 @@ Our installation automatically configured the foreman username and password.  If
 
 == Enable Repos
 
+The most difficult part of getting all of the parameters right is figuring out the exact 'name'.  The following command helped me out a great deal.  If you find something better, let me know: 'hammer repository-set list --product "Red Hat Enterprise Linux Server" --organization "ExampleCom Test Lab"'
+
+
 .[root@workstation ~]$ 
 ----
 hammer repository-set enable \
@@ -80,7 +83,6 @@ hammer repository-set enable \
 --basearch "x86_64" \
 --name "Red Hat Satellite Tools 6.4 (for RHEL 7 Server) (RPMs)"
 ----
-
 
 
 
