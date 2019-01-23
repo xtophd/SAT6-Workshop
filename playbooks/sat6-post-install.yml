@@ -1,1 +1,13 @@
 
+---
+- hosts: nodes, satellite
+  tasks:
+  
+    - name: "PING all hosts to ensure we are alive and ready"
+      ping:
+
+    - name: "CMD yum clean all"
+      shell:                                                                                           
+        cmd: |                                                                                         
+          yum clean all
+  
