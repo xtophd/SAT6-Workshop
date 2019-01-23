@@ -5,10 +5,10 @@
     - name: "PING all hosts to ensure we are alive and ready"
       ping:
       
-    - name: "YUM install satellite"
+    - name: "YUM install satellite packages"
       yum: name=satellite,sos,foreman-discovery-image state=installed
 
-    - name: "CMD satellite-installer"
+    - name: "CMD install satellite"
       shell: 
         cmd: |
           satellite-installer --scenario satellite \
