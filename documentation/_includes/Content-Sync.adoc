@@ -46,7 +46,7 @@ hammer repository-set enable \
 .[root@workstation ~]$ 
 ----
 hammer repository-set enable \
---organization "ExampleCom Test Lab"
+--organization "ExampleCom Test Lab" \
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
 --releasever "7Server" \
@@ -56,7 +56,7 @@ hammer repository-set enable \
 .[root@workstation ~]$ 
 ----
 hammer repository-set enable \
---organization "ExampleCom Test Lab"
+--organization "ExampleCom Test Lab" \
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
 --name "Red Hat Enterprise Linux 7 Server - Extras (RPMs)"
@@ -65,7 +65,7 @@ hammer repository-set enable \
 .[root@workstation ~]$ 
 ----
 hammer repository-set enable \
---organization "ExampleCom Test Lab"
+--organization "ExampleCom Test Lab" \
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
 --releasever "7.5" \
