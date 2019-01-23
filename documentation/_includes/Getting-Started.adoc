@@ -71,12 +71,64 @@ WARNING: It is important to be in the correct working directory for these instal
 cd ~/SAT6-Workshop
 ----
 
-Now you are ready to proceed with executing the pre-install steps.  This typically runs for about 3-5 minutes.    
+Now you are ready to proceed with executing the pre-install steps.  This typically runs for about 35-40 minutes.    
 
 .[root@workstation OCP-Workshop]#
 ----
-bash 01-pre-install-script.sh
+bash install-satellite.sh
 ----
+
+=== Procure Satellite Manifest
+
+While you are waiting on the installation to complete, you can procure your satellite manifest.
+
+NOTE: For this workshop you will be provided with a working manifest by the instructor.  Following instructions are informational
+
+Creating and downloading a Satellite Manifest is done by visiting the link:https://access.redhat.com/[Red Hat Customer Portal], sign-on with your credentials and then proceeding to link:https://access.redhat.com/management/[My Subscriptions].
+
+Next proceed to link:https://access.redhat.com/management/subscription_allocations[Subscription Allocations].
+
+Now click on link:https://access.redhat.com/management/subscription_allocations/new[New Subscription Allocations].
+
+Give it a Name: example.com
+Type: Satellite 6.4
+
+Click Create
+
+Add Subscriptions to the Subscription Allocation
+
+Download Manifest.
+
+=== Load the Manifest
+
+Using your Browser, proceed to sign-on to your Satellite server.
+
+Go to "Subscriptions"
+
+Upload your Manifest
+
+This process will takes a few minutes.
+
+At this point the Satellite is ready for use.
+
+=== Enable Red Hat Products
+
+
+=== Start Content Sync Immediately
+
+
+=== Create a Sync Plan
+
+
+
+
+
+
+
+
+
+
+
 
 
 .[root@workstation OCP-Workshop]# - THINGS I NEED TO PUT IN PLAYBOOKS
