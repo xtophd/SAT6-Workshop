@@ -26,26 +26,56 @@ It is a valid statement to say that anything which can be done in the WebUI, can
 Tasks such as getting basic content defined and syncronized are perfect for the command line.  Doing it from the WebUI as a novice
 is tedious and you don't really learn anything other than 'navigating the abundant menus can be overwhelming and confusing'.
 
-So begin by configuring the hammer cli in order to avoid username/password prompts for each task.
+Our installation automatically configured the foreman username and password.  If for whatever reason you alter the password for admin within the Satellite's WebUI, you need to update hammer config as well:
 
-.[root@satellite ~]$ 
-----
-mkdir ~/.hammer/
-
-vi ~/.hammer/cli_config.yml
-----
-
-____
-
-:foreman:
- :host: 'https://satellite.example.com/'
- :username: 'admin'
- :password: 'redhat'
-
-____
+  *  /root/.hammer/cli.modules.d/foreman.yml
 
 
 == Enable Repos
+
+.[root@workstation ~]$ 
+----
+hammer repository-set enable \
+--product "Red Hat Enterprise Linux Server" \
+--basearch "x86_64" \
+--releasever "7Server" \
+--name "Red Hat Enterprise Linux 7 Server RPMs"
+----
+
+.[root@workstation ~]$ 
+----
+hammer repository-set enable \
+--product "Red Hat Enterprise Linux Server" \
+--basearch "x86_64" \
+--releasever "7Server" \
+--name "Red Hat Enterprise Linux 7 Server - Optional RPMs"
+----
+
+.[root@workstation ~]$ 
+----
+hammer repository-set enable \
+--product "Red Hat Enterprise Linux Server" \
+--basearch "x86_64" \
+--name "Red Hat Enterprise Linux 7 Server - Extras RPMs"
+----
+
+.[root@workstation ~]$ 
+----
+hammer repository-set enable \
+--product "Red Hat Enterprise Linux Server" \
+--basearch "x86_64" \
+--releasever "7.5" \
+--name "Red Hat Enterprise Linux 7 Server Kickstart"
+----
+
+.[root@workstation ~]$ 
+----
+hammer repository-set enable \
+--product "Red Hat Enterprise Linux Server" \
+--basearch "x86_64" \
+--name "Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs"
+----
+
 
 
 
