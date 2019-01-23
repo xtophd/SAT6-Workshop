@@ -36,10 +36,12 @@ vi ~/.hammer/cli_config.yml
 ----
 
 ____
+
 :foreman:
  :host: 'https://satellite.example.com/'
  :username: 'admin'
  :password: 'redhat'
+
 ____
 
 
