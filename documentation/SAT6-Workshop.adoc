@@ -15,6 +15,10 @@ include::{includedir}/Preface.adoc[leveloffset=+1]
 
 include::{includedir}/Getting-Started.adoc[leveloffset=+1]
 
+== Start and Stop Satellite Services (First Steps)
+
+include::{includedir}/Start-Stop.adoc[leveloffset=+1]
+
 == Content Syncronization (First Steps)
 
 include::{includedir}/Content-Sync.adoc[leveloffset=+1]
