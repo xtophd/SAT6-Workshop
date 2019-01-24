@@ -38,10 +38,19 @@ Many of the same steps we use here can be found in the official provisioning gui
 ssh satellite
 ----
 
+On the satellite server, for those not interested in typing there is a cheat-script available to execute all the tasks within this unit.  Please do take the time to review the commands and their parameters if you oopt to invoke the script.
+
+[NOTE]
+====
+_Unit Cheat Script_
+----
+cheat-sync-repos.sh
+----
+====
+
 == Enable Repos
 
 The most difficult part of getting all of the parameters right is figuring out the exact 'name'.  The following command helped me out a great deal.  If you find something better, let me know: 'hammer repository-set list --product "Red Hat Enterprise Linux Server" --organization "ExampleCom Test Lab"'
-
 
 .[root@workstation ~]$ 
 ----
