@@ -84,6 +84,55 @@ hammer repository-set enable \
 --name "Red Hat Satellite Tools 6.4 (for RHEL 7 Server) (RPMs)"
 ----
 
+== Change Download Policy
+
+.[root@workstation ~]$ 
+----
+hammer repository update  \
+--organization "ExampleCom Test Lab" \
+--product "Red Hat Enterprise Linux Server" \
+--name "Red Hat Enterprise Linux 7 Server (RPMs)" \
+--download-policy background
+----
+
+.[root@workstation ~]$ 
+----
+hammer repository update \
+--organization "ExampleCom Test Lab" \
+--product "Red Hat Enterprise Linux Server" \
+--name "Red Hat Enterprise Linux 7 Server - Optional (RPMs)" \
+--download-policy background
+----
+
+.[root@workstation ~]$ 
+----
+hammer repository update \
+--organization "ExampleCom Test Lab" \
+--product "Red Hat Enterprise Linux Server" \
+--name "Red Hat Enterprise Linux 7 Server - Extras (RPMs)" \
+--download-policy background
+----
+
+.[root@workstation ~]$ 
+----
+hammer repository update \
+--organization "ExampleCom Test Lab" \
+--product "Red Hat Enterprise Linux Server" \
+--name "Red Hat Enterprise Linux 7 Server (Kickstart)" \
+--download-policy background
+----
+
+.[root@workstation ~]$ 
+----
+hammer repository update \
+--product "Red Hat Enterprise Linux Server" \
+--organization "ExampleCom Test Lab" \
+--name "Red Hat Satellite Tools 6.4 (for RHEL 7 Server) (RPMs)" \
+--download-policy background
+----
+
+
+
 
 == Synchronize Repos
 
