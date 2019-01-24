@@ -166,7 +166,7 @@ hammer product synchronize \
 [discrete]
 == End of Unit
 
-*Next:* link:Content-Views.adoc[Content Views]
+*Next:* link:App-Lifecycles.adoc[Application Lifecycles]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
