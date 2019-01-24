@@ -11,6 +11,17 @@
         cmd: |                                                                                         
           yum clean all
 
+- hosts: nodes
+
+    ## Left Over from previous work
+    - name: "YUM remove unwanted packages"
+      yum: name=katello-ca-consumer-*.noarch state=absent
+
+   - name: "Install Satellite CRT on nodes"
+      shell:                                                                                           
+        cmd: |                                                                                         
+          rpm -Uvh http://satellite.example.com/pub/katello-ca-consumer-satellite.example.com-1.0-1.noarch                                                             
+
 - hosts: satellite
   tasks:
 
