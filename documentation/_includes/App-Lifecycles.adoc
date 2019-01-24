@@ -8,7 +8,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-= Application Lifecycle
+= Application Lifecycles
 
 NOTE: This unit assumes you have successfully loaded a working manifest into the Red Hat Satellite Server.
 
