@@ -12,6 +12,7 @@
           yum clean all
 
 - hosts: satellite
+  tasks:
 
     - name: "TEMPLATE install cheat-(scripts) in /var/tmp"
       template:
