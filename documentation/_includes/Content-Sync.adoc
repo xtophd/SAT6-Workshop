@@ -95,7 +95,7 @@ hammer repository update  \
 --organization "ExampleCom Test Lab" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server" \
---download-policy background
+--download-policy immediate
 ----
 
 .[root@workstation ~]$ 
@@ -104,7 +104,7 @@ hammer repository update \
 --organization "ExampleCom Test Lab" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server" \
---download-policy background
+--download-policy immediate
 ----
 
 .[root@workstation ~]$ 
@@ -113,7 +113,7 @@ hammer repository update \
 --organization "ExampleCom Test Lab" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64" \
---download-policy background
+--download-policy immediate
 ----
 
 .[root@workstation ~]$ 
@@ -122,7 +122,7 @@ hammer repository update \
 --organization "ExampleCom Test Lab" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.5" \
---download-policy background
+--download-policy immediate
 ----
 
 .[root@workstation ~]$ 
@@ -131,7 +131,7 @@ hammer repository update \
 --product "Red Hat Enterprise Linux Server" \
 --organization "ExampleCom Test Lab" \
 --name "Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64" \
---download-policy background
+--download-policy immediate
 ----
 
 
@@ -144,12 +144,15 @@ Since all of the content we are currently working with falls under a single prod
 .[root@workstation ~]$ 
 ----
 hammer product synchronize \
---organization "ExampleCom Test Lab"
+--organization "ExampleCom Test Lab" \
 --name "Red Hat Enterprise Linux Server" \
 --async
 ----
 
 
+
+.OLD UNFORMATTED NOTES
+----
 
 ## Enable Red Hat Repos
     Content -> Red Hat Repos
