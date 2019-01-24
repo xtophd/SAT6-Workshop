@@ -1,0 +1,13 @@
+#!/bin/bash
+
+hammer lifecycle-environment create --name "Desktop-DEV" \
+--description "Environment for Dekstop Active Development" \
+--prior "Library" --organization "ExampleCom Test Lab"
+
+hammer lifecycle-environment create --name "Desktop-QA" \
+--description "Environment for Desktop Quality Assurance" \
+--prior "Desktop-DEV" --organization "ExampleCom Test Lab"
+
+hammer lifecycle-environment create --name "Desktop-PROD" \
+--description "Environment for Desktop Production Releases" \
+--prior "DeskTop-QA" --organization "ExampleCom Test Lab"
