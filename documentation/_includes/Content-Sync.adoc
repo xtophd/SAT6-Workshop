@@ -157,7 +157,7 @@ hammer product synchronize \
 [discrete]
 == End of Unit
 
-*Next:* link:PXE-less-Discovery.adoc[Provisioning with PXE-less Discovery]
+*Next:* link:Content-Views.adoc[Content Views]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
