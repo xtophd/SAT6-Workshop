@@ -15,14 +15,29 @@ include::{includedir}/Preface.adoc[leveloffset=+1]
 
 include::{includedir}/Getting-Started.adoc[leveloffset=+1]
 
-== Start and Stop Satellite Services (First Steps)
+== Common Operational Tasks
 
-include::{includedir}/Start-Stop.adoc[leveloffset=+1]
+include::{includedir}/Common-Ops.adoc[leveloffset=+1]
 
-== Content Syncronization (First Steps)
+== Content Syncronization
 
 include::{includedir}/Content-Sync.adoc[leveloffset=+1]
 
+== Application Lifecycles
+
+include::{includedir}/App-Lifecycles.adoc[leveloffset=+1]
+
+== Content Views
+
+include::{includedir}/Content-Views.adoc[leveloffset=+1]
+
+== PXE Less Discovery
+
+include::{includedir}/Content-Views.adoc[leveloffset=+1]
+
+== Scratch Notes
+
+include::{includedir}/Scratch-Notes.txt[leveloffset=+1]
 
 [discrete]
 = The End
