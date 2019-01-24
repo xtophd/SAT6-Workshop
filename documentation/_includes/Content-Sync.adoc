@@ -12,7 +12,16 @@ endif::[]
 
 NOTE: This unit assumes you have successfully loaded a working manifest into the Red Hat Satellite Server.
 
+NOTE: This unit also assume the 'hammer' command is configured correctly and functions without prompting for username and password.  If it does not, you may need to make some changes to the config file: _/root/.hammer/cli.modules.d/foreman.yml_
+
 All the work in this unit will be performed on the satellite's command-line, or optionally in the WebUI.
+
+If you have not already, connect to the satellite server.
+
+.[root@workstation ~]$ 
+----
+ssh satellite
+----
 
 [discrete]
 == Additional Reference Materials
@@ -28,17 +37,6 @@ Many of the same steps we use here can be found in the official provisioning gui
 ----
 ssh satellite
 ----
-
-== Configure the Hammer CLI
-
-It is a valid statement to say that anything which can be done in the WebUI, can also be done on the command-line using a tool called 'hammer'
-
-Tasks such as getting basic content defined and syncronized are perfect for the command line.  
-
-Our installation automatically configured the foreman username and password.  If for whatever reason you alter the password for admin within the Satellite's WebUI, you need to update hammer config as well:
-
-  *  /root/.hammer/cli.modules.d/foreman.yml
-
 
 == Enable Repos
 
