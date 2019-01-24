@@ -19,8 +19,7 @@ hammer content-view publish \
 echo "Promoting Content View to DEV"
 
 hammer content-view version promote \
-
---content-view "Desktop-R7" \
+  --content-view "Desktop-R7" \
   --version 1 \
   --to-lifecycle-environment "Desktop-DEV" \
   --organization "ExampleCom Test Lab"
