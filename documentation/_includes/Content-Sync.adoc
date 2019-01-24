@@ -85,6 +85,18 @@ hammer repository-set enable \
 ----
 
 
+== Synchronize Repos
+
+Since all of the content we are currently working with falls under a single product category, we can specify to sync all of it simultaneously.
+
+.[root@workstation ~]$ 
+----
+hammer product synchronize \
+--organization "ExampleCom Test Lab"
+--name "Red Hat Enterprise Linux Server" \
+--async
+----
+
 
 
 ## Enable Red Hat Repos
