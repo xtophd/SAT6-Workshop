@@ -1,0 +1,34 @@
+#!/bin/bash
+
+hammer repository-set enable \
+--organization "ExampleCom Test Lab" \
+--product "Red Hat Enterprise Linux Server" \
+--basearch "x86_64" \
+--releasever "7Server" \
+--name "Red Hat Enterprise Linux 7 Server (RPMs)"
+
+hammer repository-set enable \
+--organization "ExampleCom Test Lab" \
+--product "Red Hat Enterprise Linux Server" \
+--basearch "x86_64" \
+--releasever "7Server" \
+--name "Red Hat Enterprise Linux 7 Server - Optional (RPMs)"
+
+hammer repository-set enable \
+--organization "ExampleCom Test Lab" \
+--product "Red Hat Enterprise Linux Server" \
+--basearch "x86_64" \
+--name "Red Hat Enterprise Linux 7 Server - Extras (RPMs)"
+
+hammer repository-set enable \
+--organization "ExampleCom Test Lab" \
+--product "Red Hat Enterprise Linux Server" \
+--basearch "x86_64" \
+--releasever "7.5" \
+--name "Red Hat Enterprise Linux 7 Server (Kickstart)"
+
+hammer repository-set enable \
+--product "Red Hat Enterprise Linux Server" \
+--organization "ExampleCom Test Lab" \
+--basearch "x86_64" \
+--name "Red Hat Satellite Tools 6.4 (for RHEL 7 Server) (RPMs)"
