@@ -14,6 +14,16 @@ NOTE: This unit assumes you have successfully loaded a working manifest into the
 
 All the work in this unit will be performed on the satellite's command-line, or optionally in the WebUI.
 
+[discrete]
+== Additional Reference Materials
+
+NOTE: You are not required to reference outside documentation for these exercises.  This is informational only.
+
+Many of the same steps we use here can be found in the official provisioning guide.
+
+    * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/provisioning_guide/initialization_script_for_provisioning_examples[Provisioning Guide - Appendix A]
+
+
 .[root@workstation ~]$ 
 ----
 ssh satellite
@@ -23,8 +33,7 @@ ssh satellite
 
 It is a valid statement to say that anything which can be done in the WebUI, can also be done on the command-line using a tool called 'hammer'
 
-Tasks such as getting basic content defined and syncronized are perfect for the command line.  Doing it from the WebUI as a novice
-is tedious and you don't really learn anything other than 'navigating the abundant menus can be overwhelming and confusing'.
+Tasks such as getting basic content defined and syncronized are perfect for the command line.  
 
 Our installation automatically configured the foreman username and password.  If for whatever reason you alter the password for admin within the Satellite's WebUI, you need to update hammer config as well:
 
