@@ -23,6 +23,19 @@ If you have not already, connect to the satellite server.
 ssh satellite
 ----
 
+On the satellite server, for those not interested in typing there is a cheat-script available to execute all the tasks within this unit.  Please do take the time to review the commands and their parameters if you oopt to invoke the script.
+
+[NOTE]
+====
+_Unit Cheat Script_
+----
+cheat-enable-repos.sh
+cheat-set-policy.sh
+cheat-sync-repos.sh
+----
+====
+
+
 [discrete]
 == Additional Reference Materials
 
@@ -31,22 +44,6 @@ NOTE: You are not required to reference outside documentation for these exercise
 Many of the same steps we use here can be found in the official provisioning guide.
 
     * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/provisioning_guide/initialization_script_for_provisioning_examples[Provisioning Guide - Appendix A]
-
-
-.[root@workstation ~]$ 
-----
-ssh satellite
-----
-
-On the satellite server, for those not interested in typing there is a cheat-script available to execute all the tasks within this unit.  Please do take the time to review the commands and their parameters if you oopt to invoke the script.
-
-[NOTE]
-====
-_Unit Cheat Script_
-----
-cheat-sync-repos.sh
-----
-====
 
 == Enable Repos
 
