@@ -17,7 +17,12 @@ Not sure just how common these tasks are, but as this workshop was built out we 
 A common question is "how do I restart the satellite service".  One can always reboot, but that is obviously not the ideal solution.
 
 The proper way to manage the Satellite services is as follows:
- 
+
+.[root@satellite ~]$ 
+----
+katello-service stop
+----
+
 .[root@satellite ~]$ 
 ----
 katello-service start
