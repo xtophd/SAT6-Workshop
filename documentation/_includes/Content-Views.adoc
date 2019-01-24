@@ -70,7 +70,7 @@ hammer content-view version promote --content-view "Desktop-R7" --version 1 \
 [discrete]
 == End of Unit
 
-*Next:* link:App-Lifecycles.adoc[Application Lifecycles]
+*Next:* link:PXE-Less-Discovery.adoc[PXE Less Discovery]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
