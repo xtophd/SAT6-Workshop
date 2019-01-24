@@ -25,3 +25,4 @@
         - {src: 'cheat-enable-repos.j2',         dest: '/usr/local/bin/cheat-enable-repos.sh'}
         - {src: 'cheat-set-policy.j2',           dest: '/usr/local/bin/cheat-set-policy.sh'}
         - {src: 'cheat-app-lifecycles.j2',       dest: '/usr/local/bin/cheat-app-lifecycles.sh'}
+        - {src: 'cheat-content-views.j2',        dest: '/usr/local/bin/cheat-content-views.sh'}
