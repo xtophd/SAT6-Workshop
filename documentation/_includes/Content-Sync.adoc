@@ -86,12 +86,15 @@ hammer repository-set enable \
 
 == Change Download Policy
 
+Notice that the names are not identical below.  They appear to include the base architecture and release version in the name.  You can get the list of names using 'hammer repository list'.
+
+
 .[root@workstation ~]$ 
 ----
 hammer repository update  \
 --organization "ExampleCom Test Lab" \
 --product "Red Hat Enterprise Linux Server" \
---name "Red Hat Enterprise Linux 7 Server (RPMs)" \
+--name "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server" \
 --download-policy background
 ----
 
@@ -100,7 +103,7 @@ hammer repository update  \
 hammer repository update \
 --organization "ExampleCom Test Lab" \
 --product "Red Hat Enterprise Linux Server" \
---name "Red Hat Enterprise Linux 7 Server - Optional (RPMs)" \
+--name "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server" \
 --download-policy background
 ----
 
@@ -109,7 +112,7 @@ hammer repository update \
 hammer repository update \
 --organization "ExampleCom Test Lab" \
 --product "Red Hat Enterprise Linux Server" \
---name "Red Hat Enterprise Linux 7 Server - Extras (RPMs)" \
+--name "Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64" \
 --download-policy background
 ----
 
@@ -118,7 +121,7 @@ hammer repository update \
 hammer repository update \
 --organization "ExampleCom Test Lab" \
 --product "Red Hat Enterprise Linux Server" \
---name "Red Hat Enterprise Linux 7 Server (Kickstart)" \
+--name "Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.5" \
 --download-policy background
 ----
 
@@ -127,7 +130,7 @@ hammer repository update \
 hammer repository update \
 --product "Red Hat Enterprise Linux Server" \
 --organization "ExampleCom Test Lab" \
---name "Red Hat Satellite Tools 6.4 (for RHEL 7 Server) (RPMs)" \
+--name "Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64" \
 --download-policy background
 ----
 
