@@ -10,6 +10,8 @@ endif::[]
 
 = Common Operator Tasks
 
+Not sure just how common these tasks are, but as this workshop was built out we ran into things which needed to be managed.  So here is a pile of helpful tips and references.
+
 == How to Stop Satellite Services
 
 A common question is "how do I restart the satellite service".  One can always reboot, but that is obviously not the ideal solution.
