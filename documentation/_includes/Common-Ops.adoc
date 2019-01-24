@@ -1,0 +1,56 @@
+:sectnums:
+:sectnumlevels: 3
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= Common Operator Tasks
+
+== How to Stop Satellite Services
+
+A common question is "how do I restart the satellite service".  One can always reboot, but that is obviously not the ideal solution.
+
+The proper way to manage the Satellite services is as follows:
+ 
+.[root@satellite ~]$ 
+----
+katello-service start
+----
+
+.[root@satellite ~]$ 
+----
+katello-service restart
+----
+
+== Logs to Watch
+
+.[root@satellite ~]$ 
+----
+foreman-tail
+----
+ 
+== Cleaning up /var/spool/squid
+
+.[root@satellite ~]$ 
+----
+katello-service stop
+
+rm -rf /var/spool/squid/*
+
+katello-service start
+----
+
+[discrete]
+== End of Unit
+
+*Next:* link:Content-Sync.adoc[Content Synchronization]
+
+link:../SAT6-Workshop.adoc[Return to TOC]
+
+////
+Always end files with a blank line to avoid include problems.
+////
