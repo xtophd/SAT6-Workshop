@@ -1,0 +1,17 @@
+#!/bin/bash
+
+hammer content-view version promote \
+  --content-view "Desktop-R7" \
+  --version 1 \
+  --to-lifecycle-environment "Desktop-DEV" \
+  --organization "ExampleCom Test Lab"
+
+hammer content-view version promote \
+  --content-view "Desktop-R7" --version 1 \
+  --to-lifecycle-environment "Desktop-QA" \
+  --organization "ExampleCom Test Lab"
+
+hammer content-view version promote 
+  --content-view "Desktop-R7" --version 1 \
+  --to-lifecycle-environment "Desktop-PROD" \
+  --organization "ExampleCom Test Lab"
