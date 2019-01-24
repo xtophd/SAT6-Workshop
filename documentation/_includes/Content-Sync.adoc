@@ -39,7 +39,7 @@ The most difficult part of getting all of the parameters right is figuring out t
 .[root@workstation ~]$ 
 ----
 hammer repository-set enable \
---organization "ExampleCom Test Lab"
+--organization "ExampleCom Test Lab" \
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
 --releasever "7Server" \
