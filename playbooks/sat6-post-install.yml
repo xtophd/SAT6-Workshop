@@ -13,15 +13,13 @@
 
 - hosts: nodes
   tasks:
-  
+
     ## Left Over from previous work
     - name: "YUM remove unwanted packages"
-      yum: name=katello-ca-consumer-*.noarch state=absent
+      yum: name=katello-ca-consumer-rhsat.example.com-1.0-1.noarch state=absent
 
-    - name: "Install Satellite CRT on nodes"
-      shell:                                                                                           
-        cmd: |                                                                                         
-          rpm -Uvh http://satellite.example.com/pub/katello-ca-consumer-satellite.example.com-1.0-1.noarch.rpm                                                            
+    - name: "YUM install satellite crt"
+      yum: name=http://satellite.example.com/pub/katello-ca-consumer-satellite.example.com-1.0-1.noarch.rpm state=installed
 
 - hosts: satellite
   tasks:
