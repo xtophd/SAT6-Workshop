@@ -31,9 +31,21 @@ include::{includedir}/App-Lifecycles.adoc[leveloffset=+1]
 
 include::{includedir}/Content-Views.adoc[leveloffset=+1]
 
+== PXE Discovery
+
+include::{includedir}/PXE-Discovery.adoc[leveloffset=+1]
+
 == PXE Less Discovery
 
-include::{includedir}/Content-Views.adoc[leveloffset=+1]
+include::{includedir}/PXEless-Discovery.adoc[leveloffset=+1]
+
+== Introduction to Ansible
+
+include::{includedir}/Intro-Ansible.adoc[leveloffset=+1]
+
+== Introduction to Puppet
+
+include::{includedir}/Intro-Puppet.adoc[leveloffset=+1]
 
 == Scratch Notes
 
