@@ -19,7 +19,7 @@ include::{includedir}/Getting-Started.adoc[leveloffset=+1]
 
 include::{includedir}/Common-Ops.adoc[leveloffset=+1]
 
-== Content Syncronization
+== Content Synchronization
 
 include::{includedir}/Content-Sync.adoc[leveloffset=+1]
 
