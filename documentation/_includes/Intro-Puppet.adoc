@@ -40,7 +40,7 @@ Many of the same steps we use here can be found in the official provisioning gui
 [discrete]
 == End of Unit
 
-*Next:* link:Scratch-Notes.adoc[Scratch Notes]
+*Next:* link:Scratch-Notes.txt[Scratch Notes]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
