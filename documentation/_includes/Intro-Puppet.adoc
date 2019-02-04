@@ -40,7 +40,7 @@ Many of the same steps we use here can be found in the official provisioning gui
 [discrete]
 == End of Unit
 
-*Next:* link:App-Lifecycles.adoc[Application Lifecycles]
+*Next:* link:Scratch-Notes.adoc[Scratch Notes]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
