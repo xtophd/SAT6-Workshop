@@ -32,7 +32,7 @@ Many of the same steps we use here can be found in the official provisioning gui
 [discrete]
 == End of Unit
 
-*Next:* link:PXEless-Discovery.adoc[PXE-less Discovery]
+*Next:* link:PXE-Less-Discovery.adoc[PXE-less Discovery]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
