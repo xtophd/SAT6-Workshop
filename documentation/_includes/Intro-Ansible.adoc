@@ -31,16 +31,12 @@ Many of the same steps we use here can be found in the official provisioning gui
 
 == Prep Work
 
-== Create Ansible Role
-
-== Import Ansbile Role
-
 == Execute on Client
 
 [discrete]
 == End of Unit
 
-*Next:* link:Intro-Puppet.adoc[Introduction to Puppet Lifecycles]
+*Next:* link:Intro-Puppet.adoc[Introduction to Puppet]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
