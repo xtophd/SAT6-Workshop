@@ -92,7 +92,7 @@ hammer content-view version promote \
 [discrete]
 == End of Unit
 
-*Next:* link:PXE-Less-Discovery.adoc[PXE Less Discovery]
+*Next:* link:Host-Groups.adoc[Host Groups]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
