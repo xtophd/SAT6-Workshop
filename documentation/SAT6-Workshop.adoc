@@ -35,6 +35,10 @@ include::{includedir}/Content-Views.adoc[leveloffset=+1]
 
 include::{includedir}/Host-Groups.adoc[leveloffset=+1]
 
+== Activation Keys
+
+include::{includedir}/Activation-Keys.adoc[leveloffset=+1]
+
 == Discovery Rules
 
 include::{includedir}/Discovery-Rules.adoc[leveloffset=+1]
