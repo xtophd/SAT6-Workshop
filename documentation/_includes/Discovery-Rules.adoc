@@ -8,14 +8,12 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-= Create Discovery Rules
+= Discovery Rules
 
 .[root@workstation ~]$ 
 ----
 whoami
 ----
-
-
 
 [discrete]
 == Additional Reference Materials
@@ -26,21 +24,12 @@ Many of the same steps we use here can be found in the official provisioning gui
 
     * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/provisioning_guide/initialization_script_for_provisioning_examples[Provisioning Guide - Appendix A]
 
-
-== Ansible Overview
-
-== Prep Work
-
-== Create Ansible Role
-
-== Import Ansbile Role
-
-== Execute on Client
+== Discovery Rules Overview
 
 [discrete]
 == End of Unit
 
-*Next:* link:Intro-Puppet.adoc[Introduction to Puppet Lifecycles]
+*Next:* link:PXE-Discovery.adoc[PXE Discovery]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
