@@ -31,13 +31,21 @@ include::{includedir}/App-Lifecycles.adoc[leveloffset=+1]
 
 include::{includedir}/Content-Views.adoc[leveloffset=+1]
 
+== Host Groups
+
+include::{includedir}/Host-Groups.adoc[leveloffset=+1]
+
+== Discovery Rules
+
+include::{includedir}/Discovery-Rules.adoc[leveloffset=+1]
+
 == PXE Discovery
 
 include::{includedir}/PXE-Discovery.adoc[leveloffset=+1]
 
 == PXE Less Discovery
 
-include::{includedir}/PXEless-Discovery.adoc[leveloffset=+1]
+include::{includedir}/PXE-Less-Discovery.adoc[leveloffset=+1]
 
 == Introduction to Ansible
 
