@@ -39,9 +39,9 @@ include::{includedir}/Host-Groups.adoc[leveloffset=+1]
 
 include::{includedir}/Activation-Keys.adoc[leveloffset=+1]
 
-== Client Management
+== Host Management
 
-include::{includedir}/Client Management.adoc[leveloffset=+1]
+include::{includedir}/Host Management.adoc[leveloffset=+1]
 
 == Discovery Rules
 
