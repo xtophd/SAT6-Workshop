@@ -32,7 +32,7 @@ Many of the same steps we use here can be found in the official provisioning gui
 [discrete]
 == End of Unit
 
-*Next:* link:Client-Management.adoc[Client Management]
+*Next:* link:Host-Management.adoc[Host Management]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
