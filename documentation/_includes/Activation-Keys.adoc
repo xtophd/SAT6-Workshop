@@ -10,29 +10,26 @@ endif::[]
 
 = Activation Keys
 
-.[root@workstation ~]$ 
-----
-whoami
-----
-
-
-
 [discrete]
 == Additional Reference Materials
 
 NOTE: You are not required to reference outside documentation for these exercises.  This is informational only.
 
-Many of the same steps we use here can be found in the official provisioning guide.
+Many of the same steps we use here can be found in the official administration documentation.
 
-    * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/provisioning_guide/initialization_script_for_provisioning_examples[Provisioning Guide - Appendix A]
-
-
+    * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/content_management_guide/managing_activation_keys[Managing Activation Keys]
+    
 == Activation Keys Overview
 
+Activation keys provide a means to easy system registration and subscription attachment. 
 
+There are two methods to register a system with a Satellite Server:
+   * authenticate with a Satellite Server using a username and password and then manually register a host, or
+   * use an activation key (authentication token) to automate the process
+      
 == Create Activation Keys
 
-.[root@workstation ~]$ 
+.[root@satellite ~]$ 
 ----
 hammer activation-key create \
 --name "desktop-dev" \
@@ -42,7 +39,7 @@ hammer activation-key create \
 --organization "ExampleCom Test Lab"
 ----
 
-.[root@workstation ~]$ 
+.[root@satellite ~]$ 
 ----
 hammer activation-key create \
 --name "desktop-prob" \
@@ -56,14 +53,14 @@ hammer activation-key create \
 
 First we need to identify available subscription IDs
 
-.[root@workstation ~]$ 
+.[root@satellite ~]$ 
 ----
 hammer subscription list --organization "ExampleCom Test Lab"
 ----
 
 Same command with a different output format.
 
-.[root@workstation ~]$ 
+.[root@satellite ~]$ 
 ----
 hammer --output base subscription list --organization "ExampleCom Test Lab"
 ----
@@ -72,7 +69,7 @@ Take noice of the end date, quantity and consumed.  Each time an activation key 
 
 Now it's time to attach the subscriptions to the activation keys.  For our scenario, both DEV and PROD with consume the same subscription entitlement.
 
-.[root@workstation ~]$ 
+.[root@satellite ~]$ 
 ----
 hammer activation-key add-subscription \
 --name "desktop-dev" \
@@ -89,7 +86,7 @@ hammer activation-key add-subscription \
 
 By default the Satellite-Tools content will not be enabled automatically when hosts register with an activation key.  This default bevahiour is easily overidden as follows:
 
-.[root@workstation ~]$ 
+.[root@satellite ~]$ 
 ----
 hammer activation-key content-override \
 --name "desktop-dev" \
@@ -107,12 +104,12 @@ hammer activation-key content-override \
 
 == Additional Activities
 
-.[root@workstation ~]$ 
+.[root@satellite ~]$ 
 ----
 hammer activation-key list --organization "ExampleCom Test Lab"
 ----
 
-.[root@workstation ~]$ 
+.[root@satellite ~]$ 
 ----
 hammer activation-key info --name "desktop-dev" --organization "ExampleCom Test Lab"
 ----
