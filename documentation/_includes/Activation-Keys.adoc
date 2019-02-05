@@ -70,9 +70,39 @@ hammer --output base subscription list --organization "ExampleCom Test Lab"
 
 Take noice of the end date, quantity and consumed.  Each time an activation key is used, the consumed count increases.  When there are no subscriptions remaining, any attempt to use the key for host activation is rejected.
 
+Now it's time to attach the subscriptions to the activation keys.  For our scenario, both DEV and PROD with consume the same subscription entitlement.
 
+.[root@workstation ~]$ 
+----
+hammer activation-key add-subscription \
+--name "desktop-dev" \
+--subscription-id <ID-FROM-ABOVE-COMMAND> \
+--organization "ExampleCom Test Lab"
 
+hammer activation-key add-subscription \
+--name "desktop-prod" \
+--subscription-id <ID-FROM-ABOVE-COMMAND> \
+--organization "ExampleCom Test Lab"
+----
 
+== Adjust Auto-Enable Status of Content
+
+By default the Satellite-Tools content will not be enabled automatically when hosts register with an activation key.  This default bevahiour is easily overidden as follows:
+
+.[root@workstation ~]$ 
+----
+hammer activation-key content-override \
+--name "desktop-dev" \
+--content-label rhel-7-server-satellite-tools-6.4-rpms \
+--value 1 \
+--organization "ExampleCom Test Lab"
+
+hammer activation-key content-override \
+--name "desktop-prod" \
+--content-label rhel-7-server-satellite-tools-6.4-rpms \
+--value 1 \
+--organization "ExampleCom Test Lab"
+----
 
 [discrete]
 == End of Unit
