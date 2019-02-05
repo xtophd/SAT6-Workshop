@@ -41,8 +41,17 @@ Hosts can be managed through the Red Hat Satellite web UI or through command lin
 subscription-manager register --serverurl=satellite.example.com  --org="ExampleCom_Test_Lab" --activationkey="desktop-dev"
 ----
 
-==
+== Upload Package Info
 
+.[root@node1 ~]$ 
+----
+yum install katello-host-tools
+----
+
+.[root@node1 ~]$ 
+----
+katello-package-upload
+----
 
 == Audit
 
