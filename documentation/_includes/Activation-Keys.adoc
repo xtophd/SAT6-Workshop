@@ -35,7 +35,6 @@ Many of the same steps we use here can be found in the official provisioning gui
 ----
 hammer activation-key create \
 --name "desktop-dev" \
---unlimited-content-hosts true \
 --description "Desktops for development and early testing" \
 --lifecycle-environment "Desktop-DEV" \
 --content-view "Desktop-R7"  \
@@ -45,8 +44,7 @@ hammer activation-key create \
 .[root@workstation ~]$ 
 ----
 hammer activation-key create \
---name "desktop-dev" \
---unlimited-content-hosts true \
+--name "desktop-prob" \
 --description "Desktops for development and early testing" \
 --lifecycle-environment "Desktop-PROD" \
 --content-view "Desktop-R7"  \
