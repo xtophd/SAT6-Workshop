@@ -10,10 +10,6 @@ endif::[]
 
 = Host Management
 
-.[root@workstation ~]$ 
-----
-whoami
-----
 
 [discrete]
 == Additional Reference Materials
@@ -39,6 +35,14 @@ Red Hat Satellite enables host management at scale, including:
 Hosts can be managed through the Red Hat Satellite web UI or through command line tools like 'hammer'.
 
 == Registration
+
+.[root@node1 ~]$ 
+----
+subscription-manager register --serverurl=satellite.example.com  --org="ExampleCom_Test_Lab" --activationkey="desktop-dev"
+----
+
+==
+
 
 == Audit
 
