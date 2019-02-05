@@ -104,6 +104,19 @@ hammer activation-key content-override \
 --organization "ExampleCom Test Lab"
 ----
 
+
+== Additional Activities
+
+.[root@workstation ~]$ 
+----
+hammer activation-key list --organization "ExampleCom Test Lab"
+----
+
+.[root@workstation ~]$ 
+----
+hammer activation-key info --name "desktop-dev" --organization "ExampleCom Test Lab"
+----
+
 [discrete]
 == End of Unit
 
