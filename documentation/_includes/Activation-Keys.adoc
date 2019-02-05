@@ -30,6 +30,7 @@ Many of the same steps we use here can be found in the official provisioning gui
 == Activation Keys Overview
 
 
+== Create Activation Keys
 
 .[root@workstation ~]$ 
 ----
@@ -50,6 +51,25 @@ hammer activation-key create \
 --content-view "Desktop-R7"  \
 --organization "ExampleCom Test Lab"
 ----
+
+== Attach Subscriptions
+
+First we need to identify available subscription IDs
+
+.[root@workstation ~]$ 
+----
+hammer subscription list --organization "ExampleCom Test Lab"
+----
+
+Same command with a different output format.
+
+.[root@workstation ~]$ 
+----
+hammer --output base subscription list --organization "ExampleCom Test Lab"
+----
+
+Take noice of the end date, quantity and consumed.  Each time an activation key is used, the consumed count increases.  When there are no subscriptions remaining, any attempt to use the key for host activation is rejected.
+
 
 
 
