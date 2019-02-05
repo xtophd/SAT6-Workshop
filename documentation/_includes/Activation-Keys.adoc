@@ -27,7 +27,34 @@ Many of the same steps we use here can be found in the official provisioning gui
     * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/provisioning_guide/initialization_script_for_provisioning_examples[Provisioning Guide - Appendix A]
 
 
-== Host Group Overview
+== Activation Keys Overview
+
+
+
+.[root@workstation ~]$ 
+----
+hammer activation-key create \
+--name "desktop-dev" \
+--unlimited-content-hosts true \
+--description "Desktops for development and early testing" \
+--lifecycle-environment "Desktop-DEV" \
+--content-view "Desktop-R7"  \
+--organization "ExampleCom Test Lab"
+----
+
+.[root@workstation ~]$ 
+----
+hammer activation-key create \
+--name "desktop-dev" \
+--unlimited-content-hosts true \
+--description "Desktops for development and early testing" \
+--lifecycle-environment "Desktop-PROD" \
+--content-view "Desktop-R7"  \
+--organization "ExampleCom Test Lab"
+----
+
+
+
 
 [discrete]
 == End of Unit
