@@ -2,10 +2,10 @@
 myDisk = "/dev/vdb"
 myVG = "sat_vg"
 
-mySat_Location = "USA"
-mySat_Org = "ExampleCom"
-mySat_Admin = "admin"
-mySat_PW = "redhat"
+myLocation = "USA"
+myOrganization = "ExampleCom"
+myAdminName = "admin"
+myAdminPW = "redhat"
 
 [satellite]
 satellite.example.com
