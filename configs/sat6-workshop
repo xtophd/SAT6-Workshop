@@ -1,6 +1,7 @@
 [satellite:vars]
-myDisk = /dev/vdb
-myVG = sat_vg
+myDisk = "/dev/vdb"
+myVG = "sat_vg"
+myORG = "ExampleCom"
 
 [satellite]
 satellite.example.com
