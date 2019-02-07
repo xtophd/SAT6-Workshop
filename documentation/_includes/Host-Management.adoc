@@ -38,7 +38,7 @@ Hosts can be managed through the Red Hat Satellite web UI or through command lin
 
 .[root@node1 ~]$ 
 ----
-subscription-manager register --serverurl=satellite.example.com  --org="ExampleCom_Test_Lab" --activationkey="desktop-dev"
+subscription-manager register --serverurl=satellite.example.com  --org="ExampleCom" --activationkey="desktop-dev"
 ----
 
 .[root@node1 ~]$ 
