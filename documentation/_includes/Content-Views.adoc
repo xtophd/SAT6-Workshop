@@ -29,7 +29,9 @@ On the satellite server, for those not interested in typing there is a cheat-scr
 ====
 _Unit Cheat Script_
 ----
-cheat-content-views.sh
+cheat-cv-create.sh
+cheat-cv-publish.sh
+cheat-cv-promote.sh
 ----
 ====
 
