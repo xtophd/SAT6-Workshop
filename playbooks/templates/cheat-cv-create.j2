@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "Creating Content View"
+
+hammer content-view create \
+  --organization {{ myOrganization }}
+  --name "Desktop-R7" \
+  --description "Desktop RHEL 7 OS" \
+  --product "Red Hat Enterprise Linux Server" \
+  --repositories "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server,Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64" \
