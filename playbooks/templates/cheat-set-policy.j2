@@ -1,31 +1,31 @@
 #!/bin/bash
 
 hammer repository update  \
---organization "ExampleCom" \
+--organization "{{ myOrganization }}" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server" \
 --download-policy immediate
 
 hammer repository update \
---organization "ExampleCom" \
+--organization "{{ myOrganization }}" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server" \
 --download-policy immediate
 
 hammer repository update \
---organization "ExampleCom" \
+--organization "{{ myOrganization }}" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64" \
 --download-policy immediate
 
 hammer repository update \
---organization "ExampleCom" \
+--organization "{{ myOrganization }}" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.5" \
 --download-policy immediate
 
 hammer repository update \
---organization "ExampleCom" \
+--organization "{{ myOrganization }}" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64" \
 --download-policy immediate
