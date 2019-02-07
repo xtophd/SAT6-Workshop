@@ -10,30 +10,30 @@
         cmd: |
           if grep -q {{ item.mount }} /proc/mounts ; then umount {{ item.mount }} ; fi
       with_items:
-        - {vg: 'sat6_vg', lv: 'pulp',    mount: '/var/lib/pulp'}
-        - {vg: 'sat6_vg', lv: 'pgsql',   mount: '/var/lib/pgsql'}
-        - {vg: 'sat6_vg', lv: 'mongodb', mount: '/var/libm/mongodb'}
-        - {vg: 'sat6_vg', lv: 'squid',   mount: '/var/spool/squid'}
-        - {vg: 'sat6_vg', lv: 'cache',   mount: '/var/cache'}
+        - {vg: {{ myVG }}, lv: 'pulp',    mount: '/var/lib/pulp'}
+        - {vg: {{ myVG }}, lv: 'pgsql',   mount: '/var/lib/pgsql'}
+        - {vg: {{ myVG }}, lv: 'mongodb', mount: '/var/libm/mongodb'}
+        - {vg: {{ myVG }}, lv: 'squid',   mount: '/var/spool/squid'}
+        - {vg: {{ myVG }}, lv: 'cache',   mount: '/var/cache'}
 
     - name: "CMD cleanup previous satellite storage"
       shell:
         cmd: |
           echo "need to check mounts && umount"
-          vgs sat6_vg && vgremove --force sat6_vg
-          pvs /dev/vdb && pvremove --force /dev/vdb
-          wipefs -a /dev/vdb
+          vgs {{ myVG }} && vgremove --force {{ myVG }}
+          pvs {{ myDisk }} && pvremove --force {{ myDisk }}
+          wipefs -a {{ myDisk }}
 
     - name: "CMD prepare satellite storage"
       shell:
         cmd: |
-          pvcreate /dev/vdb
-          vgcreate sat6_vg /dev/vdb
-          lvcreate -L 50GB  -n mongodb sat6_vg
-          lvcreate -L 100GB -n pulp    sat6_vg
-          lvcreate -L 5GB   -n pgsql   sat6_vg
-          lvcreate -L 5GB   -n squid   sat6_vg
-          lvcreate -L 20GB  -n cache   sat6_vg
+          pvcreate {{ myDisk }}
+          vgcreate {{ myVG }} {{ myDisk }}
+          lvcreate -L 50GB  -n mongodb {{ myVG }}
+          lvcreate -L 100GB -n pulp    {{ myVG }}
+          lvcreate -L 5GB   -n pgsql   {{ myVG }}
+          lvcreate -L 5GB   -n squid   {{ myVG }}
+          lvcreate -L 20GB  -n cache   {{ myVG }}
 
     - name: "CMD remove old cache directory"
       shell:
@@ -48,11 +48,11 @@
           mkdir -p {{ item.mount }}
           grep -q {{ item.mount }} /etc/fstab || echo "/dev/mapper/{{item.vg}}-{{ item.lv }} {{ item.mount }} xfs defaults 0 0" >> /etc/fstab
       with_items:
-        - {vg: 'sat6_vg', lv: 'pulp',    mount: '/var/lib/pulp'}
-        - {vg: 'sat6_vg', lv: 'pgsql',   mount: '/var/lib/pgsql'}
-        - {vg: 'sat6_vg', lv: 'mongodb', mount: '/var/libm/mongodb'}
-        - {vg: 'sat6_vg', lv: 'squid',   mount: '/var/spool/squid'}
-        - {vg: 'sat6_vg', lv: 'cache',   mount: '/var/cache'}
+        - {vg: {{ myVG }}, lv: 'pulp',    mount: '/var/lib/pulp'}
+        - {vg: {{ myVG }}, lv: 'pgsql',   mount: '/var/lib/pgsql'}
+        - {vg: {{ myVG }}, lv: 'mongodb', mount: '/var/libm/mongodb'}
+        - {vg: {{ myVG }}, lv: 'squid',   mount: '/var/spool/squid'}
+        - {vg: {{ myVG }}, lv: 'cache',   mount: '/var/cache'}
 
     - name: "CMD mount everything"
       shell:
