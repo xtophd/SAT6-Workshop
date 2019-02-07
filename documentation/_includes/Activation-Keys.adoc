@@ -36,7 +36,7 @@ hammer activation-key create \
 --description "Desktops for development and early testing" \
 --lifecycle-environment "Desktop-DEV" \
 --content-view "Desktop-R7"  \
---organization "ExampleCom Test Lab"
+--organization "ExampleCom"
 ----
 
 .[root@satellite ~]$ 
@@ -46,7 +46,7 @@ hammer activation-key create \
 --description "Desktops for development and early testing" \
 --lifecycle-environment "Desktop-PROD" \
 --content-view "Desktop-R7"  \
---organization "ExampleCom Test Lab"
+--organization "ExampleCom"
 ----
 
 == Attach Subscriptions
@@ -55,14 +55,14 @@ First we need to identify available subscription IDs
 
 .[root@satellite ~]$ 
 ----
-hammer subscription list --organization "ExampleCom Test Lab"
+hammer subscription list --organization "ExampleCom"
 ----
 
 Same command with a different output format.
 
 .[root@satellite ~]$ 
 ----
-hammer --output base subscription list --organization "ExampleCom Test Lab"
+hammer --output base subscription list --organization "ExampleCom"
 ----
 
 Take noice of the end date, quantity and consumed.  Each time an activation key is used, the consumed count increases.  When there are no subscriptions remaining, any attempt to use the key for host activation is rejected.
@@ -74,12 +74,12 @@ Now it's time to attach the subscriptions to the activation keys.  For our scena
 hammer activation-key add-subscription \
 --name "desktop-dev" \
 --subscription-id <ID-FROM-ABOVE-COMMAND> \
---organization "ExampleCom Test Lab"
+--organization "ExampleCom"
 
 hammer activation-key add-subscription \
 --name "desktop-prod" \
 --subscription-id <ID-FROM-ABOVE-COMMAND> \
---organization "ExampleCom Test Lab"
+--organization "ExampleCom"
 ----
 
 == Adjust Auto-Enable Status of Content
@@ -92,13 +92,13 @@ hammer activation-key content-override \
 --name "desktop-dev" \
 --content-label rhel-7-server-satellite-tools-6.4-rpms \
 --value 1 \
---organization "ExampleCom Test Lab"
+--organization "ExampleCom"
 
 hammer activation-key content-override \
 --name "desktop-prod" \
 --content-label rhel-7-server-satellite-tools-6.4-rpms \
 --value 1 \
---organization "ExampleCom Test Lab"
+--organization "ExampleCom"
 ----
 
 
@@ -106,12 +106,12 @@ hammer activation-key content-override \
 
 .[root@satellite ~]$ 
 ----
-hammer activation-key list --organization "ExampleCom Test Lab"
+hammer activation-key list --organization "ExampleCom"
 ----
 
 .[root@satellite ~]$ 
 ----
-hammer activation-key info --name "desktop-dev" --organization "ExampleCom Test Lab"
+hammer activation-key info --name "desktop-dev" --organization "ExampleCom"
 ----
 
 [discrete]
