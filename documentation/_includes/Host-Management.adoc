@@ -69,7 +69,7 @@ katello-package-upload
 [discrete]
 == End of Unit
 
-*Next:* link:Discover-Rules.adoc[Discovery Rules]
+*Next:* link:Discovery-Rules.adoc[Discovery Rules]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
