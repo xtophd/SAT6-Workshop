@@ -12,10 +12,10 @@
       shell: 
         cmd: |
           satellite-installer --scenario satellite \
-          --foreman-initial-organization "ExampleCom" \
-          --foreman-initial-location "Irving, Tx" \
-          --foreman-admin-username admin \
-          --foreman-admin-password redhat \
+          --foreman-initial-organization {{ myOrganization }} \
+          --foreman-initial-location {{ myLocationn }}" \
+          --foreman-admin-username {{ myAdminName }} \
+          --foreman-admin-password {{ myAdminPW }} \
           --foreman-proxy-dns-managed=false \
           --foreman-proxy-dhcp-managed=false
           
