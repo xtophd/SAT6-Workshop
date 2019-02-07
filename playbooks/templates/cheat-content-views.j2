@@ -7,14 +7,14 @@ hammer content-view create \
   --description "Desktop RHEL 7 OS" \
   --product "Red Hat Enterprise Linux Server" \
   --repositories "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server,Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64" \
-  --organization "ExampleCom Test Lab"
+  --organization "ExampleCom"
 
 echo "Publishing Content View"
 
 hammer content-view publish \
   --name "Desktop-R7" \
   --description "Initial content view for our operating system" \
-  --organization "ExampleCom Test Lab"
+  --organization "ExampleCom"
 
 echo "Promoting Content View to DEV"
 
@@ -22,7 +22,7 @@ hammer content-view version promote \
   --content-view "Desktop-R7" \
   --version 1 \
   --to-lifecycle-environment "Desktop-DEV" \
-  --organization "ExampleCom Test Lab"
+  --organization "ExampleCom"
 
 echo "Promoting Content View to QA"
 
@@ -30,7 +30,7 @@ hammer content-view version promote \
   --content-view "Desktop-R7" \
   --version 1 \
   --to-lifecycle-environment "Desktop-QA" \
-  --organization "ExampleCom Test Lab"
+  --organization "ExampleCom"
 
 echo "Promoting Content View to PROD"
 
@@ -38,4 +38,4 @@ hammer content-view version promote \
   --content-view "Desktop-R7" \
   --version 1 \
   --to-lifecycle-environment "Desktop-PROD" \
-  --organization "ExampleCom Test Lab"
+  --organization "ExampleCom"
