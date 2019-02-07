@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "Promoting Content View to DEV"
+
+hammer content-view version promote \
+  --organization {{ myOrganization }} \
+  --content-view "Desktop-R7" \
+  --version 1 \
+  --to-lifecycle-environment "Desktop-DEV"
+
+echo "Promoting Content View to QA"
+
+hammer content-view version promote \
+  --organization {{ myOrganization }} \
+  --content-view "Desktop-R7" \
+  --version 1 \
+  --to-lifecycle-environment "Desktop-QA"
+  
+echo "Promoting Content View to PROD"
+
+hammer content-view version promote \
+  --organization {{ myOrganization }} \
+  --content-view "Desktop-R7" \
+  --version 1 \
+  --to-lifecycle-environment "Desktop-PROD"
