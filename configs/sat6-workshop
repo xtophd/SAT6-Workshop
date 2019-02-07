@@ -1,7 +1,11 @@
 [satellite:vars]
 myDisk = "/dev/vdb"
 myVG = "sat_vg"
-myORG = "ExampleCom"
+
+mySat_Location = "USA"
+mySat_Org = "ExampleCom"
+mySat_Admin = "admin"
+mySat_PW = "redhat"
 
 [satellite]
 satellite.example.com
