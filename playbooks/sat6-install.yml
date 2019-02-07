@@ -12,7 +12,7 @@
       shell: 
         cmd: |
           satellite-installer --scenario satellite \
-          --foreman-initial-organization "ExampleCom Test Lab" \
+          --foreman-initial-organization "ExampleCom" \
           --foreman-initial-location "Irving, Tx" \
           --foreman-admin-username admin \
           --foreman-admin-password redhat \
