@@ -52,7 +52,7 @@ The most difficult part of getting all of the parameters right is figuring out t
 .[root@workstation ~]$ 
 ----
 hammer repository-set enable \
---organization "ExampleCom Test Lab" \
+--organization "ExampleCom" \
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
 --releasever "7Server" \
@@ -62,7 +62,7 @@ hammer repository-set enable \
 .[root@workstation ~]$ 
 ----
 hammer repository-set enable \
---organization "ExampleCom Test Lab" \
+--organization "ExampleCom" \
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
 --releasever "7Server" \
@@ -72,7 +72,7 @@ hammer repository-set enable \
 .[root@workstation ~]$ 
 ----
 hammer repository-set enable \
---organization "ExampleCom Test Lab" \
+--organization "ExampleCom" \
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
 --name "Red Hat Enterprise Linux 7 Server - Extras (RPMs)"
@@ -81,7 +81,7 @@ hammer repository-set enable \
 .[root@workstation ~]$ 
 ----
 hammer repository-set enable \
---organization "ExampleCom Test Lab" \
+--organization "ExampleCom" \
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
 --releasever "7.5" \
@@ -91,8 +91,8 @@ hammer repository-set enable \
 .[root@workstation ~]$ 
 ----
 hammer repository-set enable \
+--organization "ExampleCom" \
 --product "Red Hat Enterprise Linux Server" \
---organization "ExampleCom Test Lab" \
 --basearch "x86_64" \
 --name "Red Hat Satellite Tools 6.4 (for RHEL 7 Server) (RPMs)"
 ----
@@ -105,7 +105,7 @@ Notice that the names are not identical below.  They appear to include the base 
 .[root@workstation ~]$ 
 ----
 hammer repository update  \
---organization "ExampleCom Test Lab" \
+--organization "ExampleCom" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server" \
 --download-policy immediate
@@ -114,7 +114,7 @@ hammer repository update  \
 .[root@workstation ~]$ 
 ----
 hammer repository update \
---organization "ExampleCom Test Lab" \
+--organization "ExampleCom" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server" \
 --download-policy immediate
@@ -123,7 +123,7 @@ hammer repository update \
 .[root@workstation ~]$ 
 ----
 hammer repository update \
---organization "ExampleCom Test Lab" \
+--organization "ExampleCom" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64" \
 --download-policy immediate
@@ -132,7 +132,7 @@ hammer repository update \
 .[root@workstation ~]$ 
 ----
 hammer repository update \
---organization "ExampleCom Test Lab" \
+--organization "ExampleCom" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.5" \
 --download-policy immediate
@@ -141,8 +141,8 @@ hammer repository update \
 .[root@workstation ~]$ 
 ----
 hammer repository update \
+--organization "ExampleCom" \
 --product "Red Hat Enterprise Linux Server" \
---organization "ExampleCom Test Lab" \
 --name "Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64" \
 --download-policy immediate
 ----
@@ -154,7 +154,7 @@ Since all of the content we are currently working with falls under a single prod
 .[root@workstation ~]$ 
 ----
 hammer product synchronize \
---organization "ExampleCom Test Lab" \
+--organization "ExampleCom" \
 --name "Red Hat Enterprise Linux Server" \
 --async
 ----
