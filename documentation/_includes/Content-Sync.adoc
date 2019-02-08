@@ -10,9 +10,9 @@ endif::[]
 
 = Content Synchronization
 
-WARN: This unit assumes you have successfully loaded a working manifest into the Red Hat Satellite Server.
+WARNING: This unit assumes you have successfully loaded a working manifest into the Red Hat Satellite Server.
 
-WARN: This unit also assume the 'hammer' command is configured correctly and functions without prompting for username and password.  If it does not, you may need to make some changes to the config file: _/root/.hammer/cli.modules.d/foreman.yml_
+WARNING: This unit also assume the 'hammer' command is configured correctly and functions without prompting for username and password.  If it does not, you may need to make some changes to the config file: _/root/.hammer/cli.modules.d/foreman.yml_
 
 All the work in this unit will be performed on the satellite's command-line, or optionally in the WebUI.
 
