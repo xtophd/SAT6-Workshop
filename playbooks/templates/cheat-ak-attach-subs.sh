@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Attach Subscriptions to Activation Keys
+echo "Attach Subscriptions to Activation Keys"
 
 UUID=`hammer --output base subscription list --organization "{{ myOrganization }}"  | grep UUID | awk '{ print $2 }'`
 
