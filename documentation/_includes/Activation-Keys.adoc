@@ -10,6 +10,18 @@ endif::[]
 
 = Activation Keys
 
+
+[NOTE]
+====
+_Unit Cheat Scripts_
+----
+cheat-ak-create.sh
+cheat-ak-attach-subs.sh
+cheat-ak-autoenable.sh
+----
+====
+
+
 [discrete]
 == Additional Reference Materials
 
