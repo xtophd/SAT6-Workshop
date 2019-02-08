@@ -38,8 +38,11 @@
         - {src: 'cheat-set-policy.j2',           dest: '/usr/local/bin/cheat-set-policy.sh'}
         - {src: 'cheat-app-lifecycles.j2',       dest: '/usr/local/bin/cheat-app-lifecycles.sh'}
         - {src: 'cheat-cv-create.j2',            dest: '/usr/local/bin/cheat-cv-create.sh'}
-        - {src: 'cheat-cv-publish.j2',            dest: '/usr/local/bin/cheat-cv-publish.sh'}
-        - {src: 'cheat-cv-promote.j2',            dest: '/usr/local/bin/cheat-cv-promote.sh'}
+        - {src: 'cheat-cv-publish.j2',           dest: '/usr/local/bin/cheat-cv-publish.sh'}
+        - {src: 'cheat-cv-promote.j2',           dest: '/usr/local/bin/cheat-cv-promote.sh'}
+        - {src: 'cheat-ak-create.j2',            dest: '/usr/local/bin/cheat-ak-create.sh'}
+        - {src: 'cheat-ak-attach-subs.j2',       dest: '/usr/local/bin/cheat-ak-attach-subs.sh'}
+        - {src: 'cheat-ak-autoenable.j2',        dest: '/usr/local/bin/cheat-ak-autoenable.sh'}
 
 
 
