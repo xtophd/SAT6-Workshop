@@ -51,6 +51,13 @@ rm -rf /var/spool/squid/*
 katello-service start
 ----
 
+== Reset Admin Password
+
+.[root@satellite ~]$ 
+----
+foreman-rake permissions:reset password=NewPassword
+----
+
 == Backups
 
 .[root@satellite ~]$ 
