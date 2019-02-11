@@ -19,7 +19,7 @@ NOTE: You are not required to reference outside documentation for these exercise
 
 Many of the same steps we use here can be found in the official provisioning guide.
 
-    * link: https://www.open-scap.org/resources [Open-scap Resources]
+    * link: https://www.open-scap.org/resources[Open-scap Resources]
     * link: https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/administering_red_hat_satellite/chap-red_hat_satellite-administering_red_hat_satellite-security_compliance_management[Managing Security Compliance]
 
 == OpenSCAP Overview
