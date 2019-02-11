@@ -1,0 +1,56 @@
+:sectnums:
+:sectnumlevels: 3
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= Secuirty with OpenSCAP
+
+
+
+[discrete]
+== Additional Reference Materials
+
+NOTE: You are not required to reference outside documentation for these exercises.  This is informational only.
+
+Many of the same steps we use here can be found in the official provisioning guide.
+
+    * link: https://www.open-scap.org/resources [Open-scap Resources]
+    * link: https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/administering_red_hat_satellite/chap-red_hat_satellite-administering_red_hat_satellite-security_compliance_management[Managing Security Compliance]
+
+== OpenSCAP Overview
+
+Security Content Automation Protocol (SCAP) is a specification for expressing and manipulating security data in 
+standardized ways. SCAP uses several individual specifications in concert to automate continuous monitoring, 
+vulnerability management, and security policy compliance evaluation reporting.
+
+SCAP is a list of specifications maintained by the National Institute of Standards and Technology (NIST) for maintaining 
+system security for enterprise systems.
+
+OpenSCAP is an implementation (application) of SCAP specifications on Linux.
+
+== Load SCAP content
+
+.[root@satellite ~]$ 
+----
+foreman-rake foreman_openscap:bulk_upload:default
+----
+
+== Create Compliance Policy
+
+== Monitor Compliance
+
+[discrete]
+== End of Unit
+
+*Next:* link:Activation-Keys.adoc[Activation Keys]
+
+link:../SAT6-Workshop.adoc[Return to TOC]
+
+////
+Always end files with a blank line to avoid include problems.
+////
