@@ -29,9 +29,9 @@ On the satellite server, for those not interested in typing there are cheat-scri
 ====
 _Unit Cheat Script_
 ----
-cheat-enable-repos.sh
-cheat-set-policy.sh
-cheat-sync-repos.sh
+cheat-repos-enable.sh
+cheat-repos-policy.sh
+cheat-repos-sync.sh
 ----
 ====
 
