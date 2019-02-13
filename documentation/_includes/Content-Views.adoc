@@ -94,7 +94,7 @@ hammer content-view version promote \
 [discrete]
 == End of Unit
 
-*Next:* link:Host-Groups.adoc[Host Groups]
+*Next:* link:Activation-Keys.adoc[Activation Keys]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
