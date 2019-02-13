@@ -40,8 +40,9 @@ NOTE: You are not required to reference outside documentation for these exercise
 
 Many of the same steps we use here can be found in the official provisioning guide.
 
-    * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/provisioning_guide/initialization_script_for_provisioning_examples[Provisioning Guide - Appendix A]
-
+    * link: https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/transitioning_from_red_hat_satellite_5_to_red_hat_satellite_6/[Satellite Transition Guide]
+    
+    
 == Create Lifecycle Environment
 
 .[root@satellite ~]$ 
