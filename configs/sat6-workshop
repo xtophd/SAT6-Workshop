@@ -1,11 +1,12 @@
-[satellite:vars]
-myDisk = "/dev/vdb"
-myVG = "sat_vg"
-
+[:vars]
 myLocation = "USA"
 myOrganization = "ExampleCom"
 myAdminName = "admin"
 myAdminPW = "redhat"
+
+[satellite:vars]
+myDisk = "/dev/vdb"
+myVG = "sat_vg"
 
 [satellite]
 satellite.example.com
