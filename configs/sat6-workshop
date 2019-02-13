@@ -1,4 +1,4 @@
-[:vars]
+[all:vars]
 myLocation = "USA"
 myOrganization = "ExampleCom"
 myAdminName = "admin"
