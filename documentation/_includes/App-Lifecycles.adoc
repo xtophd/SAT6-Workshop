@@ -57,7 +57,7 @@ hammer lifecycle-environment create --name "Desktop-QA" \
 
 hammer lifecycle-environment create --name "Desktop-PROD" \
 --description "Environment for Desktop Production Releases" \
---prior "DeskTop-QA" --organization "ExampleCom"
+--prior "Desktop-QA" --organization "ExampleCom"
 ----
 
 [discrete]
