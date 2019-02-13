@@ -22,7 +22,7 @@
         cmd: |                                                                                         
           yum clean all
 
-    - name: "TEMPLATE install cheat-(scripts) in /var/tmp"
+    - name: "TEMPLATE install cheat-(scripts) in /usr/local/bin"
       template:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
@@ -35,7 +35,7 @@
 - hosts: satellite
   tasks:
 
-    - name: "TEMPLATE install cheat-(scripts) in /var/tmp"
+    - name: "TEMPLATE install cheat-(scripts) in /usr/local/bin"
       template:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
