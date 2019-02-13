@@ -22,6 +22,16 @@
         cmd: |                                                                                         
           yum clean all
 
+    - name: "TEMPLATE install cheat-(scripts) in /var/tmp"
+      template:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: root
+        group: root
+        mode: 0744
+      with_items:
+        - {src: 'cheat-register-host.j2',           dest: '/usr/local/bin/cheat-register-host.sh'}
+
 - hosts: satellite
   tasks:
 
@@ -33,9 +43,9 @@
         group: root
         mode: 0744
       with_items:
-        - {src: 'cheat-sync-repos.j2',           dest: '/usr/local/bin/cheat-sync-repos.sh'}
-        - {src: 'cheat-enable-repos.j2',         dest: '/usr/local/bin/cheat-enable-repos.sh'}
-        - {src: 'cheat-set-policy.j2',           dest: '/usr/local/bin/cheat-set-policy.sh'}
+        - {src: 'cheat-repos-sync.j2',           dest: '/usr/local/bin/cheat-repos-sync.sh'}
+        - {src: 'cheat-repos-enable.j2',         dest: '/usr/local/bin/cheat-repos-enable.sh'}
+        - {src: 'cheat-repos-policy.j2',         dest: '/usr/local/bin/cheat-repos-policy.sh'}
         - {src: 'cheat-app-lifecycles.j2',       dest: '/usr/local/bin/cheat-app-lifecycles.sh'}
         - {src: 'cheat-cv-create.j2',            dest: '/usr/local/bin/cheat-cv-create.sh'}
         - {src: 'cheat-cv-publish.j2',           dest: '/usr/local/bin/cheat-cv-publish.sh'}
