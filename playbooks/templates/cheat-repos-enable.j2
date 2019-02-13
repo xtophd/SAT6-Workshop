@@ -14,11 +14,11 @@ hammer repository-set enable \
 --releasever "7Server" \
 --name "Red Hat Enterprise Linux 7 Server - Optional (RPMs)"
 
-hammer repository-set enable \
---organization "{{ myOrganization }}" \
---product "Red Hat Enterprise Linux Server" \
---basearch "x86_64" \
---name "Red Hat Enterprise Linux 7 Server - Extras (RPMs)"
+# hammer repository-set enable \
+# --organization "{{ myOrganization }}" \
+# --product "Red Hat Enterprise Linux Server" \
+# --basearch "x86_64" \
+# --name "Red Hat Enterprise Linux 7 Server - Extras (RPMs)"
 
 hammer repository-set enable \
 --organization "{{ myOrganization }}" \
