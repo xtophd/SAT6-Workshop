@@ -41,7 +41,7 @@ include::{includedir}/Activation-Keys.adoc[leveloffset=+1]
 
 == Host Management
 
-include::{includedir}/Host Management.adoc[leveloffset=+1]
+include::{includedir}/Host-Management.adoc[leveloffset=+1]
 
 == Discovery Rules
 
