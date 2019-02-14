@@ -21,12 +21,19 @@
     - name: "YUM remove old rhn tools"
       yum: name=rhn-setup,rhn-client-tools state=absent
   
-    - name: "CMD disable yum plugins and subscription-manager"
+    - name: "CMD disable yum subscription nagging"
       shell: 
         cmd: |          
           sed -i 's/enabled=1/enabled=0/g' /etc/yum/pluginconf.d/subscription-manager.conf
           sed -i 's/enabled=1/enabled=0/g' /etc/yum/pluginconf.d/product-id.conf
-    
+
+    - name: "CMD disable local yum repos"
+      shell: 
+        cmd: |          
+          sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/rhel7.repo
+
+
+
     - name: "USER create and/or reset users"
       user: name="{{ item.name }}" password="{{ item.password }}"
       with_items:
