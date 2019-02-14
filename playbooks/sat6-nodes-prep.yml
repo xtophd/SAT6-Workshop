@@ -18,10 +18,12 @@
           tuned-adm profile virtual-guest                                                              
           mount -o remount,nobarrier /                                                                 
   
-    - name: "CMD disable yum plugins for rhn and subscription-manager"
+    - name: "YUM remove old rhn tools"
+      yum: name=rhn-setup,rhn-client-tools state=absent
+  
+    - name: "CMD disable yum plugins and subscription-manager"
       shell: 
         cmd: |          
-          sed -i 's/enabled=1/enabled=0/g' /etc/yum/pluginconf.d/rhnplugin.conf
           sed -i 's/enabled=1/enabled=0/g' /etc/yum/pluginconf.d/subscription-manager.conf
           sed -i 's/enabled=1/enabled=0/g' /etc/yum/pluginconf.d/product-id.conf
     
