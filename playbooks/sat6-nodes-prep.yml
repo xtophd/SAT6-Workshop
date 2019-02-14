@@ -2,9 +2,6 @@
 - hosts: nodes, satellite
   tasks:
   
-    - name: "PING all hosts to ensure we are alive and ready"
-      ping:
-
     ## *** WARNING *** WARNING *** WARNING *** WARNING *** WARNING *** 
     ##
     ##   We SHOULD use an appropriate perf profile in the real world,
@@ -21,19 +18,6 @@
     - name: "YUM remove old rhn tools"
       yum: name=rhn-setup,rhn-client-tools state=absent
   
-    - name: "CMD disable yum subscription nagging"
-      shell: 
-        cmd: |          
-          sed -i 's/enabled=1/enabled=0/g' /etc/yum/pluginconf.d/subscription-manager.conf
-          sed -i 's/enabled=1/enabled=0/g' /etc/yum/pluginconf.d/product-id.conf
-
-    - name: "CMD disable local yum repos"
-      shell: 
-        cmd: |          
-          sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/rhel7.repo
-
-
-
     - name: "USER create and/or reset users"
       user: name="{{ item.name }}" password="{{ item.password }}"
       with_items:
@@ -62,4 +46,11 @@
     - name: "SERVICE START firewalld"
       service: name=firewalld state=started enabled=yes
 
+- hosts: nodes
+  tasks:
+
+    - name: "CMD disable local yum repos"
+      shell: 
+        cmd: |          
+          sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/rhel7.repo
 
