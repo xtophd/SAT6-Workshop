@@ -34,7 +34,7 @@ Red Hat Satellite enables host management at scale, including:
    
 Hosts can be managed through the Red Hat Satellite web UI or through command line tools like 'hammer'.
 
-Once a host is entitlement with a subscription, we refer to it as a 'Content Host'.
+Once a host is entitled with a subscription, we refer to it as a 'Content Host'.
 
 == Registration
 
