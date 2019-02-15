@@ -31,10 +31,6 @@ include::{includedir}/App-Lifecycles.adoc[leveloffset=+1]
 
 include::{includedir}/Content-Views.adoc[leveloffset=+1]
 
-== Host Groups
-
-include::{includedir}/Host-Groups.adoc[leveloffset=+1]
-
 == Activation Keys
 
 include::{includedir}/Activation-Keys.adoc[leveloffset=+1]
