@@ -1,11 +1,5 @@
 
 ---
-- hosts: nodes, satellite
-  tasks:
-  
-    - name: "PING all hosts to ensure we are alive and ready"
-      ping:
-
 - hosts: nodes
   tasks:
 
@@ -53,8 +47,6 @@
         - {src: 'cheat-ak-create.j2',            dest: '/usr/local/bin/cheat-ak-create.sh'}
         - {src: 'cheat-ak-attach-subs.j2',       dest: '/usr/local/bin/cheat-ak-attach-subs.sh'}
         - {src: 'cheat-ak-autoenable.j2',        dest: '/usr/local/bin/cheat-ak-autoenable.sh'}
-
-
 
     - name: "CMD yum clean all"
       shell:                                                                                           
