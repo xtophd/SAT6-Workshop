@@ -90,7 +90,7 @@ Host has now been patched.
 [discrete]
 == End of Unit
 
-*Next:* link:Host-Groups.adoc[Host Groups]
+*Next:* link:Insights.adoc[Red Hat Insights]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
