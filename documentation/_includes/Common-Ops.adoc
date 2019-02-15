@@ -60,10 +60,9 @@ foreman-rake permissions:reset password=NewPassword
 
 == Backups
 
-.[root@satellite ~]$ 
-----
-Coming Soon!
-----
+Refer to the documentation:
+
+link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4-beta/html/administering_red_hat_satellite/chap-red_hat_satellite-administering_red_hat_satellite-backup_and_disaster_recovery[Backup and Disaster Recovery]
 
 [discrete]
 == End of Unit
