@@ -1,0 +1,140 @@
+---
+- hosts: nodes, satellite
+  tasks:
+  
+    ## *** WARNING *** WARNING *** WARNING *** WARNING *** WARNING *** 
+    ##
+    ##   We SHOULD use an appropriate perf profile in the real world,
+    ##   but we should NEVER enable nobarrier in the real world.
+    ##
+    ## *** WARNING *** WARNING *** WARNING *** WARNING *** WARNING *** 
+    
+    - name: change performance profile                                                                 
+      shell:                                                                                           
+        cmd: |                                                                                         
+          tuned-adm profile virtual-guest                                                              
+          mount -o remount,nobarrier /                                                                 
+  
+    - name: "YUM remove old rhn tools"
+      yum: name=rhn-setup,rhn-client-tools state=absent
+  
+    - name: "USER create and/or reset users"
+      user: name="{{ item.name }}" password="{{ item.password }}"
+      with_items:
+        - {name: 'root', password: '$5$PK7KM9pT$AehNIMYtW22TEE.D0U3ORWCDFMFvARwJLf8YPvVgAf.'}
+        - {name: 'student', password: '$5$OJx9uJm8$4VYM2llNxqX/7I4M3vXZM8ZJ9FE2msmHpcOqXlDesC8'}
+      
+    - name: "TEMPLATE modify /etc/motd"
+      template:
+        src: motd-sat6-workshop.j2
+        dest: /etc/motd
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: "YUM install misc required packages"
+      yum: name=wget,git,net-tools,bind-utils,yum-utils,iptables-services,bridge-utils,bash-completion,kexec-tools,sos,psacct,firewalld,lynx state=installed
+
+    - name: "SERVICE STOP firewalld"
+      service: name=firewalld state=stopped enabled=yes
+
+    - name: "CMD flushing any existing iptable rules"
+      shell: 
+        cmd: |
+          iptables -F
+
+    - name: "SERVICE START firewalld"
+      service: name=firewalld state=started enabled=yes
+
+
+- hosts: nodes
+  tasks:
+
+    - name: "CMD disable local yum repos"
+      shell: 
+        cmd: |          
+          sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/rhel7.repo
+
+    - name: "YUM remove insights-client"
+      yum: name=insights-client state=absent
+      
+
+- hosts: satellite
+  tasks:
+
+    - name: "CMD unmount previous satellite filesystems"
+      shell:
+        cmd: |
+          if grep -q {{ item.mount }} /proc/mounts ; then umount {{ item.mount }} ; fi
+      with_items:
+        - {vg: "{{ myVG }}", lv: 'pulp',    mount: '/var/lib/pulp'}
+        - {vg: "{{ myVG }}", lv: 'pgsql',   mount: '/var/lib/pgsql'}
+        - {vg: "{{ myVG }}", lv: 'mongodb', mount: '/var/libm/mongodb'}
+        - {vg: "{{ myVG }}", lv: 'squid',   mount: '/var/spool/squid'}
+        - {vg: "{{ myVG }}", lv: 'cache',   mount: '/var/cache'}
+
+    - name: "CMD cleanup previous satellite storage"
+      shell:
+        cmd: |
+          echo "need to check mounts && umount"
+          vgs "{{ myVG }}" && vgremove --force "{{ myVG }}"
+          pvs "{{ myDisk }}" && pvremove --force "{{ myDisk }}"
+          wipefs -a "{{ myDisk }}"
+
+    - name: "CMD prepare satellite storage"
+      shell:
+        cmd: |
+          pvcreate "{{ myDisk }}"
+          vgcreate "{{ myVG }}" "{{ myDisk }}"
+          lvcreate -L 50GB  -n mongodb "{{ myVG }}"
+          lvcreate -L 100GB -n pulp    "{{ myVG }}"
+          lvcreate -L 5GB   -n pgsql   "{{ myVG }}"
+          lvcreate -L 5GB   -n squid   "{{ myVG }}"
+          lvcreate -L 20GB  -n cache   "{{ myVG }}"
+
+    - name: "CMD remove old cache directory"
+      shell:
+        cmd: |
+          rm -rf /var/cache
+          mkdir -p /var/cache
+
+    - name: "CMD create filesystems, mount points and fstab entries"
+      shell:
+        cmd: |
+          mkfs -t xfs /dev/{{ item.vg }}/{{ item.lv }}
+          mkdir -p {{ item.mount }}
+          grep -q {{ item.mount }} /etc/fstab || echo "/dev/mapper/{{item.vg}}-{{ item.lv }} {{ item.mount }} xfs defaults 0 0" >> /etc/fstab
+      with_items:
+        - {vg: "{{ myVG }}", lv: 'pulp',    mount: '/var/lib/pulp'}
+        - {vg: "{{ myVG }}", lv: 'pgsql',   mount: '/var/lib/pgsql'}
+        - {vg: "{{ myVG }}", lv: 'mongodb', mount: '/var/libm/mongodb'}
+        - {vg: "{{ myVG }}", lv: 'squid',   mount: '/var/spool/squid'}
+        - {vg: "{{ myVG }}", lv: 'cache',   mount: '/var/cache'}
+
+    - name: "CMD mount everything"
+      shell:
+        cmd: |
+          mount -a
+          
+    - name: "CMD configure firewalld"
+      shell:
+        cmd: |
+          firewall-cmd --add-port="{{ item.port }}"
+      with_items:
+        - {port: "53/udp"}
+        - {port: "53/tcp"}
+        - {port: "67/udp"}
+        - {port: "69/udp"}
+        - {port: "80/tcp"}
+        - {port: "443/tcp"} 
+        - {port: "5000/tcp"}
+        - {port: "5647/tcp"}
+        - {port: "8000/tcp"}
+        - {port: "8140/tcp"}
+        - {port: "9090/tcp"}
+
+    - name: "CMD save firewalld state"
+      shell:
+        cmd: |
+          firewall-cmd --runtime-to-permanent
+              
