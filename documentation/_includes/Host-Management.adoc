@@ -10,6 +10,14 @@ endif::[]
 
 = Fundamental Host Management & Patching
 
+[NOTE]
+====
+_Unit Cheat Scripts_
+----
+cheat-register-host.sh
+----
+====
+
 
 [discrete]
 == Additional Reference Materials
