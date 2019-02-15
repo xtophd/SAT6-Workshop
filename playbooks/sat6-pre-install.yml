@@ -69,7 +69,7 @@
       with_items:
         - {vg: "{{ myVG }}", lv: 'pulp',    mount: '/var/lib/pulp'}
         - {vg: "{{ myVG }}", lv: 'pgsql',   mount: '/var/lib/pgsql'}
-        - {vg: "{{ myVG }}", lv: 'mongodb', mount: '/var/libm/mongodb'}
+        - {vg: "{{ myVG }}", lv: 'mongodb', mount: '/var/lib/mongodb'}
         - {vg: "{{ myVG }}", lv: 'squid',   mount: '/var/spool/squid'}
         - {vg: "{{ myVG }}", lv: 'cache',   mount: '/var/cache'}
 
@@ -107,7 +107,7 @@
       with_items:
         - {vg: "{{ myVG }}", lv: 'pulp',    mount: '/var/lib/pulp'}
         - {vg: "{{ myVG }}", lv: 'pgsql',   mount: '/var/lib/pgsql'}
-        - {vg: "{{ myVG }}", lv: 'mongodb', mount: '/var/libm/mongodb'}
+        - {vg: "{{ myVG }}", lv: 'mongodb', mount: '/var/lib/mongodb'}
         - {vg: "{{ myVG }}", lv: 'squid',   mount: '/var/spool/squid'}
         - {vg: "{{ myVG }}", lv: 'cache',   mount: '/var/cache'}
 
