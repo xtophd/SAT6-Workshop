@@ -14,3 +14,7 @@ subscription-manager register \
   --org="{{ myOrganization }}" \
   --serverurl="satellite.example.com" \
   --activationkey="desktop-dev"
+
+echo "## Uploading package data"
+
+katello-package-upload
