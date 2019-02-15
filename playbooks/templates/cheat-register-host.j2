@@ -15,6 +15,10 @@ subscription-manager register \
   --serverurl="satellite.example.com" \
   --activationkey="desktop-dev"
 
+echo "## Installing Katello Agent"
+
+yum install katello-agent
+
 echo "## Uploading package data"
 
 katello-package-upload
