@@ -8,7 +8,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-= Host Management
+= Fundamental Host Management & Patching
 
 
 [discrete]
@@ -33,6 +33,8 @@ Red Hat Satellite enables host management at scale, including:
    * subscription management. 
    
 Hosts can be managed through the Red Hat Satellite web UI or through command line tools like 'hammer'.
+
+Once a host is entitlement with a subscription, we refer to it as a 'Content Host'.
 
 == Registration
 
