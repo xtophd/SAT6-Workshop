@@ -40,6 +40,8 @@ Many of the same steps we use here can be found in the official provisioning gui
 
 == Add Exclude Filter
 
+== Add Outside Repo
+
 == Publish the Content View
 
 == Promote the Content View
