@@ -1,7 +1,26 @@
 #!/bin/bash
 
+echo "## Enabling Repo: Extras"
+
 hammer repository-set enable \
   --organization "{{ myOrganization }}" \
   --product "Red Hat Enterprise Linux Server" \
   --basearch "x86_64" \
   --name "Red Hat Enterprise Linux 7 Server - Extras (RPMs)"
+
+echo "## Setting Download Policy: Extras"
+
+hammer repository update \
+--organization "{{ myOrganization }}" \
+--product "Red Hat Enterprise Linux Server" \
+--name "Red Hat Enterprise Linux 7 Server - Extras (RPMs)" \
+--download-policy delayed  
+
+echo "## Starting Sync: Red Hat Enterprise Linux Server"
+
+hammer product synchronize \
+--organization "ExampleCom" \
+--name "Red Hat Enterprise Linux Server" \
+--async
+
+
