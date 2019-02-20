@@ -8,7 +8,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-= Fundamental Host Management & Patching
+= Fundamental Host Management: Registration & Patching
 
 [NOTE]
 ====
