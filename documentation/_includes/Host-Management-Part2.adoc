@@ -34,6 +34,8 @@ Many of the same steps we use here can be found in the official provisioning gui
 
 == Enable RHEL 7 Extras Repo
 
+== Syncronize
+
 == Update Content View
 
 == Add Exclude Filter
