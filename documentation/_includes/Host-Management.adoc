@@ -90,7 +90,7 @@ Host has now been patched.
 [discrete]
 == End of Unit
 
-*Next:* link:Insights.adoc[Red Hat Insights]
+*Next:* link:Host-Management-Part2.adoc[Host Management Part 2]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
