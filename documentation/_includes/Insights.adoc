@@ -65,7 +65,7 @@ Using the WebUI, simply go to the 'Insights -> Overview' report and you can poke
 [discrete]
 == End of Unit
 
-*Next:* link:Host-Groups.adoc[Host Groups]
+*Next:* link:Host-Management-Part2.adoc[Host Groups]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
