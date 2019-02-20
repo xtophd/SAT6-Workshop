@@ -35,9 +35,13 @@ include::{includedir}/Content-Views.adoc[leveloffset=+1]
 
 include::{includedir}/Activation-Keys.adoc[leveloffset=+1]
 
-== Fundamental Host Management & Patching
+== Fundamental Host Management: Registration & Patching
 
-include::{includedir}/Host-Management.adoc[leveloffset=+1]
+include::{includedir}/Host-Management-Part1.adoc[leveloffset=+1]
+
+== Fundamental Host Management: Content Views & Life Cycles
+
+include::{includedir}/Host-Management-Part2.adoc[leveloffset=+1]
 
 == Host Groups
 
