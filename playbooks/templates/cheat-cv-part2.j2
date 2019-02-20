@@ -26,8 +26,8 @@ hammer product synchronize \
 echo "## Content View: Add Extras"
 
 hammer content-view update \
-  --name "Desktop-R7" \
   --organization "{{ myOrganization }}" \
+  --name "Desktop-R7" \
   --repositories "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server,Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64,Red Hat Enterprise Linux 7 Server - Extras (RPMs)"
 
 echo "## Content View: Add Filter"
@@ -35,8 +35,16 @@ echo "## Content View: Add Filter"
 
 echo "## Content View: Publish"
 
+hammer content-view publish \
+  --organization "{{ myOrganization }}" \
+  --name "Desktop-R7" \
+  --description "Initial content view for our operating system"
 
 echo "## Content View: Promote"
 
-
+hammer content-view version promote \
+  --organization "{{ myOrganization }}" \
+  --content-view "Desktop-R7" \
+  --version 2 \
+  --to-lifecycle-environment "Desktop-DEV" \
 
