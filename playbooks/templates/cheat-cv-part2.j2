@@ -25,10 +25,9 @@ hammer product synchronize \
 
 echo "## Content View: Add Extras"
 
-hammer content-view update --name "Desktop-R7" \
+hammer content-view update \
+  --name "Desktop-R7" \
   --organization "{{ myOrganization }}" \
-  --description "Desktop RHEL 7 OS" \
-  --product "Red Hat Enterprise Linux Server" \
   --repositories "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server,Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64,Red Hat Enterprise Linux 7 Server - Extras (RPMs)"
 
 echo "## Content View: Add Filter"
