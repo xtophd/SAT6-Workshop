@@ -1,0 +1,43 @@
+#!/bin/bash
+
+echo "## Enabling Repo: Extras"
+
+hammer repository-set enable \
+  --organization "{{ myOrganization }}" \
+  --product "Red Hat Enterprise Linux Server" \
+  --basearch "x86_64" \
+  --name "Red Hat Enterprise Linux 7 Server - Extras (RPMs)"
+
+echo "## Setting Download Policy: Extras"
+
+hammer repository update \
+  --organization "{{ myOrganization }}" \
+  --product "Red Hat Enterprise Linux Server" \
+  --name "Red Hat Enterprise Linux 7 Server - Extras (RPMs)" \
+  --download-policy delayed  
+
+echo "## Starting Sync: Red Hat Enterprise Linux Server"
+
+hammer product synchronize \
+  --organization "{{ myOrganization }}" \
+  --name "Red Hat Enterprise Linux Server" \
+  --async
+
+echo "## Content View: Add Extras"
+
+hammer content-view update --name "Desktop-R7" \
+  --organization "{{ myOrganization }}" \
+  --description "Desktop RHEL 7 OS" \
+  --product "Red Hat Enterprise Linux Server" \
+  --repositories "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server,Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64,Red Hat Enterprise Linux 7 Server - Extras (RPMs)"
+
+echo "## Content View: Add Filter"
+
+
+echo "## Content View: Publish"
+
+
+echo "## Content View: Promote"
+
+
+
