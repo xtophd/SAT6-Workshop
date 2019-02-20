@@ -8,7 +8,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-= Fundamental Host Management : Part 2
+= Fundamental Host Management : Content Views & Life Cycles
 
 NOTE: This unit is meant to be done in the WebUI.  Cheat scripts are provided for automation and testing.
 
