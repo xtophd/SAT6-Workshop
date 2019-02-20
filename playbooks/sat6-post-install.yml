@@ -47,7 +47,7 @@
         - {src: 'cheat-ak-create.j2',            dest: '/usr/local/bin/cheat-ak-create.sh'}
         - {src: 'cheat-ak-attach-subs.j2',       dest: '/usr/local/bin/cheat-ak-attach-subs.sh'}
         - {src: 'cheat-ak-autoenable.j2',        dest: '/usr/local/bin/cheat-ak-autoenable.sh'}
-        - {src: 'cheat-ak-autoenable.j2',        dest: '/usr/local/bin/cheat-cv-part2.sh'}
+        - {src: 'cheat-cv-part2.j2',             dest: '/usr/local/bin/cheat-cv-part2.sh'}
 
     - name: "CMD yum clean all"
       shell:                                                                                           
