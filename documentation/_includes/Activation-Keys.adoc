@@ -129,7 +129,7 @@ hammer activation-key info --name "desktop-dev" --organization "ExampleCom"
 [discrete]
 == End of Unit
 
-*Next:* link:Host-Management.adoc[Host Management]
+*Next:* link:Host-Management-Part1.adoc[Host Management Part 1]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
