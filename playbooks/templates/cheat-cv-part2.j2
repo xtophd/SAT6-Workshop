@@ -16,12 +16,12 @@ hammer repository update \
   --name "Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64" \
   --download-policy immediate 
 
-echo "## Starting Sync: Red Hat Enterprise Linux Server"
+echo "## Starting Sync: Extras"
 
-hammer product synchronize \
-  --organization "{{ myOrganization }}" \
-  --name "Red Hat Enterprise Linux Server" \
-  --async
+hammer repository synchronize \
+  --organization {{ myOrganization }} \
+  --product "Red Hat Enterprise Linux Server" \
+  --name  "Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64"
 
 echo "## Content View: Add Extras"
 
