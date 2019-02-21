@@ -13,7 +13,7 @@ echo "## Setting Download Policy: Extras"
 hammer repository update \
   --organization "{{ myOrganization }}" \
   --product "Red Hat Enterprise Linux Server" \
-  --name "Red Hat Enterprise Linux 7 Server - Extras (RPMs)" \
+  --name "Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64" \
   --download-policy background  
 
 echo "## Starting Sync: Red Hat Enterprise Linux Server"
@@ -28,7 +28,7 @@ echo "## Content View: Add Extras"
 hammer content-view update \
   --organization "{{ myOrganization }}" \
   --name "Desktop-R7" \
-  --repositories "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server,Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64,Red Hat Enterprise Linux 7 Server - Extras (RPMs)"
+  --repositories "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server,Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64,Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64"
 
 echo "## Content View: Add Filter"
 
