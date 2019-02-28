@@ -77,8 +77,8 @@
       shell:
         cmd: |
           echo "need to check mounts && umount"
-          vgs "{{ myVG }}" && vgremove --force "{{ myVG }}"
-          pvs "{{ myDisk }}" && pvremove --force "{{ myDisk }}"
+          if vgs "{{ myVG }}" ; then vgremove --force "{{ myVG }}" ; fi
+          if pvs "{{ myDisk }}" ; then pvremove --force "{{ myDisk }}" ; fi
           wipefs -a "{{ myDisk }}"
 
     - name: "CMD prepare satellite storage"
