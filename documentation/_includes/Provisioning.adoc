@@ -21,6 +21,26 @@ Many of the same steps we use here can be found in the official provisioning gui
 
 == Provisioning Overview
 
+== Add Kickstart Repos to Content View
+
+Content -> Content Views
+
+Select Desktop-R7
+
+Yum Content -> Repositories
+
+Add
+
+Select `Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.5`
+
+Add Repositories
+
+(Top Right) `Publish New Version`
+
+Promote
+
+Select Desktop-DEV
+
 == Create Provioning Template
 
 Hosts -> Provisioning Templates
@@ -48,7 +68,24 @@ Right before <% if salt_enabled %> add this block
 @X11
 <% end -%>
 
+=== Association
+
+Move appropriate Operating Systems to `Selected Items` list
+
+=== Locations
+
+add your location to `Selected Items`
+
+=== Organization
+
+verify your organization is in the `Selected Items` list
+
+Submit
+
+
 == Create Partition Table
+
+Hosts -> Partition Tables
 
 Create Partition Table
 Name: `Custom Desktop Partitions`
@@ -78,7 +115,36 @@ logvol /tmp  --fstype=ext4  --vgname=vg_rhel --name=tmp    --size=2048
 logvol swap  --fstype=swap --vgname=vg_rhel --name=swap01 --size=2048
 
 
+=== Locations
+
+add your location to `Selected Items`
+
+=== Organization
+
+verify your organization is in the `Selected Items` list
+
+Submit
+
 == Create a Host Group
+
+Configure -> Host Groups
+
+Create
+
+Name: Custom Desktop
+Lifecycle Environment: Desktop-DEV
+Content View: Desktop-R7
+Content Source: satellite.example.com
+
+=== Network
+
+=== Operating System
+
+Architecture: x86_64
+Operating System: RedHat 7.5
+Media Selection: Synced Content
+Synced Content: Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.5
+
 
 == Configure Discovery Rules
 
