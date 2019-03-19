@@ -19,99 +19,170 @@ Red Hat's official documentation can be found publicly with the links provided b
 
 
     * PUT LINK TO PXE-LESS DISCVOERY REFERENCES HERE
+
+Steps required for PXE-Less Discovery
+
+  * Already Done
+    * Install 'foreman-discovery-image' and 'rubygem-smart_proxy_discovery' packages on Satellite Server
+    * Enable Red Hat Repos (including 'kickstart' repos)
+    * Sync Red Hat Repos
+    * Create Lifecycle
+    * Create Content View (which includes 'kickstart' repos)
+    * Publish Content View to Library
+    * Promote Content View to LifeCycle
     
+  * To Do
+    * Create Custom Provisioning Template
+    * Create Custom Partition Template
+    * Modify the Operating System
+    * Create a Domain
+    * Create a Subnet
+    * Create Activation Key
+    * Create Host Group
+    * Create Discovery Rules
+    * Create Discovery Image
+    * Mount Discovery Image to Client
+
+== Create Provisioning Template
+
+Hosts->Templates->Provisioning Templates
+
+Search on 'kickstart default'
+
+To the right of the template called "Kickstart default", select 'clone'
+
+=== Tab: Template
+
+Change the name to "Kickstart custom"
+
+=== Tab: Associations
+
+Add 'Red Hat 7.5' to the 'Selected Items' list
+
+=== Tab: Locations
+
+Add our locations to the 'Selected items' list
+
+Select 'Submit'
+
+Do not make any further changes at this time.
+
+
+== Create Partition Table
+
+Hosts->Templates->Partition Table
+
+Search on 'kickstart default'
+
+To the right of the partition table called "Kickstart default", select 'clone'
+
+=== Tab: Template
+
+Change the name to "Kickstart Custom" and select 'Submit'
+
+=== Tab: Locations
+
+Add our locations to the 'Selected items' list
+
+Select 'Submit'
+
+
+Do not make any further changes at this time.
+
+
+== Update Operating System
+
+Hosts->Provisioning Setup->Operating Systems
+
+Select 'Red Hat 7.5'
+
+=== Tab: Partition Table
+
+Select "Kickstart Custom" and all to 'Selected Items' list
+
+Select 'Submit'
+
+=== Tab: Templates
+
+Provisioning Template: 'Kickstart custom'
+
+== Create a Domain
+
+Satellite considers a domain and a DNS zone as the same thing.  That is, if you are planning to manage a site where all the machines are of the form hostname.somewhere.com then the domain is somewhere.com.
+
+This allows Satellite to associate a puppet variable with a domain/site and automatically append this variable to all external node requests made by machines at that site.
+
+The default domain is assumed to be 'example.com' and since we are only operating in the damain 'example.com' we have nothing further to do here.
+
+== Create a Subnet
+
+Let's wait to confirm this is actually rquired
+
+== Create Activation Key
+
+Content->LifeCycles->Activation Keys
+
+Select 'Create Activation Key'
+
+Name the key 'Custom Key'
+
+Select the appropriate Environment
+
+Select the appropriate Content View
+
+Select 'Save'
+
+Now that the Activation Key has been created, we need to make further associations.
+
+=== Tab: Subscriptions
+
+Select 'Add'
+
+Choose the current entitlement to associate with this Activation Key.
+
+Select 'Add Selected'
+
+Return to the List/Remove tab and you should see the entitlement listed
+
+That's it for now, we will leave everything else at it's default.
+
+== Create Host Group
+
+Configure->Host Groups
+
+Select 'Create Host Group'
+
+=== Tab: Host Group
+
+Name: Custom
+Lifecycle Environment: Dev
+Content View: R7
+Content Source: satellite.example.com
+
+Leave everything else as default
+
+=== Tab: Operating System
+
+Architecture: x86_64
+Operating System: RedHat 7.5
+Media Selection: Synced Content
+Synced Content: Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.5
+Partition Table: 
+
+
+
+
+
+== Create Discovery Rules
+== Create Discovery Image
+== Mount Discovery Image to Client
+
+
+
+
+
 .[root@workstation OCP-Workshop]# - RAW INSTRUCTIONS
 ----
-
-
-Synchronize Content 
-
-
-Enable Repos
-
-## Enable Red Hat Repos
-    Content -> Red Hat Repos
-    Kickstart trees are under kickstart tab
-
-## Enable following Repos (enable to the "recommended" button)
-   7.5 Kickstart    {search 'linux 7 server kickstart', open rhel7-7-server-kickstart, pick 7.5}
-   7Server
-   7Server Optional
-   7 Server Extras
-   Red Hat Satellite Tools 6.4 (for RHEL 7 Server)
-
-## Content I probably DON'T need
-   7.5 Server (probably don't need this)
-   Satellite 6.4 for RHEL 7 Server (probably don't need this)
-   7Server RH Common (probably don't need this)
-
-
-  ** NOTES:
-  ** 7Server is the general GA stream of RHEL
-  ** you will need kickstarts of specific dot release
-  ** kickstarts need to be included in the content views expecting to use them
-
-
-Sync Content
-
-## Set Download Policies to Immediate
-  Content->Products->Red Hat Enterprise Linux Server-><click each one>
-  set "Download Policy" to "Immediate"
-
-## Sync stuff
-  Content->Sync Status
-  Expand All
-  Select All
-  Synchronize Now
-
-  ** NOTE:
-  ** Go to lunch/dinner
-
-Create Life Cycle
- 
-## POC NOTE::
-## Oath-Workstation-LC -> qa -> prod
- 
-##Create a LifeCycle Environment : "RHEL-Workstation-LC"
-Content->Life Cycle Environments / Create Environment Path
- 
-##Add New Environments: qa, prod
-->Add New Environment
-->Add New Environment
- 
-##    Promote to "Library"
- 
-##    Promote to "RHEL 7 Workstations"
- 
-
-
-
-
-Create Content View
-
-## POC NOTE::
-## Oath-Workstations-CV
-
-
-##Create a Content View: RHEL-Workstation-CV
-Content->ContenViews->Create
-    
-
-##Yum Content/Repos Add the following:
-Content->ContenViews / Yum Content->Repositories
-
-Select 'Add' Tab
-
-    7 Server
-    7 Server Optional
-    7 Server Extras
-    Satellite Tools 6.4 for 7 Server
-    7.5 Kickstart
-
-## Publish
-
-## Promote
-
 
 Configure the Discovery Red Hat Kexec
 
