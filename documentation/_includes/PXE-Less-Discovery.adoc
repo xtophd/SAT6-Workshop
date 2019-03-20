@@ -319,9 +319,8 @@ logvol swap  --fstype=swap --vgname=vg_rhel --name=swap01 --size=2000
 
 Insert this block in %packages block 
 
-.[root@workstation OCP-Workshop]# - RAW INSTRUCTIONS
-----
 
+----
 <% if host_param('custom') == 'true' %>
 @GNOME
 @Graphical Administration Tools
@@ -332,11 +331,16 @@ Insert this block in %packages block
 @Fonts
 @X11
 <% end -%>
-
 ----
 
 
+Insert thisblock in %post-install, right before ansible callback
 
+----
+<% if host_param('custom') == 'true' -%>
+systemctl set-default graphical.target
+<% end -%>
+----
 
 
 
