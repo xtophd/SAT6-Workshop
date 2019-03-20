@@ -32,6 +32,7 @@ Steps required for PXE-Less Discovery
     * Promote Content View to LifeCycle
     
   * To Do
+    * Enable 'Discovery Red Hat Kexec'
     * Create Custom Provisioning Template
     * Create Custom Partition Template
     * Modify the Operating System
@@ -43,7 +44,17 @@ Steps required for PXE-Less Discovery
     * Create Discovery Image
     * Mount Discovery Image to Client
 
-== Create Provisioning Template
+
+== Enable 'Discovery Red Hat Kexec'
+
+Switch to "Any Organization"
+Hosts->Provisioning Templates
+Select "Discovery Red Hat kexec"
+Verify Associations
+Add our custom Location
+Add our custom Org
+
+== Create Custom Provisioning Template
 
 Hosts->Templates->Provisioning Templates
 
@@ -71,7 +82,7 @@ Do not make any further changes at this time.
 
 
 
-== Create Partition Table
+== Create Custom Partition Table
 
 Hosts->Templates->Partition Table
 
@@ -79,11 +90,13 @@ Search on 'kickstart default'
 
 To the right of the partition table called "Kickstart default", select 'clone'
 
-=== Tab: Template
+=== Adjust Partition Template Settings
+
+==== TAB: Template
 
 Change the name to "Kickstart Custom" and select 'Submit'
 
-=== Tab: Locations
+==== TAB: Locations
 
 Add our locations to the 'Selected items' list
 
@@ -99,32 +112,39 @@ Hosts->Provisioning Setup->Operating Systems
 
 Select 'Red Hat 7.5'
 
-=== Tab: Partition Table
+=== Adjust Operating System Settings
 
-Select "Kickstart Custom" and all to 'Selected Items' list
+==== TAB: Partition Table
 
-Select 'Submit'
+Select "Kickstart Custom" and add to 'Selected Items' list
 
-=== Tab: Templates
+=== TAB: Templates
 
 Provisioning Template: 'Kickstart Custom'
 Discovery Kexec template: 'Discovery Red Hat kexec'
+
+Select 'Submit'
+
+Do not make any further changes at this time.
 
 
 
 == Create a Domain
 
-Satellite considers a domain and a DNS zone as the same thing.  That is, if you are planning to manage a site where all the machines are of the form hostname.somewhere.com then the domain is somewhere.com.
+https://access.redhat.com/solutions/1165743
 
-This allows Satellite to associate a puppet variable with a domain/site and automatically append this variable to all external node requests made by machines at that site.
-
-The default domain is assumed to be 'example.com' and since we are only operating in the damain 'example.com' we have nothing further to do here.
+Click on Administer -> Organizations 
+Click on "Domains" default domain should be listed, select it.
+Click on Submit.
+Click on Administer -> Locations 
+Click on "Domains" default domain should be listed, select it.
+Click on Submit.
 
 
 
 == Create a Subnet
 
-Yes it's required
+Enter the basic network info required for the client to communicate with the Satellite
 
 
 
@@ -144,7 +164,9 @@ Select 'Save'
 
 Now that the Activation Key has been created, we need to make further associations.
 
-=== Tab: Subscriptions
+=== Adjust Activation Key Settings
+
+==== TAB: Subscriptions
 
 Select 'Add'
 
@@ -154,7 +176,9 @@ Select 'Add Selected'
 
 Return to the List/Remove tab and you should see the entitlement listed
 
-That's it for now, we will leave everything else at it's default.
+Select 'Submit'
+
+Do not make any further changes at this time.
 
 
 
@@ -164,7 +188,9 @@ Configure->Host Groups
 
 Select 'Create Host Group'
 
-=== TAB: Host Group
+=== Adjust Host Group Settings
+
+==== TAB: Host Group
 
 Name: Custom
 Lifecycle Environment: Dev
@@ -173,23 +199,70 @@ Content Source: satellite.example.com
 
 Leave everything else as default
 
-=== TAB: Operating System
+==== TAB: Operating System
 
 Architecture: x86_64
 Operating System: RedHat 7.5
 Media Selection: Synced Content
 Synced Content: Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.5
-Partition Table: 
+Partition Table: 'Kickstart Custom'
+PXE loader: PXELinux BIOS
+Root Pass: redhat123
 
+==== TAB: Locations
 
+Add our location
+
+==== TAB: Organization
+
+Add our organization
+
+Select 'Submit'
+
+Do not make any further changes at this time.
 
 
 
 == Create Discovery Rules
+
+Configure->Discovery Rules
+
+==== TAB: Primary
+
+Name: Custom
+Search: facts.custom=true
+Host Group: Custom
+Hostname: <%= @host.facts['nmprimary_dhcp4_option_host_name'] %>
+
+==== TAB: Locations
+
+add our location
+
+==== Organization
+
+Add our organization
+
+Select 'Submit'
+
+Do not make any further changes at this time.
+
+
+
+## Host Group
+Select whatever we created above
+
+## Enable Auto Discovery Provisioning
+Administer->Settings / Discovered / "Auto provisioning"
+
+
+
 == Create Discovery Image
+
+
+
+
+
 == Mount Discovery Image to Client
-
-
 
 
 
