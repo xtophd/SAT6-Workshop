@@ -48,10 +48,15 @@ Steps required for PXE-Less Discovery
 == Enable 'Discovery Red Hat Kexec'
 
 Switch to "Any Organization"
+
 Hosts->Provisioning Templates
+
 Select "Discovery Red Hat kexec"
+
 Verify Associations
+
 Add our custom Location
+
 Add our custom Org
 
 == Create Custom Provisioning Template
