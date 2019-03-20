@@ -51,21 +51,24 @@ Search on 'kickstart default'
 
 To the right of the template called "Kickstart default", select 'clone'
 
-=== Tab: Template
+=== Adjust Provisioning Template Settings
+
+==== TAB: Template
 
 Change the name to "Kickstart custom"
 
-=== Tab: Associations
+==== TAB: Associations
 
 Add 'Red Hat 7.5' to the 'Selected Items' list
 
-=== Tab: Locations
+==== TAB: Locations
 
 Add our locations to the 'Selected items' list
 
 Select 'Submit'
 
 Do not make any further changes at this time.
+
 
 
 == Create Partition Table
@@ -86,8 +89,8 @@ Add our locations to the 'Selected items' list
 
 Select 'Submit'
 
-
 Do not make any further changes at this time.
+
 
 
 == Update Operating System
@@ -104,7 +107,10 @@ Select 'Submit'
 
 === Tab: Templates
 
-Provisioning Template: 'Kickstart custom'
+Provisioning Template: 'Kickstart Custom'
+Discovery Kexec template: 'Discovery Red Hat kexec'
+
+
 
 == Create a Domain
 
@@ -114,9 +120,13 @@ This allows Satellite to associate a puppet variable with a domain/site and auto
 
 The default domain is assumed to be 'example.com' and since we are only operating in the damain 'example.com' we have nothing further to do here.
 
+
+
 == Create a Subnet
 
-Let's wait to confirm this is actually rquired
+Yes it's required
+
+
 
 == Create Activation Key
 
@@ -146,13 +156,15 @@ Return to the List/Remove tab and you should see the entitlement listed
 
 That's it for now, we will leave everything else at it's default.
 
+
+
 == Create Host Group
 
 Configure->Host Groups
 
 Select 'Create Host Group'
 
-=== Tab: Host Group
+=== TAB: Host Group
 
 Name: Custom
 Lifecycle Environment: Dev
@@ -161,7 +173,7 @@ Content Source: satellite.example.com
 
 Leave everything else as default
 
-=== Tab: Operating System
+=== TAB: Operating System
 
 Architecture: x86_64
 Operating System: RedHat 7.5
