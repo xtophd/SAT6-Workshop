@@ -44,6 +44,15 @@ Steps required for PXE-Less Discovery
     * Create Discovery Image
     * Mount Discovery Image to Client
 
+== Enable Auto Discovery Provisioning
+
+Administer->Settings
+
+==== TAB: Discovered 
+
+"Auto provisioning" : Yes
+
+
 
 == Enable 'Discovery Red Hat Kexec'
 
@@ -253,9 +262,6 @@ Do not make any further changes at this time.
 
 
 
-## Host Group
-Select whatever we created above
-
 ## Enable Auto Discovery Provisioning
 Administer->Settings / Discovered / "Auto provisioning"
 
@@ -263,7 +269,15 @@ Administer->Settings / Discovered / "Auto provisioning"
 
 == Create Discovery Image
 
+We are going to create a discovery image inorder to inject some custom host facts.
 
+cd /usr/share/foreman-discovery-image
+
+discovery-remaster foreman-discovery-image-3.5.3-1.iso "proxy.url=https://satellite.lab.linuxsoup.com proxy.type=server fdi.pxfactname1=custom fdi.pxfactvalue1=true fdi.pxauto=1"
+
+Take notice of the ISO that was created.  In the real world, you could now burn that image to a CDROM, USB stick or copy the image to your virtualization environment to mount to your VM.
+
+Luckily that work has already been done for you.
 
 
 
@@ -271,28 +285,10 @@ Administer->Settings / Discovered / "Auto provisioning"
 
 
 
+== Customize the Partition Template
+
 .[root@workstation OCP-Workshop]# - RAW INSTRUCTIONS
 ----
-
-Configure the Discovery Red Hat Kexec
-
-Switch to "Any Organization"
-Hosts->Provisioning Templates
-Select "Discovery Red Hat kexec"
-Verify Associations
-Add our custom Location
-Add our custom Org
-
-
-Create Custom Partition Table
-Hosts->Templates/Partition Tables
-Clone "Kickstart default"
-Make adjustments:
-Name: Oath-Workstation-PT
-OS Family: Red Hat
-
-
-EXAMPLE:
 
 <%#
 kind: ptable
@@ -307,63 +303,48 @@ zerombr
 clearpart --all --initlabel
 
 clearpart --drives=sda --all
-part /boot --fstype=xfs --size=512 --ondisk=sda --asprimary
-part pv.01 --size=1024 --grow --ondisk=sda --asprimary
+part /boot --fstype=ext2 --size=512 --ondisk=sda --asprimary
+part pv.01 --size=16000 --grow --ondisk=sda --asprimary
 volgroup vg_rhel pv.01
-logvol /     --fstype=xfs  --vgname=vg_rhel --name=root   --size=6144 --grow
-logvol /var  --fstype=xfs  --vgname=vg_rhel --name=var    --size=4096
-logvol /home --fstype=xfs  --vgname=vg_rhel --name=home   --size=2048
-logvol /tmp  --fstype=xfs  --vgname=vg_rhel --name=tmp    --size=2048
-logvol swap  --fstype=swap --vgname=vg_rhel --name=swap01 --size=2048
+logvol /     --fstype=ext4 --vgname=vg_rhel --name=root   --size=6000 --grow
+logvol /var  --fstype=ext4 --vgname=vg_rhel --name=var    --size=4000
+logvol /home --fstype=ext4 --vgname=vg_rhel --name=home   --size=2000
+logvol /tmp  --fstype=ext4 --vgname=vg_rhel --name=tmp    --size=2000
+logvol swap  --fstype=swap --vgname=vg_rhel --name=swap01 --size=2000
+
+----
 
 
-## Associate with Organization
+== Customize the Provisioning Template
 
-## Associate with with Operating System 
+Insert this block in %packages block 
 
-Hosts->Operating Systems
-Partition Table Tab, add new custom partitioning scheme to  association table
+.[root@workstation OCP-Workshop]# - RAW INSTRUCTIONS
+----
 
-Create Domain
+<% if host_param('custom') == 'true' %>
+@GNOME
+@Graphical Administration Tools
+@Guest Desktop Agents
+@Remote Desktop Clients
+@Virtualization Client
+@Virtualization Tools
+@Fonts
+@X11
+<% end -%>
 
-
-
-Create Subnet
-
-
-
-Create Activation Key
-
-## Create Activation Key
-Oath-Workstation-AK
-Select Environment
-Select Content View
-
-## Add subscription
-
-## Add Repository Sets
+----
 
 
-Hostgroup
 
-## Create Host Group
-Configure->Host Groups
 
-## Network
-Select Domain
-I did not have to select Subnets
 
-## Select Custom Partitioning Template
-Operating System tab, select new partition scheme
+
+
+.[root@workstation OCP-Workshop]# - REMAINING RAW INSTRUCTIONS
+----
 
 ## Parameters
-
-## Global Parameter: don't upgrade packages during installation
-package_upgrade=false
-
-## Associate Activation Key
-
-
 
 Create Ansible Role
 
@@ -400,40 +381,6 @@ Configure->Ansible->Roles
 
 ## Add Ansible Role to Host Group
 
-
-## Create Subnet
-
-
-## Create Domains
-
-Discovery Rule
-
-Configure->Discovery Ruless
-
-## Add Search
-facts.oath-workstation=true
-
-## Host Group
-Select whatever we created above
-
-## Enable Auto Discovery Provisioning
-Administer->Settings / Discovered / "Auto provisioning"
-
-POST Install Setup
-## Continued Installation/Customization
-?? updates
-
-PROVISIONING BARE METAL HOSTS
-Reference Documentation
-https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/provisioning_guide/provisioning_bare_metal_hosts
-
-## Associate Kexec provisioning template with our org/location
-Select Organization to Any Organization
-Select Location to Any Location
-Hosts->Templates/Provisioning
-Search kexec
-Location & Org Tab, add our org and location
-Save
 
 ## Create Puppet Environment and Associate it org/loc
 
