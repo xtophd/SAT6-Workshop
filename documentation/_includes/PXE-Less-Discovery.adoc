@@ -297,7 +297,6 @@ Luckily that work has already been done for you.
 
 ----
 <%#
-<%#
 kind: ptable
 name: Custom Partition Template
 model: Ptable
