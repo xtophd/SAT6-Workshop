@@ -33,6 +33,13 @@ katello-service start
 katello-service restart
 ----
 
+== Check Satellite Services Status
+
+.[root@satellite ~]$ 
+----
+hammer ping
+----
+
 == Logs to Watch
 
 .[root@satellite ~]$ 
