@@ -223,6 +223,14 @@ Partition Table: 'Kickstart Custom'
 PXE loader: PXELinux BIOS
 Root Pass: redhat123
 
+==== TAB: Parameters
+
+custom_pkgs=true
+
+package_upgrade=false
+
+
+
 ==== TAB: Locations
 
 Add our location
