@@ -297,26 +297,47 @@ Luckily that work has already been done for you.
 
 ----
 <%#
+<%#
 kind: ptable
-name: My Workstation Partitions
+name: Custom Partition Template
 model: Ptable
 oses:
 - CentOS
 - Fedora
 - RedHat
 %>
+
 zerombr
-clearpart --all --initlabel
+
+<% if host_param('custom_nvme') == 'true' %>
+<%#   This partition scheme triggered by Discovery-Rule: facts.custom = true and facts.manufacturer = LENOVO and  facts.productname =  20HGS22D00 -%>
+<%#   IE: the Discovery-Rules identifies the hardware and then binds to a HostGroup which sets host_param 'custom_nvme' which is caught here -%>
+
+clearpart --drives=nvme0n1 --all
+part /boot --fstype=ext2 --size=512 --ondisk=nvme0n1 --asprimary
+part pv.01 --size=16000 --grow --ondisk=nvme0n1 --asprimary
+
+<% elsif @host.facts['manufacturer'] == 'LENOVO' and @host.facts['productname'] == '20HGS22D00' -%>
+<%# This partition scheme is triggered solely by ERB evaluation of facts: manufacturer == 'LENOVO' and productname == '20HGS22D00' -%>
+
+clearpart --drives=nvme0n1 --all
+part /boot --fstype=ext2 --size=512 --ondisk=nvme0n1 --asprimary
+part pv.01 --size=16000 --grow --ondisk=nvme0n1 --asprimary
+
+<% else -%>
+<%# This partition scheme is the default -%>
 
 clearpart --drives=sda --all
 part /boot --fstype=ext2 --size=512 --ondisk=sda --asprimary
 part pv.01 --size=16000 --grow --ondisk=sda --asprimary
+<% end -%>
+
 volgroup vg_rhel pv.01
-logvol /     --fstype=ext4 --vgname=vg_rhel --name=root   --size=6000 --grow
-logvol /var  --fstype=ext4 --vgname=vg_rhel --name=var    --size=4000
-logvol /home --fstype=ext4 --vgname=vg_rhel --name=home   --size=2000
-logvol /tmp  --fstype=ext4 --vgname=vg_rhel --name=tmp    --size=2000
-logvol swap  --fstype=swap --vgname=vg_rhel --name=swap01 --size=2000
+logvol /     --fstype=ext4  --vgname=vg_rhel --name=root   --size=6000 --grow
+logvol /var  --fstype=ext4  --vgname=vg_rhel --name=var    --size=4000
+logvol /home --fstype=ext4  --vgname=vg_rhel --name=home   --size=2000
+logvol /tmp  --fstype=ext4  --vgname=vg_rhel --name=tmp    --size=2000
+logvol swap  --fstype=swap  --vgname=vg_rhel --name=swap01 --size=2000
 ----
 
 
