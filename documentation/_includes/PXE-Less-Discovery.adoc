@@ -18,7 +18,7 @@ NOTE: You are not required to reference outside documentation for these exercise
 Red Hat's official documentation can be found publicly with the links provided below.  It is important to note that this workshop guide supports a very narrowly scoped and simple installation of the Openshift Container Platform (OCP).  Please refer to the official Red Hat documentation for complete information on the installation procedures.
 
 
-    * PUT LINK TO PXE-LESS DISCVOERY REFERENCES HERE
+    * link:https://puppet.com/docs/puppet/5.3/lang_template_erb.html[ERB Template Syntax]
 
 Steps required for PXE-Less Discovery
 
@@ -293,7 +293,9 @@ Luckily that work has already been done for you.
 
 Hosts->Templates->Partition Table
 
-This cusomtom partition template utilizes host.facts only to decide what the install device should be.  First it examines some possible host manufacturer and productname identifiers to determine a specific make:model of a laptop using a nvme ssd (ie: 'nvme0n1').  Second, using simlar logic it looks for virtual machines on the RHV platform using virtio disks (id: 'vda').  Lastly, it defaults to using 'sda'.
+First off, satellite's kickstart template leverage ERB (Embedded RuBy).
+
+This custom partition template utilizes host.facts only to decide what the install device should be.  First it examines some possible host manufacturer and productname identifiers to determine a specific make:model of a laptop using a nvme ssd (ie: 'nvme0n1').  Second, using simlar logic it looks for virtual machines on the RHV platform using virtio disks (id: 'vda').  Lastly, it defaults to using 'sda'.
 
 ----
 <%#
