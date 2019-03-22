@@ -252,8 +252,11 @@ Configure->Discovery Rules
 ==== TAB: Primary
 
 Name: Custom
+
 Search: facts.custom=true
+
 Host Group: Custom
+
 Hostname: <%= @host.facts['nmprimary_dhcp4_option_host_name'] %>
 
 ==== TAB: Locations
@@ -267,13 +270,6 @@ Add our organization
 Select 'Submit'
 
 Do not make any further changes at this time.
-
-
-
-## Enable Auto Discovery Provisioning
-Administer->Settings / Discovered / "Auto provisioning"
-
-
 
 == Create Discovery Image
 
@@ -295,6 +291,10 @@ Luckily that work has already been done for you.
 
 == Customize the Partition Template
 
+Hosts->Templates->Partition Table
+
+This cusomtom partition template utilizes host.facts only to decide what the install device should be.  First it examines some possible host manufacturer and productname identifiers to determine a specific make:model of a laptop using a nvme ssd (ie: 'nvme0n1').  Second, using simlar logic it looks for virtual machines on the RHV platform using virtio disks (id: 'vda').  Lastly, it defaults to using 'sda'.
+
 ----
 <%#
 kind: ptable
@@ -306,37 +306,31 @@ oses:
 - RedHat
 %>
 
-zerombr
-
-<% if host_param('custom_nvme') == 'true' %>
-<%#   This partition scheme triggered by Discovery-Rule: facts.custom = true and facts.manufacturer = LENOVO and  facts.productname =  20HGS22D00 -%>
-<%#   IE: the Discovery-Rules identifies the hardware and then binds to a HostGroup which sets host_param 'custom_nvme' which is caught here -%>
-
-clearpart --drives=nvme0n1 --all
-part /boot --fstype=ext2 --size=512 --ondisk=nvme0n1 --asprimary
-part pv.01 --size=16000 --grow --ondisk=nvme0n1 --asprimary
-
-<% elsif @host.facts['manufacturer'] == 'LENOVO' and @host.facts['productname'] == '20HGS22D00' -%>
-<%# This partition scheme is triggered solely by ERB evaluation of facts: manufacturer == 'LENOVO' and productname == '20HGS22D00' -%>
-
-clearpart --drives=nvme0n1 --all
-part /boot --fstype=ext2 --size=512 --ondisk=nvme0n1 --asprimary
-part pv.01 --size=16000 --grow --ondisk=nvme0n1 --asprimary
-
+  zerombr
+  
+<% if @host.facts['manufacturer'] == 'LENOVO' and @host.facts['productname'] == '20HGS22D00' and @host.facts['blockdevice_nvme0n1_size'] != nil -%>
+  <%# LENOVO Laptop with NVME SSD: /dev/nve0n1 %>
+  clearpart --drives=nvme0n1 --all
+  part /boot --fstype=ext2 --size=512 --ondisk=nvme0n1 --asprimary
+  part pv.01 --size=16000 --grow --ondisk=nvme0n1 --asprimary
+<% elsif @host.facts['manufacturer'] == 'Red Hat' and @host.facts['productname'] == 'RHEV Hypervisor' and @host.facts['blockdevice_vda_size'] != nil -%>
+  <%# VM on a RHEV Hpervisor with Virtio: /dev/vda %>
+  clearpart --drives=vda --all
+  part /boot --fstype=ext2 --size=512 --ondisk=vda --asprimary
+  part pv.01 --size=16000 --grow --ondisk=vda --asprimary
 <% else -%>
-<%# This partition scheme is the default -%>
-
-clearpart --drives=sda --all
-part /boot --fstype=ext2 --size=512 --ondisk=sda --asprimary
-part pv.01 --size=16000 --grow --ondisk=sda --asprimary
+  <%# Default Device (also covers RHEV Hypervisor with Virtio-SCSI): /dev/sda %>
+  clearpart --drives=sda --all
+  part /boot --fstype=ext2 --size=512 --ondisk=sda --asprimary
+  part pv.01 --size=16000 --grow --ondisk=sda --asprimary
 <% end -%>
 
-volgroup vg_rhel pv.01
-logvol /     --fstype=ext4  --vgname=vg_rhel --name=root   --size=6000 --grow
-logvol /var  --fstype=ext4  --vgname=vg_rhel --name=var    --size=4000
-logvol /home --fstype=ext4  --vgname=vg_rhel --name=home   --size=2000
-logvol /tmp  --fstype=ext4  --vgname=vg_rhel --name=tmp    --size=2000
-logvol swap  --fstype=swap  --vgname=vg_rhel --name=swap01 --size=2000
+  volgroup vg_rhel pv.01
+  logvol /     --fstype=ext4  --vgname=vg_rhel --name=root   --size=6000 --grow
+  logvol /var  --fstype=ext4  --vgname=vg_rhel --name=var    --size=4000
+  logvol /home --fstype=ext4  --vgname=vg_rhel --name=home   --size=2000
+  logvol /tmp  --fstype=ext4  --vgname=vg_rhel --name=tmp    --size=2000
+  logvol swap  --fstype=swap  --vgname=vg_rhel --name=swap01 --size=2000
 ----
 
 
