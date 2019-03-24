@@ -108,7 +108,11 @@ class exaplecom {
 }
 ----
 
+== Create Puppet Environment
+
 == Import Puppet Module
+
+== Add Client to Puppet Environment
 
 == Execute on Client
 
