@@ -24,20 +24,26 @@ NOTE: You are not required to reference outside documentation for these exercise
 Links to external resources:
 
     * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/puppet_guide/ [Puppet Guide]
+    * https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/puppet_guide/chap-red_hat_satellite-puppet_guide-building_puppet_modules_from_scratch [Puppet Modules From Scratch]
 
 == Puppet Overview
 
-So a high-level summary goes like this:
+So a high-level work flow summary goes like this:
 
   * you create a collection of manifests
   * you (potentially) also create a collectino of facts, files and templates
   * you assemble these components into a module
-  * the module is deployed to a client
-  * the client executes the module and configures the client as declared by the module
-
+  * you install the module on the 'puppet server', which in our case is the satellite server
+  
+  * on the client, a 'puppet agent' collects facts about the system and sends it to the 'puppet master'
+  * on the client, the 'puppet agent' retrieves the applicable modules designated for the client and applies them to the system
+  * lastly, the 'puppet agent' sends a report of applied changes and their success status to the 'puppet master'
+  
 Our goal in this exerice is to configure a client as simple LAMP based server.
 
 == Prep Work
+
+
 
 == Create Puppet Module
 
