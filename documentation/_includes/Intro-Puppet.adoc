@@ -60,10 +60,16 @@ puppet module generate user_name-module_name
 ----
 class examplecom::lamp_pkgs {
   ## example of specifying multiple packages at once
+  
   package { [ 'httpd', 'php', 'mysql-server' ]: ensure => installed }
+  
   ## exmaple of individual package declarations
+  
   package { 'vim': ensure => installed }
   package { 'basch-completion': ensure => installed }
+  
+  ## enable and start the httpd service
+  service { 'httpd': ensure => running, enable => true, require => package['httpd'] }
 }
 ----
 
@@ -107,6 +113,16 @@ class exaplecom {
   include soupdesktop::lamp_pkgs
 }
 ----
+
+== Test the Puppet Module
+
+----
+puppet apply mymodule/examples/init.pp --noop
+----
+
+== Apply to Puppet Module
+
+== Build the Puppet Module
 
 == Create Puppet Environment
 
