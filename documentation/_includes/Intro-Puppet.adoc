@@ -41,7 +41,7 @@ Then:
   * on the client, the 'puppet agent' retrieves the applicable modules designated for the client and applies them to the system
   * and finally, the 'puppet agent' sends a report of applied changes and their success status to the 'puppet master'
   
-Our goal in this exerice is to configure a client as simple LAMP based server.
+Our goal in this exercise is to configure a client as simple LAMP based server.
 
 == Prep Work
 
@@ -49,7 +49,64 @@ Our goal in this exerice is to configure a client as simple LAMP based server.
 
 == Create Puppet Module
 
+----
+cd /etc/puppetlabs/code/modules
+puppet module generate user_name-module_name
+----
+
 == Create Manifests
+
+[/etc/puppetlabs/code/modules/soupdesktop/manifests/lamp_pkgs.pp]
+----
+class examplecom::lamp_pkgs {
+  ## example of specifying multiple packages at once
+  package { [ 'httpd', 'php', 'mysql-server' ]: ensure => installed }
+  ## exmaple of individual package declarations
+  package { 'vim': ensure => installed }
+  package { 'basch-completion': ensure => installed }
+}
+----
+
+[/etc/puppetlabs/code/modules/soupdesktop/manifests/init.pp]
+----
+ * `sample parameter`
+# Explanation of what this parameter affects and what it defaults to.
+# e.g. "Specify one or more upstream ntp servers as an array."
+#
+# Variables
+# ----------
+#
+# Here you should define a list of variables that this module would require.
+#
+# * `sample variable`
+#  Explanation of how this variable affects the function of this class and if
+#  it has a default. e.g. "The parameter enc_ntp_servers must be set by the
+#  External Node Classifier as a comma separated list of hostnames." (Note,
+#  global variables should be avoided in favor of class parameters as
+#  of Puppet 2.6.)
+#
+# Examples
+# --------
+#
+# @example
+#    class { 'soupdesktop':
+#      servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
+#    }
+#
+# Authors
+# -------
+#
+# Author Name <author@domain.com>
+#
+# Copyright
+# ---------
+#
+# Copyright 2018 Your name here, unless otherwise noted.
+#
+class exaplecom {
+  include soupdesktop::lamp_pkgs
+}
+----
 
 == Import Puppet Module
 
