@@ -23,8 +23,8 @@ NOTE: You are not required to reference outside documentation for these exercise
 
 Links to external resources:
 
-    * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/puppet_guide/ [Puppet Guide]
-    * https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/puppet_guide/chap-red_hat_satellite-puppet_guide-building_puppet_modules_from_scratch [Puppet Modules From Scratch]
+    * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/puppet_guide[Puppet Guide]
+    * https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/puppet_guide/chap-red_hat_satellite-puppet_guide-building_puppet_modules_from_scratch[Puppet Modules From Scratch]
 
 == Puppet Overview
 
