@@ -43,18 +43,16 @@ Then:
   
 Our goal in this exercise is to configure a client as simple LAMP based server.
 
-== Prep Work
+== Create a Puppet Module
 
-
-
-== Create Puppet Module
+=== Initialize the Module
 
 ----
 cd /etc/puppetlabs/code/modules
 puppet module generate student-examplecom
 ----
 
-== Create Manifests
+=== Create Manifests
 
 [/etc/puppetlabs/code/modules/examplecom/manifests/lamp_pkgs.pp]
 ----
@@ -114,25 +112,31 @@ class examplecom {
 }
 ----
 
-== Test the Puppet Module
+=== Test the Puppet Module
 
 ----
 puppet apply examplecom/manifests/init.pp --noop
 ----
 
-== Build the Puppet Module
+=== Build the Puppet Module
 
 ----
 puppet module build examplecom
 ----
 
-== Create Puppet Environment
+== Add Puppet Module to Satellite
 
-== Import Puppet Module
+=== Create a Custom Product
 
-== Add Client to Puppet Environment
+=== Create Puppet Repository
 
-== Execute on Client
+=== Upload Puppet Module
+
+=== Update the Content View
+
+=== Create Puppet Environment
+
+=== Assign Puppet Environment to Host
 
 
 == APPENDIX
