@@ -10,32 +10,105 @@ endif::[]
 
 = Introduction to Puppet
 
-.[root@workstation ~]$ 
-----
-whoami
-----
+Puppet is a tool used to apply and manage system configurations. Puppet collects system information (or facts) and uses this information to create a customized system configurations.  
 
+Puppet uses it's own  configuration language that was inspired by the Nagios configurationl file format.  Puppet code is written to create a 'Puppet Manifest'.  Manifests are then assembled together into a more structured unit called a 'Puppet Module'.
 
+'Puppet Modules' are a collection manifests along with additional data such as facts, files, and templates.
 
 [discrete]
 == Additional Reference Materials
 
 NOTE: You are not required to reference outside documentation for these exercises.  This is informational only.
 
-Many of the same steps we use here can be found in the official provisioning guide.
+Links to external resources:
 
-    * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/provisioning_guide/initialization_script_for_provisioning_examples[Provisioning Guide - Appendix A]
-
+    * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/puppet_guide/ [Puppet Guide]
 
 == Puppet Overview
+
+So a high-level summary goes like this:
+
+  * you create a collection of manifests
+  * you (potentially) also create a collectino of facts, files and templates
+  * you assemble these components into a module
+  * the module is deployed to a client
+  * the client executes the module and configures the client as declared by the module
+
+Our goal in this exerice is to configure a client as simple LAMP based server.
 
 == Prep Work
 
 == Create Puppet Module
 
+== Create Manifests
+
 == Import Puppet Module
 
 == Execute on Client
+
+
+== APPENDIX
+
+=== Sample Manifest: Install Packages
+
+This uses existing configured repos to install additional packages
+
+----
+class examplecom::default_pkgs {
+  package { [ 'bash-completion', 'net-tools', 'screen', 'vim' ]: ensure => installed }
+  package { 'firefox': ensure => installed }
+  package { 'thunderbird': ensure => installed }
+  package { 'libreoffice': ensure => installed }
+}
+----
+
+=== Sample Manifest: Chrome Repo
+
+This manifest configures an external repo and installs Google Chrome
+
+----
+class examplecom::google_chrome {
+  yumrepo { 'google-chrome' :
+    enabled  => 1,
+    descr    => 'google-chrome',
+    baseurl  => 'http://dl.google.com/linux/chrome/rpm/stable/x86_64',
+    gpgcheck => 1,
+    gpgkey   => 'https://dl-ssl.google.com/linux/linux_signing_key.pub',
+  }
+  package { ['google-chrome-stable','redhat-lsb-core'] : ensure => installed }
+
+}
+----
+
+=== Sample Manifest: Adobe Flash
+
+This manifest configures an external repo and installs Adobe Flash
+
+----
+class examplecom::adobe_flash {
+  package { 'adobe-release-x86_64' :
+    ensure   => 'present',
+    source   => 'http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm'
+  }
+  package { 'flash-plugin' : ensure   => installed }
+}
+----
+
+=== Sample Manifest: Install file
+
+This manifest installs a file (if it does not exist already).  The file is pulled from a remote server.
+
+----
+class examplecom::libvirt {
+  file { '/var/lib/libvirt/iso/' : ensure => directory }
+  file { '/var/lib/libvirt/iso/ExampleCom-Discovery-Image.iso' : 
+    ensure => file,
+    source => 'http://satellite.example.com/pub/Discovery-Images/ExampleCom-Discovery-Image.iso',
+  }
+}
+----
+
 
 [discrete]
 == End of Unit
