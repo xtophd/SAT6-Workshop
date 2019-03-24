@@ -34,10 +34,12 @@ So a high-level work flow summary goes like this:
   * you (potentially) also create a collectino of facts, files and templates
   * you assemble these components into a module
   * you install the module on the 'puppet server', which in our case is the satellite server
-  
+ 
+Then:
+
   * on the client, a 'puppet agent' collects facts about the system and sends it to the 'puppet master'
   * on the client, the 'puppet agent' retrieves the applicable modules designated for the client and applies them to the system
-  * lastly, the 'puppet agent' sends a report of applied changes and their success status to the 'puppet master'
+  * and finally, the 'puppet agent' sends a report of applied changes and their success status to the 'puppet master'
   
 Our goal in this exerice is to configure a client as simple LAMP based server.
 
