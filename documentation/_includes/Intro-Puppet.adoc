@@ -51,12 +51,12 @@ Our goal in this exercise is to configure a client as simple LAMP based server.
 
 ----
 cd /etc/puppetlabs/code/modules
-puppet module generate user_name-module_name
+puppet module generate student-examplecom
 ----
 
 == Create Manifests
 
-[/etc/puppetlabs/code/modules/soupdesktop/manifests/lamp_pkgs.pp]
+[/etc/puppetlabs/code/modules/examplecom/manifests/lamp_pkgs.pp]
 ----
 class examplecom::lamp_pkgs {
   ## example of specifying multiple packages at once
@@ -73,7 +73,7 @@ class examplecom::lamp_pkgs {
 }
 ----
 
-[/etc/puppetlabs/code/modules/soupdesktop/manifests/init.pp]
+[/etc/puppetlabs/code/modules/examplecom/manifests/init.pp]
 ----
  * `sample parameter`
 # Explanation of what this parameter affects and what it defaults to.
@@ -109,7 +109,7 @@ class examplecom::lamp_pkgs {
 #
 # Copyright 2018 Your name here, unless otherwise noted.
 #
-class exaplecom {
+class examplecom {
   include soupdesktop::lamp_pkgs
 }
 ----
@@ -117,12 +117,14 @@ class exaplecom {
 == Test the Puppet Module
 
 ----
-puppet apply mymodule/examples/init.pp --noop
+puppet apply examplecom/manifests/init.pp --noop
 ----
 
-== Apply to Puppet Module
-
 == Build the Puppet Module
+
+----
+puppet module build examplecom
+----
 
 == Create Puppet Environment
 
