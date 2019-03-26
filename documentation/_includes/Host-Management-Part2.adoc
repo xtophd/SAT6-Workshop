@@ -42,6 +42,22 @@ Many of the same steps we use here can be found in the official provisioning gui
 
 == Add Outside Repo
 
+=== Create Product
+
+=== Add Repo
+
+=== Synchronize
+
+=== Content View: Add Repo
+
+=== Content View: Publish 
+
+=== Content View: Promote
+
+=== Add Subscription: Host
+
+=== Add Subscription: Activation Key
+
 == Publish the Content View
 
 == Promote the Content View
