@@ -69,7 +69,7 @@ Many of the same steps we use here can be found in the official provisioning gui
 [discrete]
 == End of Unit
 
-*Next:* link:PXE-Less-Discovery.adoc[PXE-Less Discovery]
+*Next:* link:Insights.adoc[Insights]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
