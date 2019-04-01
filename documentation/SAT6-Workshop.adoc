@@ -43,6 +43,10 @@ include::{includedir}/Host-Management-Part1.adoc[leveloffset=+1]
 
 include::{includedir}/Host-Management-Part2.adoc[leveloffset=+1]
 
+== Insights
+
+include::{includedir}/Insights.adoc[leveloffset=+1]
+
 == Host Groups
 
 include::{includedir}/Host-Groups.adoc[leveloffset=+1]
