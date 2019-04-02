@@ -8,7 +8,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-= Secuirty with OpenSCAP
+= Security with OpenSCAP
 
 
 
