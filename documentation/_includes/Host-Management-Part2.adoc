@@ -101,6 +101,20 @@ Select 'Publish New Version'
 
 === Add Product Subscription: Host
 
+Hosts->All Hosts
+
+Select 'node1.example.com'
+
+Select 'Content'
+
+TAB: Subscriptions->Subscriptions
+
+Add
+
+Select 'Google'
+
+Selected 'Add Selected'
+
 === Add Product Subscription: Activation Key
 
 == Move Client to QA LifeCycle
