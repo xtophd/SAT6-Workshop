@@ -40,11 +40,22 @@ Many of the same steps we use here can be found in the official provisioning gui
 
 == Add Exclude Filter
 
-== Add Outside Repo
+== Add Outside Repo (Google Chrome)
 
 === Create Product
 
+Content->Products
+
+Select 'Create Product'
+
+Name = Google
+
+Accept Defaults and 'Submit'
+
+
 === Add Repo
+
+Upstream URL = http://dl.google.com/linux/chrome/rpm/stable/x86_64
 
 === Synchronize
 
@@ -54,13 +65,9 @@ Many of the same steps we use here can be found in the official provisioning gui
 
 === Content View: Promote
 
-=== Add Subscription: Host
+=== Add Product Subscription: Host
 
-=== Add Subscription: Activation Key
-
-== Publish the Content View
-
-== Promote the Content View
+=== Add Product Subscription: Activation Key
 
 == Move Client to QA LifeCycle
 
