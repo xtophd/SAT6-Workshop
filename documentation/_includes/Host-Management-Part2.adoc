@@ -52,14 +52,48 @@ Name = Google
 
 Accept Defaults and 'Submit'
 
-
 === Add Repo
+
+Product->Google: Repositories
+
+Select 'New Repository'
+
+Name = Chrome
+
+Type = yum
 
 Upstream URL = http://dl.google.com/linux/chrome/rpm/stable/x86_64
 
+Download Policy = Immediate
+
+Select 'Save'
+
 === Synchronize
 
+Content -> Sync Status
+
+Expand All
+
+Select Google/Chrome
+
+Select 'Sunchronize Now'
+
 === Content View: Add Repo
+
+Content->Content Views
+
+Select 'Desktop-R7'
+
+Yum Content->Repositories
+
+Select TAB: Add
+
+Select 'Chrome'
+
+Select 'Add Repositories'
+
+Select 'Publish New Version'
+
 
 === Content View: Publish 
 
