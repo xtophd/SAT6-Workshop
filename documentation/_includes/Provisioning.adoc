@@ -21,39 +21,6 @@ Many of the same steps we use here can be found in the official provisioning gui
 
 == Provisioning Overview
 
-
-## == Create a Domain
-##
-##Infrastructure -> Domains
-##
-##Create Domain
-##
-##
-##Review of Tabs with key/value data
-
-##== Create a Subnet
-##
-##Infrastructure -> Subnets
-##
-##Create Subnet
-##
-##Review of Tabs with key/value data
-##=== Subnet
-##
-##=== Remote Execution
-##
-##=== Domains
-##
-##=== Capsules
-##
-##=== Parameters
-##
-##=== Locations
-##
-##=== Organizations
-
-####################
-
 == Add Kickstart Repos to Content View
 
 Content -> Content Views
@@ -74,8 +41,6 @@ Promote
 
 Select Desktop-DEV
 
-####################
-
 == Create Provioning Template
 
 Hosts -> Provisioning Templates
@@ -92,6 +57,7 @@ Select 'Custom Desktop Kickstart'
 Unselect 'Default'
 
 Right before <% if salt_enabled %> add this block
+----
 <% if host_param('custom_dekstop_pkgs') == 'true' %>
 @GNOME
 @Graphical Administration Tools
@@ -102,6 +68,7 @@ Right before <% if salt_enabled %> add this block
 @Fonts
 @X11
 <% end -%>
+----
 
 === Association
 
@@ -128,6 +95,7 @@ Name: `Custom Desktop Partitions`
 Family: `Red Hat`
 
 Template:
+----
 <%#
 kind: ptable
 name: Custom Desktop Partitions
@@ -149,7 +117,7 @@ logvol /var  --fstype=ext4  --vgname=vg_rhel --name=var    --size=4096
 logvol /home --fstype=ext4 --vgname=vg_rhel --name=home   --size=2048
 logvol /tmp  --fstype=ext4  --vgname=vg_rhel --name=tmp    --size=2048
 logvol swap  --fstype=swap --vgname=vg_rhel --name=swap01 --size=2048
-
+----
 
 === Locations
 
