@@ -23,6 +23,7 @@ NOTE: You are not required to reference outside documentation for these exercise
 
 Links to external resources:
 
+    * link:https://access.redhat.com/blogs/1169563/posts/2848811[Lifecycles for Puppet Modules]
     * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/puppet_guide[Puppet Guide]
     * https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/puppet_guide/chap-red_hat_satellite-puppet_guide-building_puppet_modules_from_scratch[Puppet Modules From Scratch]
 
@@ -47,6 +48,9 @@ Our goal in this exercise is to configure a client as simple LAMP based server.
 
 === Initialize the Module
 
+For purposes of this workshop, we are going to due to puppet module work on the satellite server itself.  This is simply due to the fact that all of the tools are already installed.
+
+[root@satellite]
 ----
 cd /etc/puppetlabs/code/modules
 puppet module generate student-examplecom
@@ -81,12 +85,14 @@ class examplecom {
 === Test the Puppet Module
 
 ----
+cd /etc/puppetlabs/code/modules
 puppet apply examplecom/manifests/init.pp --noop
 ----
 
 === Build the Puppet Module
 
 ----
+cd /etc/puppetlabs/code/modules
 puppet module build examplecom
 ----
 
@@ -94,16 +100,29 @@ puppet module build examplecom
 
 === Create a Custom Product
 
-=== Create Puppet Repository
+==== Add Puppet Repository
 
-=== Upload Puppet Module
+==== Upload Puppet Module
 
 === Update the Content View
 
-=== Create Puppet Environment
+Content -> Content Views
 
-=== Assign Puppet Environment to Host
+Select our Content View
 
+Select TAB:Puppet Modules
+
+Select 'Add New Module'
+
+Add all Manifests from our custom Module
+
+=== Publish Content View
+
+=== Promote Content View
+
+== Add Puppet Environment to Host Group
+
+== Add Puppet Modules to Host Group
 
 == APPENDIX
 
