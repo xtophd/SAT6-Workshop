@@ -49,7 +49,7 @@ Using the WebUI, simply go to the 'Insights -> Overview' report and you can poke
 [discrete]
 == End of Unit
 
-*Next:* link:Host-Management-Part2.adoc[Host Groups]
+*Next:* link:Host_Collections_and_Remote_Jobs.adoc[Host Colelctions and Remote Jobs]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
