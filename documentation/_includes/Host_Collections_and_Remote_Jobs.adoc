@@ -74,14 +74,60 @@ Provider Type: Ansible
 
 === TAB: Locations
 
-Select 'Submit'
+Select and add your locations.
+
+Now select 'Submit'
 
 == Create a Host Collection
 
+=== Create first Host Collection
+
+Hosts->Hosts->Host Collections
+
+Select Create Host Collection
+
+Name: ExampleCom_Collection_1
+
+Select 'Save'
+
+=== Create second Host Collection
+
+Hosts->Hosts->Host Collections
+
+Select Create Host Collection
+
+Name: ExampleCom_Collection_2
+
+Select 'Save'
+
+=== Add hosts to each collection
+
+Register node2 and node3 to Satellite
+
+Add node1 to Host_Collection_1
+
+Add node1, node2 and node3 to Host_Collection_2
+
 == Select Host Collection
+
+Hosts->All Hosts
+
+Filter: "host_collection = Host_Collection_1"
+
+Select all hosts in collection
 
 == Schedule Remote Job
 
+With hosts properly selected
+
+'Select Action' -> 'Schedule Remote Job'
+
+Job Category: 'My Playbooks'
+Job Template: 'My Playbook - Sample Config'
+
+Select 'Submit'
+
+Go inspect your clients.
 
 == Alternative Ansible Job Template
 
