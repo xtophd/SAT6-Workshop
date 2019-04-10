@@ -62,7 +62,7 @@ Name = Chrome
 
 Type = yum
 
-Upstream URL = http://dl.google.com/linux/chrome/rpm/stable/x86_64
+Upstream URL = https://dl.google.com/linux/chrome/rpm/stable/x86_64
 
 Download Policy = Immediate
 
