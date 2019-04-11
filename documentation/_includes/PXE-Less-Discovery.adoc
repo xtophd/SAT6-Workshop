@@ -527,7 +527,7 @@ https://access.redhat.com/solutions/275573
 [discrete]
 == End of Unit
 
-*Next:* link:Intro-Ansible.adoc[Introduction to Ansible]
+*Next:* link:Ansible.adoc[Introduction to Ansible]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
