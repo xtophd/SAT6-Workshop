@@ -170,7 +170,7 @@ Select 'Submit' and try to schedule this job for your host-collection.
 [discrete]
 == End of Unit
 
-*Next:* link:Host_Groups.adoc[Host Groups]
+*Next:* link:Host-Groups.adoc[Host Groups]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
