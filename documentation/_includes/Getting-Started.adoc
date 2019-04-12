@@ -63,7 +63,7 @@ cd ~
 git clone https://github.com/xtophd/SAT6-Workshop
 ----
 
-=== Run the pre-install script
+=== Run the installaction script
 
 WARNING: It is important to be in the correct working directory for these installation procedures to function properly.  
 
