@@ -21,7 +21,7 @@ myHostCollection_Name  = "MyCollection"
 
 myHostGroup_Name = "MyHostGroup"
 
-myDiscoveryRule_Name "MyRule"
+myDiscoveryRule_Name = "MyRule"
 
 
 
