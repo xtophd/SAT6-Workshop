@@ -1,0 +1,21 @@
+[all:vars]
+myLocation = "USA"
+myOrganization = "ExampleCom"
+myAdminName = "admin"
+myAdminPW = "redhat"
+
+[satellite:vars]
+myDisk = "/dev/vdb"
+myVG = "sat_vg"
+
+[satellite]
+satellite.example.com
+
+[workstation]
+workstation.example.com
+
+[nodes]
+node1.example.com
+node2.example.com
+node3.example.com
+

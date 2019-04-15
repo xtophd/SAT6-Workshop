@@ -4,6 +4,27 @@ myOrganization = "ExampleCom"
 myAdminName = "admin"
 myAdminPW = "redhat"
 
+myLifecycle_Name_1 = "MyLifecycle-DEV"
+myLifecycle_Name_2 = "MyLifecycle-QA"
+myLifecycle_Name_3 = "MyLifecycle-PROD"
+
+myContentView_Name = "MyContent RHEL 7"
+
+myActivationKeyName_1 = "MyKey-DEV"
+myActivationKeyName_2 = "MyKey-PROD"
+
+myJobTemplate_Category = "MyTemplates"
+myJobTemplate_Name_1   = "MyTemplate: Ping"
+myJobTemplate_Name_2   = "MyTemplate: Sample Config"
+
+myHostCollection_Name  = "MyCollection"
+
+myHostGroup_Name = "MyHostGroup"
+
+myDiscoveryRule_Name "MyRule"
+
+
+
 [satellite:vars]
 myDisk = "/dev/vdb"
 myVG = "sat_vg"

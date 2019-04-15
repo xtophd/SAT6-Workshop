@@ -13,7 +13,7 @@ echo "## Registering with satellite"
 subscription-manager register \
   --org="{{ myOrganization }}" \
   --serverurl="satellite.example.com" \
-  --activationkey="desktop-dev"
+  --activationkey="{{ myActivationKeyName_1 }}"
 
 echo "## Installing Katello Agent"
 
