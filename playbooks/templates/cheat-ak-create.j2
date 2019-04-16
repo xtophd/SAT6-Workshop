@@ -5,13 +5,13 @@ echo "Creating Activation Keys for DEV and PROD"
 hammer activation-key create \
   --name "{{ myActivationKeyName_1 }}" \
   --description "" \
-  --lifecycle-environment "{{ myLifeCycleName_1 }}" \
+  --lifecycle-environment "{{ myLifecycleName_1 }}" \
   --content-view "{{ myContentViewName }}"  \
   --organization "{{ myOrganization }}"
 
 hammer activation-key create \
   --name "{{ myActivationKeyName_2 }}" \
   --description "" \
-  --lifecycle-environment "{{ myLifeCycleName_2 }}" \
+  --lifecycle-environment "{{ myLifecycleName_2 }}" \
   --content-view "{{ myContentViewName }}"  \
   --organization "{{ myOrganization }}"
