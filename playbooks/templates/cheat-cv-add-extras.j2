@@ -27,7 +27,7 @@ echo "## Content View: Add Extras"
 
 hammer content-view update \
   --organization "{{ myOrganization }}" \
-  --name "{{ myContentViewName" \
+  --name "{{ myContentViewName  }}" \
   --repositories "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server,Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64,Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64"
 
 echo "## Content View: Add Filter"
@@ -45,7 +45,7 @@ echo "## Content View: Promote"
 
 hammer content-view version promote \
   --organization "{{ myOrganization }}" \
-  --content-view "{{ myContentViewName" \
+  --content-view "{{ myContentViewName }}" \
   --version 2 \
-  --to-lifecycle-environment "{{ myLifecycleName_1 }} "
+  --to-lifecycle-environment "{{ myLifecycleName_1 }}"
 
