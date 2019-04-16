@@ -19,7 +19,7 @@ hammer repository update \
 echo "## Starting Sync: Extras"
 
 hammer repository synchronize \
-  --organization {{ myOrganization }} \
+  --organization "{{ myOrganization }}" \
   --product "Red Hat Enterprise Linux Server" \
   --name  "Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64"
 
