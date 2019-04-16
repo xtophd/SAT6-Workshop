@@ -50,8 +50,8 @@ Many of the same steps we use here can be found in the official provisioning gui
 .[root@satellite ~]$ 
 ----
 # Create and publish our Content View
-hammer content-view create --name "Desktop-R7" \
---description "Desktop RHEL 7 OS" \
+hammer content-view create --name "MyContent RHEL 7" \
+--description "RHEL 7 OS Content" \
 --product "Red Hat Enterprise Linux Server" \
 --repositories "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server,Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64" \
 --organization "ExampleCom"
@@ -61,8 +61,8 @@ hammer content-view create --name "Desktop-R7" \
 
 .[root@satellite ~]$ 
 ----
-hammer content-view publish --name "Desktop-R7" \
---description "Initial content view for our operating system" \
+hammer content-view publish --name "MyContent RHEL 7" \
+--description "Initial content view publication" \
 --organization "ExampleCom"
 ----
 
@@ -71,21 +71,21 @@ hammer content-view publish --name "Desktop-R7" \
 .[root@satellite ~]$ 
 ----
 hammer content-view version promote \
---content-view "Desktop-R7" \
+--content-view "MyContent RHEL 7" \
 --version 1 \
---to-lifecycle-environment "Desktop-DEV" \
+--to-lifecycle-environment "MyLifecycle-DEV" \
 --organization "ExampleCom"
 
 hammer content-view version promote \
 --content-view "Desktop-R7" \
 --version 1 \
---to-lifecycle-environment "Desktop-QA" \
+--to-lifecycle-environment "MyLifecycle-QA" \
 --organization "ExampleCom"
 
 hammer content-view version promote \
 --content-view "Desktop-R7" \
 --version 1 \
---to-lifecycle-environment "Desktop-PROD" \
+--to-lifecycle-environment "MyLifecycle-PROD" \
 --organization "ExampleCom"
 
 ----
