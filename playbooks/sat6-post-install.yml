@@ -11,10 +11,10 @@
     - name: "YUM install satellite crt"
       yum: name=http://satellite.example.com/pub/katello-ca-consumer-satellite.example.com-1.0-1.noarch.rpm state=installed
 
-    - name: "CMD yum clean all"
+    - name: "CMD clear yum cache"
       shell:                                                                                           
         cmd: |                                                                                         
-          yum clean all
+          rm -rf /var/cache/yum/*
 
     - name: "TEMPLATE install cheat-(scripts) in /usr/local/bin"
       template:
