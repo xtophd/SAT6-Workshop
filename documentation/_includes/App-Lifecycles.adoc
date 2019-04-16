@@ -47,17 +47,17 @@ Many of the same steps we use here can be found in the official provisioning gui
 
 .[root@satellite ~]$ 
 ----
-hammer lifecycle-environment create --name "Desktop-DEV" \
---description "Environment for Dekstop Active Development" \
+hammer lifecycle-environment create --name "MyLifecycle-DEV" \
+--description "Environment for Active Development" \
 --prior "Library" --organization "ExampleCom"
 
-hammer lifecycle-environment create --name "Desktop-QA" \
---description "Environment for Desktop Quality Assurance" \
---prior "Desktop-DEV" --organization "ExampleCom"
+hammer lifecycle-environment create --name "MyLifecycle-QA" \
+--description "Environment for Quality Assurance" \
+--prior "MyLifecycle-DEV" --organization "ExampleCom"
 
-hammer lifecycle-environment create --name "Desktop-PROD" \
---description "Environment for Desktop Production Releases" \
---prior "Desktop-QA" --organization "ExampleCom"
+hammer lifecycle-environment create --name "MyLifecycle-PROD" \
+--description "Environment for Production Releases" \
+--prior "MyLifecycle-QA" --organization "ExampleCom"
 ----
 
 [discrete]
