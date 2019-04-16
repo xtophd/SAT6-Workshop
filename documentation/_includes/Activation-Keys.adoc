@@ -44,20 +44,20 @@ There are two methods to register a system with a Satellite Server:
 .[root@satellite ~]$ 
 ----
 hammer activation-key create \
---name "desktop-dev" \
---description "Desktops for development and early testing" \
---lifecycle-environment "Desktop-DEV" \
---content-view "Desktop-R7"  \
+--name "MyKey-DEV" \
+--description "Development and early testing" \
+--lifecycle-environment "MyLifecycle-DEV" \
+--content-view "MyContent RHEL 7"  \
 --organization "ExampleCom"
 ----
 
 .[root@satellite ~]$ 
 ----
 hammer activation-key create \
---name "desktop-prod" \
---description "Desktops for development and early testing" \
---lifecycle-environment "Desktop-PROD" \
---content-view "Desktop-R7"  \
+--name "MyKey-PROD" \
+--description "Quality Assurance" \
+--lifecycle-environment "MyLifecycle-PROD" \
+--content-view "MyContent RHEL 7"  \
 --organization "ExampleCom"
 ----
 
