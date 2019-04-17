@@ -28,7 +28,14 @@ myDiscoveryFact = "MyFact"
 myDisk = "/dev/vdb"
 myVG = "sat_vg"
 
+
 [satellite]
+
+## If you plan to only run the pre/install/post playbooks on the Satellite host itself,
+## you may opt to uncomment the localhost entry below and delete and additional hostnames, 
+## including those in [workstation] and [nodes].
+# 127.0.0.1 ansible_python_interpreter=/usr/bin/python
+
 satellite.example.com
 
 [workstation]
@@ -38,11 +45,3 @@ workstation.example.com
 node1.example.com
 node2.example.com
 node3.example.com
-
-##
-## The following is for use only when running these playbooks on the satellite locally
-## If this is the case, change the satellite references in the playbooks to 'local' and delete the 'nodes'
-##
-
-[local]
-127.0.0.1 ansible_python_interpreter=/usr/bin/python
