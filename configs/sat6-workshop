@@ -22,8 +22,7 @@ myHostCollectionName  = "MyCollection"
 myHostGroupName = "MyHostGroup"
 
 myDiscoveryRuleName = "MyRule"
-
-
+myDiscoveryFact = "MyFact"
 
 [satellite:vars]
 myDisk = "/dev/vdb"
@@ -40,3 +39,10 @@ node1.example.com
 node2.example.com
 node3.example.com
 
+##
+## The following is for use only when running these playbooks on the satellite locally
+## If this is the case, change the satellite references in the playbooks to 'local' and delete the 'nodes'
+##
+
+[local]
+127.0.0.1 ansible_python_interpreter=/usr/bin/python
