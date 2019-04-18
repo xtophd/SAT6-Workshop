@@ -24,7 +24,6 @@ Steps required for PXE-Less Discovery
 
   * Already Done
     * Install 'foreman-discovery-image' and 'rubygem-smart_proxy_discovery' packages on Satellite Server
-    * Enable Red Hat Repos (including 'kickstart' repos)
     * Sync Red Hat Repos
     * Create Lifecycle
     * Create Content View (which includes 'kickstart' repos)
@@ -32,6 +31,7 @@ Steps required for PXE-Less Discovery
     * Promote Content View to LifeCycle
     
   * To Do
+    * Enable Red Hat Repos (including 'kickstart' repos), publish and promote new CV
     * Enable 'Discovery Red Hat Kexec'
     * Create Custom Provisioning Template
     * Create Custom Partition Template
@@ -44,6 +44,9 @@ Steps required for PXE-Less Discovery
     * Create Discovery Image
     * Mount Discovery Image to Client
 
+== Add Red Hat Kickstart Repo to CV, publish and promote new CV
+
+
 == Enable Auto Discovery Provisioning
 
 Administer->Settings
@@ -51,8 +54,6 @@ Administer->Settings
 ==== TAB: Discovered 
 
 "Auto provisioning" : Yes
-
-
 
 == Enable 'Discovery Red Hat Kexec'
 
