@@ -34,6 +34,10 @@ myVG = "sat_vg"
 ## If you plan to only run the pre/install/post playbooks on the Satellite host itself,
 ## you may opt to uncomment the localhost entry below and delete and additional hostnames, 
 ## including those in [workstation] and [nodes].
+##
+##  Don't forget to add '--connection=local' to the commandline parameters if you want to
+##  avoid invoking sshd on the localhost
+
 # 127.0.0.1 ansible_python_interpreter=/usr/bin/python
 
 satellite.example.com
