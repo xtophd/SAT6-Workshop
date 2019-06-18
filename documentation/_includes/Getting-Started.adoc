@@ -125,7 +125,6 @@ The installation of Red Hat Satellite is now complete and you should be ready to
 
 [discrete]
 == End of Unit
-or Tasks]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
