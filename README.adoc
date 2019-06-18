@@ -13,7 +13,7 @@ ifdef::env-github[]
 endif::[]
 :imagesdir: ./_include/_images/
 
-= Satellite-Workshop
+= Satellite 6 Workshop
 
 Foundational exercises to introduce core concepts of Red Hat Satellite Server
 
