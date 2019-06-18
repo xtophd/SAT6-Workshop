@@ -125,8 +125,7 @@ The installation of Red Hat Satellite is now complete and you should be ready to
 
 [discrete]
 == End of Unit
-
-*Next:* link:Common-Ops.adoc[Common Operator Tasks]
+or Tasks]
 
 link:../SAT6-Workshop.adoc[Return to TOC]
 
