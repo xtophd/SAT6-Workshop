@@ -107,7 +107,6 @@ NOTE: you will need true console (GUI) on "WORKSTATION" for the *Wayland* and *W
 == SAT 6 : EXERCISES
 
 [#toc]
-
   . link:{includedir}/Getting-Started.adoc[*Workshop Preparation* - DO THIS FIRST!]
   . link:{includedir}/Common-Ops.adoc[*Common Operational Tasks*]
   . link:{includedir}/Content-Sync.adoc[*Content Synchronization*]
