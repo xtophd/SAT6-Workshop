@@ -19,5 +19,5 @@ Foundational exercises to introduce core concepts of Red Hat Satellite Server
 
 Master document for this branch can be found here:
 
-* link:{docsdir}/Satellite-Workshop.adoc[Satellite Server Workshop]
+* link:{docsdir}/SAT6-Workshop.adoc[Sat 6 Workshop]
 
