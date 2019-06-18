@@ -108,7 +108,7 @@ NOTE: you will need true console (GUI) on "WORKSTATION" for the *Wayland* and *W
 
 [#toc]
 
-  . link:{includedir}/Getting-Started.adoc[[*Workshop Preparation* - DO THIS FIRST!]
+  . link:{includedir}/Getting-Started.adoc[*Workshop Preparation* - DO THIS FIRST!]
   . link:{includedir}/Common-Ops.adoc[*Common Operational Tasks*]
   . link:{includedir}/Content-Sync.adoc[*Content Synchronization*]
   . link:{includedir}/App-Lifecycles.adoc[*Application Lifecycles*]
