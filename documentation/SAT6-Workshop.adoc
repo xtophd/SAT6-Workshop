@@ -122,8 +122,8 @@ NOTE: you will need true console (GUI) on "WORKSTATION" for the *Wayland* and *W
   . link:{includedir}/PXE-Discovery.adoc[*PXE Discovery*]
   . link:{includedir}/PXE-Less-Discovery.adoc[*PXE Less Discovery*]
   . link:{includedir}/Intro-Ansible.adoc[*Introduction to Ansible*]
-  . link:{includedir}/Intro-Puppet.adoc[Introduction to Puppet]
-  . link:{includedir}/Scratch-Notes.txt[Additional Scratch Notes]
+  . link:{includedir}/Intro-Puppet.adoc[*Introduction to Puppet*]
+  . link:{includedir}/Scratch-Notes.txt[*Additional Scratch Notes*]
 
 ////  
 TO PRINT THIS DOC REMOVE THIS LINE AND COMMENTS AROUND INCLUDES
