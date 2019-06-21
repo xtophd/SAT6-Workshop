@@ -23,7 +23,7 @@ If you have not already, connect to the satellite server.
 ssh satellite
 ----
 
-On the satellite server, for those not interested in typing there is a cheat-script available to execute all the tasks within this unit.  Please do take the time to review the commands and their parameters if you oopt to invoke the script.
+On the satellite server, for those not interested in typing there is a cheat-script available to execute all the tasks within this unit.  Please do take the time to review the commands and their parameters if you opt to invoke the script.
 
 [NOTE]
 ====
