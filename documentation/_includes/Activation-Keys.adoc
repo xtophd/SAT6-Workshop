@@ -10,6 +10,20 @@ endif::[]
 
 = Activation Keys
 
+NOTE: This unit assumes you have successfully loaded a working manifest into the Red Hat Satellite Server.
+
+NOTE: This unit also assume the 'hammer' command is configured correctly and functions without prompting for username and password.  If it does not, you may need to make some changes to the config file: _/root/.hammer/cli.modules.d/foreman.yml_
+
+All the work in this unit will be performed on the satellite's command-line, or optionally in the WebUI.
+
+If you have not already, connect to the satellite server.
+
+.[root@workstation ~]$ 
+----
+ssh satellite
+----
+
+On the satellite server, for those not interested in typing there is a cheat-script available to execute all the tasks within this unit.  Please do take the time to review the commands and their parameters if you opt to invoke the script.
 
 [NOTE]
 ====
