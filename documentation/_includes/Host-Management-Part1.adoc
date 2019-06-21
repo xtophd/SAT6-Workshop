@@ -10,6 +10,21 @@ endif::[]
 
 = Fundamental Host Management: Registration & Patching
 
+NOTE: This unit assumes you have successfully loaded a working manifest into the Red Hat Satellite Server.
+
+NOTE: This unit also assume the 'hammer' command is configured correctly and functions without prompting for username and password.  If it does not, you may need to make some changes to the config file: _/root/.hammer/cli.modules.d/foreman.yml_
+
+The work in this unit will be performed partially on node1's command-line and then in the Satellite's WebUI.
+
+Begin by connecting to node1.
+
+.[root@workstation ~]$ 
+----
+ssh node1
+----
+
+On the node1 server, for those not interested in typing there is a cheat-script available to execute all the tasks within this unit.  Please do take the time to review the commands and their parameters if you opt to invoke the script.
+
 [NOTE]
 ====
 _Unit Cheat Scripts_
@@ -48,7 +63,7 @@ Once a host is entitled with a subscription, we refer to it as a 'Content Host'.
 
 .[root@node1 ~]$ 
 ----
-subscription-manager register --serverurl=satellite.example.com  --org="ExampleCom" --activationkey="desktop-dev"
+subscription-manager register --serverurl=satellite.example.com  --org="ExampleCom" --activationkey="MyKey-DEV"
 ----
 
 == Inspect Enabled Repos
