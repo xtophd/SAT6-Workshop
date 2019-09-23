@@ -98,13 +98,13 @@ Now it's time to attach the subscriptions to the activation keys.  For our scena
 .[root@satellite ~]$ 
 ----
 hammer activation-key add-subscription \
---name "desktop-dev" \
---subscription-id <ID-FROM-ABOVE-COMMAND> \
+--name "MyKey-DEV" \
+--subscription-id <UUID-FROM-ABOVE-COMMAND> \
 --organization "ExampleCom"
 
 hammer activation-key add-subscription \
---name "desktop-prod" \
---subscription-id <ID-FROM-ABOVE-COMMAND> \
+--name "MyKey-PROD" \
+--subscription-id <UUID-FROM-ABOVE-COMMAND> \
 --organization "ExampleCom"
 ----
 
@@ -115,13 +115,13 @@ By default the Satellite-Tools content will not be enabled automatically when ho
 .[root@satellite ~]$ 
 ----
 hammer activation-key content-override \
---name "desktop-dev" \
+--name "MyKey-DEV" \
 --content-label rhel-7-server-satellite-tools-6.4-rpms \
 --value 1 \
 --organization "ExampleCom"
 
 hammer activation-key content-override \
---name "desktop-prod" \
+--name "MyKey-PROD" \
 --content-label rhel-7-server-satellite-tools-6.4-rpms \
 --value 1 \
 --organization "ExampleCom"
@@ -137,7 +137,7 @@ hammer activation-key list --organization "ExampleCom"
 
 .[root@satellite ~]$ 
 ----
-hammer activation-key info --name "desktop-dev" --organization "ExampleCom"
+hammer activation-key info --name "MyKey-DEV" --organization "ExampleCom"
 ----
 
 [discrete]
