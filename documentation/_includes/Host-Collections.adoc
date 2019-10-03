@@ -20,12 +20,13 @@ whoami
 
 NOTE: You are not required to reference outside documentation for these exercises.  This is informational only.
 
-Many of the same steps we use here can be found in the official provisioning guide.
+Many of the same steps we use here can be found in the official docs.
 
-    * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/provisioning_guide/initialization_script_for_provisioning_examples[Provisioning Guide - Appendix A]
-
+    * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.5/html/managing_hosts/chap-red_hat_satellite-managing_hosts-configuring_host_collections[Configuring Host Collections]
 
 == Host Collections Overview
+
+A host collection is a group of multiple content hosts (clients or systems). This feature enables the execution of actions on multiple hosts at once. 
 
 == Create Host Collection
 
