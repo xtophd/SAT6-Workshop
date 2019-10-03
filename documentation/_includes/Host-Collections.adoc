@@ -29,17 +29,17 @@ Many of the same steps we use here can be found in the official provisioning gui
 
 == Create Host Collection
 
-Select 'Hosts->Host Collections'
+Select `Hosts->Host Collections`
 
-Select 'Create Host Collection'
+Select `Create Host Collection`
 
-Give the collection a name: 'MyHostCollection'
+Give the collection a name: "MyHostCollection"
 
-Leave 'Unlimited Hosts' selected (checked)
+Leave "Unlimited Hosts" selected (checked)
 
-Give the collectoion a description: "Hosts that belong me"
+Give the collection a description: "Hosts that belong me"
 
-Select 'Save'
+Select `Save`
 
 == Add Hosts
 
