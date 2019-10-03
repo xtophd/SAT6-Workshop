@@ -119,6 +119,10 @@ Once you are in the Errata tab for 'node1', select all errata and apply.
 
 Host has now been patched.
 
+== Additional Resources
+
+link: https://www.redhat.com/en/blog/introduction-tracer-feature-satellite[Introduction to Tracer]
+
 [discrete]
 == End of Unit
 
