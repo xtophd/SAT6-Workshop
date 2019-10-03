@@ -78,13 +78,30 @@ subscription-manager repos
 .[root@node1 ~]$ 
 ----
 yum install katello-agent
+
+systemctl start goferd
 ----
 
-== Upload Package Info
+== Install Tracer Agent
+
+NOTE: Tracer is a tech-preview feature introduced in Satellite 6.3 and continues to be tech-preview in Satellite 6.5
+
+Tracer helps administrators identify applications that need to be restarted after a Red Hat Enterprise Linux system is patched.
+
+.[root@node1 ~]$ 
+----
+yum install katello-host-tools-tracer
+----
+
+== Upload System Info
+
+To get our environment started ASAP, let's upload information about the host manually.
 
 .[root@node1 ~]$ 
 ----
 katello-package-upload
+
+katello-tracer-upload
 ----
 
 == Audit
