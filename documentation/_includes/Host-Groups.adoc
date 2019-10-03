@@ -32,9 +32,7 @@ A host group is in some ways similar to an inherited node declaration, in that i
 [discrete]
 == End of Unit
 
-*Next:* link:Discovery-Rules.adoc[Discovery-Rules]
-
-link:../SAT6-Workshop.adoc[Return to TOC]
+link:../SAT6-Workshop.adoc#poc[Return to TOC]
 
 ////
 Always end files with a blank line to avoid include problems.
