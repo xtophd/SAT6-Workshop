@@ -43,8 +43,39 @@ Select `Save`
 
 == Add Hosts
 
+Within the Host Collection pane, select `Hosts`
+
+Select `Add`
+
+Select (check) our client nodes: `node1` `node2` `node3`
+
+Select `Add Selected`
+
+Within the Host Collections `Hosts` pane, select `List/Remove` and confirm clients were added
+
 == Perform Actions
 
+Within the Host Collections `Hosts` pane, select `List/Remove`
+
+Select all hosts for this activity.
+
+Within the Host Collections pane, select `Details`
+
+On the right side of the pane `Details` pane, locate the list of *Actions*.  Careful, it's NOT the `Select Action` button in the top right, rather it is a list actions with links to specific activities.
+
+Select `Package Installation, Removal, and Update`
+
+You could just bring all your clients in the collection up to date (based on what is in the content view) by clicking `Update All Packages`, however in the interest of time we are only going to install a single package.
+
+Check `Package` and enter "sos" in the text field.
+
+Now select `Install`
+
+Answer `Yes` to "Are you sure you want to install sos on the system(s) selected?"
+
+Select `Done`
+
+Select `Monitor->Tasks` to view progress and status
 
 [discrete]
 == End of Unit
