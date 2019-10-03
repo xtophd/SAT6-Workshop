@@ -145,9 +145,7 @@ hammer product synchronize \
 [discrete]
 == End of Unit
 
-*Next:* link:App-Lifecycles.adoc[Application Lifecycles]
-
-link:../SAT6-Workshop.adoc[Return to TOC]
+link:../SAT6-Workshop.adoc#toc[Return to TOC]
 
 ////
 Always end files with a blank line to avoid include problems.
