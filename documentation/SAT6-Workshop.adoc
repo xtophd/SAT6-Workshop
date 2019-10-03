@@ -115,6 +115,7 @@ NOTE: you will need true console (GUI) on "WORKSTATION" for the *Wayland* and *W
   . link:{includedir}/Activation-Keys.adoc[*Activation Keys*]
   . link:{includedir}/Host-Management-Part1.adoc[*Host Management 1: Registration & Patching*]
   . link:{includedir}/Host-Management-Part2.adoc[*Host Management 2: Content Views & Life Cycles*]
+  . link:{includedir}/Host-Collections.adoc
   . link:{includedir}/Insights.adoc[*Insights*]
   . link:{includedir}/Host-Groups.adoc[*Host Groups*]
   . link:{includedir}/Discovery-Rules.adoc[*Discovery Rules*]
