@@ -23,26 +23,26 @@ Red Hat's official documentation can be found publicly with the links provided b
 Steps required for PXE-Less Discovery
 
   * Already Done
-    * Install 'foreman-discovery-image' and 'rubygem-smart_proxy_discovery' packages on Satellite Server
-    * Sync Red Hat Repos
-    * Create Lifecycle
-    * Create Content View (which includes 'kickstart' repos)
-    * Publish Content View to Library
-    * Promote Content View to LifeCycle
+    ** Install 'foreman-discovery-image' and 'rubygem-smart_proxy_discovery' packages on Satellite Server
+    ** Sync Red Hat Repos
+    ** Create Lifecycle
+    ** Create Content View (which includes 'kickstart' repos)
+    ** Publish Content View to Library
+    ** Promote Content View to LifeCycle
     
   * To Do
-    * Enable Red Hat Repos (including 'kickstart' repos), publish and promote new CV
-    * Enable 'Discovery Red Hat Kexec'
-    * Create Custom Provisioning Template
-    * Create Custom Partition Template
-    * Modify the Operating System
-    * Create a Domain
-    * Create a Subnet
-    * Create Activation Key
-    * Create Host Group
-    * Create Discovery Rules
-    * Create Discovery Image
-    * Mount Discovery Image to Client
+    ** Enable Red Hat Repos (including 'kickstart' repos), publish and promote new CV
+    ** Enable 'Discovery Red Hat Kexec'
+    ** Create Custom Provisioning Template
+    ** Create Custom Partition Template
+    ** Modify the Operating System
+    ** Create a Domain
+    ** Create a Subnet
+    ** Create Activation Key
+    ** Create Host Group
+    ** Create Discovery Rules
+    ** Create Discovery Image
+    ** Mount Discovery Image to Client
 
 == Add Red Hat Kickstart Repo to CV, publish and promote new CV
 
