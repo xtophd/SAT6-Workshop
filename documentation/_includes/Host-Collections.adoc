@@ -27,14 +27,29 @@ Many of the same steps we use here can be found in the official provisioning gui
 
 == Host Collections Overview
 
-A host group is in some ways similar to an inherited node declaration, in that it is a high level grouping of classes that can be named and treated as a unit. This is then treated as a template and is selectable during the creation of a new host and ensures that the host is configured in one of your pre-defined states. In addition to defining which puppet classes get included when building this host type you are also able to assign variables and provisioning information to a host group to further refine the behavior of the puppet runtime. The host group's classes and the host group's variables are included in the external node information when the puppetmaster compiles the host's configuration.
+== Create Host Collection
+
+Select 'Hosts->Host Collections'
+
+Select 'Create Host Collection'
+
+Give the collection a name: 'MyHostCollection'
+
+Leave 'Unlimited Hosts' selected (checked)
+
+Give the collectoion a description: "Hosts that belong me"
+
+Select 'Save'
+
+== Add Hosts
+
+== Perform Actions
+
 
 [discrete]
 == End of Unit
 
-*Next:* link:Activation-Keys.adoc[Activation Keys]
-
-link:../SAT6-Workshop.adoc[Return to TOC]
+link:../SAT6-Workshop.adoc#toc[Return to TOC]
 
 ////
 Always end files with a blank line to avoid include problems.
