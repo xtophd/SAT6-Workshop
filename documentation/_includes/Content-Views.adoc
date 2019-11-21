@@ -94,13 +94,13 @@ hammer content-view version promote \
 --organization "ExampleCom"
 
 hammer content-view version promote \
---content-view "Desktop-R7" \
+--content-view "MyContent RHEL 7" \
 --version 1 \
 --to-lifecycle-environment "MyLifecycle-QA" \
 --organization "ExampleCom"
 
 hammer content-view version promote \
---content-view "Desktop-R7" \
+--content-view "MyContent RHEL 7" \
 --version 1 \
 --to-lifecycle-environment "MyLifecycle-PROD" \
 --organization "ExampleCom"
