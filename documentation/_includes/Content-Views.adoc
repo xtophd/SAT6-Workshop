@@ -45,6 +45,13 @@ Many of the same steps we use here can be found in the official provisioning gui
 
     * link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4/html/provisioning_guide/initialization_script_for_provisioning_examples[Provisioning Guide - Appendix A]
 
+== List Repository IDs
+
+.[root@satellite ~]$ 
+----
+#  hammer repository list --organization "ExampleCom"
+----
+
 == Create a Content View
 
 .[root@satellite ~]$ 
