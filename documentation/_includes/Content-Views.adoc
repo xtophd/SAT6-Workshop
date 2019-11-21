@@ -52,8 +52,7 @@ Many of the same steps we use here can be found in the official provisioning gui
 # Create and publish our Content View
 hammer content-view create --name "MyContent RHEL 7" \
 --description "RHEL 7 OS Content" \
---product "Red Hat Enterprise Linux Server" \
---repositories "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server,Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64" \
+--repository-ids 2,1,4 \
 --organization "ExampleCom"
 ----
 
