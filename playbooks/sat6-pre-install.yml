@@ -17,12 +17,6 @@
   
     - name: "YUM remove old rhn tools"
       yum: name=rhn-setup,rhn-client-tools state=absent
-  
-    - name: "USER create and/or reset users"
-      user: name="{{ item.name }}" password="{{ item.password }}"
-      with_items:
-        - {name: 'root', password: '$5$PK7KM9pT$AehNIMYtW22TEE.D0U3ORWCDFMFvARwJLf8YPvVgAf.'}
-        - {name: 'student', password: '$5$OJx9uJm8$4VYM2llNxqX/7I4M3vXZM8ZJ9FE2msmHpcOqXlDesC8'}
       
     - name: "TEMPLATE modify /etc/motd"
       template:
@@ -46,7 +40,6 @@
     - name: "SERVICE START firewalld"
       service: name=firewalld state=started enabled=yes
 
-
 - hosts: nodes
   tasks:
 
@@ -57,7 +50,6 @@
 
     - name: "YUM remove insights-client"
       yum: name=insights-client state=absent
-      
 
 - hosts: satellite
   tasks:
