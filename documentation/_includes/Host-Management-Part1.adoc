@@ -48,6 +48,7 @@ Many of the same steps we use here can be found in the official provisioning gui
 A host is defined as any Red Hat Enterprise Linux system that Red Hat Satellite manages, physical or virtual. Virtual hosts may be deployed on any platform supported by Red Hat Satellite (ex: KVM, VMware vSphere, OpenStack, Amazon EC2, Rackspace Cloud Services, Google Compute Engine)
 
 Red Hat Satellite enables host management at scale, including:
+
    * monitoring, 
    * provisioning, 
    * remote execution, 
