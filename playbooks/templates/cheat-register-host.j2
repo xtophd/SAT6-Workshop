@@ -6,7 +6,9 @@ yum clean all
 
 echo "## Disabling local yum repos"
 
-sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/rhel7.repo
+for i in `ls /etc/yum.repos.d | grep -v redhat.repo` ; do
+  sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/${i}
+done
 
 echo "## Registering with satellite"
 
