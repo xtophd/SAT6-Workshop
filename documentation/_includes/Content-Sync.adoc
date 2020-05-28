@@ -47,7 +47,14 @@ Many of the same steps we use here can be found in the official provisioning gui
 
 == Enable Repos
 
-The most difficult part of getting all of the parameters right is figuring out the exact 'name'.  The following command helped me out a great deal.  If you find something better, let me know: 'hammer repository-set list --product "Red Hat Enterprise Linux Server" --organization "ExampleCom Test Lab"'
+The most difficult part of getting all of the parameters right is figuring out the exact 'name'.  The following command helped me out a great deal.  If you find something better, let me know: 
+
+root@satellite ~]$
+----
+hammer repository-set list --product "Red Hat Enterprise Linux Server" --organization "ExampleCom"
+----
+
+Once you have the names, you can begin to enable the desired repos.
 
 .[root@satellite ~]$ 
 ----
@@ -141,6 +148,15 @@ hammer product synchronize \
 --async
 ----
 
+== Synchonization Status
+
+You can inspect the synchronization status with following command.  Unfortunately you need a really wide terminal for easy viewing, but the information is there.
+
+.[root@satellite ~]$ 
+----
+hammer product list 
+--organization ExampleCom
+----
 
 [discrete]
 == End of Unit

@@ -51,6 +51,7 @@
         - {src: 'cheat-ak-create.j2',            dest: '/usr/local/bin/cheat-ak-create.sh'}
         - {src: 'cheat-ak-attach-subs.j2',       dest: '/usr/local/bin/cheat-ak-attach-subs.sh'}
         - {src: 'cheat-ak-autoenable.j2',        dest: '/usr/local/bin/cheat-ak-autoenable.sh'}
+        - {src: 'cheat-manifest.j2',             dest: '/usr/local/bin/cheat-manifest.sh'}
 
     - name: "SAT6-POSTINSTALL: yum clean all"
       shell:                                                                                           
