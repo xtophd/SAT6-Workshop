@@ -49,7 +49,7 @@ Many of the same steps we use here can be found in the official provisioning gui
 
 The most difficult part of getting all of the parameters right is figuring out the exact 'name'.  The following command helped me out a great deal.  If you find something better, let me know: 
 
-root@satellite ~]$
+.[root@satellite ~]$
 ----
 hammer repository-set list --product "Red Hat Enterprise Linux Server" --organization "ExampleCom"
 ----
