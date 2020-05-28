@@ -112,7 +112,7 @@ This process will takes a few minutes.
 
 At this point the Satellite is ready for use.
 
-NOTE: You can load manifest from cli with: hammer subscription upload --file manifest.zip --organization "ExampleCom Test Lab"
+NOTE: You can load manifest from cli with: hammer subscription upload --file manifest.zip --organization "ExampleCom"
 
 == Conclusion
 

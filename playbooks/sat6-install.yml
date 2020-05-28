@@ -14,8 +14,8 @@
           satellite-installer --scenario satellite \
           --foreman-initial-organization "{{ myOrganization }}" \
           --foreman-initial-location "{{ myLocation }}" \
-          --foreman-admin-username "{{ myAdminName }}" \
-          --foreman-admin-password "{{ myAdminPW }}" \
+          --foreman-initial-admin-username "{{ myAdminName }}" \
+          --foreman-initial-admin-password "{{ myAdminPW }}" \
           --foreman-proxy-dns-managed=false \
           --foreman-proxy-dhcp-managed=false
           
