@@ -47,11 +47,13 @@ Many of the same steps we use here can be found in the official provisioning gui
 
 == Enable Repos
 
-The most difficult part of getting all of the parameters right is figuring out the exact 'name'.  The following command helped me out a great deal.  If you find something better, let me know: 
+The most difficult part of getting all of the parameters right is figuring out the exact 'name'.  The following commands helped me out a great deal.  If you find something better, let me know: 
 
 .[root@satellite ~]$
 ----
 hammer repository-set list --product "Red Hat Enterprise Linux Server" --organization "ExampleCom"
+
+hammer product list --organization "ExampleCom"
 ----
 
 Once you have the names, you can begin to enable the desired repos.
@@ -154,8 +156,7 @@ You can inspect the synchronization status with following command.  Unfortunatel
 
 .[root@satellite ~]$ 
 ----
-hammer product list  \
---organization ExampleCom
+hammer product list --enabled true --organization ExampleCom
 ----
 
 [discrete]
