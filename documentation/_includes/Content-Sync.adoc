@@ -154,7 +154,7 @@ You can inspect the synchronization status with following command.  Unfortunatel
 
 .[root@satellite ~]$ 
 ----
-hammer product list 
+hammer product list  \
 --organization ExampleCom
 ----
 
