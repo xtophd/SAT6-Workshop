@@ -1,24 +1,11 @@
 ---
-- hosts: nodes, satellite
+- hosts: myNodes, mySatellite
   tasks:
   
-    ## *** WARNING *** WARNING *** WARNING *** WARNING *** WARNING *** 
-    ##
-    ##   We SHOULD use an appropriate perf profile in the real world,
-    ##   but we should NEVER enable nobarrier in the real world.
-    ##
-    ## *** WARNING *** WARNING *** WARNING *** WARNING *** WARNING *** 
-    
-    - name: change performance profile                                                                 
-      shell:                                                                                           
-        cmd: |                                                                                         
-          tuned-adm profile virtual-guest                                                              
-          mount -o remount,nobarrier /                                                                 
-  
-    - name: "YUM remove old rhn tools"
+    - name: "SAT6-PREINSTALL-HOSTPREP: yum remove old rhn tools"
       yum: name=rhn-setup,rhn-client-tools state=absent
       
-    - name: "TEMPLATE modify /etc/motd"
+    - name: "SAT6-PREINSTALL-HOSTPREP: modify /etc/motd"
       template:
         src: motd-sat6-workshop.j2
         dest: /etc/motd
@@ -26,35 +13,41 @@
         group: root
         mode: 0644
 
-    - name: "YUM install misc required packages"
+    - name: "SAT6-PREINSTALL-HOSTPREP:YUM install misc required packages"
       yum: name=wget,git,net-tools,bind-utils,yum-utils,iptables-services,bridge-utils,bash-completion,kexec-tools,sos,psacct,firewalld state=installed
 
-    - name: "SERVICE STOP firewalld"
+    - name: "SAT6-PREINSTALL-HOSTPREP:SERVICE STOP firewalld"
       service: name=firewalld state=stopped enabled=yes
 
-    - name: "CMD flushing any existing iptable rules"
+    - name: "SAT6-PREINSTALL-HOSTPREP:CMD flushing any existing iptable rules"
       shell: 
         cmd: |
           iptables -F
 
-    - name: "SERVICE START firewalld"
+    - name: "SAT6-PREINSTALL-HOSTPREP:SERVICE START firewalld"
       service: name=firewalld state=started enabled=yes
 
-- hosts: nodes
+
+
+- hosts: myNodes
   tasks:
 
-    - name: "CMD disable local yum repos"
+    - name: "SAT6-PREINSTALL-HOSTPREP:CMD disable local yum repos"
       shell: 
         cmd: |          
-          sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/rhel7.repo
+          for i in `ls /etc/yum.repos.d | grep -v redhat.repo` ; do 
+            sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/${i}
+          done 
 
-    - name: "YUM remove insights-client"
+    - name: "SAT6-PREINSTALL-HOSTPREP:YUM remove insights-client"
       yum: name=insights-client state=absent
 
-- hosts: satellite
+
+
+- hosts: mySatellite
   tasks:
 
-    - name: "CMD unmount previous satellite filesystems"
+    - name: "SAT6-PREINSTALL-HOSTPREP:CMD unmount previous satellite filesystems"
       shell:
         cmd: |
           if grep -q {{ item.mount }} /proc/mounts ; then umount {{ item.mount }} ; fi
@@ -65,7 +58,7 @@
         - {vg: "{{ myVG }}", lv: 'squid',   mount: '/var/spool/squid'}
         - {vg: "{{ myVG }}", lv: 'cache',   mount: '/var/cache'}
 
-    - name: "CMD cleanup previous satellite storage"
+    - name: "SAT6-PREINSTALL-HOSTPREP:CMD cleanup previous satellite storage"
       shell:
         cmd: |
           echo "need to check mounts && umount"
@@ -73,24 +66,34 @@
           if pvs "{{ myDisk }}" ; then pvremove --force "{{ myDisk }}" ; fi
           wipefs -a "{{ myDisk }}"
 
-    - name: "CMD prepare satellite storage"
+    - name: "SAT6-PREINSTALL-HOSTPREP:CMD create physical volume"
       shell:
         cmd: |
           pvcreate "{{ myDisk }}"
-          vgcreate "{{ myVG }}" "{{ myDisk }}"
-          lvcreate -L 50GB  -n mongodb "{{ myVG }}"
-          lvcreate -L 100GB -n pulp    "{{ myVG }}"
-          lvcreate -L 5GB   -n pgsql   "{{ myVG }}"
-          lvcreate -L 5GB   -n squid   "{{ myVG }}"
-          lvcreate -L 20GB  -n cache   "{{ myVG }}"
 
-    - name: "CMD remove old cache directory"
+    - name: "SAT6-PREINSTALL-HOSTPREP:CMD create volume group"
+      shell:
+        cmd: |
+          vgcreate "{{ myVG }}" "{{ myDisk }}"
+
+    - name: "SAT6-PREINSTALL-HOSTPREP:CMD create logical volumes"
+      shell:
+        cmd: |
+          lvcreate -y -L {{ item.size }}GB  -n {{ item.lv }} "{{ item.vg }}"
+      with_items:
+        - {vg: "{{ myVG }}", lv: 'mongodb', size: '50'}
+        - {vg: "{{ myVG }}", lv: 'pulp',    size: '100'}
+        - {vg: "{{ myVG }}", lv: 'pgsql',   size: '5'}
+        - {vg: "{{ myVG }}", lv: 'squid',   size: '5'}
+        - {vg: "{{ myVG }}", lv: 'cache',   size: '20'}
+
+    - name: "SAT6-PREINSTALL-HOSTPREP:CMD remove old cache directory"
       shell:
         cmd: |
           rm -rf /var/cache
           mkdir -p /var/cache
 
-    - name: "CMD create filesystems, mount points and fstab entries"
+    - name: "SAT6-PREINSTALL-HOSTPREP:CMD create filesystems, mount points and fstab entries"
       shell:
         cmd: |
           mkfs -t xfs /dev/{{ item.vg }}/{{ item.lv }}
@@ -103,12 +106,12 @@
         - {vg: "{{ myVG }}", lv: 'squid',   mount: '/var/spool/squid'}
         - {vg: "{{ myVG }}", lv: 'cache',   mount: '/var/cache'}
 
-    - name: "CMD mount everything"
+    - name: "SAT6-PREINSTALL-HOSTPREP:CMD mount everything"
       shell:
         cmd: |
           mount -a
           
-    - name: "CMD configure firewalld"
+    - name: "SAT6-PREINSTALL-HOSTPREP:CMD configure firewalld"
       shell:
         cmd: |
           firewall-cmd --add-port="{{ item.port }}"
@@ -125,7 +128,7 @@
         - {port: "8140/tcp"}
         - {port: "9090/tcp"}
 
-    - name: "CMD save firewalld state"
+    - name: "SAT6-PREINSTALL-HOSTPREP: CMD save firewalld state"
       shell:
         cmd: |
           firewall-cmd --runtime-to-permanent

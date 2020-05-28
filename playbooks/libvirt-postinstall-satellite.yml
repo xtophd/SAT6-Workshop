@@ -1,0 +1,27 @@
+## Authors: 
+##   Christoph Doerbeck
+##
+## Summary:
+##
+##
+##
+
+---
+- hosts: mySatellite
+
+  tasks:
+
+  - name: "LIBVIRT-POSTINSTALL-SATELLITE: create artifacts directory"
+    file:
+      path: "{{ g_artifactsDir }}"
+      mode: "0700"
+      state: directory
+
+  - name: "LIBVIRT-POSTINSTALL-SATELLITE: deploy pull manifest"
+    copy:
+      src: "../config/{{ g_manifestName }}"
+      dest: "{{ g_artifactsDir }}"
+      owner: root
+      group: root
+      mode: 0644
+

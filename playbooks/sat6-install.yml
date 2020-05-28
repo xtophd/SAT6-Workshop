@@ -1,10 +1,7 @@
 ---
-- hosts: satellite
+- hosts: mySatellite
   tasks:
   
-    - name: "PING all hosts to ensure we are alive and ready"
-      ping:
-      
     - name: "YUM install satellite packages"
       yum: name=satellite,sos,foreman-discovery-image state=installed
 
@@ -14,8 +11,8 @@
           satellite-installer --scenario satellite \
           --foreman-initial-organization "{{ myOrganization }}" \
           --foreman-initial-location "{{ myLocation }}" \
-          --foreman-admin-username "{{ myAdminName }}" \
-          --foreman-admin-password "{{ myAdminPW }}" \
+          --foreman-initial-admin-username "{{ myAdminName }}" \
+          --foreman-initial-admin-password "{{ myAdminPW }}" \
           --foreman-proxy-dns-managed=false \
           --foreman-proxy-dhcp-managed=false
           

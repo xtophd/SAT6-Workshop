@@ -1,0 +1,30 @@
+## Authors: 
+##   Christoph Doerbeck
+##
+## Summary:
+##
+
+---
+##- hosts: mySatellite
+##  tasks:
+
+- import_playbook: sat6-preinstall-registration.yml
+  tags:
+    - registration
+
+- import_playbook: sat6-preinstall-repos.yml
+  tags:
+    - repos
+
+- import_playbook: sat6-preinstall-hostprep.yml
+  tags:
+    - hostprep
+
+- import_playbook: sat6-install.yml
+  tags:
+    - install
+
+- import_playbook: sat6-postinstall.yml
+  tags:
+    - postinstall
+

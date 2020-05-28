@@ -1,0 +1,30 @@
+
+## Authors: 
+##   Christoph Doerbeck
+##
+## Summary:
+##
+
+---
+- hosts: mySatellite
+  tasks:
+
+  - name: "SAT6-PREINSTALL-REGISTRATION: collect RHN username and password"
+    pause:
+      prompt: "Enter RHSM username: "
+      echo: yes
+    register: rhsm_username
+
+  - pause:
+      prompt: "Enter RHN password: "
+      echo: no
+    register: rhsm_password
+
+  - name: "SAT6-PREINSTALL-REGISTRATION: rhsm register"
+    redhat_subscription:
+      state: present
+      pool: "Red Hat Satellite.*Subscription"
+      force_register: yes
+      username: "{{ rhsm_username.user_input }}"
+      password: "{{ rhsm_password.user_input }}"
+  

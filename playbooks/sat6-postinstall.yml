@@ -1,22 +1,25 @@
 
 ---
-- hosts: nodes
+- hosts: myNodes
   tasks:
 
-    - name: "CMD remove older katello certs"
+    - name: "SAT6-POSTINSTALL: remove older katello certs"
       shell:
         cmd: |
           yum remove -y katello-ca-consumer*.noarch
 
-    - name: "YUM install satellite crt"
-      yum: name=http://satellite.example.com/pub/katello-ca-consumer-satellite.example.com-1.0-1.noarch.rpm state=installed
+    - name: "SAT6-POSTINSTALL: yum install satellite crt"
+      vars:
+        - p_fqdn: "{{ hostvars[item]['inventory_hostname_short'] }}.{{ g_pubFQDN }}"
+      yum: name=http://{{ p_fqdn }}/pub/katello-ca-consumer-{{ p_fqdn }}-1.0-1.noarch.rpm state=installed
+      loop: "{{ groups['mySatellite'] }}"
 
-    - name: "CMD clear yum cache"
+    - name: "SAT6-POSTINSTALL: clear yum cache"
       shell:                                                                                           
         cmd: |                                                                                         
           rm -rf /var/cache/yum/*
 
-    - name: "TEMPLATE install cheat-(scripts) in /usr/local/bin"
+    - name: "SAT6-POSTINSTALL: install cheat-(scripts) in /usr/local/bin"
       template:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
@@ -26,10 +29,10 @@
       with_items:
         - {src: 'cheat-register-host.j2',           dest: '/usr/local/bin/cheat-register-host.sh'}
 
-- hosts: satellite
+- hosts: mySatellite
   tasks:
 
-    - name: "TEMPLATE install cheat-(scripts) in /usr/local/bin"
+    - name: "SAT6-POSTINSTALL: install cheat-(scripts) in /usr/local/bin"
       template:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
@@ -49,7 +52,7 @@
         - {src: 'cheat-ak-attach-subs.j2',       dest: '/usr/local/bin/cheat-ak-attach-subs.sh'}
         - {src: 'cheat-ak-autoenable.j2',        dest: '/usr/local/bin/cheat-ak-autoenable.sh'}
 
-    - name: "CMD yum clean all"
+    - name: "SAT6-POSTINSTALL: yum clean all"
       shell:                                                                                           
         cmd: |                                                                                         
           yum clean all
