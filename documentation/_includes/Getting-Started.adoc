@@ -72,7 +72,7 @@ WARNING: It is important to be in the correct working directory for these instal
 cd ~/SAT6-Workshop
 ----
 
-Subscript to correct content
+Subscribe to correct content:
 
 .[root@workstation ~]#
 ----
