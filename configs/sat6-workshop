@@ -24,6 +24,8 @@ myHostGroupName = "MyHostGroup"
 myDiscoveryRuleName = "MyRule"
 myDiscoveryFact = "MyFact"
 
+g_pubFQDN = "sat6.example.com"
+
 [satellite:vars]
 myDisk = "/dev/vdb"
 myVG = "sat_vg"
@@ -40,12 +42,12 @@ myVG = "sat_vg"
 
 # 127.0.0.1 ansible_python_interpreter=/usr/bin/python
 
-satellite.example.com
+satellite.sat6.example.com
 
 [workstation]
-workstation.example.com
+workstation.sat6.example.com
 
 [nodes]
-node1.example.com
-node2.example.com
-node3.example.com
+node1.sat6.example.com
+node2.sat6.example.com
+node3.sat6.example.com

@@ -50,10 +50,10 @@
 - hosts: nodes
   tasks:
 
-    - name: "CMD disable local yum repos"
-      shell: 
-        cmd: |          
-          sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/rhel7.repo
+#    - name: "CMD disable local yum repos"
+#      shell: 
+#        cmd: |          
+#          sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/rhel7.repo
 
     - name: "YUM remove insights-client"
       yum: name=insights-client state=absent

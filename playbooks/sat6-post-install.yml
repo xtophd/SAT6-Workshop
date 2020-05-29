@@ -9,7 +9,7 @@
           yum remove -y katello-ca-consumer*.noarch
 
     - name: "YUM install satellite crt"
-      yum: name=http://satellite.example.com/pub/katello-ca-consumer-satellite.example.com-1.0-1.noarch.rpm state=installed
+      yum: name=http://satellite.{{ g_pubFQDN }}/pub/katello-ca-consumer-satellite.{{ g_pubFQDN }}-1.0-1.noarch.rpm state=installed
 
     - name: "CMD clear yum cache"
       shell:                                                                                           
