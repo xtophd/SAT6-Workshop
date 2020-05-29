@@ -159,6 +159,14 @@ You can inspect the synchronization status with following command.  Unfortunatel
 hammer product list --enabled true --organization ExampleCom
 ----
 
+----
+----|---------------------------------|-------------|--------------|--------------|-----------
+ID  | NAME                            | DESCRIPTION | ORGANIZATION | REPOSITORIES | SYNC STATE
+----|---------------------------------|-------------|--------------|--------------|-----------
+122 | Red Hat Enterprise Linux Server |             | ExampleCom   | 4            | Running  
+----|---------------------------------|-------------|--------------|--------------|-----------
+----
+
 [discrete]
 == End of Unit
 
