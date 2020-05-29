@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "Loading Manifest"
+
+hammer subscription upload \
+  --organization "{{ myOrganization }}" \
+  --file "{{ g_artifactsDir }}/{{ g_manifestName }}"
+
