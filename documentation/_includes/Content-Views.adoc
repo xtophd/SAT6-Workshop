@@ -107,6 +107,21 @@ hammer content-view version promote \
 
 ----
 
+== List Content Views
+
+.[root@satellite ~]$ 
+----
+hammer content-view list
+----
+
+----
+----------------|---------------------------|---------------------------|-----------|---------------------|---------------
+CONTENT VIEW ID | NAME                      | LABEL                     | COMPOSITE | LAST PUBLISHED      | REPOSITORY IDS
+----------------|---------------------------|---------------------------|-----------|---------------------|---------------
+1               | Default Organization View | Default_Organization_View |           | 2020/05/30 04:38:05 |
+2               | MyContent RHEL 7          | MyContent_RHEL_7          |           | 2020/05/30 13:41:36 | 4, 1
+----------------|---------------------------|---------------------------|-----------|---------------------|---------------
+----
 
 [discrete]
 == End of Unit
