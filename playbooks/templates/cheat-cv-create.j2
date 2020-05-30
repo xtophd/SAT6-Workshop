@@ -1,9 +1,17 @@
 #!/bin/bash
 
+echo "Collection repository IDs"
+
+export RHEL7=`hammer repository list --organization "ExampleCom" | grep "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server" | awk '{ print $1 }'`
+
+export RHEL7Opt=`hammer repository list --organization "ExampleCom" | grep "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server" | awk '{ print $1 }'`
+
+export SATTools=`hammer repository list --organization "ExampleCom" | grep " Red Hat Satellite Tools 6.6 for RHEL 7 Server RPMs x86_64" | awk '{ print $1 }'`
+
 echo "Creating Content View"
 
 hammer content-view create \
   --organization "{{ myOrganization }}" \
   --name "{{ myContentViewName }}" \
   --description "RHEL 7 OS Content" \
-  --repository-ids 2,1,4
+  --repository-ids ${RHEL7},${RHEL7Opt},${SATTools}
