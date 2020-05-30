@@ -60,6 +60,25 @@ hammer lifecycle-environment create --name "MyLifecycle-PROD" \
 --prior "MyLifecycle-QA" --organization "ExampleCom"
 ----
 
+== List Lifecycle Environments
+
+.[root@satellite ~]$ 
+----
+hammer lifecycle-environment list
+----
+
+----
+---|------------------|----------------
+ID | NAME             | PRIOR
+---|------------------|----------------
+1  | Library          |
+2  | MyLifecycle-DEV  | Library
+4  | MyLifecycle-PROD | MyLifecycle-QA
+3  | MyLifecycle-QA   | MyLifecycle-DEV
+---|------------------|----------------
+----
+
+
 [discrete]
 == End of Unit
 
