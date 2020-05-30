@@ -183,6 +183,17 @@ For a more detailed report per respository, first identify the correct ID.
 hammer repository list --organization "ExampleCom"
 ----
 
+----
+---|------------------------------------------------------------------|---------------------------------|--------------|---------------------------------------------------------------------------------
+ID | NAME                                                             | PRODUCT                         | CONTENT TYPE | URL
+---|------------------------------------------------------------------|---------------------------------|--------------|---------------------------------------------------------------------------------
+3  | Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.5           | Red Hat Enterprise Linux Server | yum          | https://cdn.redhat.com/content/dist/rhel/server/7/7.5/x86_64/kickstart
+2  | Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server | Red Hat Enterprise Linux Server | yum          | https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/optional/os
+1  | Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server            | Red Hat Enterprise Linux Server | yum          | https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/os
+4  | Red Hat Satellite Tools 6.6 for RHEL 7 Server RPMs x86_64        | Red Hat Enterprise Linux Server | yum          | https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/sat-tools/6....
+---|------------------------------------------------------------------|---------------------------------|--------------|---------------------------------------------------------------------------------
+----
+
 Then fetch the current information
 
 .[root@satellite ~]$ 
