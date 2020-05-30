@@ -56,10 +56,10 @@ Many of the same steps we use here can be found in the official provisioning gui
 [source,indent=4]
 ----
 ID | NAME                                                             | PRODUCT                         | CONTENT TYPE | URL            
-3  | Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.5           | Red Hat Enterprise Linux Server | yum          | https://cdn.redhat.com/content/dist/rhel/server/7/7.5/x86_64/kickstart
+3  | Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.6           | Red Hat Enterprise Linux Server | yum          | https://cdn.redhat.com/content/dist/rhel/server/7/7.6/x86_64/kickstart
 2  | Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server | Red Hat Enterprise Linux Server | yum          | https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/optional/os
 1  | Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server            | Red Hat Enterprise Linux Server | yum          | https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/os
-4  | Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64        | Red Hat Enterprise Linux Server | yum          | https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/sat-tools/6....
+4  | Red Hat Satellite Tools 6.6 for RHEL 7 Server RPMs x86_64        | Red Hat Enterprise Linux Server | yum          | https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/sat-tools/6....
 ----
 
 
@@ -122,6 +122,8 @@ CONTENT VIEW ID | NAME                      | LABEL                     | COMPOS
 2               | MyContent RHEL 7          | MyContent_RHEL_7          |           | 2020/05/30 13:41:36 | 4, 1
 ----------------|---------------------------|---------------------------|-----------|---------------------|---------------
 ----
+
+Notice the Repository IDs listed in the far right column?  The identify them, recall the `hammer repository` shown at the top of this unit.
 
 [discrete]
 == End of Unit
