@@ -176,6 +176,51 @@ ID  | NAME                            | DESCRIPTION | ORGANIZATION | REPOSITORIE
 ----|---------------------------------|-------------|--------------|--------------|-----------
 ----
 
+For a more detailed report per respository, first identify the correct ID.
+
+.[root@satellite ~]$ 
+----
+hammer repository list --organization "ExampleCom"
+----
+
+Then fetch the current information
+
+.[root@satellite ~]$ 
+----
+hammer repository info --id=1  --organization "ExampleCom"
+----
+
+----
+ID:                 1
+Name:               Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server
+Label:              Red_Hat_Enterprise_Linux_7_Server_RPMs_x86_64_7Server
+Organization:       ExampleCom
+Red Hat Repository: yes
+Content Type:       yum
+Mirror on Sync:     yes
+URL:                https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/os
+Publish Via HTTP:   no
+Published At:       https://satellite.sat6.example.com/pulp/repos/ExampleCom/Library/content/dist/rhel/server/7/7Server/x86_64/os/
+Relative Path:      ExampleCom/Library/content/dist/rhel/server/7/7Server/x86_64/os
+Download Policy:    immediate
+Product:
+    ID:   122
+    Name: Red Hat Enterprise Linux Server
+GPG Key:
+
+Sync:
+    Status:
+Created:            2020/05/30 04:52:08
+Updated:            2020/05/30 04:52:33
+Content Counts:
+    Packages:       9382
+    Source RPMS:    0
+    Package Groups: 76
+    Errata:         4360
+    Module Streams: 0
+----
+
+
 [discrete]
 == End of Unit
 
