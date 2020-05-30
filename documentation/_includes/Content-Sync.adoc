@@ -84,7 +84,7 @@ hammer repository-set enable \
 --organization "ExampleCom" \
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
---releasever "7.5" \
+--releasever "7.6" \
 --name "Red Hat Enterprise Linux 7 Server (Kickstart)"
 ----
 
@@ -94,7 +94,7 @@ hammer repository-set enable \
 --organization "ExampleCom" \
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
---name "Red Hat Satellite Tools 6.4 (for RHEL 7 Server) (RPMs)"
+--name "Red Hat Satellite Tools 6.6 (for RHEL 7 Server) (RPMs)"
 ----
 
 == Change Download Policy
@@ -134,7 +134,7 @@ hammer repository update \
 hammer repository update \
 --organization "ExampleCom" \
 --product "Red Hat Enterprise Linux Server" \
---name "Red Hat Satellite Tools 6.4 for RHEL 7 Server RPMs x86_64" \
+--name "Red Hat Satellite Tools 6.6 for RHEL 7 Server RPMs x86_64" \
 --download-policy immediate
 ----
 
