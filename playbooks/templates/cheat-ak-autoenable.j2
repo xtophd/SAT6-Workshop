@@ -4,12 +4,12 @@ echo "Activation Key Content Auto Enablement"
 
 hammer activation-key content-override \
 --name "{{ myActivationKeyName_1 }}" \
---content-label rhel-7-server-satellite-tools-6.4-rpms \
+--content-label rhel-7-server-satellite-tools-6.6-rpms \
 --value 1 \
 --organization "{{ myOrganization }}"
 
 hammer activation-key content-override \
 --name "{{ myActivationKeyName_2 }}" \
---content-label rhel-7-server-satellite-tools-6.4-rpms \
+--content-label rhel-7-server-satellite-tools-6.6-rpms \
 --value 1 \
 --organization "{{ myOrganization }}"
