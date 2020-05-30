@@ -138,6 +138,15 @@ hammer repository update \
 --download-policy immediate
 ----
 
+== View Current Enabled Repositories
+
+Before starting the synchronization process, it might be wise to do a quick sanity check.
+
+.[root@satellite ~]$ 
+----
+hammer repository list --organization "ExampleCom"
+----
+
 == Synchronize Repos
 
 Since all of the content we are currently working with falls under a single product category, we can specify to sync all of it simultaneously.
