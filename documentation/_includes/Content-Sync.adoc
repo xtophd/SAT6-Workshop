@@ -231,6 +231,7 @@ Content Counts:
     Module Streams: 0
 ----
 
+NOTE: When a product have been successfully sync'd, it will show a `Last Sync Date:` with a date and/or time value.
 
 [discrete]
 == End of Unit
