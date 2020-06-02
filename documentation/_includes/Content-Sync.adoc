@@ -195,13 +195,13 @@ NOTE: When a product have been successfully sync'd, it will show a `Last Sync Da
 
 == Adding Additional Repos
 
-NOTE: DO NOT perform these steps unless you are certain that you have sufficient time and network bandwidth.  Enabling these additional repos will delay your ability to proceed with exercises.
+IMPORTANT: *DO NOT* perform these steps unless you are certain that you have sufficient time and network bandwidth.  Enabling these additional repos will delay your ability to proceed with exercises.
 
 On the satellite server, there are cheat-scripts available to add the additional products.
 
 [NOTE]
 ====
-_Unit Cheat Script_
+_Additonal Cheat Scripts_
 ----
 cheat-repos-add-extras.sh
 cheat-repos-add-optional.sh
