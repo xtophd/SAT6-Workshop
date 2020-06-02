@@ -116,17 +116,16 @@ By default the Satellite-Tools content will not be enabled automatically when ho
 ----
 hammer activation-key content-override \
 --name "MyKey-DEV" \
---content-label rhel-7-server-satellite-tools-6.4-rpms \
+--content-label rhel-7-server-satellite-tools-6.6-rpms \
 --value 1 \
 --organization "ExampleCom"
 
 hammer activation-key content-override \
 --name "MyKey-PROD" \
---content-label rhel-7-server-satellite-tools-6.4-rpms \
+--content-label rhel-7-server-satellite-tools-6.6-rpms \
 --value 1 \
 --organization "ExampleCom"
 ----
-
 
 == Additional Activities
 
