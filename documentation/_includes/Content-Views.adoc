@@ -123,6 +123,13 @@ CONTENT VIEW ID | NAME                      | LABEL                     | COMPOS
 
 Notice the Repository IDs listed in the far right column?  To identify them, recall the `hammer repository` command shown at the top of this unit.
 
+For additional details, you can use the following.
+
+.[root@satellite ~]$ 
+----
+hammer content-view info --id=2
+----
+
 [discrete]
 == End of Unit
 
