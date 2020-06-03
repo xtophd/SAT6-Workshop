@@ -130,6 +130,11 @@ For additional details, you can use the following.
 hammer content-view info --id=2
 ----
 
+.[root@satellite ~]$ 
+----
+hammer content-view version list --content-view "MyContent RHEL 7" --organization "ExampleCom"
+----
+
 [discrete]
 == End of Unit
 
