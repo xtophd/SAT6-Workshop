@@ -74,26 +74,6 @@ hammer repository-set enable \
 --organization "ExampleCom" \
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
---releasever "7Server" \
---name "Red Hat Enterprise Linux 7 Server - Optional (RPMs)"
-----
-
-.[root@satellite ~]$ 
-----
-hammer repository-set enable \
---organization "ExampleCom" \
---product "Red Hat Enterprise Linux Server" \
---basearch "x86_64" \
---releasever "7.6" \
---name "Red Hat Enterprise Linux 7 Server (Kickstart)"
-----
-
-.[root@satellite ~]$ 
-----
-hammer repository-set enable \
---organization "ExampleCom" \
---product "Red Hat Enterprise Linux Server" \
---basearch "x86_64" \
 --name "Red Hat Satellite Tools 6.6 (for RHEL 7 Server) (RPMs)"
 ----
 
@@ -108,24 +88,6 @@ hammer repository update  \
 --organization "ExampleCom" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server" \
---download-policy immediate
-----
-
-.[root@satellite ~]$ 
-----
-hammer repository update \
---organization "ExampleCom" \
---product "Red Hat Enterprise Linux Server" \
---name "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server" \
---download-policy immediate
-----
-
-.[root@satellite ~]$ 
-----
-hammer repository update \
---organization "ExampleCom" \
---product "Red Hat Enterprise Linux Server" \
---name "Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.6" \
 --download-policy immediate
 ----
 
@@ -172,7 +134,7 @@ hammer product list --enabled true --organization ExampleCom
 ----|---------------------------------|-------------|--------------|--------------|-----------
 ID  | NAME                            | DESCRIPTION | ORGANIZATION | REPOSITORIES | SYNC STATE
 ----|---------------------------------|-------------|--------------|--------------|-----------
-122 | Red Hat Enterprise Linux Server |             | ExampleCom   | 4            | Running  
+122 | Red Hat Enterprise Linux Server |             | ExampleCom   | 2            | Running  
 ----|---------------------------------|-------------|--------------|--------------|-----------
 ----
 
@@ -187,10 +149,8 @@ hammer repository list --organization "ExampleCom"
 ---|------------------------------------------------------------------|---------------------------------|--------------|---------------------------------------------------------------------------------
 ID | NAME                                                             | PRODUCT                         | CONTENT TYPE | URL
 ---|------------------------------------------------------------------|---------------------------------|--------------|---------------------------------------------------------------------------------
-3  | Red Hat Enterprise Linux 7 Server Kickstart x86_64 7.5           | Red Hat Enterprise Linux Server | yum          | https://cdn.redhat.com/content/dist/rhel/server/7/7.5/x86_64/kickstart
-2  | Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server | Red Hat Enterprise Linux Server | yum          | https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/optional/os
 1  | Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server            | Red Hat Enterprise Linux Server | yum          | https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/os
-4  | Red Hat Satellite Tools 6.6 for RHEL 7 Server RPMs x86_64        | Red Hat Enterprise Linux Server | yum          | https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/sat-tools/6....
+2  | Red Hat Satellite Tools 6.6 for RHEL 7 Server RPMs x86_64        | Red Hat Enterprise Linux Server | yum          | https://cdn.redhat.com/content/dist/rhel/server/7/7Server/x86_64/sat-tools/6....
 ---|------------------------------------------------------------------|---------------------------------|--------------|---------------------------------------------------------------------------------
 ----
 
@@ -232,6 +192,22 @@ Content Counts:
 ----
 
 NOTE: When a product have been successfully sync'd, it will show a `Last Sync Date:` with a date and/or time value.
+
+== Adding Additional Repos
+
+IMPORTANT: *DO NOT* perform these steps unless you are certain that you have sufficient time and network bandwidth.  Enabling these additional repos will delay your ability to proceed with exercises.
+
+On the satellite server, there are cheat-scripts available to add the additional products.
+
+[NOTE]
+====
+_Additonal Cheat Scripts_
+----
+cheat-repos-add-extras.sh
+cheat-repos-add-optional.sh
+cheat-repos-add-kickstart.sh
+----
+====
 
 [discrete]
 == End of Unit
