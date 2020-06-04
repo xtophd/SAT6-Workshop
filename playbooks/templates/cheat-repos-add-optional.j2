@@ -1,0 +1,26 @@
+#!/bin/bash
+
+echo "Enabling Repo..."
+
+hammer repository-set enable \
+--organization "{{ myOrganization }}" \
+--product "Red Hat Enterprise Linux Server" \
+--basearch "x86_64" \
+--releasever "7Server" \
+--name "Red Hat Enterprise Linux 7 Server - Optional (RPMs)"
+
+echo "Setting Download Policy..."
+
+hammer repository update \
+--organization "{{ myOrganization }}" \
+--product "Red Hat Enterprise Linux Server" \
+--name "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server" \
+--download-policy immediate
+
+echo "Starting Sync..."
+
+hammer repository synchronize \
+  --organization "{{ myOrganization }}" \
+  --product "Red Hat Enterprise Linux Server" \
+  --name  "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server" 
+

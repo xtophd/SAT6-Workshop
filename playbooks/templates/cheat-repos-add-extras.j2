@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "Enabling Repo..."
+
+hammer repository-set enable \
+  --organization "{{ myOrganization }}" \
+  --product "Red Hat Enterprise Linux Server" \
+  --basearch "x86_64" \
+  --name "Red Hat Enterprise Linux 7 Server - Extras (RPMs)"
+
+echo "Setting Download Policay..."
+
+hammer repository update \
+  --organization "{{ myOrganization }}" \
+  --product "Red Hat Enterprise Linux Server" \
+  --name "Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64" \
+  --download-policy immediate 
+
+echo "Starting Sync..."
+
+hammer repository synchronize \
+  --organization "{{ myOrganization }}" \
+  --product "Red Hat Enterprise Linux Server" \
+  --name  "Red Hat Enterprise Linux 7 Server - Extras RPMs x86_64"
+
