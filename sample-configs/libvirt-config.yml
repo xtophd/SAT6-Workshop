@@ -48,6 +48,26 @@ kvm_cfg:
     dir: "/var/www/html/repos"
     url: "http://{{ g_kvmhost_ip }}:{{ g_http_port }}/repos"
 
+##
+## CUSTOM RESOURCE PROFILES
+##
+##   default resource profiles are found in:
+##   playbooks.deployer-kvm/group_vars/all/rs_profiles.yml
+##
+
+local_rs_profile:
+
+  sat6:
+    description: "Satellite 6 Workshop"
+    vcpus: 4
+    memsize: 24000
+    storage:
+      root:
+        size: 30
+      extra:
+        disk1:
+          size: 200
+
 kvm_deploy_plan:
 
   ## PRE/POST INSTALL SCRIPTS BEFORE AND AFTER DEPLOY
