@@ -77,6 +77,15 @@ Refer to the documentation:
 
 link:https://access.redhat.com/documentation/en-us/red_hat_satellite/6.4-beta/html/administering_red_hat_satellite/chap-red_hat_satellite-administering_red_hat_satellite-backup_and_disaster_recovery[Backup and Disaster Recovery]
 
+== Load Manifest
+
+Command line to install a manifest
+
+.[root@satellite ~]$ 
+----
+hammer subscription upload --file manifest.zip --organization "ExampleCom"
+----
+
 [discrete]
 == End of Unit
 
