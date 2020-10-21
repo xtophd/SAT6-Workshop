@@ -9,7 +9,7 @@
   - debug: msg="Manifest URL https://access.redhat.com/management/subscription_allocations"
     when: test_manifest.stat.exists == false
 
-  - name: "LIBVIRT-POSTINSTALL-BASTION: fail if pull-secret absent"
+  - name: "LIBVIRT-POSTINSTALL-BASTION: fail if manifest absent"
     fail: msg="COPY YOUR SATELLITE MANIFEST HERE ./config/{{ g_manifestName }}"
     when: test_manifest.stat.exists == false
 
