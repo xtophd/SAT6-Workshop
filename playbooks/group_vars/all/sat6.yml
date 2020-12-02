@@ -1,0 +1,25 @@
+sat6_assets:
+
+  "6.3":
+    name: "satellite"
+    version: "6.3"
+    repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.3-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-satellite-6.3-puppet4-rpms"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ myOrganization }} --foreman-initial-location {{ myLocation }} --foreman-admin-username {{ myAdminName }} --foreman-admin-password {{ myAdminPW }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
+
+  "6.4":
+    name: "satellite"
+    version: "6.4"
+    repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.4-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.6-rpms"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ myOrganization }} --foreman-initial-location {{ myLocation }} --foreman-initial-admin-username {{ myAdminName }} --foreman-initial-admin-password {{ myAdminPW }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
+
+  "6.5":
+    name: "satellite"
+    version: "6.5"
+    repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.5-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.6-rpms"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ myOrganization }} --foreman-initial-location {{ myLocation }} --foreman-initial-admin-username {{ myAdminName }} --foreman-initial-admin-password {{ myAdminPW }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
+
+  "6.6":
+    name: "satellite"
+    version: "6.6"
+    repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.6-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.8-rpms"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ myOrganization }} --foreman-initial-location {{ myLocation }} --foreman-initial-admin-username {{ myAdminName }} --foreman-initial-admin-password {{ myAdminPW }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
