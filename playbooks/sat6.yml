@@ -18,7 +18,7 @@
 
 - import_playbook: sat6-preinstall-hostprep.yml
   tags:
-    - hostprep
+    - prep
 
 - import_playbook: sat6-install.yml
   tags:

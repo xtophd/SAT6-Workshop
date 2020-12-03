@@ -28,21 +28,22 @@ fi
 
 case "$1" in
     "all")
-        echo "ansible-playbook -i ${myInventory} -e @${myExtravars} -f 10  ./playbooks/sat6.yml"
-        time  ansible-playbook -i ${myInventory} -e @${myExtravars} -f 10  ./playbooks/sat6.yml
+        echo "ansible-playbook -i ${myInventory} -f 10  ./playbooks/sat6.yml"
+        time  ansible-playbook -i ${myInventory} -f 10  ./playbooks/sat6.yml
         ;;
          
-    "repos"       | \
-    "prepwork"    | \
-    "install"     | \
+    "registration"  | \
+    "repos"         | \
+    "prep"          | \
+    "install"       | \
     "postinstall")
 
-        echo "ansible-playbook -i ${myInventory} -e @${myExtravars} -f 10 --tags $1 ./playbooks/sat6.yml"
-        time  ansible-playbook -i ${myInventory} -e @${myExtravars} -f 10 --tags $1 ./playbooks/sat6.yml
+        echo "ansible-playbook -i ${myInventory} -f 10 --tags $1 ./playbooks/sat6.yml"
+        time  ansible-playbook -i ${myInventory} -f 10 --tags $1 ./playbooks/sat6.yml
         ;;
 
     *)
-        echo "USAGE: prepare-sat6-workshop.sh [ all | repos | prepwork ]"
+        echo "USAGE: prepare-sat6-workshop.sh [ all | registration | repos | prep | install | postinstall ]"
         ;;
 
 esac         
