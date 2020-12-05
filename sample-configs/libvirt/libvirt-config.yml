@@ -106,8 +106,8 @@ deployer_plan:
       inject_sshkey:      True
       wait_for_shutdown:  True
       post_config:        True
-      pre_install:        "ansible-playbook -i ./config/master-config.yml -e @./config/libvirt-config.yml -f 10  ./playbooks/libvirt-preinstall-satellite.yml"
-      post_install:       "ansible-playbook -i ./config/master-config.yml -e @./config/libvirt-config.yml -f 10  ./playbooks/libvirt-postinstall-satellite.yml"
+      pre_install:        "ansible-playbook -i ./config/master-config.yml -e @./config/libvirt-config.yml -f 10  ./playbooks/deployer-preinstall-satellite.yml"
+      post_install:       "ansible-playbook -i ./config/master-config.yml -e @./config/libvirt-config.yml -f 10  ./playbooks/deployer-postinstall-satellite.yml"
 
     pass_3:
       hostgroup:          "myNodes"

@@ -44,16 +44,16 @@ g_location = "Dallas"
 g_studentName = "cloud-user"
 
 ## Your Workshop Cluster Name
-g_satelliteVersion = "6.6"
+g_satelliteVersion = "6.4"
 
 ## Your Workshop Cluster Name
-g_clusterName = "sat6"
+g_clusterName = "sat6rhv"
 
 ## Artifacts Directory
 g_artifactsDir = "/root/sat6-artifacts"
 
 ## Manifest File Name
-g_manifestName = "manifest-v64.zip"
+g_manifestName = "manifest_sat6rhv_6.4.zip"
 
 ## Satellite Parms
 
@@ -90,12 +90,12 @@ myDiscoveryFact = "MyFact"
 ## Configure the public (primary) network
 g_publicNet     = "True"
 g_publicDomain  = "example.com"
-g_pubNET        = "192.168.125.0"
+g_pubNET        = "192.168.1.0"
 g_pubNM         = "255.255.255.0"
 g_pubPREFIX     = "24"
-g_pubGW         = "192.168.125.1"
-g_pubDNS        = "192.168.125.1"
-g_pubNTP        = "192.168.125.160"
+g_pubGW         = "192.168.1.1"
+g_pubDNS        = "192.168.1.30"
+g_pubNTP        = "192.168.1.1"
 g_pubFQDN       = "{{ g_clusterName }}.{{ g_publicDomain }}"
 
 ## Configure the private (secondary) network
@@ -174,28 +174,28 @@ ansible_connection = "local"
 
 [myBastion:vars]
 
-h_hwPROF = "kvm_vda"
+h_hwPROF = "ovirt_sda"
 h_rsPROF = "bastion"
-h_ksPROF = "rhel7_lvm"
+h_ksPROF = "rhel8"
 
 ## -----------------
 
 [mySatellite:vars]
 
-h_hwPROF = "kvm_vda"
+h_hwPROF = "ovirt_sda"
 h_rsPROF = "sat6"
-h_ksPROF = "rhel7_lvm"
+h_ksPROF = "rhel7"
 
-myDisk = "/dev/vdb"
+myDisk = "/dev/sdb"
 myVG = "sat_vg"
 
 ## -----------------
 
 [myNodes:vars]
 
-h_hwPROF = "kvm_vda"
-h_rsPROF = "sml"
-h_ksPROF = "rhel76_lvm"
+h_hwPROF = "ovirt_sda"
+h_rsPROF = "tiny"
+h_ksPROF = "rhel76"
 
 ##
 ## ----------------------------------------
@@ -205,13 +205,13 @@ h_ksPROF = "rhel76_lvm"
 virthost     h_pubIP="192.168.125.1"
 
 [myBastion]
-bastion      h_pubIP="192.168.125.160" 
+bastion      h_pubIP="192.168.1.120" 
 
 [mySatellite]
-satellite    h_pubIP="192.168.125.161"
+satellite    h_pubIP="192.168.1.121"
 
 [myNodes]
-node1        h_pubIP="192.168.125.162"
-node2        h_pubIP="192.168.125.163"
-node3        h_pubIP="192.168.125.164"
+node1        h_pubIP="192.168.1.122"
+node2        h_pubIP="192.168.1.123"
+node3        h_pubIP="192.168.1.124"
 

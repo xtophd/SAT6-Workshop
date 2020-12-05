@@ -176,7 +176,7 @@ ansible_connection = "local"
 
 h_hwPROF = "kvm_vda"
 h_rsPROF = "bastion"
-h_ksPROF = "rhel7_lvm"
+h_ksPROF = "rhel7"
 
 ## -----------------
 
@@ -184,7 +184,7 @@ h_ksPROF = "rhel7_lvm"
 
 h_hwPROF = "kvm_vda"
 h_rsPROF = "sat6"
-h_ksPROF = "rhel7_lvm"
+h_ksPROF = "rhel7"
 
 myDisk = "/dev/vdb"
 myVG = "sat_vg"
@@ -194,8 +194,8 @@ myVG = "sat_vg"
 [myNodes:vars]
 
 h_hwPROF = "kvm_vda"
-h_rsPROF = "sml"
-h_ksPROF = "rhel76_lvm"
+h_rsPROF = "tiny"
+h_ksPROF = "rhel76"
 
 ##
 ## ----------------------------------------
