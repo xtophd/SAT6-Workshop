@@ -17,7 +17,7 @@
       mode: "0700"
       state: directory
 
-  - name: "LIBVIRT-POSTINSTALL-SATELLITE: deploy pull manifest"
+  - name: "LIBVIRT-POSTINSTALL-SATELLITE: deploy manifest"
     copy:
       src: "../config/{{ g_manifestName }}"
       dest: "{{ g_artifactsDir }}"
