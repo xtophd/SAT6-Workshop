@@ -77,7 +77,7 @@
 
 - hosts: myBastion,mySatellite,myNodes
   gather_facts: no 
-  serial: 2 
+  serial: 3 
   roles:
     - role: xtoph_deploy
       vars: 

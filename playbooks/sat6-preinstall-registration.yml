@@ -9,22 +9,45 @@
 - hosts: mySatellite
   tasks:
 
-  - name: "SAT6-PREINSTALL-REGISTRATION: collect RHN username and password"
-    pause:
-      prompt: "Enter RHSM username: "
-      echo: yes
-    register: rhsm_username
 
-  - pause:
-      prompt: "Enter RHN password: "
-      echo: no
-    register: rhsm_password
+
+  - name: "SAT6-PREINSTALL-REGISTRATION: collect RHN username"
+    block:
+
+      - pause:
+          prompt: "Enter RHSM username: "
+          echo: yes
+        register: prompt_username
+
+      - set_fact:
+          rhsm_username: "{{ prompt_username.user_input }}"
+
+    when: rhsm_username is not defined or 
+          rhsm_username == ""
+
+
+
+  - name: "SAT6-PREINSTALL-REGISTRATION: collect RHN password"
+    block:
+
+      - pause:
+          prompt: "Enter RHN password: "
+          echo: no
+        register: prompt_password
+
+      - set_fact:
+          rhsm_password: "{{ prompt_password.user_input }}"
+
+    when: rhsm_password is not defined or 
+          rhsm_password == ""
+
+
 
   - name: "SAT6-PREINSTALL-REGISTRATION: rhsm register"
     redhat_subscription:
       state: present
       pool: "Red Hat Satellite.*Subscription"
       force_register: yes
-      username: "{{ rhsm_username.user_input }}"
-      password: "{{ rhsm_password.user_input }}"
+      username: "{{ rhsm_username }}"
+      password: "{{ rhsm_password }}"
   
