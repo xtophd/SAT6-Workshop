@@ -11,7 +11,7 @@
 
 
 
-  - name: "SAT6-PREINSTALL-REGISTRATION: collect RHN username"
+  - name: "sat6-preinstall-registration: collect RHSM username"
     block:
 
       - pause:
@@ -27,11 +27,11 @@
 
 
 
-  - name: "SAT6-PREINSTALL-REGISTRATION: collect RHN password"
+  - name: "sat6-preinstall-registration: collect RHSM password"
     block:
 
       - pause:
-          prompt: "Enter RHN password: "
+          prompt: "Enter RHSM password: "
           echo: no
         register: prompt_password
 
@@ -43,7 +43,7 @@
 
 
 
-  - name: "SAT6-PREINSTALL-REGISTRATION: rhsm register"
+  - name: "sat6-preinstall-registration: rhsm register"
     redhat_subscription:
       state: present
       pool: "Red Hat Satellite.*Subscription"

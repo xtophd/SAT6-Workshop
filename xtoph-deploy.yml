@@ -60,6 +60,18 @@
 
 
 ##
+##    Let's make sure we have a manifest
+##
+
+
+- import_playbook: playbooks/deployer-predeploy-tasks.yml
+  when: xtoph_deploy_cmd == "deploy" or
+        xtoph_deploy_cmd == "redeploy" or
+        xtoph_deploy_cmd == "setup+" or
+        xtoph_deploy_cmd == "workshop"
+
+
+##
 ##     For the RHEL 8 Workshop, there are 
 ##     no concurrency issues, so proceed 
 ##     to deploy everything at once
@@ -92,6 +104,22 @@
 ##    All nodes should be deployed
 ##    So proceed to configure the workshop 
 ## 
+##
+##    Place copy of manifest on satellite
+##
+
+
+- import_playbook: playbooks/deployer-postdeploy-tasks.yml
+  when: xtoph_deploy_cmd == "deploy" or
+        xtoph_deploy_cmd == "redeploy" or
+        xtoph_deploy_cmd == "setup+" or
+        xtoph_deploy_cmd == "workshop"
+
+
+
+##
+##    Run the Satellite installation
+##
 
 
 
@@ -99,5 +127,5 @@
   when: xtoph_deploy_cmd == "deploy" or 
         xtoph_deploy_cmd == "redeploy" or 
         xtoph_deploy_cmd == "setup+" or
-        xtoph_deploy_cmd=="workshop"
+        xtoph_deploy_cmd == "workshop"
 

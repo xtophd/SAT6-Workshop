@@ -1,0 +1,15 @@
+- hosts: localhost
+
+  tasks:
+
+
+
+  - name: "deployer-predeploy-tasks : stat manifest"
+    stat: path="../config/{{ g_manifestName }}"
+    register: test_manifest
+
+
+
+  - name: "deployer-predeploy-tasks : fail if manifest absent"
+    fail: msg="COPY YOUR SATELLITE MANIFEST HERE ./config/{{ g_manifestName }}"
+    when: test_manifest.stat.exists == false
