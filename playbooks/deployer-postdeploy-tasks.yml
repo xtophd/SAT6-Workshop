@@ -11,13 +11,13 @@
 
   tasks:
 
-  - name: "LIBVIRT-POSTINSTALL-SATELLITE: create artifacts directory"
+  - name: "deployer-postdeploy-tasks : create artifacts directory"
     file:
       path: "{{ g_artifactsDir }}"
       mode: "0700"
       state: directory
 
-  - name: "LIBVIRT-POSTINSTALL-SATELLITE: deploy manifest"
+  - name: "deployer-postdeploy-tasks: deploy manifest"
     copy:
       src: "../config/{{ g_manifestName }}"
       dest: "{{ g_artifactsDir }}"

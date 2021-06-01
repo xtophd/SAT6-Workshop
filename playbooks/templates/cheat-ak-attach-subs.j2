@@ -1,17 +1,24 @@
 #!/bin/bash
 
+## Change Log:
+##
+##    2021-02-19  Changed to using ID and not UUID. In versions of Satellite prior to 6.8 this worked [used the UUID]
+##                SUB_ID=`hammer --output base subscription list --organization "{{ myOrganization }}"  | grep UUID | awk '{ print $2 }'`
+##
+
+
 echo "Attach Subscriptions to Activation Keys {{ myActivationKeyName_1 }} and {{ myActivationKeyName_2 }}"
 
-UUID=`hammer --output base subscription list --organization "{{ myOrganization }}"  | grep UUID | awk '{ print $2 }'`
+SUB_ID=`hammer --output base subscription list --organization "{{ myOrganization }}"  | grep '^ID' | awk '{ print $2 }'`
 
-echo "Found Sub UUID: ${UUID}"
+echo "Found Sub ID: ${SUB_ID}"
 
 hammer activation-key add-subscription \
   --name "{{ myActivationKeyName_1 }}" \
-  --subscription-id ${UUID} \
+  --subscription-id ${SUB_ID} \
   --organization "{{ myOrganization }}"
 
 hammer activation-key add-subscription \
   --name "{{ myActivationKeyName_2 }}" \
-  --subscription-id ${UUID} \
+  --subscription-id ${SUB_ID} \
   --organization "{{ myOrganization }}"

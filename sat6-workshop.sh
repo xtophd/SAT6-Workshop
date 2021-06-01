@@ -6,11 +6,6 @@
 
 myInventory="./config/master-config.ini"
 
-## This script is intended to be run:
-##     on the libvirt hypervisor node
-##     in the project directory
-##     EX: CWD == ~root/OCP4-Workshop
-
 if [ ! -e "${myInventory}" ] ; then
     echo "ERROR: Are you in the right directory? Can not find ${myInventory}" ; exit
     exit
@@ -40,7 +35,7 @@ case "$1" in
         ;;
 
     *)
-        echo "USAGE: prepare-sat6-workshop.sh [ all | registration | repos | prep | install | postinstall ]"
+        echo "USAGE: sat6-workshop.sh [ all | registration | repos | prep | install | postinstall ]"
         ;;
 
 esac         
