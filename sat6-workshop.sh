@@ -4,8 +4,7 @@
 ## NOTE: you must point to the correct inventory
 ##
 
-myInventory="./config/master-config.yml"
-myExtravars="./config/libvirt-config.yml"
+myInventory="./config/master-config.ini"
 
 ## This script is intended to be run:
 ##     on the libvirt hypervisor node
@@ -28,8 +27,7 @@ fi
 
 case "$1" in
     "all")
-        echo "ansible-playbook -i ${myInventory} -f 10  ./playbooks/sat6.yml"
-        time  ansible-playbook -i ${myInventory} -f 10  ./playbooks/sat6.yml
+        time  ansible-playbook --ask-vault-pass -i ${myInventory} -f 10  ./playbooks/sat6.yml
         ;;
          
     "registration"  | \
@@ -38,8 +36,7 @@ case "$1" in
     "install"       | \
     "postinstall")
 
-        echo "ansible-playbook -i ${myInventory} -f 10 --tags $1 ./playbooks/sat6.yml"
-        time  ansible-playbook -i ${myInventory} -f 10 --tags $1 ./playbooks/sat6.yml
+        time  ansible-playbook --ask-vault-pass -i ${myInventory} -f 10 --tags $1 ./playbooks/sat6.yml
         ;;
 
     *)

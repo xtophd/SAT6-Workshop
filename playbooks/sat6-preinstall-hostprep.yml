@@ -46,22 +46,37 @@
 - hosts: mySatellite
   tasks:
 
-    - name: "SAT6-PREINSTALL-HOSTPREP: stop puppet services if running"
-      shell: if `pgrep -u puppet`; then systemctl puppet stop ; fi
+    - name: "SAT6-PREINSTALL-HOSTPREP: debug of sat6_assets[{{ g_satelliteVersion }}]"
+      debug: var=sat6_assets[g_satelliteVersion]['fs_data']
 
-    - name: "SAT6-PREINSTALL-HOSTPREP: stop satellite services if running"
-      shell: if `which katello-service`; then katello-service stop ; fi
+    ##
+    ##    These are crude, but trying to accomodate 
+    ##    satellite 6.3-6.9 in  various states of
+    ##    installation.
+    ##
+
+    - name: "SAT6-PREINSTALL-HOSTPREP: stop puppet services if running"
+      shell: if pgrep -u puppet; then systemctl stop puppet ; fi
+
+    - name: "SAT6-PREINSTALL-HOSTPREP: stop satellite services if running (< 6.9)"
+      shell: if which katello-service; then katello-service stop ; fi
+
+    - name: "SAT6-PREINSTALL-HOSTPREP: stop satellite services if running (>= 6.9)"
+      shell: if which satellite-maintain; then satellite-maintain service stop ; fi
+
+    - name: "SAT6-PREINSTALL-HOSTPREP: stop mongodb services if running"
+      shell: if pgrep -u mongodb; then systemctl stop mongod ; fi
+
+    - name: "SAT6-PREINSTALL-HOSTPREP: stop squid services if running"
+      shell: if pgrep -u squid; then systemctl stop squid ; fi
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD unmount previous satellite filesystems"
+      vars:
+        t_path: "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['path'] }}"
       shell:
         cmd: |
-          if grep -q {{ item.mount }} /proc/mounts ; then umount {{ item.mount }} ; fi
-      with_items:
-        - {vg: "{{ myVG }}", lv: 'pulp',    mount: '/var/lib/pulp'}
-        - {vg: "{{ myVG }}", lv: 'pgsql',   mount: '/var/lib/pgsql'}
-        - {vg: "{{ myVG }}", lv: 'mongodb', mount: '/var/lib/mongodb'}
-        - {vg: "{{ myVG }}", lv: 'squid',   mount: '/var/spool/squid'}
-        - {vg: "{{ myVG }}", lv: 'cache',   mount: '/var/cache'}
+          if grep -q {{ t_path }} /proc/mounts ; then umount {{ t_path }} ; fi
+      with_items: "{{ sat6_assets[g_satelliteVersion]['fs_data'] }}"
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD cleanup previous satellite storage"
       shell:
@@ -82,15 +97,15 @@
           vgcreate "{{ myVG }}" "{{ myDisk }}"
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD create logical volumes"
+      vars:
+        t_path: "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['path'] }}"
+        t_size: "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['size'] }}"
+        t_lv:   "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['lv'] }}"
+        t_vg:   "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['vg'] }}"
       shell:
         cmd: |
-          lvcreate -y -L {{ item.size }}GB  -n {{ item.lv }} "{{ item.vg }}"
-      with_items:
-        - {vg: "{{ myVG }}", lv: 'mongodb', size: '50'}
-        - {vg: "{{ myVG }}", lv: 'pulp',    size: '100'}
-        - {vg: "{{ myVG }}", lv: 'pgsql',   size: '5'}
-        - {vg: "{{ myVG }}", lv: 'squid',   size: '5'}
-        - {vg: "{{ myVG }}", lv: 'cache',   size: '20'}
+          lvcreate -y -L {{ t_size }}GB  -n {{ t_lv }} {{ t_vg }}
+      with_items: "{{ sat6_assets[g_satelliteVersion]['fs_data'] }}"
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD remove old cache directory"
       shell:
@@ -99,23 +114,46 @@
           mkdir -p /var/cache
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD create filesystems, mount points and fstab entries"
+      vars:
+        t_path: "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['path'] }}"
+        t_lv:   "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['lv'] }}"
+        t_vg:   "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['vg'] }}"
       shell:
         cmd: |
-          mkfs -t xfs /dev/{{ item.vg }}/{{ item.lv }}
-          mkdir -p {{ item.mount }}
-          grep -q {{ item.mount }} /etc/fstab || echo "/dev/mapper/{{item.vg}}-{{ item.lv }} {{ item.mount }} xfs defaults 0 0" >> /etc/fstab
-      with_items:
-        - {vg: "{{ myVG }}", lv: 'pulp',    mount: '/var/lib/pulp'}
-        - {vg: "{{ myVG }}", lv: 'pgsql',   mount: '/var/lib/pgsql'}
-        - {vg: "{{ myVG }}", lv: 'mongodb', mount: '/var/lib/mongodb'}
-        - {vg: "{{ myVG }}", lv: 'squid',   mount: '/var/spool/squid'}
-        - {vg: "{{ myVG }}", lv: 'cache',   mount: '/var/cache'}
+          mkfs -t xfs /dev/{{ t_vg }}/{{ t_lv }}
+          mkdir -p {{ t_path }}
+          grep -q {{ t_path }} /etc/fstab || echo "/dev/mapper/{{t_vg}}-{{ t_lv }} {{ t_path }} xfs defaults 0 0" >> /etc/fstab
+      with_items: "{{ sat6_assets[g_satelliteVersion]['fs_data'] }}"
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD mount everything"
       shell:
         cmd: |
           mount -a
-          
+
+    - name: "SAT6-PREINSTALL-HOSTPREP:CMD create additional sub-directories"
+      file:
+        path:  "{{ item.path  }}"
+        owner: "{{ item.owner }}"
+        group: "{{ item.group }}"
+        mode:  "{{ item.mode  }}"
+        state: directory
+      with_items:
+        - {path: '/var/lib/pulp/cache', owner: 'root', group: 'root', mode: '0755'}
+
+    - name: "SAT6-PREINSTALL-HOSTPREP:CMD create link for pulp cache direcotory"
+      file:
+        path: "/var/cache/pulp"
+        src:  "/var/lib/pulp/cache"
+        state: link
+
+    - name: "SAT6-PREINSTALL-HOSTPREP:CMD restore selinux contexts on new filesystems"
+      vars:
+        t_path: "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['path'] }}"
+      shell:
+        cmd: |
+          restorecon -R {{ t_path }}
+      with_items: "{{ sat6_assets[g_satelliteVersion]['fs_data'] }}"
+
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD configure firewalld"
       shell:
         cmd: |

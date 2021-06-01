@@ -5,8 +5,18 @@
 ##
 
 ---
-##- hosts: mySatellite
-##  tasks:
+
+- hosts: all
+  tags: always
+  tasks:
+
+    - name: "sat6.yml : load variables"
+      include_vars:
+        file: "../config/credentials.yml"
+      when: sat6_AdminPW is undefined
+
+
+
 
 - import_playbook: sat6-preinstall-registration.yml
   tags:
