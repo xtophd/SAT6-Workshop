@@ -33,7 +33,7 @@ katello-service start
 katello-service restart
 ----
 
-NOTE: Satellite 6.9 introduced "satellite-maintain" to manage related services.  EX: satellite-maintain service [ list | status | start | stop | restart ]
+NOTE: Satellite 6.9 introduced "satellite-maintain" to manage related services:  `satellite-maintain service [ list | status | start | stop | restart ]`
 
 == Check Satellite Services Status
 
