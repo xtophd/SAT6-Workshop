@@ -1,4 +1,4 @@
-xtoph_deploy_config:
+xtoph_config:
 
   debug: true
 
@@ -7,7 +7,7 @@ xtoph_deploy_config:
   selected_profile:
     kickstart: "{{ h_ksPROF | default ('') }}"
     resource:  "{{ h_rsPROF | default ('') }}"
-    hardware:  "{{ h_hwPROF | default ('') }}"
+    machine:   "{{ h_hwPROF | default ('') }}"
 
   deployhost:
 
