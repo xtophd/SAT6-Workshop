@@ -1,4 +1,4 @@
-xtoph_deploy_config:
+xtoph_config:
 
   debug: true
 
@@ -7,22 +7,26 @@ xtoph_deploy_config:
   selected_profile:
     kickstart: "{{ h_ksPROF | default ('') }}"
     resource:  "{{ h_rsPROF | default ('') }}"
-    hardware:  "{{ h_hwPROF | default ('') }}"
+    machine:   "{{ h_hwPROF | default ('') }}"
 
   deployhost:
 
     ##
-    ##     platform:      "ovirt" or "libvirt"
+    ##     platform_enable: one or more of the following
+    ##       - "ovirt"
+    ##       - "libvirt"
+    ##       - "baremetal"
     ##
 
-    platform: "libvirt"
+    platform_enable: 
+      - "libvirt"
     
     ##
     ##    deployhost hostname OR ip that will
     ##    accessible to the deployed VMs
     ##
 
-    ip: "192.168.1.128"
+    ip: "{{ g_deployhostIP}}"
 
     ##
     ##    dnsmasq_enable:    ensures dnsmasq is installed
@@ -37,7 +41,7 @@ xtoph_deploy_config:
     ##                           real-dns
     ##
 
-    dnsmasq_enable:  true
+    dnsmasq_enable:     true
     dnsmasq_asprimary:  true
 
     ##
@@ -74,7 +78,7 @@ xtoph_deploy_config:
 
     kickstart:
       dir: "/var/www/html/ks"
-      url: "http://192.168.1.28:8008/ks"
+      url: "http://{{ g_deployhostIP}}:8008/ks"
 
     ##
     ##    Where will the repos be mounted
@@ -83,7 +87,7 @@ xtoph_deploy_config:
 
     repos:
       dir: "/var/www/html/repos"
-      url: "http://192.168.1.28:8008/repos"
+      url: "http://{{ g_deployhostIP}}:8008/repos"
 
     ##
     ##    Where are the ISOs stored
@@ -91,43 +95,3 @@ xtoph_deploy_config:
 
     iso:
       dir: "/home/iso"
-
-  libvirt:
-
-    ##
-    ##    netsted_virt_enable:   add flags to the OS kernel
-    ##                           to allow passtrough virt
-    ##
-
-    nested_virt_enable: true
-
-    vm:
-      name: "{{ g_clusterName }}_{{ inventory_hostname }}"
-
-    network:
-
-      net0:
-        network_name:    "br0"
-        fwd_type:        "bridge"
-        dev:             "eno4"
-        description:     "Primary interface"
-
-        enabled:         ""
-        has_internet:    ""
-
-        ip:              "{{ h_pubIP        }}"
-        basedomain:      "{{ g_publicDomain }}"
-        network:         "{{ g_pubNET       }}"
-        netmask:         "{{ g_pubNM        }}"
-        broadcast:       "{{ g_pubBC        }}"
-        prefix:          "{{ g_pubPREFIX    }}"
-        gateway:         "{{ g_pubGW        }}"
-        nameserver:      "{{ g_pubDNS       }}"
-        timeserver:      "{{ g_pubNTP       }}"
-        fqdn:            "{{ g_pubFQDN      }}"
-
-
-
-    storage:
-
-      qcow_dir: "/home/virt-images"
