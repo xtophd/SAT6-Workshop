@@ -3,7 +3,7 @@
 echo "Publishing Content View"
 
 hammer content-view publish \
-  --organization "{{ myOrganization }}" \
-  --name "{{ myContentViewName }}" \
+  --organization "{{ workshop_vars.myOrganization }}" \
+  --name "{{ workshop_vars.myContentViewName }}" \
   --description "Initial content view RHEL 7 OS"
   

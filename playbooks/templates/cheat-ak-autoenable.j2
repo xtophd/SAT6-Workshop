@@ -3,13 +3,13 @@
 echo "Activation Key Content Auto Enablement"
 
 hammer activation-key content-override \
---name "{{ myActivationKeyName_1 }}" \
---content-label rhel-7-server-satellite-tools-{{ g_satelliteVersion }}-rpms \
+--name "{{ workshop_vars.myActivationKeyName_1 }}" \
+--content-label rhel-7-server-satellite-tools-{{ workshop_vars.satellite_version }}-rpms \
 --value 1 \
---organization "{{ myOrganization }}"
+--organization "{{ workshop_vars.myOrganization }}"
 
 hammer activation-key content-override \
---name "{{ myActivationKeyName_2 }}" \
---content-label rhel-7-server-satellite-tools-{{ g_satelliteVersion }}-rpms \
+--name "{{ workshop_vars.myActivationKeyName_2 }}" \
+--content-label rhel-7-server-satellite-tools-{{ workshop_vars.satellite_version }}-rpms \
 --value 1 \
---organization "{{ myOrganization }}"
+--organization "{{ workshop_vars.myOrganization }}"

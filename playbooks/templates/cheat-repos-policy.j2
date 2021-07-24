@@ -1,13 +1,13 @@
 #!/bin/bash
 
 hammer repository update  \
---organization "{{ myOrganization }}" \
+--organization "{{ workshop_vars.myOrganization }}" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server" \
 --download-policy immediate
 
 hammer repository update \
---organization "{{ myOrganization }}" \
+--organization "{{ workshop_vars.myOrganization }}" \
 --product "Red Hat Enterprise Linux Server" \
---name "Red Hat Satellite Tools {{ g_satelliteVersion }} for RHEL 7 Server RPMs x86_64" \
+--name "Red Hat Satellite Tools {{ workshop_vars.satellite_version }} for RHEL 7 Server RPMs x86_64" \
 --download-policy immediate

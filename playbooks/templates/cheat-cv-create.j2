@@ -8,13 +8,13 @@ echo -n "."
 #export RHEL7Opt=`hammer repository list --organization "ExampleCom" | grep "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server" | awk '{ print $1 }'`
 #echo -n "."
 
-export SATTools=`hammer repository list --organization "ExampleCom" | grep " Red Hat Satellite Tools {{ g_satelliteVersion }} for RHEL 7 Server RPMs x86_64" | awk '{ print $1 }'`
+export SATTools=`hammer repository list --organization "ExampleCom" | grep " Red Hat Satellite Tools {{ workshop_vars.satellite_version }} for RHEL 7 Server RPMs x86_64" | awk '{ print $1 }'`
 echo "."
 
 echo "Creating Content View"
 
 hammer content-view create \
-  --organization "{{ myOrganization }}" \
-  --name "{{ myContentViewName }}" \
+  --organization "{{ workshop_vars.myOrganization }}" \
+  --name "{{ workshop_vars.myContentViewName }}" \
   --description "RHEL 7 OS Content" \
   --repository-ids ${RHEL7},${SATTools}

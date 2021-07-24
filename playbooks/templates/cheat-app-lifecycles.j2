@@ -1,19 +1,19 @@
 #!/bin/bash
 
 hammer lifecycle-environment create \
-  --organization "{{ myOrganization }}" \
-  --name "{{ myLifecycleName_1 }}" \
+  --organization "{{ workshop_vars.myOrganization }}" \
+  --name "{{ workshop_vars.myLifecycleName_1 }}" \
   --description "" \
   --prior "Library"
 
 hammer lifecycle-environment create \
-  --organization "{{ myOrganization }}" \
-  --name "{{ myLifecycleName_2 }}" \
+  --organization "{{ workshop_vars.myOrganization }}" \
+  --name "{{ workshop_vars.myLifecycleName_2 }}" \
   --description "" \
-  --prior "{{ myLifecycleName_1 }}"
+  --prior "{{ workshop_vars.myLifecycleName_1 }}"
 
 hammer lifecycle-environment create \
-  --organization "{{ myOrganization }}" \
-  --name "{{ myLifecycleName_3 }}" \
+  --organization "{{ workshop_vars.myOrganization }}" \
+  --name "{{ workshop_vars.myLifecycleName_3 }}" \
   --description "" \
-  --prior "{{ myLifecycleName_2 }}"
+  --prior "{{ workshop_vars.myLifecycleName_2 }}"

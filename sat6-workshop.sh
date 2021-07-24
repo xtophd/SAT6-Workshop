@@ -4,7 +4,7 @@
 ## NOTE: you must point to the correct inventory
 ##
 
-myInventory="./config/master-config.ini"
+myInventory="./config/master-config.yml"
 
 if [ ! -e "${myInventory}" ] ; then
     echo "ERROR: Are you in the right directory? Can not find ${myInventory}" ; exit

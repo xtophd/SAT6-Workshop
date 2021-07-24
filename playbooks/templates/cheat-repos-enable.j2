@@ -1,14 +1,14 @@
 #!/bin/bash
 
 hammer repository-set enable \
---organization "{{ myOrganization }}" \
+--organization "{{ workshop_vars.myOrganization }}" \
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
 --releasever "7Server" \
 --name "Red Hat Enterprise Linux 7 Server (RPMs)"
 
 hammer repository-set enable \
---organization "{{ myOrganization }}" \
+--organization "{{ workshop_vars.myOrganization }}" \
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
---name "Red Hat Satellite Tools {{ g_satelliteVersion }} (for RHEL 7 Server) (RPMs)"
+--name "Red Hat Satellite Tools {{ workshop_vars.satellite_version }} (for RHEL 7 Server) (RPMs)"

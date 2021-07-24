@@ -5,11 +5,11 @@
 
 
   - name: "deployer-predeploy-tasks : stat manifest"
-    stat: path="../config/{{ g_manifestName }}"
+    stat: path="../config/{{ workshop_vars.manifest_filename }}"
     register: test_manifest
 
 
 
   - name: "deployer-predeploy-tasks : fail if manifest absent"
-    fail: msg="COPY YOUR SATELLITE MANIFEST HERE ./config/{{ g_manifestName }}"
+    fail: msg="COPY YOUR SATELLITE MANIFEST HERE ./config/{{ workshop_vars.manifest_filename }}"
     when: test_manifest.stat.exists == false

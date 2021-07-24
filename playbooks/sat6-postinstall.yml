@@ -10,7 +10,7 @@
 
     - name: "SAT6-POSTINSTALL: yum install satellite crt"
       vars:
-        - p_fqdn: "{{ hostvars[item]['inventory_hostname_short'] }}.{{ g_pubFQDN }}"
+        - p_fqdn: "{{ hostvars[item]['inventory_hostname_short'] }}.{{ workshop_extras.network_fqdn }}"
       yum: name=http://{{ p_fqdn }}/pub/katello-ca-consumer-{{ p_fqdn }}-1.0-1.noarch.rpm state=installed
       loop: "{{ groups['mySatellite'] }}"
 

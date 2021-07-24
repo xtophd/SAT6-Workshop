@@ -3,23 +3,23 @@
 echo "Promoting Content View to DEV"
 
 hammer content-view version promote \
-  --organization "{{ myOrganization }}" \
-  --content-view "{{ myContentViewName }}" \
+  --organization "{{ workshop_vars.myOrganization }}" \
+  --content-view "{{ workshop_vars.myContentViewName }}" \
   --version 1 \
-  --to-lifecycle-environment "{{ myLifecycleName_1 }}"
+  --to-lifecycle-environment "{{ workshop_vars.myLifecycleName_1 }}"
 
 echo "Promoting Content View to QA"
 
 hammer content-view version promote \
-  --organization "{{ myOrganization }}" \
-  --content-view "{{ myContentViewName }}" \
+  --organization "{{ workshop_vars.myOrganization }}" \
+  --content-view "{{ workshop_vars.myContentViewName }}" \
   --version 1 \
-  --to-lifecycle-environment "{{ myLifecycleName_2 }}"
+  --to-lifecycle-environment "{{ workshop_vars.myLifecycleName_2 }}"
   
 echo "Promoting Content View to PROD"
 
 hammer content-view version promote \
-  --organization "{{ myOrganization }}" \
-  --content-view "{{ myContentViewName }}" \
+  --organization "{{ workshop_vars.myOrganization }}" \
+  --content-view "{{ workshop_vars.myContentViewName }}" \
   --version 1 \
-  --to-lifecycle-environment "{{ myLifecycleName_3 }}"
+  --to-lifecycle-environment "{{ workshop_vars.myLifecycleName_3 }}"

@@ -3,22 +3,22 @@
 ## Change Log:
 ##
 ##    2021-02-19  Changed to using ID and not UUID. In versions of Satellite prior to 6.8 this worked [used the UUID]
-##                SUB_ID=`hammer --output base subscription list --organization "{{ myOrganization }}"  | grep UUID | awk '{ print $2 }'`
+##                SUB_ID=`hammer --output base subscription list --organization "{{ workshop_vars.myOrganization }}"  | grep UUID | awk '{ print $2 }'`
 ##
 
 
-echo "Attach Subscriptions to Activation Keys {{ myActivationKeyName_1 }} and {{ myActivationKeyName_2 }}"
+echo "Attach Subscriptions to Activation Keys {{ workshop_vars.myActivationKeyName_1 }} and {{ workshop_vars.myActivationKeyName_2 }}"
 
-SUB_ID=`hammer --output base subscription list --organization "{{ myOrganization }}"  | grep '^ID' | awk '{ print $2 }'`
+SUB_ID=`hammer --output base subscription list --organization "{{ workshop_vars.myOrganization }}"  | grep '^ID' | awk '{ print $2 }'`
 
 echo "Found Sub ID: ${SUB_ID}"
 
 hammer activation-key add-subscription \
-  --name "{{ myActivationKeyName_1 }}" \
+  --name "{{ workshop_vars.myActivationKeyName_1 }}" \
   --subscription-id ${SUB_ID} \
-  --organization "{{ myOrganization }}"
+  --organization "{{ workshop_vars.myOrganization }}"
 
 hammer activation-key add-subscription \
-  --name "{{ myActivationKeyName_2 }}" \
+  --name "{{ workshop_vars.myActivationKeyName_2 }}" \
   --subscription-id ${SUB_ID} \
-  --organization "{{ myOrganization }}"
+  --organization "{{ workshop_vars.myOrganization }}"

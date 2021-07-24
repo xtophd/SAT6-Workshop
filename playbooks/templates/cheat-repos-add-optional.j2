@@ -3,7 +3,7 @@
 echo "Enabling Repo..."
 
 hammer repository-set enable \
---organization "{{ myOrganization }}" \
+--organization "{{ workshop_vars.myOrganization }}" \
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
 --releasever "7Server" \
@@ -12,7 +12,7 @@ hammer repository-set enable \
 echo "Setting Download Policy..."
 
 hammer repository update \
---organization "{{ myOrganization }}" \
+--organization "{{ workshop_vars.myOrganization }}" \
 --product "Red Hat Enterprise Linux Server" \
 --name "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server" \
 --download-policy immediate
@@ -20,7 +20,7 @@ hammer repository update \
 echo "Starting Sync..."
 
 hammer repository synchronize \
-  --organization "{{ myOrganization }}" \
+  --organization "{{ workshop_vars.myOrganization }}" \
   --product "Red Hat Enterprise Linux Server" \
   --name  "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server" 
 

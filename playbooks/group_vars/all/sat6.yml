@@ -6,31 +6,31 @@ sat6_assets:
     repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.3-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-satellite-6.3-puppet4-rpms"
     stop_cmd: "katello-service stop"
     start_cmd: "katello-service start"
-    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ myOrganization }} --foreman-initial-location {{ myLocation }} --foreman-admin-username {{ myAdminName }} --foreman-admin-password {{ myAdminPW }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ workshop_vars.myOrganization }} --foreman-initial-location {{ workshop_vars.myLocation }} --foreman-admin-username {{ workshopadmin_username }} --foreman-admin-password {{ workshopadmin_password }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
     fs_data:
       mongodb:
         lv:     "mongodb"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/mongodb"
         size:   "50"
       pulp:
         lv:     "pulp"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/pulp"
         size:   "100"
       pgsql:
         lv:     "pgsql"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/pgsql"
         size:   "10"
       squid:
         lv:     "squid"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/spool/squid"
         size:   "10"
       cache:
         lv:     "cache"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/cache"
         size:   "10"
 
@@ -40,31 +40,31 @@ sat6_assets:
     repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.4-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.6-rpms"
     stop_cmd: "katello-service stop"
     start_cmd: "katello-service start"
-    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ myOrganization }} --foreman-initial-location {{ myLocation }} --foreman-admin-username {{ myAdminName }} --foreman-admin-password {{ myAdminPW }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ workshop_vars.myOrganization }} --foreman-initial-location {{ workshop_vars.myLocation }} --foreman-admin-username {{ workshopadmin_username }} --foreman-admin-password {{ workshopadmin_password }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
     fs_data:
       mongodb:
         lv:     "mongodb"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/mongodb"
         size:   "50"
       pulp:
         lv:     "pulp"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/pulp"
         size:   "100"
       pgsql:
         lv:     "pgsql"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/pgsql"
         size:   "10"
       squid:
         lv:     "squid"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/spool/squid"
         size:   "10"
       cache:
         lv:     "cache"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/cache"
         size:   "10"
 
@@ -74,31 +74,31 @@ sat6_assets:
     repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.5-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.6-rpms"
     stop_cmd: "katello-service stop"
     start_cmd: "katello-service start"
-    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ myOrganization }} --foreman-initial-location {{ myLocation }} --foreman-admin-username {{ myAdminName }} --foreman-admin-password {{ myAdminPW }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ workshop_vars.myOrganization }} --foreman-initial-location {{ workshop_vars.myLocation }} --foreman-admin-username {{ workshopadmin_username }} --foreman-admin-password {{ workshopadmin_password }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
     fs_data:
       mongodb:
         lv:     "mongodb"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/mongodb"
         size:   "50"
       pulp:
         lv:     "pulp"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/pulp"
         size:   "100"
       pgsql:
         lv:     "pgsql"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/pgsql"
         size:   "10"
       squid:
         lv:     "squid"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/spool/squid"
         size:   "10"
       cache:
         lv:     "cache"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/cache"
         size:   "10"
 
@@ -108,31 +108,31 @@ sat6_assets:
     repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.6-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.8-rpms"
     stop_cmd: "katello-service stop"
     start_cmd: "katello-service start"
-    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization '{{ myOrganization }}' --foreman-initial-location '{{ myLocation }}' --foreman-initial-admin-username '{{ myAdminName }}' --foreman-initial-admin-password '{{ myAdminPW }}' --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization '{{ workshop_vars.myOrganization }}' --foreman-initial-location '{{ workshop_vars.myLocation }}' --foreman-initial-admin-username '{{ workshopadmin_username }}' --foreman-initial-admin-password '{{ workshopadmin_password }}' --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
     fs_data:
       mongodb:
         lv:     "mongodb"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/mongodb"
         size:   "50"
       pulp:
         lv:     "pulp"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/pulp"
         size:   "100"
       pgsql:
         lv:     "pgsql"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/pgsql"
         size:   "10"
       squid:
         lv:     "squid"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/spool/squid"
         size:   "10"
       cache:
         lv:     "cache"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/cache"
         size:   "10"
 
@@ -142,31 +142,31 @@ sat6_assets:
     repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.7-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.8-rpms"
     stop_cmd: "katello-service stop"
     start_cmd: "katello-service start"
-    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ myOrganization }} --foreman-initial-location {{ myLocation }} --foreman-initial-admin-username {{ myAdminName }} --foreman-initial-admin-password {{ myAdminPW }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ workshop_vars.myOrganization }} --foreman-initial-location {{ workshop_vars.myLocation }} --foreman-initial-admin-username {{ workshopadmin_username }} --foreman-initial-admin-password {{ workshopadmin_password }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
     fs_data:
       mongodb:
         lv:     "mongodb"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/mongodb"
         size:   "50"
       pulp:
         lv:     "pulp"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/pulp"
         size:   "100"
       pgsql:
         lv:     "pgsql"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/pgsql"
         size:   "10"
       squid:
         lv:     "squid"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/spool/squid"
         size:   "10"
       cache:
         lv:     "cache"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/cache"
         size:   "10"
 
@@ -176,31 +176,31 @@ sat6_assets:
     repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.8-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.9-rpms"
     stop_cmd: "katello-service stop"
     start_cmd: "katello-service start"
-    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ myOrganization }} --foreman-initial-location {{ myLocation }} --foreman-initial-admin-username {{ myAdminName }} --foreman-initial-admin-password {{ myAdminPW }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ workshop_vars.myOrganization }} --foreman-initial-location {{ workshop_vars.myLocation }} --foreman-initial-admin-username {{ workshopadmin_username }} --foreman-initial-admin-password {{ workshopadmin_password }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
     fs_data:
       mongodb:
         lv:     "mongodb"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/mongodb"
         size:   "50"
       pulp:
         lv:     "pulp"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/pulp"
         size:   "100"
       pgsql:
         lv:     "pgsql"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/pgsql"
         size:   "10"
       squid:
         lv:     "squid"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/spool/squid"
         size:   "10"
       cache:
         lv:     "cache"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/cache"
         size:   "10"
 
@@ -210,30 +210,30 @@ sat6_assets:
     repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.9-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.9-rpms"
     stop_cmd: "satellite-maintain service stop"
     start_cmd: "satellite-maintain service start"
-    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ myOrganization }} --foreman-initial-location {{ myLocation }} --foreman-initial-admin-username {{ myAdminName }} --foreman-initial-admin-password {{ myAdminPW }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ workshop_vars.myOrganization }} --foreman-initial-location {{ workshop_vars.myLocation }} --foreman-initial-admin-username {{ workshopadmin_username }} --foreman-initial-admin-password {{ workshopadmin_password }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
     fs_data:
       mongodb:
         lv:     "mongodb"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/mongodb"
         size:   "50"
       pulp:
         lv:     "pulp"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/lib/pulp"
         size:   "100"
       pgsql:
         lv:     "pgsql"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/opt/rh/rh-postgresql2"
         size:   "10"
       squid:
         lv:     "squid"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/spool/squid"
         size:   "10"
       cache:
         lv:     "cache"
-        vg:     "{{ myVG }}"
+        vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/cache"
         size:   "10"

@@ -3,6 +3,6 @@
 echo "Loading Manifest"
 
 hammer subscription upload \
-  --organization "{{ myOrganization }}" \
-  --file "{{ g_artifactsDir }}/{{ g_manifestName }}"
+  --organization "{{ workshop_vars.myOrganization }}" \
+  --file "{{ workshop_vars.artifacts_directory }}/{{ workshop_vars.manifest_filename }}"
 

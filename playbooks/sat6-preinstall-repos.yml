@@ -9,10 +9,10 @@
 - hosts: mySatellite
   tasks:
 
-  - debug: var=sat6_assets[g_satelliteVersion]['repos']
+  - debug: var=sat6_assets[workshop_vars.satellite_version]['repos']
 
   - name: "SAT6-PREINSTALL-REPOS: enable repos"
     rhsm_repository: 
-      name: "{{ sat6_assets[g_satelliteVersion]['repos'] }}"
+      name: "{{ sat6_assets[workshop_vars.satellite_version]['repos'] }}"
       purge: True
       state: enabled

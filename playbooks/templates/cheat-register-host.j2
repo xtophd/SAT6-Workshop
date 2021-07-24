@@ -13,9 +13,9 @@ done
 echo "## Registering with satellite"
 
 subscription-manager register \
-  --org="{{ myOrganization }}" \
-  --serverurl="satellite.{{ g_pubFQDN }}" \
-  --activationkey="{{ myActivationKeyName_1 }}"
+  --org="{{ workshop_vars.myOrganization }}" \
+  --serverurl="satellite.{{ workshop_extras.network_fqdn }}" \
+  --activationkey="{{ workshop_vars.myActivationKeyName_1 }}"
 
 echo "## Installing Katello Agent"
 

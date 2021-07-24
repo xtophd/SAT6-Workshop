@@ -5,9 +5,9 @@
     - name: "YUM install satellite packages"
       yum: name=satellite,sos,foreman-discovery-image state=installed
 
-    - debug: var=sat6_assets[g_satelliteVersion]['install_cmd'] 
+    - debug: var=sat6_assets[workshop_vars.satellite_version]['install_cmd'] 
 
     - name: "CMD install satellite"
       shell: 
         cmd: |
-          {{ sat6_assets[g_satelliteVersion]['install_cmd'] }}
+          {{ sat6_assets[workshop_vars.satellite_version]['install_cmd'] }}

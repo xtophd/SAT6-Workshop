@@ -1,17 +1,17 @@
 #!/bin/bash
 
-echo "Creating Activation Keys {{ myActivationKeyName_1 }} and {{ myActivationKeyName_2 }}"
+echo "Creating Activation Keys {{ workshop_vars.myActivationKeyName_1 }} and {{ workshop_vars.myActivationKeyName_2 }}"
 
 hammer activation-key create \
-  --name "{{ myActivationKeyName_1 }}" \
+  --name "{{ workshop_vars.myActivationKeyName_1 }}" \
   --description "" \
-  --lifecycle-environment "{{ myLifecycleName_1 }}" \
-  --content-view "{{ myContentViewName }}"  \
-  --organization "{{ myOrganization }}"
+  --lifecycle-environment "{{ workshop_vars.myLifecycleName_1 }}" \
+  --content-view "{{ workshop_vars.myContentViewName }}"  \
+  --organization "{{ workshop_vars.myOrganization }}"
 
 hammer activation-key create \
-  --name "{{ myActivationKeyName_2 }}" \
+  --name "{{ workshop_vars.myActivationKeyName_2 }}" \
   --description "" \
-  --lifecycle-environment "{{ myLifecycleName_3 }}" \
-  --content-view "{{ myContentViewName }}"  \
-  --organization "{{ myOrganization }}"
+  --lifecycle-environment "{{ workshop_vars.myLifecycleName_3 }}" \
+  --content-view "{{ workshop_vars.myContentViewName }}"  \
+  --organization "{{ workshop_vars.myOrganization }}"

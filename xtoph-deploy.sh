@@ -7,7 +7,7 @@
 ##   copy it to ./playbooks/config/{master,libvirt}-config.yml
 ##
 
-myInventory="./config/master-config.ini"
+myInventory="./config/master-config.yml"
 
 if [[ ! -e "${myInventory}" || ! -e "./xtoph-deploy.yml" ]] ; then
     echo "ERROR: Are you in the right directory? Can not find ${myInventory} | xtoph-deploy.yml" ; exit

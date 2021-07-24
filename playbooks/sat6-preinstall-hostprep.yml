@@ -46,8 +46,8 @@
 - hosts: mySatellite
   tasks:
 
-    - name: "SAT6-PREINSTALL-HOSTPREP: debug of sat6_assets[{{ g_satelliteVersion }}]"
-      debug: var=sat6_assets[g_satelliteVersion]['fs_data']
+    - name: "SAT6-PREINSTALL-HOSTPREP: debug of sat6_assets[{{ workshop_vars.satellite_version }}]"
+      debug: var=sat6_assets[workshop_vars.satellite_version]['fs_data']
 
     ##
     ##    These are crude, but trying to accomodate 
@@ -72,40 +72,40 @@
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD unmount previous satellite filesystems"
       vars:
-        t_path: "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['path'] }}"
+        t_path: "{{ sat6_assets[workshop_vars.satellite_version]['fs_data'][item]['path'] }}"
       shell:
         cmd: |
           if grep -q {{ t_path }} /proc/mounts ; then umount {{ t_path }} ; fi
-      with_items: "{{ sat6_assets[g_satelliteVersion]['fs_data'] }}"
+      with_items: "{{ sat6_assets[workshop_vars.satellite_version]['fs_data'] }}"
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD cleanup previous satellite storage"
       shell:
         cmd: |
           echo "need to check mounts && umount"
-          if vgs "{{ myVG }}" ; then vgremove --force "{{ myVG }}" ; fi
-          if pvs "{{ myDisk }}" ; then pvremove --force "{{ myDisk }}" ; fi
-          wipefs -a "{{ myDisk }}"
+          if vgs "{{ workshop_vars.myVG }}" ; then vgremove --force "{{ workshop_vars.myVG }}" ; fi
+          if pvs "{{ workshop_vars.myDisk }}" ; then pvremove --force "{{ workshop_vars.myDisk }}" ; fi
+          wipefs -a "{{ workshop_vars.myDisk }}"
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD create physical volume"
       shell:
         cmd: |
-          pvcreate "{{ myDisk }}"
+          pvcreate "{{ workshop_vars.myDisk }}"
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD create volume group"
       shell:
         cmd: |
-          vgcreate "{{ myVG }}" "{{ myDisk }}"
+          vgcreate "{{ workshop_vars.myVG }}" "{{ workshop_vars.myDisk }}"
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD create logical volumes"
       vars:
-        t_path: "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['path'] }}"
-        t_size: "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['size'] }}"
-        t_lv:   "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['lv'] }}"
-        t_vg:   "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['vg'] }}"
+        t_path: "{{ sat6_assets[workshop_vars.satellite_version]['fs_data'][item]['path'] }}"
+        t_size: "{{ sat6_assets[workshop_vars.satellite_version]['fs_data'][item]['size'] }}"
+        t_lv:   "{{ sat6_assets[workshop_vars.satellite_version]['fs_data'][item]['lv'] }}"
+        t_vg:   "{{ sat6_assets[workshop_vars.satellite_version]['fs_data'][item]['vg'] }}"
       shell:
         cmd: |
           lvcreate -y -L {{ t_size }}GB  -n {{ t_lv }} {{ t_vg }}
-      with_items: "{{ sat6_assets[g_satelliteVersion]['fs_data'] }}"
+      with_items: "{{ sat6_assets[workshop_vars.satellite_version]['fs_data'] }}"
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD remove old cache directory"
       shell:
@@ -115,15 +115,15 @@
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD create filesystems, mount points and fstab entries"
       vars:
-        t_path: "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['path'] }}"
-        t_lv:   "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['lv'] }}"
-        t_vg:   "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['vg'] }}"
+        t_path: "{{ sat6_assets[workshop_vars.satellite_version]['fs_data'][item]['path'] }}"
+        t_lv:   "{{ sat6_assets[workshop_vars.satellite_version]['fs_data'][item]['lv'] }}"
+        t_vg:   "{{ sat6_assets[workshop_vars.satellite_version]['fs_data'][item]['vg'] }}"
       shell:
         cmd: |
           mkfs -t xfs /dev/{{ t_vg }}/{{ t_lv }}
           mkdir -p {{ t_path }}
           grep -q {{ t_path }} /etc/fstab || echo "/dev/mapper/{{t_vg}}-{{ t_lv }} {{ t_path }} xfs defaults 0 0" >> /etc/fstab
-      with_items: "{{ sat6_assets[g_satelliteVersion]['fs_data'] }}"
+      with_items: "{{ sat6_assets[workshop_vars.satellite_version]['fs_data'] }}"
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD mount everything"
       shell:
@@ -148,11 +148,11 @@
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD restore selinux contexts on new filesystems"
       vars:
-        t_path: "{{ sat6_assets[g_satelliteVersion]['fs_data'][item]['path'] }}"
+        t_path: "{{ sat6_assets[workshop_vars.satellite_version]['fs_data'][item]['path'] }}"
       shell:
         cmd: |
           restorecon -R {{ t_path }}
-      with_items: "{{ sat6_assets[g_satelliteVersion]['fs_data'] }}"
+      with_items: "{{ sat6_assets[workshop_vars.satellite_version]['fs_data'] }}"
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD configure firewalld"
       shell:

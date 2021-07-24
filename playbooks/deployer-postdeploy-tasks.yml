@@ -13,14 +13,14 @@
 
   - name: "deployer-postdeploy-tasks : create artifacts directory"
     file:
-      path: "{{ g_artifactsDir }}"
+      path: "{{ workshop_vars.artifacts_directory }}"
       mode: "0700"
       state: directory
 
   - name: "deployer-postdeploy-tasks: deploy manifest"
     copy:
-      src: "../config/{{ g_manifestName }}"
-      dest: "{{ g_artifactsDir }}"
+      src: "../config/{{ workshop_vars.manifest_filename }}"
+      dest: "{{ workshop_vars.artifacts_directory }}"
       owner: root
       group: root
       mode: 0600
