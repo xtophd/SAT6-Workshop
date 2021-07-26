@@ -1,0 +1,181 @@
+##
+##    !! WARNING !!  Ansible only interprets 'True' and 'False'
+##                   as booleans when reading ini files.  Other
+##                   values such as 'true' or 'false' would be 
+##                   interpreted as strings and would break various
+##                   logic tests.  
+##
+##                   When reading YML files, booleans can take on
+##                   many forms and be interpreted correctly.
+##
+##                   For consistency, only use unquoted booleans: True & False
+
+all: 
+
+  vars:
+
+    ## ----------------------------------------
+    ##    Workshop Variables
+
+    workshop_vars:
+
+      clustername:           "sat6lvbr"
+
+      satellite_version:     "6.9"
+      manifest_filename:     "manifest-v69.zip"
+
+      artifacts_directory:   "/root/sat6-artifacts"
+      
+      ## Network Parms
+
+      network_basedomain:    "example.com"
+      network_network:       "192.168.1.0"
+      network_netmask:       "255.255.255.0"
+      network_broadcast:     "192.168.1.255"
+      network_prefix:        "24"
+      network_gateway:       "192.168.1.1"
+      network_nameserver:    "192.168.1.30"
+      network_timeserver:    "192.168.1.1"
+
+      ## Satellite Parms
+
+      myDisk:                "/dev/vdb"
+      myVG:                  "sat_vg"
+      
+      myLocation:            "USA"
+      myOrganization:        "ExampleCom"
+
+      myLifecycleName_1:     "MyLifecycle-DEV"
+      myLifecycleName_2:     "MyLifecycle-QA"
+      myLifecycleName_3:     "MyLifecycle-PROD"
+      
+      myContentViewName:     "MyContent RHEL 7"
+      
+      myActivationKeyName_1: "MyKey-DEV"
+      myActivationKeyName_2: "MyKey-PROD"
+      
+      myJobTemplateCategory: "MyTemplates"
+      myJobTemplateName_1:   "MyTemplate: Ping"
+      myJobTemplateName_2:   "MyTemplate: Sample Config"
+      
+      myHostCollectionName:  "MyCollection"
+
+      myHostGroupName:       "MyHostGroup"
+      
+      myDiscoveryRuleName:   "MyRule"
+      myDiscoveryFact:       "MyFact"
+
+      http_proxy:            ""
+      https_proxy:           ""
+
+      bastion:
+
+        firewalld:           True
+        dns:                 True
+        dhcp:                False
+        dhcp_pxe:            False
+        dhcp_uefi_http:      False
+        haproxy:             False
+        matchbox:            False
+        nfs:                 False
+        ntp:                 False
+        workshop_user:       True
+        workshop_materials:  True
+        desktop_gui:         True
+        desktop_chrome:      True
+        desktop_vnc:         True
+
+    workshop_extras:
+
+      network_fqdn:         "{{ workshop_vars.clustername }}.{{ workshop_vars.network_basedomain }}"
+
+
+
+    ## ----------------------------------------
+    ##    Xtoph Deploy Variables
+
+    xtoph_vars:
+
+      deployhost_ip:       "192.168.1.23" 
+      clustername:         "{{ workshop_vars.clustername }}"
+
+
+
+    ## ----------------------------------------
+    ##    Override default ansible host with
+    ##    one that includes fqdn.  This saves us
+    ##    from having to specify FQDN in host 
+    ##    vars section below.  This assumes all
+    ##    hosts are in the same domain. DUH!
+
+    ansible_host: "{{ inventory_hostname }}.{{ workshop_extras.network_fqdn }}"
+
+
+
+## ----------------------------------------
+## HOSTGROUPS & VARS
+## ----------------------------------------
+
+
+
+myDeployhost:
+  hosts:
+    gw125:
+      h_pubIP: "{{ xtoph_vars.deployhost_ip }}"
+  vars:
+    ansible_connection: local
+
+
+
+## -----------------
+
+
+
+myBastion:
+  hosts:
+    bastion:
+      h_pubIP: "192.168.1.140"
+  vars:
+    h_hwPROF:  "kvm_vda"
+    h_rsPROF:  "bastion"
+    h_ksPROF:  "rhel79-bootiso"
+    h_netDEV:  "eth0"
+    h_blkDEV:  "vda"
+
+
+
+## -----------------
+
+
+
+mySatellite:
+  hosts:
+    satellite:
+      h_pubIP: "192.168.1.141"
+  vars: 
+    h_hwPROF:  "kvm_vda"
+    h_rsPROF:  "sat6"
+    h_ksPROF:  "rhel79-bootiso"
+    h_netDEV:  "eth0"
+    h_blkDEV:  "vda"
+
+
+
+## -----------------
+
+
+
+myNodes:
+  hosts:
+    node1:
+      h_pubIP: "192.168.1.142" 
+    node2:
+      h_pubIP: "192.168.1.143" 
+    node3:
+      h_pubIP: "192.168.1.144"
+  vars: 
+    h_hwPROF:  "kvm_vda"
+    h_rsPROF:  "tiny"
+    h_ksPROF:  "rhel79-bootiso"
+    h_netDEV:  "eth0"
+    h_blkDEV:  "vda"
