@@ -206,6 +206,7 @@ _Additonal Cheat Scripts_
 cheat-repos-add-extras.sh
 cheat-repos-add-optional.sh
 cheat-repos-add-kickstart.sh
+cheat-repos-add-rhel8.sh
 ----
 ====
 
