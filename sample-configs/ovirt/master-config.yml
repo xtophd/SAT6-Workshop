@@ -175,7 +175,9 @@ myNodes:
     node2:
       h_pubIP: "192.168.1.123" 
     node3:
-      h_pubIP: "192.168.1.124"
+      h_pubIP:  "192.168.1.124"
+      h_ksPROF: "rhel84-bootiso"
+      h_netDEV: "ens3"
   vars: 
     h_hwPROF:  "ovirt_sda"
     h_rsPROF:  "tiny"
