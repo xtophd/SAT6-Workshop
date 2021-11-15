@@ -1,39 +1,56 @@
 !/bin/bash
 
-echo "Enabling Repos for RHEL 8..."
+echo "Enabling Repos for RHEL 8 (BaseOS/AppStream/Satellite Tools)..."
 
 hammer repository-set enable \
-  --organization "ExampleCom" \
+  --organization "{{ workshop_vars.myOrganization }}" \
   --id 7416 \
   --releasever "8"
 
 hammer repository-set enable \
-  --organization "ExampleCom" \
+  --organization "{{ workshop_vars.myOrganization }}" \
   --id 7441 \
+  --releasever "8"
+  
+hammer repository-set enable \
+  --organization "{{ workshop_vars.myOrganization }}" \
+  --id 11462 \
   --releasever "8"
 
 echo "Setting Download Policy..."
 
 hammer repository update \
-  --organization "ExampleCom" \
+  --organization "{{ workshop_vars.myOrganization }}" \
   --product "Red Hat Enterprise Linux for x86_64" \
   --name "Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8" \
   --download-policy immediate
 
 hammer repository update \
-  --organization "ExampleCom" \
+  --organization "{{ workshop_vars.myOrganization }}" \
   --product "Red Hat Enterprise Linux Server" \
   --name "Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8" \
   --download-policy immediate
 
+hammer repository update \
+  --organization "{{ workshop_vars.myOrganization }}" \
+  --product "Red Hat Enterprise Linux Server" \
+  --download-policy immediate
+  --name "Red Hat Satellite Tools {{ workshop_vars.satellite_version }} for RHEL 8 x86_64 RPMs" \
+
+
 echo "Starting Sync..."
 
 hammer repository synchronize \
-  --organization "ExampleCom" \
+  --organization "{{ workshop_vars.myOrganization }}" \
   --product "Red Hat Enterprise Linux for x86_64" \
   --name "Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8"
 
 hammer repository synchronize \
-  --organization "ExampleCom" \
+  --organization "{{ workshop_vars.myOrganization }}" \
   --product "Red Hat Enterprise Linux for x86_64" \
   --name "Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8"
+  
+hammer repository synchronize \
+  --organization "{{ workshop_vars.myOrganization }}" \
+  --product "Red Hat Enterprise Linux for x86_64" \
+  --name "Red Hat Satellite Tools {{ workshop_vars.satellite_version }} for RHEL 8 x86_64 RPMs" \
