@@ -17,43 +17,9 @@ hammer repository-set enable \
   --id 11462 \
   --releasever "8"
 
-echo "Setting Download Policy..."
+echo ""
+echo "User the "cheat-repos-sync.sh" to initialize a sync of everything
 
-hammer repository update \
-  --organization "{{ workshop_vars.myOrganization }}" \
-  --product "Red Hat Enterprise Linux for x86_64" \
-  --name "Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8" \
-  --download-policy immediate
-
-hammer repository update \
-  --organization "{{ workshop_vars.myOrganization }}" \
-  --product "Red Hat Enterprise Linux Server" \
-  --name "Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8" \
-  --download-policy immediate
-
-hammer repository update \
-  --organization "{{ workshop_vars.myOrganization }}" \
-  --product "Red Hat Enterprise Linux Server" \
-  --name "Red Hat Satellite Tools {{ workshop_vars.satellite_version }} for RHEL 8 x86_64 RPMs" \
-  --download-policy immediate
-  
-
-echo "Starting Sync..."
-
-hammer repository synchronize \
-  --organization "{{ workshop_vars.myOrganization }}" \
-  --product "Red Hat Enterprise Linux for x86_64" \
-  --name "Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8" \
-  --async
-
-hammer repository synchronize \
-  --organization "{{ workshop_vars.myOrganization }}" \
-  --product "Red Hat Enterprise Linux for x86_64" \
-  --name "Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8" \
-  --async
-  
-hammer repository synchronize \
-  --organization "{{ workshop_vars.myOrganization }}" \
-  --product "Red Hat Enterprise Linux for x86_64" \
-  --name "Red Hat Satellite Tools {{ workshop_vars.satellite_version }} for RHEL 8 x86_64 RPMs" \
-  --async
+##
+## Turns our that working with hammer is a PITA and I need to move all of this to ansible
+##
