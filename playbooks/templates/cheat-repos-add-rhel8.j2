@@ -43,14 +43,17 @@ echo "Starting Sync..."
 hammer repository synchronize \
   --organization "{{ workshop_vars.myOrganization }}" \
   --product "Red Hat Enterprise Linux for x86_64" \
-  --name "Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8"
+  --name "Red Hat Enterprise Linux 8 for x86_64 - BaseOS RPMs 8" \
+  --async
 
 hammer repository synchronize \
   --organization "{{ workshop_vars.myOrganization }}" \
   --product "Red Hat Enterprise Linux for x86_64" \
-  --name "Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8"
+  --name "Red Hat Enterprise Linux 8 for x86_64 - AppStream RPMs 8" \
+  --async
   
 hammer repository synchronize \
   --organization "{{ workshop_vars.myOrganization }}" \
   --product "Red Hat Enterprise Linux for x86_64" \
   --name "Red Hat Satellite Tools {{ workshop_vars.satellite_version }} for RHEL 8 x86_64 RPMs" \
+  --async
