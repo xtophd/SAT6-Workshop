@@ -12,8 +12,15 @@
         group: root
         mode: 0644
 
-    - name: "SAT6-PREINSTALL-HOSTPREP:YUM install misc required packages"
+    - name: "SAT6-PREINSTALL-HOSTPREP:YUM install misc required packages (RHEL 7)"
       yum: name=wget,git,net-tools,bind-utils,yum-utils,iptables-services,bridge-utils,bash-completion,kexec-tools,sos,psacct,firewalld state=installed
+      when:
+        - ansible_distribution_major_version == '7'
+
+    - name: "SAT6-PREINSTALL-HOSTPREP:YUM install misc required packages (RHEL 8)"
+      yum: name=wget,git,net-tools,bind-utils,yum-utils,iptables-services,iproute,bash-completion,kexec-tools,sos,psacct,firewalld state=installed
+      when:
+        - ansible_distribution_major_version == '8'
 
     - name: "SAT6-PREINSTALL-HOSTPREP:SERVICE STOP firewalld"
       service: name=firewalld state=stopped enabled=yes

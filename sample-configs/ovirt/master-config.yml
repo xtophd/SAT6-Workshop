@@ -104,14 +104,6 @@ all:
 
 
 
-    ## ----------------------------------------
-    ##    Override default ansible host with
-    ##    one that includes fqdn.  This saves us
-    ##    from having to specify FQDN in host 
-    ##    vars section below.  This assumes all
-    ##    hosts are in the same domain. DUH!
-
-    ansible_host: "{{ inventory_hostname }}.{{ workshop_extras.network_fqdn }}"
 
 
 
@@ -139,7 +131,9 @@ myBastion:
     bastion:
       h_pubIP: "192.168.1.120"
   vars:
+    ansible_host: "{{ inventory_hostname }}.{{ workshop_extras.network_fqdn }}"
     h_hwPROF:  "ovirt_sda"
+    h_plPROF:  "sat6_ovirt_platform"
     h_rsPROF:  "bastion"
     h_ksPROF:  "rhel79-bootiso"
     h_netDEV:  "eth0"
@@ -156,7 +150,9 @@ mySatellite:
     satellite:
       h_pubIP: "192.168.1.121"
   vars: 
+    ansible_host: "{{ inventory_hostname }}.{{ workshop_extras.network_fqdn }}"
     h_hwPROF:  "ovirt_sda"
+    h_plPROF:  "sat6_ovirt_platform"
     h_rsPROF:  "sat6"
     h_ksPROF:  "rhel79-bootiso"
     h_netDEV:  "eth0"
@@ -179,7 +175,9 @@ myNodes:
       h_ksPROF: "rhel84-bootiso"
       h_netDEV: "ens3"
   vars: 
+    ansible_host: "{{ inventory_hostname }}.{{ workshop_extras.network_fqdn }}"
     h_hwPROF:  "ovirt_sda"
+    h_plPROF:  "sat6_ovirt_platform"
     h_rsPROF:  "tiny"
     h_ksPROF:  "rhel79-bootiso"
     h_netDEV:  "eth0"
