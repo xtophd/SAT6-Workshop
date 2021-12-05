@@ -1,109 +1,104 @@
-xtoph_config:
+debug: true
 
-  debug: true
+cleanup: true
 
-  cleanup: true
+selected_profile:
+  kickstart: "{{ h_ksPROF | default ('') }}"
+  platform:  "{{ h_plPROF | default ('') }}"
+  resource:  "{{ h_rsPROF | default ('') }}"
+  machine:   "{{ h_hwPROF | default ('') }}"
 
-  hostname: "{{ inventory_hostname }}"
+deployhost:
 
-  clustername: "{{ xtoph_vars.clustername }}"
+  ##
+  ##     platform_enable: one or more of the following
+  ##       - "ovirt"
+  ##       - "libvirt"
+  ##       - "baremetal"
+  ##
 
-  selected_profile:
-    kickstart: "{{ h_ksPROF | default ('') }}"
-    resource:  "{{ h_rsPROF | default ('') }}"
-    machine:   "{{ h_hwPROF | default ('') }}"
+  platform_enable: 
+    - "libvirt"
+  
+  ##
+  ##    deployhost hostname OR ip that will
+  ##    accessible to the deployed VMs
+  ##
 
-  deployhost:
+  ip: "{{ xtoph_vars.deployhost_ip }}"
 
-    ##
-    ##     platform_enable: one or more of the following
-    ##       - "ovirt"
-    ##       - "libvirt"
-    ##       - "baremetal"
-    ##
+  ##
+  ##    firewalld_enable:  ensures firewalld is installed
+  ##                       and enabled on the deployhost
+  ##
 
-    platform_enable: 
-      - "libvirt"
-    
-    ##
-    ##    deployhost hostname OR ip that will
-    ##    accessible to the deployed VMs
-    ##
+  firewalld_enable: true
 
-    ip: "{{ xtoph_vars.deployhost_ip }}"
+  ##
+  ##    dnsmasq_enable:    ensures dnsmasq is installed
+  ##                       and enabled on the deployhost
+  ##
+  ##    dnsmasq_asprimary: deployed hosts/vms will be
+  ##                       configured to use deployhost's
+  ##                       dns as primary resolver
+  ##
+  ##                       host/vm resolves to ->
+  ##                         deployhost which forwards to ->
+  ##                           real-dns
+  ##
 
-    ##
-    ##    firewalld_enable:  ensures firewalld is installed
-    ##                       and enabled on the deployhost
-    ##
+  dnsmasq_enable:     true
+  dnsmasq_asprimary:  true
 
-    firewalld_enable: true
+  ##
+  ##    http_port:      port to provide kickstart and
+  ##                    yum repo services
+  ##
 
-    ##
-    ##    dnsmasq_enable:    ensures dnsmasq is installed
-    ##                       and enabled on the deployhost
-    ##
-    ##    dnsmasq_asprimary: deployed hosts/vms will be
-    ##                       configured to use deployhost's
-    ##                       dns as primary resolver
-    ##
-    ##                       host/vm resolves to ->
-    ##                         deployhost which forwards to ->
-    ##                           real-dns
-    ##
+  http_enable:  true
+  http_port:    "8008"
 
-    dnsmasq_enable:     true
-    dnsmasq_asprimary:  true
+  ##
+  ##    cockpit_enable: install and configure cockpit
+  ##
+  ##    cockpit_port:   defaults to 9090 if left empty
+  ##                    if you change it, the config
+  ##                    will ADD the specifed port.
+  ##
 
-    ##
-    ##    http_port:      port to provide kickstart and
-    ##                    yum repo services
-    ##
+  cockpit_enable:  true
+  cockpit_port:    ""
 
-    http_enable:  true
-    http_port:    "8008"
+  ##
+  ##    temporary directory for various tasks
+  ##
+  ##    NOTE: needs to be unique for every host
+  ##
 
-    ##
-    ##    cockpit_enable: install and configure cockpit
-    ##
-    ##    cockpit_port:   defaults to 9090 if left empty
-    ##                    if you change it, the config
-    ##                    will ADD the specifed port.
-    ##
+  tmp_dir: "/home/tmp/{{ xtoph_vars.clustername }}/{{ inventory_hostname }}"
 
-    cockpit_enable:  true
-    cockpit_port:    ""
+  ##
+  ##    Where with the kickstart configs are stored
+  ##    What is the URL to access the kickstarts
+  ##
 
-    ##
-    ##    temporary directory for various tasks
-    ##
-    ##    NOTE: needs to be unique for every host
-    ##
+  kickstart:
+    dir: "/var/www/html/ks"
+    url: "http://{{ xtoph_vars.deployhost_ip }}:8008/ks"
 
-    tmp_dir: "/home/tmp/{{ xtoph_vars.clustername }}/{{ inventory_hostname }}"
+  ##
+  ##    Where will the repos be mounted
+  ##    What is the URL to access the repos
+  ##
 
-    ##
-    ##    Where with the kickstart configs are stored
-    ##    What is the URL to access the kickstarts
-    ##
+  repos:
+    dir: "/var/www/html/repos"
+    url: "http://{{ xtoph_vars.deployhost_ip }}:8008/repos"
 
-    kickstart:
-      dir: "/var/www/html/ks"
-      url: "http://{{ xtoph_vars.deployhost_ip }}:8008/ks"
+  ##
+  ##    Where are the ISOs stored
+  ##
 
-    ##
-    ##    Where will the repos be mounted
-    ##    What is the URL to access the repos
-    ##
-
-    repos:
-      dir: "/var/www/html/repos"
-      url: "http://{{ xtoph_vars.deployhost_ip }}:8008/repos"
-
-    ##
-    ##    Where are the ISOs stored
-    ##
-
-    iso:
-      dir: "/home/iso"
+  iso:
+    dir: "/home/iso"
 
