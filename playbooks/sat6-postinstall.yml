@@ -1,6 +1,6 @@
 
 ---
-- hosts: myNodes
+- hosts: myNodes, !myShelter
   tasks:
 
     - name: "SAT6-POSTINSTALL: remove older katello certs"
@@ -32,7 +32,7 @@
       with_items:
         - {src: 'cheat-register-host.j2',           dest: '/usr/local/bin/cheat-register-host.sh'}
 
-- hosts: mySatellite
+- hosts: mySatellite, !myShelter
   tasks:
 
     - name: "SAT6-POSTINSTALL: install cheat-(scripts) in /usr/local/bin"

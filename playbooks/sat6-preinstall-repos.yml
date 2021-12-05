@@ -6,7 +6,7 @@
 ##
 
 ---
-- hosts: mySatellite
+- hosts: mySatellite, !myShelter
   tasks:
 
   - debug: var=sat6_assets[workshop_vars.satellite_version]['repos']

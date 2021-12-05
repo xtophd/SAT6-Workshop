@@ -171,14 +171,35 @@ myNodes:
     node2:
       h_pubIP: "192.168.1.123" 
     node3:
-      h_pubIP:  "192.168.1.124"
-      h_ksPROF: "rhel84-bootiso"
-      h_netDEV: "ens3"
+      h_pubIP: "192.168.1.124"
+
   vars: 
     ansible_host: "{{ inventory_hostname }}.{{ workshop_extras.network_fqdn }}"
     h_hwPROF:  "ovirt_sda"
     h_plPROF:  "sat6_ovirt_platform"
     h_rsPROF:  "tiny"
-    h_ksPROF:  "rhel79-bootiso"
-    h_netDEV:  "eth0"
     h_blkDEV:  "sda"
+
+
+    ## RHEL 7
+    # h_ksPROF:  "rhel79-bootiso"
+    # h_netDEV:  "eth0"
+
+    ## CENTOS 7
+    h_ksPROF:  "centos7-netinstall"
+    h_netDEV:  "eth0"
+
+    ## RHEL 8
+    # h_ksPROF: "rhel84-bootiso"
+    # h_netDEV: "ens3"
+   
+
+ 
+## -----------------
+
+
+
+myShelter:
+  hosts:
+    satellite:
+

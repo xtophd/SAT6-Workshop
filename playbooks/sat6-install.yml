@@ -1,5 +1,5 @@
 ---
-- hosts: mySatellite
+- hosts: mySatellite, !myShelter
   tasks:
   
     - name: "YUM install satellite packages"

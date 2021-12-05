@@ -1,5 +1,5 @@
 ---
-- hosts: myNodes, mySatellite
+- hosts: myNodes, mySatellite, !myShelter
   tasks:
     - name: "SAT6-PREINSTALL-HOSTPREP: yum remove old rhn tools"
       yum: name=rhn-setup,rhn-client-tools state=absent
@@ -35,7 +35,7 @@
 
 
 
-- hosts: myNodes
+- hosts: myNodes, !myShelter
   tasks:
 
     - name: "SAT6-PREINSTALL-HOSTPREP:CMD disable local yum repos"
@@ -50,7 +50,7 @@
 
 
 
-- hosts: mySatellite
+- hosts: mySatellite, !myShelter
   tasks:
 
     - name: "SAT6-PREINSTALL-HOSTPREP: debug of sat6_assets[{{ workshop_vars.satellite_version }}]"

@@ -6,7 +6,7 @@
 ##
 
 ---
-- hosts: mySatellite
+- hosts: mySatellite, !myShelter
   tasks:
 
 
