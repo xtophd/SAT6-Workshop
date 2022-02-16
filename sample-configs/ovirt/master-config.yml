@@ -84,9 +84,9 @@ all:
         ntp:                 False
         workshop_user:       True
         workshop_materials:  True
-        desktop_gui:         True
-        desktop_chrome:      True
-        desktop_vnc:         True
+        desktop_gui:         False
+        desktop_chrome:      False
+        desktop_vnc:         False
 
     workshop_extras:
 
@@ -99,7 +99,7 @@ all:
 
     xtoph_vars:
 
-      deployhost_ip:       "192.168.1.170" 
+      deployhost_ip:       "192.168.100.33" 
       clustername:         "{{ workshop_vars.clustername }}"
 
 
@@ -182,24 +182,24 @@ myNodes:
 
 
     ## RHEL 7
-    # h_ksPROF:  "rhel79-bootiso"
-    # h_netDEV:  "eth0"
-
-    ## CENTOS 7
-    h_ksPROF:  "centos7-netinstall"
+    h_ksPROF:  "rhel79-bootiso"
     h_netDEV:  "eth0"
 
+    ## CENTOS 7
+    #h_ksPROF:  "centos7-netinstall"
+    #h_netDEV:  "eth0"
+
     ## RHEL 8
-    # h_ksPROF: "rhel84-bootiso"
-    # h_netDEV: "ens3"
+    #h_ksPROF: "rhel84-bootiso"
+    #h_netDEV: "ens3"
    
 
  
 ## -----------------
 
 
-
 myShelter:
   hosts:
-    satellite:
+#    bastion:
+#    satellite:
 

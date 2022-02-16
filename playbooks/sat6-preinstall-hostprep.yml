@@ -1,6 +1,11 @@
 ---
 - hosts: myNodes, mySatellite, !myShelter
   tasks:
+
+    - name: "SAT6-PREINSTALL-HOSTPREP: set hostname"
+      hostname:
+        name: "{{ inventory_hostname_short }}.{{ workshop_extras.network_fqdn }}"
+
     - name: "SAT6-PREINSTALL-HOSTPREP: yum remove old rhn tools"
       yum: name=rhn-setup,rhn-client-tools state=absent
       
@@ -67,9 +72,11 @@
 
     - name: "SAT6-PREINSTALL-HOSTPREP: stop satellite services if running (< 6.9)"
       shell: if which katello-service; then katello-service stop ; fi
+      ignore_errors: yes
 
     - name: "SAT6-PREINSTALL-HOSTPREP: stop satellite services if running (>= 6.9)"
       shell: if which satellite-maintain; then satellite-maintain service stop ; fi
+      ignore_errors: yes
 
     - name: "SAT6-PREINSTALL-HOSTPREP: stop mongodb services if running"
       shell: if pgrep -u mongodb; then systemctl stop mongod ; fi

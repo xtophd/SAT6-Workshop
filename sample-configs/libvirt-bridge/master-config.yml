@@ -174,3 +174,13 @@ myNodes:
     h_ksPROF:  "rhel79-bootiso"
     h_netDEV:  "eth0"
     h_blkDEV:  "vda"
+
+
+
+## -----------------
+
+#myShelter:
+#  hosts:
+#    satellite:
+
+
