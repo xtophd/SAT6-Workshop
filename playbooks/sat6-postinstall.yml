@@ -35,6 +35,11 @@
 - hosts: mySatellite, !myShelter
   tasks:
 
+    - name: "SAT6-POSTINSTALL: selinux restorecon -R /opt"
+      shell:
+        cmd: |
+          restorecon -R /opt
+
     - name: "SAT6-POSTINSTALL: install cheat-(scripts) in /usr/local/bin"
       template:
         src: "{{ item.src }}"
@@ -59,6 +64,7 @@
         - {src: 'cheat-ak-attach-subs.j2',       dest: '/usr/local/bin/cheat-ak-attach-subs.sh'}
         - {src: 'cheat-ak-autoenable.j2',        dest: '/usr/local/bin/cheat-ak-autoenable.sh'}
         - {src: 'cheat-manifest.j2',             dest: '/usr/local/bin/cheat-manifest.sh'}
+        - {src: 'cheat-do-it-all.j2',            dest: '/usr/local/bin/cheat-do-it-all.sh'}
 
     - name: "SAT6-POSTINSTALL: yum clean all"
       shell:                                                                                           
