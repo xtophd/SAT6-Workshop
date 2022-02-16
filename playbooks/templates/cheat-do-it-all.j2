@@ -1,0 +1,24 @@
+## Manifest
+cheat-manifest.sh
+
+## Repos
+cheat-repos-enable.sh
+cheat-repos-policy.sh
+cheat-repos-sync.sh
+
+## Wait for repos to be ready
+while hammer repository info --id=1  --organization "ExampleCom" | grep -i status | grep -qvi success ; do echo -n "."; sleep 15; done
+
+## Lifecycle
+cheat-app-lifecycles.sh
+
+## Content Views
+cheat-cv-create.sh
+cheat-cv-publish.sh
+cheat-cv-promote.sh
+
+## Activation Keys
+cheat-ak-create.sh
+cheat-ak-autoenable.sh
+cheat-ak-attach-subs.sh
+
