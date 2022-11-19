@@ -21,8 +21,8 @@ all:
 
       clustername:           "sat6ovirt"
 
-      satellite_version:     "6.9"
-      manifest_filename:     "manifest-v69.zip"
+      satellite_version:     "6.10"
+      manifest_filename:     "manifest-v610.zip"
 
       artifacts_directory:   "/root/sat6-artifacts"
       
@@ -99,7 +99,7 @@ all:
 
     xtoph_vars:
 
-      deployhost_ip:       "192.168.100.33" 
+      deployhost_ip:       "192.168.1.107" 
       clustername:         "{{ workshop_vars.clustername }}"
 
 
@@ -172,6 +172,16 @@ myNodes:
       h_pubIP: "192.168.1.123" 
     node3:
       h_pubIP: "192.168.1.124"
+    node4:
+      h_pubIP: "192.168.1.125"
+    node5:
+      h_pubIP: "192.168.1.126"
+    node6:
+      h_pubIP: "192.168.1.127"
+    node7:
+      h_pubIP: "192.168.1.128"
+    node8:
+      h_pubIP: "192.168.1.129"
 
   vars: 
     ansible_host: "{{ inventory_hostname }}.{{ workshop_extras.network_fqdn }}"
