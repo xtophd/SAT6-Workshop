@@ -48,6 +48,10 @@ Under "Hosts" -> "Job templates" create a new template:
     * In the editor paste the following:
 
 ----
+<%
+  supported_families = ['Redhat']
+  render_error(N_('Unsupported or no operating system found for this host.')) unless @host.operatingsystem && supported_families.include?(@host.operatingsystem.family)
+-%>
 #!/bin/bash
 
 # Helper function that exits with a particular message and code.
