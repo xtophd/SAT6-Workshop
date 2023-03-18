@@ -39,8 +39,59 @@ TBD
 
 == Job Template
 
-TBD
+=== Create a Job Template
 
+Under "Hosts" -> "Job templates" create a new template:
+
+    + Name: 1_Upgrade+Reboot
+    + Default: checked
+    + In the editor paste the following:
+
+----
+#!/bin/bash
+
+# Helper function that exits with a particular message and code.
+#
+# Usage:
+#   exit_with_message "Could not do a thing" 2
+#
+exit_with_message () {
+  echo "${1}, exiting..."
+  exit $2
+}
+
+# Action
+yum -y upgrade
+
+RETVAL=$?
+[ $RETVAL -eq 0 ] || exit_with_message "Package action failed" $RETVAL
+
+# Post Script
+nohup shutdown -r +2 &
+RETVAL=$?
+[ $RETVAL -eq 0 ] || exit_with_message "Post script failed" $RETVAL
+----
+
+Change to the "Inputs" tab.
+
+  + there should be NO inputs
+  
+Change to the "Job" tab.
+
+  + Job category: "Packages
+  + Description Format: "Upgrade+Reboot"
+  + Provider Type: SSH
+  
+SUBMIT
+
+=== Run the Job Template
+
+Go to "Hosts" -> "Job templates" and select "Run" to the left of our new template.
+
+  + Search Query: "host_collection = EvenNodes
+  + Hit the reload button next to "Resolves to"
+  
+SUBMIT
 
 [discrete]
 == End of Unit
