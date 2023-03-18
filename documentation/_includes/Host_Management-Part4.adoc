@@ -1,0 +1,49 @@
+:sectnums:
+:sectnumlevels: 3
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= Fundamental Host Management : Patch Management
+
+[NOTE]
+====
+_Unit Cheat Scripts_
+----
+TBD
+----
+====
+
+
+[discrete]
+== Additional Reference Materials
+
+TBD
+
+== Ad-Hoc Host Collection
+
+TBD
+
+== Run Command
+
+TBD
+
+== Job Template
+
+TBD
+
+
+[discrete]
+== End of Unit
+
+*Next:* link:Host-Groups.adoc[Host Groups]
+
+link:../SAT6-Workshop.adoc[Return to TOC]
+
+////
+Always end files with a blank line to avoid include problems.
+////
