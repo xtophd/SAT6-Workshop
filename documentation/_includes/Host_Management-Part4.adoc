@@ -78,7 +78,7 @@ Change to the "Inputs" tab.
   
 Change to the "Job" tab.
 
-  * Job category: "Packages
+  * Job category: "Packages"
   * Description Format: "Upgrade+Reboot"
   * Provider Type: SSH
   
