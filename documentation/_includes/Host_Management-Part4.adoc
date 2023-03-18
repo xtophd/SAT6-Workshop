@@ -24,11 +24,16 @@ TBD
 
 TBD
 
-== Ad-Hoc Host Collection
+== Single Host
 
 TBD
 
-== Run Command
+
+== Ad-Hoc Hosts
+
+TBD
+
+== Host Collection
 
 TBD
 
