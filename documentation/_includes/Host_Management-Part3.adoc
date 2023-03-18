@@ -8,7 +8,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-= Host Collections and Remote Jobs
+= Fundamental Host Management : Host Collections and Remote Jobs
 
 [NOTE]
 ====
