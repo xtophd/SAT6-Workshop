@@ -30,11 +30,11 @@ From `Hosts->Content Hosts`, click on `node1` to explore the details about that 
 
  
   * click on the *Errata* tab
-  * select all errata and apply
-  * be sure to click the link at the top of the list to `Select all ###`
+  * select all errata (checkbox in header row, top of table)
+  * be sure to click the link that appears above the table to `Select all ###` errata
   * click Apply Selected
   
-The `Are you sure...` dialog will pop up and you can click `Apply`
+The `Are you sure...` dialog will pop up and you can click `Apply`.
 
 Host is now being patched.  Wait until the task is complete, and then inspect the details again and verify the host is current.
 
