@@ -8,7 +8,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-= Fundamental Host Management: Registration & Patching
+= Host Management: Registration
 
 NOTE: This unit assumes you have successfully loaded a working manifest into the Red Hat Satellite Server.
 
@@ -113,12 +113,6 @@ Go to 'Hosts -> All Hosts'
 Select 'node1'
 
 Expore the tabs for Facts, Content and Errata.
-
-== Remediation
-
-Once you are in the Errata tab for 'node1', select all errata and apply.
-
-Host has now been patched.
 
 == Additional Resources
 
