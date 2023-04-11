@@ -18,32 +18,46 @@
 
   - block:
 
-      - name: "SAT6-PREINSTALL-REGISTRATION: collect RHN username and password"
+      - name: "SAT6-PREINSTALL-REGISTRATION: collect RHSM username"
         pause:
           prompt: "Enter RHSM username: "
           echo: yes
         register: prompt_username
     
-      - pause:
+      - set_fact:
+          rhsm_credentials.username: prompt_username.user_input
+
+    when: rhsm_credentials.username is undefined 
+
+
+
+  - block:
+
+      - name: "SAT6-PREINSTALL-REGISTRATION: collect RHN password"
+        pause:
           prompt: "Enter RHN password: "
           echo: no
         register: prompt_password
 
       - set_fact:
-          rhsm_username: prompt_username.user_input
-          rhsm_password: prompt_password.user_input
+          rhsm_credentials.password: prompt_password.user_input
 
-    when: rhsm_username is undefined or rhsm_password is undefined
+    when: rhsm_credentials.password is undefined
 
   ##
   ##    Register system
   ##
+  ##    HELPFULL LINK: https://www.redhat.com/en/blog/subscription-manager-former-red-hat-network-user-part-2-subscription-manager-learns-grep
+  ##
 
-  - name: "SAT6-PREINSTALL-REGISTRATION: rhsm register"
-    redhat_subscription:
-      state: present
-      pool: "Red Hat Satellite.*Subscription"
-      force_register: yes
-      username: "{{ rhsm_username }}"
-      password: "{{ rhsm_password }}"
-  
+  - name: "SAT6-PREINSTALL-REGISTRATION: subscription-manager clean"
+    shell:
+      cmd: subscription-manager clean
+
+  - name: "SAT6-PREINSTALL-REGISTRATION: subscription-manager register"
+    shell:
+      cmd: subscription-manager register --username="{{ rhsm_credentials.username }}" --password="{{ rhsm_credentials.password }}" --force
+
+  - name: "SAT6-PREINSTALL-REGISTRATION: subscription-manager identify pool and attach"
+    shell:
+      cmd: subscription-manager list --available --matches 'Red Hat Satellite*Subscription' --pool-only | subscription-manager attach --file=-

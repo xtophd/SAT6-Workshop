@@ -9,10 +9,20 @@
 - hosts: mySatellite, !myShelter
   tasks:
 
-  - debug: var=sat6_assets[workshop_vars.satellite_version]['repos']
+  - name: "SAT6-PREINSTALL-REPOS: disable all repos"
+    shell:
+      cmd: subscription-manager repos --disable="*"
 
-  - name: "SAT6-PREINSTALL-REPOS: enable repos"
-    rhsm_repository: 
-      name: "{{ sat6_assets[workshop_vars.satellite_version]['repos'] }}"
-      purge: True
-      state: enabled
+  ##
+  ## NOTE:  the with_items splits the comma separated list
+  ##        of channels and prints a --enable=<val> for each
+  ##        element.  Nice side effect is the the item
+  ##        is output during execution
+  ##
+
+  - name: "SAT6-PREINSTALL-REPOS: enable needed repos"
+    shell:
+      cmd: subscription-manager repos {{ item }}
+    with_items:
+      - "{% for cv in sat6_assets[workshop_vars.satellite_version]['repos'].split(',') %} --enable={{ cv }}{% endfor %}"
+

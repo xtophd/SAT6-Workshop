@@ -2,53 +2,50 @@ debug: true
 
 cleanup: true
 
+{% raw %}
+hostname: "{{ inventory_hostname }}"
+
 selected_profile:
-  kickstart: "{{ h_ksPROF | default ('') }}"
-  platform:  "{{ h_plPROF | default ('') }}"
-  resource:  "{{ h_rsPROF | default ('') }}"
-  machine:   "{{ h_hwPROF | default ('') }}"
+    kickstart: "{{ h_ksPROF | default ('') }}"
+    platform:  "{{ h_plPROF | default ('') }}"
+    resource:  "{{ h_rsPROF | default ('') }}"
+    machine:   "{{ h_hwPROF | default ('') }}"
+{% endraw %}
 
 deployhost:
 
   ##
   ##     platform_enable: one or more of the following
-  ##       - "ovirt"
+  ##       - "ovirt" 
   ##       - "libvirt"
   ##       - "baremetal"
   ##
 
   platform_enable: 
-    - "libvirt"
+      - "libvirt"
+      - "ovirt"
+      - "baremetal"
   
   ##
   ##    deployhost hostname OR ip that will
   ##    accessible to the deployed VMs
   ##
 
+{% raw %}
   ip: "{{ xtoph_vars.deployhost_ip }}"
-
-  ##
-  ##    firewalld_enable:  ensures firewalld is installed
-  ##                       and enabled on the deployhost
-  ##
-
-  firewalld_enable: true
+{% endraw %}
 
   ##
   ##    dnsmasq_enable:    ensures dnsmasq is installed
   ##                       and enabled on the deployhost
   ##
-  ##    dnsmasq_asprimary: deployed hosts/vms will be
-  ##                       configured to use deployhost's
-  ##                       dns as primary resolver
-  ##
-  ##                       host/vm resolves to ->
+  ##    dnsmasq_asprimary  host/vm resolves to ->
   ##                         deployhost which forwards to ->
   ##                           real-dns
   ##
 
-  dnsmasq_enable:     true
-  dnsmasq_asprimary:  true
+  dnsmasq_enable:     false
+  dnsmasq_asprimary:  false
 
   ##
   ##    http_port:      port to provide kickstart and
@@ -75,16 +72,18 @@ deployhost:
   ##    NOTE: needs to be unique for every host
   ##
 
-  tmp_dir: "/home/tmp/{{ xtoph_vars.clustername }}/{{ inventory_hostname }}"
+
+{% raw %}
+  tmp_dir: "/home/tmp/{{ xtoph_vars.projectname }}/{{ inventory_hostname_short }}"
 
   ##
-  ##    Where with the kickstart configs are stored
+  ##    Where with the kickstart configs are stored 
   ##    What is the URL to access the kickstarts
   ##
 
   kickstart:
-    dir: "/var/www/html/ks"
-    url: "http://{{ xtoph_vars.deployhost_ip }}:8008/ks"
+      dir: "/var/www/html/ks"
+      url: "http://{{ xtoph_vars.deployhost_ip }}:8008/ks"
 
   ##
   ##    Where will the repos be mounted
@@ -92,13 +91,13 @@ deployhost:
   ##
 
   repos:
-    dir: "/var/www/html/repos"
-    url: "http://{{ xtoph_vars.deployhost_ip }}:8008/repos"
+      dir: "/var/www/html/repos"
+      url: "http://{{ xtoph_vars.deployhost_ip }}:8008/repos"
+{% endraw %}
 
   ##
   ##    Where are the ISOs stored
   ##
 
   iso:
-    dir: "/home/iso"
-
+      dir: "/home/iso"
