@@ -1,0 +1,116 @@
+:sectnums:
+:sectnumlevels: 3
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= Fundamental Host Management : Patch Management
+
+[NOTE]
+====
+_Unit Cheat Scripts_
+----
+TBD
+----
+====
+
+
+[discrete]
+== Additional Reference Materials
+
+TBD
+
+== Single Host
+
+From `Hosts->Content Hosts`, click on `node1` to explore the details about that host.
+
+ 
+  * click on the *Errata* tab
+  * select all errata (checkbox in header row, top of table)
+  * be sure to click the link that appears above the table to `Select all ###` errata
+  * click Apply Selected
+  
+The `Are you sure...` dialog will pop up and you can click `Apply`.
+
+Host is now being patched.  Wait until the task is complete, and then inspect the details again and verify the host is current.
+
+== Ad-Hoc Hosts
+
+TBD
+
+== Host Collection
+
+TBD
+
+== Job Template
+
+=== Create a Job Template
+
+Under "Hosts" -> "Job templates" create a new template:
+
+    * Name: 1_Upgrade+Reboot
+    * Default: checked
+    * In the editor paste the following:
+
+----
+<%
+  supported_families = ['Redhat']
+  render_error(N_('Unsupported or no operating system found for this host.')) unless @host.operatingsystem && supported_families.include?(@host.operatingsystem.family)
+-%>
+#!/bin/bash
+
+# Helper function that exits with a particular message and code.
+#
+# Usage:
+#   exit_with_message "Could not do a thing" 2
+#
+exit_with_message () {
+  echo "${1}, exiting..."
+  exit $2
+}
+
+# Action
+yum -y upgrade
+
+RETVAL=$?
+[ $RETVAL -eq 0 ] || exit_with_message "Package action failed" $RETVAL
+
+# Post Script
+nohup shutdown -r +2 &
+RETVAL=$?
+[ $RETVAL -eq 0 ] || exit_with_message "Post script failed" $RETVAL
+----
+
+Change to the "Inputs" tab.
+
+  * there should be NO inputs
+  
+Change to the "Job" tab.
+
+  * Job category: "Packages"
+  * Description Format: "Upgrade+Reboot"
+  * Provider Type: SSH
+  * SUBMIT
+
+=== Run the Job Template
+
+Go to "Hosts" -> "Job templates" and select "Run" to the far right of our new template.
+
+  * Search Query: "host_collection = EvenNodes"
+  * Hit the reload button next to "Resolves to"
+  * SUBMIT
+
+[discrete]
+== End of Unit
+
+*Next:* link:Host-Groups.adoc[Host Groups]
+
+link:../SAT6-Workshop.adoc[Return to TOC]
+
+////
+Always end files with a blank line to avoid include problems.
+////

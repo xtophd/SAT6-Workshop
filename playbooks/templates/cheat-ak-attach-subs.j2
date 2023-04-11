@@ -9,7 +9,7 @@
 
 echo "Attach Subscriptions to Activation Keys {{ workshop_vars.myActivationKeyName_1 }} and {{ workshop_vars.myActivationKeyName_2 }}"
 
-SUB_ID=`hammer --output base subscription list --organization "{{ workshop_vars.myOrganization }}"  | grep '^ID' | awk '{ print $2 }'`
+SUB_ID=`hammer --output base subscription list --organization "{{ workshop_vars.myOrganization }}"  | grep -i '^id' | awk '{ print $2 }'`
 
 echo "Found Sub ID: ${SUB_ID}"
 

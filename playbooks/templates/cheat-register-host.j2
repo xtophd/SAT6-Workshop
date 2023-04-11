@@ -24,3 +24,7 @@ yum install -y katello-agent
 echo "## Uploading package data"
 
 katello-package-upload
+
+echo "## Enabling remote execution from Satellite"
+
+curl https://satellite.{{ workshop_extras.network_fqdn }}:9090/ssh/pubkey >> /root/.ssh/authorized_keys

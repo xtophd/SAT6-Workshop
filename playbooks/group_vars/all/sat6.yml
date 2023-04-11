@@ -339,3 +339,37 @@ sat6_assets:
         vg:     "{{ workshop_vars.myVG }}"
         path:   "/var/cache"
         size:   "10"
+
+  "6.10":
+    name: "satellite"
+    version: "6.10"
+    repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.10-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.9-rpms"
+    stop_cmd: "satellite-maintain service stop"
+    start_cmd: "satellite-maintain service start"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ workshop_vars.myOrganization }} --foreman-initial-location {{ workshop_vars.myLocation }} --foreman-initial-admin-username {{ workshopadmin_username }} --foreman-initial-admin-password {{ workshopadmin_password }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
+    fs_data:
+      mongodb:
+        lv:     "mongodb"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/lib/mongodb"
+        size:   "50"
+      pulp:
+        lv:     "pulp"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/lib/pulp"
+        size:   "100"
+      pgsql:
+        lv:     "pgsql"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/opt/rh/rh-postgresql2"
+        size:   "10"
+      squid:
+        lv:     "squid"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/spool/squid"
+        size:   "10"
+      cache:
+        lv:     "cache"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/cache"
+        size:   "10"
