@@ -1,15 +1,16 @@
 #!/bin/bash
 
-echo -n "Collecting repository IDs ..."
+echo "Collecting repository IDs"
 
-export RHEL7=`hammer repository list --organization "ExampleCom" | grep "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server" | awk '{ print $1 }'`
-echo -n "."
-
-#export RHEL7Opt=`hammer repository list --organization "ExampleCom" | grep "Red Hat Enterprise Linux 7 Server - Optional RPMs x86_64 7Server" | awk '{ print $1 }'`
-#echo -n "."
-
-export SATTools=`hammer repository list --organization "ExampleCom" | grep " Red Hat Satellite Tools {{ workshop_vars.satellite_version }} for RHEL 7 Server RPMs x86_64" | awk '{ print $1 }'`
-echo "."
+REPO_IDS=$( 
+  IFS=$'\n' 
+  count=0 
+  for i in `hammer --output csv --no-headers repository list --organization "ExampleCom" --fields id`; do 
+    [[ ${count} > 0 ]] &&  echo -n "," 
+    ((count++))  
+    echo -n $i 
+  done 
+)
 
 echo "Creating Content View"
 
@@ -17,4 +18,4 @@ hammer content-view create \
   --organization "{{ workshop_vars.myOrganization }}" \
   --name "{{ workshop_vars.myContentViewName }}" \
   --description "RHEL 7 OS Content" \
-  --repository-ids ${RHEL7},${SATTools}
+  --repository-ids ${REPO_IDS}

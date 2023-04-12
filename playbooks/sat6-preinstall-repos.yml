@@ -26,3 +26,8 @@
     with_items:
       - "{% for cv in sat6_assets[workshop_vars.satellite_version]['repos'].split(',') %} --enable={{ cv }}{% endfor %}"
 
+  - name: "SAT6-PREINSTALL-REPOS: enable dnf satellite module for version = 6.12"
+    shell:
+      cmd: dnf module enable -y satellite:el8
+    when: workshop_vars.satellite_version is version('6.12',operator='>=')
+    

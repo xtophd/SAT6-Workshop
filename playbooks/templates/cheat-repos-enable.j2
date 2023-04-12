@@ -1,14 +1,16 @@
 #!/bin/bash
 
-hammer repository-set enable \
---organization "{{ workshop_vars.myOrganization }}" \
---product "Red Hat Enterprise Linux Server" \
---basearch "x86_64" \
---releasever "7Server" \
---name "Red Hat Enterprise Linux 7 Server (RPMs)"
+
+{% for product_repo_name in sat6_assets[workshop_vars.satellite_version]['product_repos'].split(',') %} 
+
+echo -n "{{ product_repo_name }}: "
 
 hammer repository-set enable \
 --organization "{{ workshop_vars.myOrganization }}" \
 --product "Red Hat Enterprise Linux Server" \
 --basearch "x86_64" \
---name "Red Hat Satellite Tools {{ workshop_vars.satellite_version }} (for RHEL 7 Server) (RPMs)"
+--releasever "7Server" \
+--name "{{ product_repo_name }}"
+
+{% endfor %}
+

@@ -1,13 +1,14 @@
 #!/bin/bash
 
-hammer repository update  \
---organization "{{ workshop_vars.myOrganization }}" \
---product "Red Hat Enterprise Linux Server" \
---name "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server" \
---download-policy immediate
+IFS=$'\n'; for i in `hammer --output csv --no-headers repository list --organization "ExampleCom" --fields name`; do
 
-hammer repository update \
---organization "{{ workshop_vars.myOrganization }}" \
---product "Red Hat Enterprise Linux Server" \
---name "Red Hat Satellite Tools {{ workshop_vars.satellite_version }} for RHEL 7 Server RPMs x86_64" \
---download-policy immediate
+    echo -n "${i}: "
+
+    hammer repository update  \
+        --organization "ExampleCom" \
+        --product "Red Hat Enterprise Linux Server" \
+        --name "${i}" \
+        --download-policy immediate
+
+done
+
