@@ -1,15 +1,23 @@
 #!/bin/bash
 
+ORGANIZATION="{{ workshop_vars.myOrganization }}"
+
 echo "Activation Key Content Auto Enablement"
 
-hammer activation-key content-override \
---name "{{ workshop_vars.myActivationKeyName_1 }}" \
---content-label rhel-7-server-satellite-tools-{{ workshop_vars.satellite_version }}-rpms \
---value 1 \
---organization "{{ workshop_vars.myOrganization }}"
+echo "Gathering activation-key names"
+for KEY_NAME in `hammer --output csv --no-headers activation-key list --organization "${ORGANIZATION}" --fields name`; do
 
-hammer activation-key content-override \
---name "{{ workshop_vars.myActivationKeyName_2 }}" \
---content-label rhel-7-server-satellite-tools-{{ workshop_vars.satellite_version }}-rpms \
---value 1 \
---organization "{{ workshop_vars.myOrganization }}"
+  echo "Gathering activation-key content details [${KEY_NAME}]"
+  for CONTENT_LABEL in $( hammer --output csv --no-headers  activation-key product-content --name "${KEY_NAME}" --organization "${ORGANIZATION}" --fields label ) ; do
+
+    echo -n "Setting Content Enabled Override [${KEY_NAME},${CONTENT_LABEL}] : "
+
+    hammer activation-key content-override \
+    --name "${KEY_NAME}" \
+    --content-label "${CONTENT_LABEL}" \
+    --value 1 \
+    --organization "${ORGANIZATION}"
+
+  done
+
+done
