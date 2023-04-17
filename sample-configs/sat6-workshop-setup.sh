@@ -599,7 +599,7 @@ virthost_menu () {
       if [[ ! -z ${VIRTHOST_TYPE} && "${VIRTHOST_TYPE}" == "ovirt" ]]; then
         TYPE_ACTIONS=("Set Manager UID" "Set Manager IP" "Set Manager FQDN" "Set Datacenter" "Set Storage Domain" "Set Network Domain")
       elif [[ ! -z ${VIRTHOST_TYPE} && "${VIRTHOST_TYPE}" == "libvirt" ]]; then
-        TYPE_ACTIONS=("Set VHost UID" "Set VHost IP" "Set vHost FQDN" "Set Bridge Device" "Set Bridge Type")
+        TYPE_ACTIONS=("Set vHost UID" "Set vHost IP" "Set vHost FQDN" "Set Bridge Device" "Set Bridge Type")
       fi
 
 

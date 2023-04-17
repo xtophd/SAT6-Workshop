@@ -40,7 +40,12 @@ all:
 
       ## Satellite Parms
 
+{% if t_virthost_type == "libvirt" %}
+      myDisk:                "/dev/vdb"
+{% else %}
       myDisk:                "/dev/sdb"
+{% endif %}
+
       myVG:                  "sat_vg"
 
       myLocation:            "USA"
