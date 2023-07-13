@@ -44,7 +44,22 @@ TBD
 
 == Host Collection
 
-TBD
+Under "Hosts" -> "Host Collections" select "OddNodes"
+
+Along with basic information about the host collection, there should appear a list of "Actions" links
+
+Select "Package Installation, Removal, and Update"
+
+The "Update Packaages" dialog should pop up
+
+Click the "Update All Packages"
+
+Hit "Yes" to the "Are you sure" confirmation.
+
+This will apply package updates to all the hosts in the host collection, but does NOT include a reboot.
+
+See the next ection on "Job Templates" to see how to do both, update and reboot.
+
 
 == Job Template
 
