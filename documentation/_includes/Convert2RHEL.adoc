@@ -1,0 +1,51 @@
+:sectnums:
+:sectnumlevels: 3
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= Convert to RHEL
+
+[NOTE]
+====
+_Unit Cheat Scripts_
+----
+TBD
+----
+====
+
+
+[discrete]
+== Additional Reference Materials
+
+https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux/migration-process/convert2rhel-how-to-convert-from-centos-linux-to-red-hat-enterprise-linux
+
+== Basic Steps
+
+On the CentOS node
+
+yum update -y
+reboot
+
+curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release https://www.redhat.com/security/data/fd431d51.txt
+curl --create-dirs -o /etc/rhsm/ca/redhat-uep.pem https://ftp.redhat.com/redhat/convert2rhel/redhat-uep.pem
+curl -o /etc/yum.repos.d/convert2rhel.repo https://ftp.redhat.com/redhat/convert2rhel/<version_number>/convert2rhel.repo
+
+yum -y install convert2rhel
+
+curl --insecure --output /usr/share/convert2rhel/subscription-manager/katello-ca-consumer-latest.noarch.rpm https://<satellite.example.com>/pub/katello-ca-consumer-latest.noarch.rpm
+
+convert2rhel
+
+[discrete]
+== End of Unit
+
+link:../SAT6-Workshop.adoc[Return to TOC]
+
+////
+Always end files with a blank line to avoid include problems.
+////
