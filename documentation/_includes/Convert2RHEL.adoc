@@ -41,7 +41,9 @@ yum -y install convert2rhel
 
 curl --insecure --output /usr/share/convert2rhel/subscription-manager/katello-ca-consumer-latest.noarch.rpm https://<satellite.example.com>/pub/katello-ca-consumer-latest.noarch.rpm
 
-convert2rhel
+subscription-manager register   --org="ExampleCom"   --serverurl="satellite.satdemo10g.lab.linuxsoup.com"   --activationkey="MyKey-DEV"
+
+convert2rhel --keeprhsm
 
 [discrete]
 == End of Unit
