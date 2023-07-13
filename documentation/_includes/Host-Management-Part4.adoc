@@ -93,7 +93,7 @@ Change to the "Job" tab.
 
   * Job category: "Packages"
   * Description Format: "Upgrade+Reboot"
-  * Provider Type: Script
+  * Provider Type: "Script"
   * SUBMIT
 
 NOTE: Prior to version 6.12, 'Provider Type:' was called 'SSH'
