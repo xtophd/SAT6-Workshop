@@ -46,6 +46,8 @@ export CONVERT2RHEL_UNSUPPORTED_INCOMPLETE_ROLLBACK=1
 
 convert2rhel --keep-rhsm -k MyKey-DEV -o ExampleCom
 
+reboot
+
 [discrete]
 == End of Unit
 
