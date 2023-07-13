@@ -29,6 +29,7 @@ https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux/migratio
 On the CentOS node
 
 yum update -y
+
 reboot
 
 curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release https://www.redhat.com/security/data/fd431d51.txt
@@ -45,7 +46,7 @@ subscription-manager register   --org="ExampleCom"   --serverurl="satellite.satd
 
 export CONVERT2RHEL_UNSUPPORTED_INCOMPLETE_ROLLBACK=1
 
-convert2rhel --keeprhsm
+convert2rhel --keep-rhsm
 
 [discrete]
 == End of Unit
