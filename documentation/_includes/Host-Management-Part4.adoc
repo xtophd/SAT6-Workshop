@@ -38,10 +38,6 @@ The `Are you sure...` dialog will pop up and you can click `Apply`.
 
 Host is now being patched.  Wait until the task is complete, and then inspect the details again and verify the host is current.
 
-== Ad-Hoc Hosts
-
-TBD
-
 == Host Collection
 
 Under "Hosts" -> "Host Collections" select "OddNodes"
