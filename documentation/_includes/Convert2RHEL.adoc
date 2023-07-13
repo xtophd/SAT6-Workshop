@@ -43,6 +43,8 @@ curl --insecure --output /usr/share/convert2rhel/subscription-manager/katello-ca
 
 subscription-manager register   --org="ExampleCom"   --serverurl="satellite.satdemo10g.lab.linuxsoup.com"   --activationkey="MyKey-DEV"
 
+export CONVERT2RHEL_UNSUPPORTED_INCOMPLETE_ROLLBACK
+
 convert2rhel --keeprhsm
 
 [discrete]
