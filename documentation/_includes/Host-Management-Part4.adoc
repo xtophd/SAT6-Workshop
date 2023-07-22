@@ -38,13 +38,24 @@ The `Are you sure...` dialog will pop up and you can click `Apply`.
 
 Host is now being patched.  Wait until the task is complete, and then inspect the details again and verify the host is current.
 
-== Ad-Hoc Hosts
-
-TBD
-
 == Host Collection
 
-TBD
+Under "Hosts" -> "Host Collections" select "OddNodes"
+
+Along with basic information about the host collection, there should appear a list of "Actions" links
+
+Select "Package Installation, Removal, and Update"
+
+The "Update Packaages" dialog should pop up
+
+Click the "Update All Packages"
+
+Hit "Yes" to the "Are you sure" confirmation.
+
+This will apply package updates to all the hosts in the host collection, but does NOT include a reboot.
+
+See the next ection on "Job Templates" to see how to do both, update and reboot.
+
 
 == Job Template
 
@@ -93,8 +104,10 @@ Change to the "Job" tab.
 
   * Job category: "Packages"
   * Description Format: "Upgrade+Reboot"
-  * Provider Type: SSH
+  * Provider Type: "Script"
   * SUBMIT
+
+NOTE: Prior to version 6.12, 'Provider Type:' was called 'SSH'
 
 === Run the Job Template
 

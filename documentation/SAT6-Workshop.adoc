@@ -123,7 +123,7 @@ NOTE: you will need true console (GUI) on "WORKSTATION" for the *Wayland* and *W
   . link:{includedir}/PXE-Discovery.adoc[*PXE Discovery*]
   . link:{includedir}/PXE-Less-Discovery.adoc[*PXE Less Discovery*]
   . link:{includedir}/Intro-Ansible.adoc[*Introduction to Ansible*]
-  . link:{includedir}/Intro-Puppet.adoc[*Introduction to Puppet*]
+  . link:{includedir}/Convert2RHEL.adoc[*Convert 2 RHEL*]
   . link:{includedir}/Scratch-Notes.txt[*Additional Scratch Notes*]
 
 ////  
@@ -145,7 +145,7 @@ include::{includedir}/Discovery-Rules.adoc[leveloffset=+1]
 include::{includedir}/PXE-Discovery.adoc[leveloffset=+1]
 include::{includedir}/PXE-Less-Discovery.adoc[leveloffset=+1]
 include::{includedir}/Intro-Ansible.adoc[leveloffset=+1]
-include::{includedir}/Intro-Puppet.adoc[leveloffset=+1]
+include::{includedir}/Convert2RHEL.adoc[leveloffset=+1]
 include::{includedir}/Scratch-Notes.txt[leveloffset=+1]
 ////
 
