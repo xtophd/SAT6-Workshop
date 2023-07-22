@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars_files: "../setup.yml"
+  tasks:
+
+    - name: "sat6-automation-manifest : load manifest"
+      redhat.satellite.subscription_manifest:
+        username:      "{{ sat6_credentials.username }}"
+        password:      "{{ sat6_credentials.password }}"
+        server_url:    "{{ sat6_details.url }}"
+        manifest_path: "{{ sat6_details.artifacts_directory }}/{{ sat6_details.manifest_filename }}"
+        organization:  "{{ sat6_details.organization }}"
+        state:         present
+        

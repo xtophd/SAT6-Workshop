@@ -70,3 +70,46 @@
       shell:                                                                                           
         cmd: |                                                                                         
           yum clean all
+
+    - name: "baremetal-deploy : create directories for ansible sat6-automation" 
+      file: 
+        path: "{{ item }}"
+        mode: "0755"
+        state: directory
+        owner: root
+        group: root
+      with_items:
+        - "/usr/local/share/sat6-automation" 
+        - "/usr/local/share/sat6-automation/playbooks" 
+      when: workshop_vars.satellite_version is version('6.12',operator='>=')
+
+    - name: "SAT6-POSTINSTALL: install sat6-automation files"
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: root
+        group: root
+        mode: 0744
+      with_items:
+        - {src: './files/ansible-sat6-automation.sh',                 dest: '/usr/local/share/sat6-automation/sat6-automation.sh'}
+        - {src: './files/ansible-sat6-automation.yml',                dest: '/usr/local/share/sat6-automation/playbooks/sat6-automation.yml'}
+        - {src: './files/ansible-sat6-automation-contentviews.yml',   dest: '/usr/local/share/sat6-automation/playbooks/sat6-automation-contentviews.yml'}
+        - {src: './files/ansible-sat6-automation-lifecycles.yml',     dest: '/usr/local/share/sat6-automation/playbooks/sat6-automation-lifecycles.yml'}
+        - {src: './files/ansible-sat6-automation-manifest.yml',       dest: '/usr/local/share/sat6-automation/playbooks/sat6-automation-manifest.yml'}
+        - {src: './files/ansible-sat6-automation-repositories.yml',   dest: '/usr/local/share/sat6-automation/playbooks/sat6-automation-repositories.yml'}
+        - {src: './files/ansible-sat6-automation-activationkeys.yml', dest: '/usr/local/share/sat6-automation/playbooks/sat6-automation-activationkeys.yml'}
+      when: workshop_vars.satellite_version is version('6.12',operator='>=')
+
+    - name: "SAT6-POSTINSTALL: install sat6-automation setup (config)"
+      template:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: root
+        group: root
+        mode: 0744
+      with_items:
+        - {src: 'ansible-sat6-automation-setup.j2',        dest: '/usr/local/share/sat6-automation/setup.yml'}
+      when: workshop_vars.satellite_version is version('6.12',operator='>=')
+
+
+

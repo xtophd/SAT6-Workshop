@@ -1,0 +1,79 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars_files: "../setup.yml"
+  tasks:
+
+
+
+    ##
+    ##    WARN: 
+    ##            This sample ansible playbook merely assigns 
+    ##            one of each subscription to each activation
+    ##            key.  This is probably NOT a desired configuration
+    ##            in production environmnet
+    ##
+    ##
+
+
+    - name: "sat6-automation-activationkeys: show subscription information"
+      redhat.satellite.subscription_info:
+        username:              "{{ sat6_credentials.username }}"
+        password:              "{{ sat6_credentials.password }}"
+        server_url:            "{{ sat6_details.url }}"
+        organization:          "{{ sat6_details.organization }}"
+      register: sub_results
+
+
+
+    - debug: var=sub_results
+
+
+
+    - name: "sat6-automation-activationkeys: show all pool ids for subscriptions"
+      debug:
+        msg: "Subscription Pool ID: {{ item.cp_id }}"
+      loop_control:
+        label:  "{{ item.name }}"
+      with_items:
+         - "{{ sub_results.subscriptions }}"
+
+
+
+    - set_fact:
+        pool_list: [] 
+
+    - name: "sat6-automation-activationkeys: build pool_list for use with activation keys"
+      set_fact:
+        pool_list: "{{ pool_list + [{ 'pool_id': item.cp_id }] }}"
+      loop_control:
+        label:  "{{ item.name }}"
+      with_items:
+         - "{{ sub_results.subscriptions }}"
+
+    - debug: var=pool_list
+
+
+
+    - debug:
+        msg: "!!! NOTE !!!  This sample playbook assigns ALL subscriptions to EVERY activationkey"
+
+
+
+    - name: "sat6-automation-activationkeys: create activationkeys"
+      redhat.satellite.activation_key:
+        username:              "{{ sat6_credentials.username }}"
+        password:              "{{ sat6_credentials.password }}"
+        server_url:            "{{ sat6_details.url }}"
+        name:                  "{{ item.key }}"
+        organization:          "{{ sat6_details.organization }}"
+        content_view:          "{{ sat6_details.content_view }}"
+        lifecycle_environment: "{{ item.value.lifecycle }}"
+        auto_attach:           False
+        subscriptions:         "{{ pool_list }}"
+      loop_control:
+        label: "{{ item.key }}"
+      with_items:
+        - "{{ sat6_details.activation_keys | dict2items }}"
+
+

@@ -1,0 +1,174 @@
+##
+## I am leaving all of my iterative steps to get to
+## the required repository name.  I could probably have
+## just figured it out manually and put it in a config
+## file but what fun is there in that.
+##
+## Please note, this is not a solution for any/all use cases
+## but to start with, we put all repos into a single
+## content view.
+##
+##    - debug:
+##        msg: 
+##          - "--- ITERATE THROUGH ITEMS ---"
+##          - "{{ item.item.value.name }}"
+##          - "{{ item.repository_set.repositories }}"
+##      loop: "{{ repodata.results }}"
+##      loop_control:
+##        label:    "{{ item.item.value.name }}"
+##
+##    - debug:
+##        msg: 
+##          - "--- ISOLATE REPOSITORIES IN EACH ITEM ---"
+##          - "{{ item.item.value.name }}"
+##          - "{{ item.repository_set.repositories | selectattr('releasever','==',item.item.value.releasever) }}"
+##      loop: "{{ repodata.results }}"
+##      loop_control:
+##        label:    "{{ item.item.value.name }}"
+##
+##    - debug:
+##        msg: 
+##          - "--- ISOLATE REPOSITORY NAME THAT MATCHES RELEASEVER ---"
+##          - "product family: {{ item.item.value.product }}"
+##          - "product name:   {{ item.item.value.name }}"
+##          - "label:          {{ item.item.value.label }}"
+##          - "releasever:     {{ item.item.value.releasever }}"
+##          - "repo name:      {{ item.repository_set.repositories | selectattr('releasever','==',item.item.value.releasever|default('')) | map(attribute='name') | join(',') }}"
+##      loop: "{{ repodata.results }}"
+##      loop_control:
+##        label:    "{{ item.item.value.name }}"
+##
+
+
+---
+- hosts: localhost
+  gather_facts: false
+  vars_files: "../setup.yml"
+  tasks:
+
+
+    - name: "sat6-automation-contentview : get info about the repo sets"
+      redhat.satellite.repository_set_info:
+
+        username:      "{{ sat6_credentials.username }}"
+        password:      "{{ sat6_credentials.password }}"
+        server_url:    "{{ sat6_details.url }}"
+        organization:  "{{ sat6_details.organization }}"
+        name:          "{{ item.value.name }}"
+        product:       "{{ item.value.product }}"
+
+      register: repodata
+      with_items:
+        - "{{ sat6_details.product_sets |dict2items }}"
+
+
+
+    - name: "sat6-automation-contentview : full debug of repodata.results"
+      debug: var=repodata
+
+    - name: "sat6-automation-contentview : selective debug of repodata.results"
+      vars:
+        product:    "{{ set.item.value.product }}"
+        name:       "{{ set.item.value.name }}"
+        label:      "{{ set.item.value.label }}"
+        releasever: "{{ set.item.value.releasever }}"
+        repo_name:  "{{ set.repository_set.repositories | selectattr('releasever','==',set.item.value.releasever) | map(attribute='name') }}"
+      debug:
+        msg: 
+          - "--- CALCULATED VARS ---"
+          - "product family: {{ product }}"
+          - "product name:   {{ name }}"
+          - "label:          {{ label }}"
+          - "releasever:     {{ releasever }}"
+          - "repo name:      {{ repo_name }}"
+      loop_control:
+        label:    "{{ set.item.value.name }}"
+        loop_var: set
+      loop: "{{ repodata.results }}"
+
+
+
+    ##
+    ##    loop over the results and build the
+    ##    repository_list for the content view
+    ##
+    ##
+    ##    NOTE: the challenge I encountered deals
+    ##          with some requested repros having a 'releasever'
+    ##          and others do not.  When releasever 
+    ##          is used, the logic needs to get the
+    ##          correct repo set name using the releasever
+    ##          as a filter key.
+    ##          
+    ##          best/simplest  solution I came up with was to 
+    ##          have 2 different loops.  one to process
+    ##          repos with releasever and one without.
+    ##
+    ##
+    ##    WARN: the empty join('') below converts 
+    ##          the list-type to a string-type, it is 
+    ##          intentional and should not be changed
+    ##
+
+    - name: "sat6-automation-contentview : reset variable repository_list"
+      set_fact:
+        repository_list: []
+
+    - name: "sat6-automation-contentview : iterations to add repos to repository list WITH releasever"
+      vars:
+        product:    "{{ set.item.value.product }}"
+        name:       "{{ set.item.value.name }}"
+        label:      "{{ set.item.value.label }}"
+        releasever: "{{ set.item.value.releasever }}"
+        repo_name:  "{{ set.repository_set.repositories | selectattr('releasever','==',set.item.value.releasever) | map(attribute='name') | join('') }}"
+      set_fact:
+        repository_list: "{{ repository_list + [{ 'name': repo_name, 'product': product }] }}"
+      loop_control:
+        label:    "{{ set.item.value.name }}"
+        loop_var: set
+      loop: "{{ repodata.results }}"
+      when: set.item.value.releasever | length > 0
+
+    - name: "sat6-automation-contentview : iterations to add repos to repository list WITHOUT releasever"
+      vars:
+        product:    "{{ set.item.value.product }}"
+        name:       "{{ set.item.value.name }}"
+        label:      "{{ set.item.value.label }}"
+        releasever: "{{ set.item.value.releasever }}"
+        repo_name:  "{{ set.repository_set.repositories | map(attribute='name') | join('') }}"
+      set_fact:
+        repository_list: "{{ repository_list + [{ 'name': repo_name, 'product': product }] }}"
+      loop_control:
+        label:    "{{ set.item.value.name }}"
+        loop_var: set
+      loop: "{{ repodata.results }}"
+      when: set.item.value.releasever | length == 0
+
+    - debug:
+        var: repository_list
+
+
+
+    ##
+    ##    Now we can finally get on with
+    ##    creating and publishing the content view
+    ##
+
+    - name: "sat6-automation-contentview : create/update content view"
+      redhat.satellite.content_view:
+        username:      "{{ sat6_credentials.username }}"
+        password:      "{{ sat6_credentials.password }}"
+        server_url:    "{{ sat6_details.url }}"
+        organization:  "{{ sat6_details.organization }}"
+        name:          "{{ sat6_details.content_view }}"
+        repositories:  "{{ repository_list }}"
+
+    - name: "sat6-automation-contentview : publish content view"
+      redhat.satellite.content_view_version:
+        username:               "{{ sat6_credentials.username }}"
+        password:               "{{ sat6_credentials.password }}"
+        server_url:             "{{ sat6_details.url }}"
+        organization:           "{{ sat6_details.organization }}"
+        content_view:           "{{ sat6_details.content_view }}"
+        lifecycle_environments: "{{ sat6_details.lifecycles.keys()|list }}"
+

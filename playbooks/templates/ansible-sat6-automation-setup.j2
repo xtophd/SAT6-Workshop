@@ -1,0 +1,92 @@
+---
+
+sat6_credentials:
+
+    username: "{{ satellite_credentials.username }}"
+    password: "{{ satellite_credentials.password }}"
+
+sat6_details:
+
+    url:                 "https://satellite.{{ workshop_vars.network_basedomain }}"
+
+    artifacts_directory: "{{ workshop_vars.artifacts_directory }}"
+    manifest_filename:   "{{ workshop_vars.manifest_filename }}"
+
+    organization:        "{{ workshop_vars.myOrganization }}"
+
+    lifecycle_1:         "{{ workshop_vars.myLifecycleName_1 }}"
+    lifecycle_2:         "{{ workshop_vars.myLifecycleName_2 }}"
+    lifecycle_3:         "{{ workshop_vars.myLifecycleName_3 }}"
+
+    activationkey_1:     "{{ workshop_vars.myActivationKeyName_1 }}"
+    activationkey_2:     "{{ workshop_vars.myActivationKeyName_2 }}"
+
+    content_view:        "{{ workshop_vars.myContentViewName }}"
+
+    ##
+    ## Hash of products to sync from the mother ship
+    ##
+
+    product_sets:
+
+{% for product_set in sat6_assets[workshop_vars.satellite_version]['product_sets'] %}
+        "{{ product_set }}":
+            name:        "{{ product_set }}"
+            label:       "{{ sat6_assets[workshop_vars.satellite_version]['product_sets'][product_set]['label'] }}"
+            product:     "{{ sat6_assets[workshop_vars.satellite_version]['product_sets'][product_set]['product'] }}"
+            basearch:    "{{ sat6_assets[workshop_vars.satellite_version]['product_sets'][product_set]['basearch'] }}"
+            releasever:  "{{ sat6_assets[workshop_vars.satellite_version]['product_sets'][product_set]['releasever'] }}"
+
+{% endfor %}
+
+    ##
+    ## Hash of content views to create
+    ##
+
+    contentviews:
+
+        "{{ workshop_vars.myContentViewName }}":
+            repositories:
+{% for product_set in sat6_assets[workshop_vars.satellite_version]['product_sets'] %}
+                - "{{ product_set }}":
+                       name:        "{{ product_set }}"
+                       label:       "{{ sat6_assets[workshop_vars.satellite_version]['product_sets'][product_set]['label'] }}"
+                       product:     "{{ sat6_assets[workshop_vars.satellite_version]['product_sets'][product_set]['product'] }}"
+                       basearch:    "{{ sat6_assets[workshop_vars.satellite_version]['product_sets'][product_set]['basearch'] }}"
+                       releasever:  "{{ sat6_assets[workshop_vars.satellite_version]['product_sets'][product_set]['releasever'] }}"
+                       repo_name:   "{{ sat6_assets[workshop_vars.satellite_version]['product_sets'][product_set]['repo_name'] }}"
+{% endfor %}
+
+                
+                
+
+    ##
+    ## Hash of lifecycles to configure
+    ##
+
+    lifecycles:
+
+        "{{ workshop_vars.myLifecycleName_1 }}":
+            prior:         "Library"
+      
+        "{{ workshop_vars.myLifecycleName_2 }}":
+            prior:         "{{ workshop_vars.myLifecycleName_1}}"
+
+        "{{ workshop_vars.myLifecycleName_3 }}":
+            prior:         "{{ workshop_vars.myLifecycleName_2}}"
+
+
+
+
+    ##
+    ## Hash of activation keys to configure
+    ##
+
+    activation_keys:
+
+        "{{ workshop_vars.myActivationKeyName_1 }}":
+            lifecycle:     "{{ workshop_vars.myLifecycleName_1}}"
+
+        "{{ workshop_vars.myActivationKeyName_2 }}":
+            lifecycle:     "{{ workshop_vars.myLifecycleName_3}}"
+      

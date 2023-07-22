@@ -15,8 +15,9 @@
         file: "../config/credentials.yml"
       when: sat6_AdminPW is undefined
 
-
-
+- import_playbook: bastion-dns.yml
+  tags:
+    - bastion
 
 - import_playbook: sat6-preinstall-registration.yml
   tags:

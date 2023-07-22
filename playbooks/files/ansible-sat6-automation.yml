@@ -1,0 +1,39 @@
+---
+
+- name: "sat6-automation : BEGIN"
+  hosts: localhost
+  gather_facts: false
+  vars_files: "../setup.yml"
+  tags: always
+  tasks:
+
+     - name: "SATELLITE AUTOMATION BEGIN"
+       debug:
+         msg: "Starting the process of configuring the Red Hat Satellite Server"
+
+#    - name: "sat6-automation : load variables"
+#      include_vars:
+#        file: "../setup.yml"
+#      when: sat6_credentials is undefined
+
+
+
+- import_playbook: sat6-automation-manifest.yml
+  tags:
+    - manifest
+
+- import_playbook: sat6-automation-repositories.yml
+  tags:
+    - repositories
+
+- import_playbook: sat6-automation-lifecycles.yml
+  tags:
+    - lifecycles
+
+- import_playbook: sat6-automation-contentviews.yml
+  tags:
+    - contentviews
+
+- import_playbook: sat6-automation-activationkeys.yml
+  tags:
+    - activationkeys

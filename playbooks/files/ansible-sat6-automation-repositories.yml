@@ -1,0 +1,88 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars_files: "../setup.yml"
+  tasks:
+
+
+
+    - name: "sat6-automation-repository: set default Red Hat download_policy"
+      redhat.satellite.setting:
+
+        username:        "{{ sat6_credentials.username }}"
+        password:        "{{ sat6_credentials.password }}"
+        server_url:      "{{ sat6_details.url }}"
+        name:            "default_redhat_download_policy"
+        value:           "immediate"
+
+
+
+    - name: "sat6-automation-repository: examining sat6-automation config (setup.yml)"
+      debug:
+        msg:
+          - "name: {{ item.value.name }}"
+          - "label: {{ omit if item.value.label|length == 0 else item.value.label }}"
+          - "product: {{ item.value.product }}"
+          - "basearch: {{ item.value.basearch }}"
+          - "releasever: {{ item.value.releasever }}"
+      loop_control:
+        label: "{{ item.key }}"
+      with_items:
+        - "{{ sat6_details.product_sets | dict2items }}"
+
+
+
+    - name: "sat6-automation-repository: enable repos WITH specified releasever"
+      redhat.satellite.repository_set:
+        username:      "{{ sat6_credentials.username }}"
+        password:      "{{ sat6_credentials.password }}"
+        server_url:    "{{ sat6_details.url }}"
+        organization:  "{{ sat6_details.organization }}"
+        name:          "{{ omit if item.value.label|length > 0 else item.value.name }}"
+        label:         "{{ omit if item.value.label|length == 0 else item.value.label | default(omit) }}"
+        product:       "{{ item.value.product }}"
+        state: enabled
+        repositories:
+        - basearch:    "{{ item.value.basearch }}"
+          releasever:  "{{ omit if item.value.releasever|length == 0 else item.value.releasever | default(omit)  }}"
+      loop_control:
+        label: "{{ item.key }}"
+      with_items:
+        - "{{ sat6_details.product_sets | dict2items }}"
+      when: item.value.releasever | length > 0
+
+
+
+    - name: "sat6-automation-repository: enable repos WITHOUT specified releasever"
+      redhat.satellite.repository_set:
+        username:      "{{ sat6_credentials.username }}"
+        password:      "{{ sat6_credentials.password }}"
+        server_url:    "{{ sat6_details.url }}"
+        organization:  "{{ sat6_details.organization }}"
+        name:          "{{ omit if item.value.label|length > 0 else item.value.name }}"
+        label:         "{{ omit if item.value.label|length == 0 else item.value.label | default(omit) }}"
+        product:       "{{ item.value.product }}"
+        state: enabled
+        repositories:
+        - basearch:    "{{ item.value.basearch }}"
+      loop_control:
+        label: "{{ item.key }}"
+      with_items:
+        - "{{ sat6_details.product_sets | dict2items }}"
+      when: item.value.releasever | length == 0
+
+
+
+    - name: "sat6-automation-repository: start repo synchronization"
+      redhat.satellite.repository_sync:
+        username:      "{{ sat6_credentials.username }}"
+        password:      "{{ sat6_credentials.password }}"
+        server_url:    "{{ sat6_details.url }}"
+        organization:  "{{ sat6_details.organization }}"
+        repository:    "{{ item.value.name }}"
+        product:       "{{ item.value.product }}"
+      loop_control:
+        label: "{{ item.key }}"
+      with_items:
+        - "{{ sat6_details.product_sets |dict2items }}"
+

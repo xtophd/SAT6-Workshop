@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars_files: "../setup.yml"
+  tasks:
+
+    - name: "sat6-automation-lifecycles: create lifecycles"
+      redhat.satellite.lifecycle_environment:
+        username:      "{{ sat6_credentials.username }}"
+        password:      "{{ sat6_credentials.password }}"
+        server_url:    "{{ sat6_details.url }}"
+        prior:         "{{ item.value.prior }}"
+        name:          "{{ item.key }}"
+        organization:  "{{ sat6_details.organization }}"
+        state:         "present"
+      with_items:
+        - "{{ sat6_details.lifecycles |dict2items }}"
+

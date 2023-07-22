@@ -29,13 +29,14 @@ case "$1" in
     "repos"         | \
     "prep"          | \
     "install"       | \
+    "bastion"       | \
     "postinstall")
 
         time  ansible-playbook --ask-vault-pass -i ${myInventory} -f 10 --tags $1 ./playbooks/sat6.yml
         ;;
 
     *)
-        echo "USAGE: sat6-workshop.sh [ all | registration | repos | prep | install | postinstall ]"
+        echo "USAGE: sat6-workshop.sh [ all | bastion | registration | repos | prep | install | postinstall ]"
         ;;
 
 esac         
