@@ -134,40 +134,30 @@ ADDR_NODE1="${ADDR_NODE1}"
 ADDR_NODE2="${ADDR_NODE2}"
 ADDR_NODE3="${ADDR_NODE3}"
 ADDR_NODE4="${ADDR_NODE4}"
-ADDR_WORKER2="${ADDR_WORKER2}"
-ADDR_SNO="${ADDR_SNO}"
 BMC_BASTION="${BMC_BASTION}"
 BMC_SATELLITE="${BMC_SATELLITE}"
 BMC_NODE1="${BMC_NODE1}"
 BMC_NODE2="${BMC_NODE2}"
 BMC_NODE3="${BMC_NODE3}"
 BMC_NODE4="${BMC_NODE4}"
-BMC_WORKER2="${BMC_WORKER2}"
-BMC_SNO="${BMC_SNO}"
 MAC_BASTION="${MAC_BASTION}"
 MAC_SATELLITE="${MAC_SATELLITE}"
 MAC_NODE1="${MAC_NODE1}"
 MAC_NODE2="${MAC_NODE2}"
 MAC_NODE3="${MAC_NODE3}"
 MAC_NODE4="${MAC_NODE4}"
-MAC_WORKER2="${MAC_WORKER2}"
-MAC_SNO="${MAC_SNO}"
 HW_BASTION="${HW_BASTION}"
 HW_SATELLITE="${HW_SATELLITE}"
 HW_NODE1="${HW_NODE1}"
 HW_NODE2="${HW_NODE2}"
 HW_NODE3="${HW_NODE3}"
 HW_NODE4="${HW_NODE4}"
-HW_WORKER2="${HW_WORKER2}"
-HW_SNO="${HW_SNO}"
 NAME_BASTION="${NAME_BASTION}"
 NAME_SATELLITE="${NAME_SATELLITE}"
 NAME_NODE1="${NAME_NODE1}"
 NAME_NODE2="${NAME_NODE2}"
 NAME_NODE3="${NAME_NODE3}"
 NAME_NODE4="${NAME_NODE4}"
-NAME_WORKER2="${NAME_WORKER2}"
-NAME_SNO="${NAME_SNO}"
 EO_ANSWERS
 
 }
@@ -647,12 +637,14 @@ virthost_menu () {
           ;;
   
           "Set Bridge Type")
-             select VIRTHOST_BR_TYPE in "bridge" "macvtap"
+             select VIRTHOST_BR_TYPE in "bridge" "macvtap" "nat"
              do
                 case ${VIRTHOST_BR_TYPE} in
                   "bridge" )
                     break ;;
                   "macvtap" )
+                    break ;;
+                  "nat" )
                     break ;;
                   "*" )
                     ;;
