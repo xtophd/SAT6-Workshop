@@ -358,6 +358,50 @@ sat6_assets:
         path:   "/var/cache"
         size:   "10"
 
+  "6.13":
+    name: "satellite"
+    version: "6.12"
+    repos: "rhel-8-for-x86_64-baseos-rpms,rhel-8-for-x86_64-appstream-rpms,satellite-6.13-for-rhel-8-x86_64-rpms,satellite-maintenance-6.13-for-rhel-8-x86_64-rpms"
+    product_repos: "Red Hat Enterprise Linux 7 Server (RPMs),Red Hat Satellite Client 6 (for RHEL 7 Server) (RPMs)"
+    product_sets:
+        "Red Hat Enterprise Linux 7 Server (RPMs)":
+            label: "rhel-7-server-rpms"
+            product: "Red Hat Enterprise Linux Server"
+            basearch: "x86_64"
+            releasever: "7Server"
+            repo_name: "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server"
+        "Red Hat Satellite Client 6 (for RHEL 7 Server) (RPMs)":
+            label: "rhel-7-server-satellite-client-6-rpms"
+            product: "Red Hat Enterprise Linux Server"
+            basearch: "x86_64"
+            releasever: ""
+            repo_name: "Red Hat Satellite Client 6 for RHEL 7 Server RPMs x86_64"
+    stop_cmd: "satellite-maintain service stop"
+    start_cmd: "satellite-maintain service start"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ workshop_vars.myOrganization }} --foreman-initial-location {{ workshop_vars.myLocation }} --foreman-initial-admin-username {{ satellite_credentials.username }} --foreman-initial-admin-password {{ satellite_credentials.password }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
+    fs_data:
+      puppet:
+        lv:     "puppet"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/opt/puppetlabs"
+        size:   "5"
+      pulp:
+        lv:     "pulp"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/lib/pulp"
+        size:   "160"
+      pgsql:
+        lv:     "pgsql"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/lib/pgsql"
+        size:   "20"
+      cache:
+        lv:     "cache"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/cache"
+        size:   "10"
+
+
 
 
 

@@ -202,7 +202,7 @@ mySatellite:
 {% endif %}
     h_plPROF:        "custom_platform"
     h_rsPROF:        "custom_satellite"
-{% if t_satellite_version == "6.12" %}
+{% if t_satellite_version is version('6.12',operator='>=') %}
     h_ksPROF:        "rhel86-bootiso"
 {% else %}
     h_ksPROF:        "rhel79-bootiso"

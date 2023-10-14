@@ -79,8 +79,11 @@
         password:      "{{ sat6_credentials.password }}"
         server_url:    "{{ sat6_details.url }}"
         organization:  "{{ sat6_details.organization }}"
-        repository:    "{{ item.value.name }}"
         product:       "{{ item.value.product }}"
+        ## 2023-10: omit reposity name
+        ##   The repository name seems to cause some problems (can't find it). 
+        ##   Omitting it just causes whole Product (family) to be sync'd, which is harmless
+        #repository:    "{{ item.value.name }}"
       loop_control:
         label: "{{ item.key }}"
       with_items:
