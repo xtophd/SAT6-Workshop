@@ -13,3 +13,26 @@
         organization:  "{{ sat6_details.organization }}"
         state:         present
         
+    ##
+    ## Until Satellite 6.14 (hoping), there is no means to manage SCA via
+    ## the ansible modules.  Thus we revert to shell and hammer
+    ##
+
+    - name: "sat6-automation-manifest : disable SCA for now"
+      shell:
+        cmd: |
+          hammer simple-content-access disable --organization "{{sat6_details.organization }}"
+
+
+
+    #- name: "sat6-automation-manifest : get organization details"
+    #  redhat.satellite.organization_info:
+    #    username:      "{{ sat6_credentials.username }}"
+    #    password:      "{{ sat6_credentials.password }}"
+    #    server_url:    "{{ sat6_details.url }}"
+    #    name:          "{{ sat6_details.organization }}"
+    #  register: org_info
+
+    #- name: "sat6-automation-manifest : debug organization details"
+    #  debug: var=org_info
+
