@@ -115,7 +115,7 @@ myLibvirtHosts:
 {% if t_virthost_type == "libvirt" and t_virthost_fqdn|length %}
     {{ t_virthost_fqdn }}:
       h_pubIP:  "{{ t_virthost_ip }}"
-      h_plPROF: "custom_kvmhost"
+      h_plPROF: "custom_platform"
 {% if t_virthost_fqdn == "localhost.localdomain" %}
       ansible_connection: local
 {% endif %}
@@ -128,7 +128,11 @@ myLibvirtHosts:
 myDeployhost:
   hosts:
     deployer:
-      h_pubIP:       {% raw %}"{{ xtoph_vars.deployhost_ip }}"{% endraw %}
+      h_pubIP:          {% raw %}"{{ xtoph_vars.deployhost_ip }}"{% endraw %}
+
+{% if t_virthost_fqdn == "localhost.localdomain" %}
+      h_plPROF:         "custom_platform"
+{% endif %}
 
   vars:
     ansible_connection: local
