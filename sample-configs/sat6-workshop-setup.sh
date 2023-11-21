@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export SATELLITE_VERSION="6.13"
+export SATELLITE_VERSION="6.14"
 export SATELLITE_MANIFEST=""
 export SATELLITE_UID="admin"
 export SATELLITE_PW=""
@@ -822,9 +822,11 @@ satellite_menu () {
       case ${action}  in
 
         "Set Version")
-           select SATELLITE_VERSION in "6.13" "6.12" "6.11" "6.10" "6.9" "6.8" "6.7" "6.6"
+           select SATELLITE_VERSION in "6.14" "6.13" "6.12" "6.11" "6.10" "6.9" "6.8" "6.7" "6.6"
            do
               case ${SATELLITE_VERSION} in
+                "6.14" )
+                  break ;;
                 "6.13" )
                   break ;;
                 "6.12" )
