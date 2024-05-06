@@ -51,9 +51,13 @@ The most difficult part of getting all of the parameters right is figuring out t
 
 .[root@satellite ~]$
 ----
+hammer product list --organization "ExampleCom"
+
 hammer repository-set list --product "Red Hat Enterprise Linux Server" --organization "ExampleCom"
 
-hammer product list --organization "ExampleCom"
+hammer repository-set list --product "Red Hat Enterprise Linux Server for x86_64" --organization "ExampleCom"
+
+hammer repository-set info --product "Red Hat Enterprise Linux for x86_64" --organization "ExampleCom" --name "Red Hat Enterprise Linux 8 for x86_64 - BaseOS (RPMs)"
 ----
 
 Once you have the names, you can begin to enable the desired repos.
