@@ -822,9 +822,11 @@ satellite_menu () {
       case ${action}  in
 
         "Set Version")
-           select SATELLITE_VERSION in "6.14" "6.13" "6.12" "6.11" "6.10" "6.9" "6.8" "6.7" "6.6"
+           select SATELLITE_VERSION in "6.15" "6.14" "6.13" "6.12" "6.11" "6.10" "6.9" "6.8" "6.7" "6.6"
            do
               case ${SATELLITE_VERSION} in
+                "6.15" )
+                  break ;;
                 "6.14" )
                   break ;;
                 "6.13" )
