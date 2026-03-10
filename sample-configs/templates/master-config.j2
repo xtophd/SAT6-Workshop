@@ -15,34 +15,57 @@ all:
   vars:
 
     ## ----------------------------------------
+    ##    Defaults based on virthost type
+
+{%if lookup('env',"VIRTHOST_TYPE") == "libvirt" %}
+    h_hwPROF:        "kvm_vda_q35"
+    h_plPROF:        "custom_platform"
+{%elif lookup('env',"VIRTHOST_TYPE") == "ovirt" %}
+    h_hwPROF:        "ovirt_sda"
+    h_plPROF:        "custom_platform"
+{%endif %}
+
+    ## ----------------------------------------
     ##    Workshop Variables
 
     workshop_vars:
 
-      projectname:          "{{ t_project_name }}"
+      projectname:          "{{ lookup('env','PROJECT_NAME')    }}"
 
-      satellite_version:     "{{ t_satellite_version }}"
-      manifest_filename:     "{{ t_satellite_manifest }}"
+      ldap_client:          {{ lookup('env','LDAP')            }}
+      ldap_uri:             "{{ lookup('env','LDAP_URI')        }}"
+      ldap_base_dn:         "{{ lookup('env','LDAP_BASE_DN')         }}"
+      ldap_bind_dn:         "{{ lookup('env','LDAP_BIND_DN')    }}"
+      ldap_bind_pw:         "{{ lookup('env','LDAP_BIND_PW')    }}"
+      ldap_sudo_grp:        "{{ lookup('env','LDAP_SUDO_GRP')   }}"
+
+      network_id:           "{{ lookup('env','NETWORK_ID')          }}"
+      network_gateway:      "{{ lookup('env','NETWORK_GATEWAY')     }}"
+      network_prefix:       "{{ lookup('env','NETWORK_PREFIX')      }}"
+      network_broadcast:    "{{ lookup('env','NETWORK_BROADCAST')   }}"
+      network_netmask:      "{{ lookup('env','NETWORK_NETMASK')     }}"
+      network_basedomain:   "{{ lookup('env','NETWORK_BASEDOMAIN')  }}"
+      network_subdomain:    "{{ lookup('env','NETWORK_SUBDOMAIN')   }}"
+      network_nameserver:   "{{ lookup('env','NETWORK_DNS_SERVER')  }}"
+      network_timeserver:   "{{ lookup('env','NETWORK_TIME_SERVER') }}"
+
+      satellite_version:     "{{ lookup('env','SATELLITE_VERSION') }}"
+      manifest_filename:     "{{ lookup('env','SATELLITE_MANIFEST') }}"
 
       artifacts_directory:   "/root/sat6-artifacts"
-
-      network_basedomain:   "{{ t_network_basedomain }}"
-      network_network:      "{{ t_network_id }}"
-      network_netmask:      "{{ t_network_netmask }}"
-      network_broadcast:    "{{ t_network_broadcast }}"
-      network_prefix:       "{{ t_network_prefix }}"
-      network_gateway:      "{{ t_network_gateway }}"
-      network_nameserver:   "{{ t_network_dns_server }}"
-      network_timeserver:   "{{ t_network_time_server }}"
 
       http_proxy:           ""
       https_proxy:          ""
 
       ## Satellite Parms
-
-{% if t_virthost_type == "libvirt" %}
+      ##   satellite_disk = {{ t_satellite_disk }}
+      ##   virthost_type  = {{ t_virthost_type }}
+      
+{% if t_satellite_disk|length and t_satellite_disk != "auto" %}
+      myDisk:                "{{ t_satellite_disk }}"
+{% elif t_satellite_disk == "auto" and t_virthost_type == "libvirt" %}
       myDisk:                "/dev/vdb"
-{% else %}
+{% elif t_satellite_disk == "auto" and t_virthost_type == "ovirt" %}
       myDisk:                "/dev/sdb"
 {% endif %}
 
@@ -88,9 +111,6 @@ all:
         desktop_chrome:     False
         desktop_vnc:        False
 
-    workshop_extras:
-
-      network_fqdn:         "{{ t_network_basedomain }}"
 
 
     ## ----------------------------------------
@@ -114,11 +134,27 @@ myLibvirtHosts:
   hosts:
 {% if t_virthost_type == "libvirt" and t_virthost_fqdn|length %}
     {{ t_virthost_fqdn }}:
-      h_pubIP:  "{{ t_virthost_ip }}"
-      h_plPROF: "custom_platform"
-{% if t_virthost_fqdn == "localhost.localdomain" %}
+      h_netIP:  "{{ t_virthost_ip }}"
+{%   if t_virthost_fqdn == "localhost.localdomain" %}
       ansible_connection: local
-{% endif %}
+{%   endif %}
+
+{%   if t_virthost_hw|length  %}
+      h_hwPROF:  "{{ t_virthost_hw }}"
+      h_plPROF:  "custom_baremetal"
+      h_plSETUP: "custom_platform"
+      h_rsPROF:  "med"
+      h_pwrOFF:  false
+      h_ksPROF:  "rhel92-bootiso"
+{%   else %}
+      h_hwPROF:  "pc_sda"
+      h_plSETUP: "custom_platform"
+      h_rsPROF:  "med"
+{%   endif %}
+
+{%   if t_virthost_bmc|length  %}
+      bmc_fqdn:        "{{ t_virthost_bmc }}"
+{%   endif %}
 {% endif %}
 
 
@@ -128,8 +164,7 @@ myLibvirtHosts:
 myDeployhost:
   hosts:
     deployer:
-      h_pubIP:          {% raw %}"{{ xtoph_vars.deployhost_ip }}"{% endraw %}
-
+      h_netIP:          {% raw %}"{{ xtoph_vars.deployhost_ip }}"{% endraw %}
 {% if t_virthost_fqdn == "localhost.localdomain" %}
       h_plPROF:         "custom_platform"
 {% endif %}
@@ -139,168 +174,63 @@ myDeployhost:
 
 
 
+{% for hgroup in [ "myBastion", "myNodes", "mySatellite" ] %}
+
 ## -----------------
 
-
-
-myBastion:
+{{ hgroup }} :
   hosts:
-    {{t_name_bastion }}.{{ t_network_basedomain}}:
-      h_pubIP:         "{{ t_addr_bastion }}"
-{% if t_mac_bastion|length %}
-      h_pubMAC:        "{{ t_mac_bastion }}"
-{% endif -%}
-{% if t_hw_bastion|length  %}
-      h_hwPROF:        "{{ t_hw_bastion  }}"
-      h_plPROF:        "custom_baremetal"
-      h_pwrOFF:        false
-      h_ksPROF:        "vmedia_nowait"
-{% endif %}
+{%   for index in range(1,9) %}
+{%     if  lookup('env','HGROUP_NODE' ~ index) == hgroup %}
 
-{% if t_bmc_bastion|length %}
-      bmc_fqdn:        "{{ t_bmc_bastion }}"
-{% endif %}
+    {{ lookup('env','NAME_NODE' ~ index) }}.{{ lookup('env','NETWORK_SUBDOMAIN') }} :
+      h_netIP:         "{{ lookup('env','ADDR_NODE' ~ index) }}"
+{%       if lookup('env','KOPTS_NODE' ~ index)|length %}
+      h_kernelOPTS:    "{{ lookup('env','KOPTS_NODE' ~ index) }}"
+{%       endif %}
+{%       if lookup('env','KS_NODE' ~ index)|length %}
+      h_ksPROF:        "{{ lookup('env','KS_NODE' ~ index) }}"
+{%       endif %}
+{%       if lookup('env','MAC_NODE' ~ index)|length %}
+      h_netMAC:        "{{ lookup('env','MAC_NODE' ~ index) }}"
+{%       endif %}
+{%       if lookup('env','NETMODE_NODE' ~ index)|length %}
+      h_netMODE:       "{{ lookup('env','NICMODE_NODE' ~ index) }}"
+{%       endif %}
+{%       if lookup('env','NETDEV_NODE' ~ index)|length %}
+      h_netDEV:        "{{ lookup('env','NETDEV_NODE' ~ index) }}"
+{%       endif %}
+{%       if lookup('env','BLKDEV_NODE' ~ index)|length %}
+      h_blkDEV:        "{{ lookup('env','BLKDEV_NODE' ~ index) }}"
+{%       endif %}
+{%       if lookup('env','HW_NODE' ~ index)|length %}
+      h_hwPROF:        "{{ lookup('env','HW_NODE' ~ index) }}"
+{%       endif %}
+{%     endif %}
+{%   endfor %}
 
   vars:
-{% if t_virthost_type == "libvirt" %}
-    h_hwPROF:        "kvm_vda"
-{% elif t_virthost_type == "ovirt" %}
-    h_hwPROF:        "ovirt_sda"
-{% endif %}
-    h_plPROF:        "custom_platform"
-    h_rsPROF:        "custom_bastion"
-    h_ksPROF:        "rhel79-bootiso"
+    #    REMINDER: 
+    #        h_plPROF    default defined at top of inventory
+    #        h_hwPROF    default defined at top of inventory
+    #        h_netMAC    if not explicitly set, probably a calculated host var file
 
-
-
-
-## -----------------
-
-
-
-mySatellite:
-  hosts:
-{% if t_addr_satellite is defined and t_addr_satellite|length %}
-     {{ t_name_satellite }}.{{ t_network_basedomain}}:
-      h_pubIP:         "{{ t_addr_satellite }}" 
-{% if t_mac_satellite|length %}
-      h_pubMAC:        "{{ t_mac_satellite }}"
-{% endif -%}
-{% if t_hw_satellite|length  %}
-      h_hwPROF:        "{{ t_hw_satellite  }}"
-      h_plPROF:        "custom_baremetal"
-      h_pwrOFF:        false
-      h_ksPROF:        "vmedia_nowait"
-{% endif %}
-
-{% if t_bmc_satellite|length %}
-      bmc_fqdn:        "{{ t_bmc_satellite }}"
-{% endif %}
-{% endif %}
-
-  vars: 
-{% if t_virthost_type == "libvirt" %}
-    h_hwPROF:        "kvm_vda"
-{% elif t_virthost_type == "ovirt" %}
-    h_hwPROF:        "ovirt_sda"
-{% endif %}
-    h_plPROF:        "custom_platform"
-    h_rsPROF:        "custom_satellite"
-{% if t_satellite_version is version('6.12',operator='>=') %}
+{%   if hgroup == "myBastion" %}
     h_ksPROF:        "rhel86-bootiso"
-{% else %}
-    h_ksPROF:        "rhel79-bootiso"
-{% endif %}
-
-
-
-## -----------------
-
-
-
-myNodes:
-  hosts:
-
-{% if t_addr_node1 is defined and t_addr_node1|length %}
-    {{ t_name_node1}}.{{ t_network_basedomain}}:
-      h_pubIP:         "{{ t_addr_node1 }}"
-{% if t_mac_node1|length %}
-      h_pubMAC:        "{{ t_mac_node1 }}"
-{% endif -%}
-{% if t_hw_node1|length  %}
-      h_hwPROF:        "{{ t_hw_node1  }}"
-      h_plPROF:        "custom_baremetal"
-      h_pwrOFF:        false
-      h_ksPROF:        "vmedia_nowait"
-{% endif %}
-
-{% if t_bmc_node1|length %}
-      bmc_fqdn:        "{{ t_bmc_node1 }}"
-{% endif %}
-{% endif %}
-
-{% if t_addr_node2 is defined and t_addr_node2|length %}
-    {{ t_name_node2}}.{{ t_network_basedomain}}:
-      h_pubIP:         "{{ t_addr_node2 }}"
-{% if t_mac_node2|length %}
-      h_pubMAC:        "{{ t_mac_node2 }}"
-{% endif -%}
-{% if t_hw_node2|length  %}
-      h_hwPROF:        "{{ t_hw_node2  }}"
-      h_plPROF:        "custom_baremetal"
-      h_pwrOFF:        false
-      h_ksPROF:        "vmedia_nowait"
-{% endif %}
-
-{% if t_bmc_node2|length %}
-      bmc_fqdn:        "{{ t_bmc_node2 }}"
-{% endif %}
-{% endif %}
-
-{% if t_addr_node3 is defined and t_addr_node3|length %}
-    {{ t_name_node3}}.{{ t_network_basedomain}}:
-      h_pubIP:         "{{ t_addr_node3 }}"
-{% if t_mac_node3|length %}
-      h_pubMAC:        "{{ t_mac_node3 }}"
-{% endif -%}
-{% if t_hw_node3|length  %}
-      h_hwPROF:        "{{ t_hw_node3  }}"
-      h_plPROF:        "custom_baremetal"
-      h_pwrOFF:        false
-      h_ksPROF:        "vmedia_nowait"
-{% endif %}
-
-{% if t_bmc_node3|length %}
-      bmc_fqdn:        "{{ t_bmc_node3 }}"
-{% endif %}
-{% endif %}
-
-{% if t_addr_node4 is defined and t_addr_node4|length %}
-    {{ t_name_node4}}.{{ t_network_basedomain}}:
-      h_pubIP:         "{{ t_addr_node4 }}"
-{% if t_mac_node4|length %}
-      h_pubMAC:        "{{ t_mac_node4 }}"
-{% endif -%}
-{% if t_hw_node4|length  %}
-      h_hwPROF:        "{{ t_hw_node4  }}"
-      h_plPROF:        "custom_baremetal"
-      h_pwrOFF:        false
-      h_ksPROF:        "vmedia_nowait"
-{% endif %}
-
-{% if t_bmc_node4|length %}
-      bmc_fqdn:        "{{ t_bmc_node4 }}"
-{% endif %}
-{% endif %}
-
-
-  vars: 
-{% if t_virthost_type == "libvirt" %}
-    h_hwPROF:        "kvm_vda"
-{% elif t_virthost_type == "ovirt" %}
-    h_hwPROF:        "ovirt_sda"
-{% endif %}
-    h_plPROF:        "custom_platform"
     h_rsPROF:        "custom_bastion"
+{%   elif hgroup == "myNodes" %}
     h_ksPROF:        "rhel79-bootiso"
+    h_rsPROF:        "custom_node"
+{%   elif hgroup == "mySatellite" %}
+{%     if lookup('env','SATELLITE_VERSION') is version('6.16',operator='>=') %}
+    h_ksPROF:        "rhel96-bootiso"
+    h_rsPROF:        "custom_satellite"
+{%     elif lookup('env','SATELLITE_VERSION') is version('6.12',operator='>=') %}
+    h_ksPROF:        "rhel86-bootiso"
+    h_rsPROF:        "custom_satellite"
+{%     else %}
+    # WARNING: Encountered unexpected hostgroup
+{%     endif %}
+{%   endif %}
+{% endfor %}
 

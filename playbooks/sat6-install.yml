@@ -1,9 +1,13 @@
 ---
 - hosts: mySatellite, !myShelter
+  vars_files:
+    - vars-sat6.yml
+    - vars-sat6-attribs.yml
+
   tasks:
   
     - name: "YUM install satellite packages"
-      yum: name=satellite,sos,foreman-discovery-image state=installed
+      yum: name=satellite,sos,foreman-discovery-image,puppetserver state=installed
 
     - debug: var=sat6_assets[workshop_vars.satellite_version]['install_cmd'] 
 

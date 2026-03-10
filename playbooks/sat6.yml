@@ -6,8 +6,10 @@
 
 ---
 
+
 - hosts: all
   tags: always
+
   tasks:
 
     - name: "sat6.yml : load variables"

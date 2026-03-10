@@ -12,6 +12,16 @@ custom_bastion:
         size: 50 
         hw_storage_profile: default
 
+custom_node:
+    name: "custom openshift bastion"
+    description: "Custom generic RHEL node"
+    vcpus:    4
+    memsize:  8000
+    storage:
+      root:
+        size: 50 
+        hw_storage_profile: default
+
 custom_satellite:
     name: "custom satellite"
     description: "Custom Satellite Server [6cpu,24GB,30GB + 200GB disk]"
@@ -23,6 +33,6 @@ custom_satellite:
         hw_storage_profile: default
       extra:
         disk1:
-          size: 200
+          size: 250
           hw_storage_profile: default
 

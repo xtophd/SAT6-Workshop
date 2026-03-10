@@ -18,10 +18,12 @@
     ## the ansible modules.  Thus we revert to shell and hammer
     ##
 
-    - name: "sat6-automation-manifest : disable SCA for now"
+    - name: "sat6-automation-manifest : disable SCA for satellite < 6.18"
       shell:
         cmd: |
           hammer simple-content-access disable --organization "{{sat6_details.organization }}"
+      when:
+        - workshop_vars.satellite_version is version('6.18',operator='<')
 
 
 

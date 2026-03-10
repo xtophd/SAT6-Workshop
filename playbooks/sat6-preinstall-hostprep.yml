@@ -4,7 +4,7 @@
 
     - name: "SAT6-PREINSTALL-HOSTPREP: set hostname"
       hostname:
-        name: "{{ inventory_hostname_short }}.{{ workshop_extras.network_fqdn }}"
+        name: "{{ inventory_hostname_short }}.{{ workshop_vars.network_subdomain }}"
 
     - name: "SAT6-PREINSTALL-HOSTPREP: yum remove old rhn tools"
       yum: name=rhn-setup,rhn-client-tools state=absent
@@ -26,6 +26,11 @@
       yum: name=wget,git,net-tools,bind-utils,yum-utils,iptables-services,iproute,bash-completion,kexec-tools,sos,psacct,firewalld state=installed
       when:
         - ansible_distribution_major_version == '8'
+
+    - name: "SAT6-PREINSTALL-HOSTPREP:YUM install misc required packages (RHEL 9)"
+      yum: name=wget,git,net-tools,bind-utils,yum-utils,iptables-services,iproute,bash-completion,kexec-tools,sos,psacct,firewalld state=installed
+      when:
+        - ansible_distribution_major_version == '9'
 
     - name: "SAT6-PREINSTALL-HOSTPREP:SERVICE STOP firewalld"
       service: name=firewalld state=stopped enabled=yes
@@ -56,6 +61,10 @@
 
 
 - hosts: mySatellite, !myShelter
+  vars_files:
+    - vars-sat6.yml
+    - vars-sat6-attribs.yml
+
   tasks:
 
     - name: "SAT6-PREINSTALL-HOSTPREP: debug of sat6_assets[{{ workshop_vars.satellite_version }}]"

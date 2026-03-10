@@ -1,6 +1,10 @@
 
 ---
 - hosts: myNodes, !myShelter
+  vars_files:
+    - vars-sat6.yml
+    - vars-sat6-attribs.yml
+
   tasks:
 
     - name: "SAT6-POSTINSTALL: remove older katello certs"
@@ -9,13 +13,12 @@
           yum remove -y katello-ca-consumer*.noarch
 
     - name: "SAT6-POSTINSTALL: yum install satellite crt"
-      vars:
-        - p_fqdn: "{{ hostvars[item]['inventory_hostname_short'] }}.{{ workshop_extras.network_fqdn }}"
       yum: 
-        name: "http://{{ p_fqdn }}/pub/katello-ca-consumer-{{ p_fqdn }}-1.0-1.noarch.rpm"
+        name: "http://{{ item }}/pub/katello-ca-consumer-{{ item }}-1.0-1.noarch.rpm"
         state: installed
         disable_gpg_check: yes
-      loop: "{{ groups['mySatellite'] }}"
+      with_items:
+        - "{{ groups['mySatellite'][0] }}"
 
     - name: "SAT6-POSTINSTALL: clear yum cache"
       shell:                                                                                           
@@ -33,6 +36,10 @@
         - {src: 'cheat-register-host.j2',           dest: '/usr/local/bin/cheat-register-host.sh'}
 
 - hosts: mySatellite, !myShelter
+  vars_files:
+    - vars-sat6.yml
+    - vars-sat6-attribs.yml
+
   tasks:
 
     - name: "SAT6-POSTINSTALL: selinux restorecon -R /opt"

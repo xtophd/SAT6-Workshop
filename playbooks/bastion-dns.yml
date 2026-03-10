@@ -31,12 +31,13 @@
 
     - name: "SAT6-WORKSHOP : bastion-dns : deploy resolv.conf"
       vars: 
-        - p_search:     "{{ workshop_vars.network_basedomain }}"
+        - p_search:     "{{ workshop_vars.network_subdomain }}"
         - p_nameserver: "127.0.0.1"
       template:
         src:   "dns-resolv-conf.j2"
         dest:  "/etc/resolv.conf"
         owner: root
+
 
 
 - hosts: myBastion,mySatellite,myNodes
@@ -48,7 +49,7 @@
       run_once: false
       lineinfile:
         dest:   "/etc/hosts"
-        regexp: "{{ h_pubIP }} .*$"
+        regexp: "{{ h_netIP }} .*$"
         state:  absent
    
     - name: "SAT6-WORKSHOP : bastion-dns : cleanup conflicting name in /etc/hosts"
@@ -66,7 +67,7 @@
       run_once: false
       lineinfile:
         dest:   "/etc/hosts"
-        line:   "{{ h_pubIP }} {{ inventory_hostname }}"
+        line:   "{{ h_netIP }} {{ inventory_hostname }}"
         state:  present
         insertbefore: "^127.0.0.1.*"
 
@@ -118,12 +119,39 @@
       with_items:
         - "dns"
 
-    - name: "SAT6-WORKSHOP : bastion-dns : add local domain entry in dnsmasq.conf"
+    #
+    #    fix dnsmasq.conf to act as forwarding nameserver
+    #
+
+    - name: "SAT6-WORKSHOP : adjust /etc/dnsmasq.conf with except-interface"
+      lineinfile:
+        dest: "/etc/dnsmasq.conf"
+        insertafter: "^#except-interface=.*$"
+        line: "except-interface=virbr0"
+        state: present
+
+    - name: "SAT6-WORKSHOP : adjust /etc/dnsmasq.conf with bind-interfaces"
+      lineinfile:
+        dest: "/etc/dnsmasq.conf"
+        insertafter: "^#bind-interfaces.*$"
+        line: "bind-interfaces"
+        state: present
+
+    - name: "SAT6-WORKSHOP : disable the listen on loopback interface only config"
+      replace:
+        dest: "/etc/dnsmasq.conf"
+        regexp: "^interface=lo"
+        replace: "#interface=lo"
+
+    - name: "SAT6-WORKSHOP : bastion-dns : add local subdomain entry in dnsmasq.conf"
       lineinfile:
         dest:   "/etc/dnsmasq.conf"
-        line:   "local=/{{ workshop_vars.network_basedomain }}/"
+        line:   "local=/{{ workshop_vars.network_subdomain }}/"
         state:  present
         insertafter: "EOF"
+      when: 
+        - workshop_vars.network_subdomain | length
+        - workshop_vars.network_subdomain != workshop_vars.network_basedomain
 
     - name: "SAT6-WORKSHOP : bastion-dns : add forwarding dns entry in dnsmasq.conf"
       lineinfile:
@@ -147,11 +175,11 @@
 
     - debug: var=hostvars[groups['myBastion'][0]]
 
-    - debug: msg="DNS IP = {{ hostvars[groups['myBastion'][0]]['h_pubIP'] }}"
+    - debug: msg="DNS IP = {{ hostvars[groups['myBastion'][0]]['h_netIP'] }}"
 
     - name: "SAT6-WORKSHOP : bastion-dns : fix nodes nodes to use bastion for dns"
       vars:
-        t_dns: "{{ hostvars[groups['myBastion'][0]]['h_pubIP'] }}"
+        t_dns: "{{ hostvars[groups['myBastion'][0]]['h_netIP'] }}"
       shell:
         cmd: |
              nmcli -g name,type connection  show  --active | awk -F: '/ethernet|wireless/ { print $1 }' | while read connection

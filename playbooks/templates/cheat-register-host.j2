@@ -14,7 +14,7 @@ echo "## Registering with satellite"
 
 subscription-manager register \
   --org="{{ workshop_vars.myOrganization }}" \
-  --serverurl="satellite.{{ workshop_extras.network_fqdn }}" \
+  --serverurl="{{  groups['mySatellite'][0] }}" \
   --activationkey="{{ workshop_vars.myActivationKeyName_1 }}"
 
 echo "## Installing Katello Agent"
@@ -27,4 +27,4 @@ katello-package-upload
 
 echo "## Enabling remote execution from Satellite"
 
-curl https://satellite.{{ workshop_extras.network_fqdn }}:9090/ssh/pubkey >> /root/.ssh/authorized_keys
+curl https://{{  groups['mySatellite'][0] }}:9090/ssh/pubkey >> /root/.ssh/authorized_keys

@@ -3,6 +3,8 @@ sat6_assets:
   "6.3":
     name: "satellite"
     version: "6.3"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
     repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.3-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-satellite-6.3-puppet4-rpms"
     product_repos: "Red Hat Enterprise Linux 7 Server (RPMs),Red Hat Satellite Tools {{ workshop_vars.satellite_version }} (for RHEL 7 Server) (RPMs)"
     stop_cmd: "katello-service stop"
@@ -73,6 +75,8 @@ sat6_assets:
   "6.5":
     name: "satellite"
     version: "6.5"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
     repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.5-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.6-rpms"
     product_repos: "Red Hat Enterprise Linux 7 Server (RPMs),Red Hat Satellite Tools {{ workshop_vars.satellite_version }} (for RHEL 7 Server) (RPMs)"
     stop_cmd: "katello-service stop"
@@ -108,6 +112,8 @@ sat6_assets:
   "6.6":
     name: "satellite"
     version: "6.6"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
     repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.6-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.8-rpms"
     product_repos: "Red Hat Enterprise Linux 7 Server (RPMs),Red Hat Satellite Tools {{ workshop_vars.satellite_version }} (for RHEL 7 Server) (RPMs)"
     stop_cmd: "katello-service stop"
@@ -143,6 +149,8 @@ sat6_assets:
   "6.7":
     name: "satellite"
     version: "6.7"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
     repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.7-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.8-rpms"
     product_repos: "Red Hat Enterprise Linux 7 Server (RPMs),Red Hat Satellite Tools {{ workshop_vars.satellite_version }} (for RHEL 7 Server) (RPMs)"
     stop_cmd: "katello-service stop"
@@ -178,6 +186,8 @@ sat6_assets:
   "6.8":
     name: "satellite"
     version: "6.8"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
     repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.8-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.9-rpms"
     product_repos: "Red Hat Enterprise Linux 7 Server (RPMs),Red Hat Satellite Tools {{ workshop_vars.satellite_version }} (for RHEL 7 Server) (RPMs)"
     stop_cmd: "katello-service stop"
@@ -213,6 +223,8 @@ sat6_assets:
   "6.9":
     name: "satellite"
     version: "6.9"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
     repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.9-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.9-rpms"
     product_repos: "Red Hat Enterprise Linux 7 Server (RPMs),Red Hat Satellite Tools {{ workshop_vars.satellite_version }} (for RHEL 7 Server) (RPMs)"
     stop_cmd: "satellite-maintain service stop"
@@ -283,6 +295,8 @@ sat6_assets:
   "6.11":
     name: "satellite"
     version: "6.11"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
     repos: "rhel-7-server-rpms,rhel-7-server-satellite-6.11-rpms,rhel-7-server-satellite-maintenance-6-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-ansible-2.9-rpms"
     product_repos: "Red Hat Enterprise Linux 7 Server (RPMs),Red Hat Satellite Tools {{ workshop_vars.satellite_version }} (for RHEL 7 Server) (RPMs)"
     stop_cmd: "satellite-maintain service stop"
@@ -318,6 +332,8 @@ sat6_assets:
   "6.12":
     name: "satellite"
     version: "6.12"
+    server_kickstart: "rhel86-bootiso"
+    client_kickstart: "rhel79-bootiso"
     repos: "rhel-8-for-x86_64-baseos-rpms,rhel-8-for-x86_64-appstream-rpms,satellite-6.12-for-rhel-8-x86_64-rpms,satellite-maintenance-6.12-for-rhel-8-x86_64-rpms"
     product_repos: "Red Hat Enterprise Linux 7 Server (RPMs),Red Hat Satellite Client 6 (for RHEL 7 Server) (RPMs)"
     product_sets: 
@@ -361,6 +377,8 @@ sat6_assets:
   "6.13":
     name: "satellite"
     version: "6.13"
+    server_kickstart: "rhel86-bootiso"
+    client_kickstart: "rhel79-bootiso"
     repos: "rhel-8-for-x86_64-baseos-rpms,rhel-8-for-x86_64-appstream-rpms,satellite-6.13-for-rhel-8-x86_64-rpms,satellite-maintenance-6.13-for-rhel-8-x86_64-rpms"
     product_repos: "Red Hat Enterprise Linux 7 Server (RPMs),Red Hat Satellite Client 6 (for RHEL 7 Server) (RPMs)"
     product_sets:
@@ -406,6 +424,8 @@ sat6_assets:
   "6.14":
     name: "satellite"
     version: "6.14"
+    server_kickstart: "rhel86-bootiso"
+    client_kickstart: "rhel79-bootiso"
     repos: "rhel-8-for-x86_64-baseos-rpms,rhel-8-for-x86_64-appstream-rpms,satellite-6.14-for-rhel-8-x86_64-rpms,satellite-maintenance-6.14-for-rhel-8-x86_64-rpms"
     product_repos: "Red Hat Enterprise Linux 7 Server (RPMs),Red Hat Satellite Client 6 (for RHEL 7 Server) (RPMs)"
     product_sets:
@@ -451,6 +471,8 @@ sat6_assets:
   "6.15":
     name: "satellite"
     version: "6.15"
+    server_kickstart: "rhel96-bootiso"
+    client_kickstart: "rhel79-bootiso"
     repos: "rhel-8-for-x86_64-baseos-rpms,rhel-8-for-x86_64-appstream-rpms,satellite-6.15-for-rhel-8-x86_64-rpms,satellite-maintenance-6.15-for-rhel-8-x86_64-rpms"
     product_repos: "Red Hat Enterprise Linux 7 Server (RPMs),Red Hat Satellite Client 6 (for RHEL 7 Server) (RPMs)"
     product_sets:
@@ -491,9 +513,144 @@ sat6_assets:
         path:   "/var/cache"
         size:   "10"
 
+  "6.16":
+    name: "satellite"
+    version: "6.16"
+    server_kickstart: "rhel96-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: "rhel-9-for-x86_64-baseos-rpms,rhel-9-for-x86_64-appstream-rpms,satellite-6.16-for-rhel-9-x86_64-rpms,satellite-maintenance-6.16-for-rhel-9-x86_64-rpms"
+    product_repos: "Red Hat Enterprise Linux 7 Server (RPMs),Red Hat Satellite Client 6 (for RHEL 7 Server) (RPMs)"
+    product_sets:
+        "Red Hat Enterprise Linux 7 Server (RPMs)":
+            label: "rhel-7-server-rpms"
+            product: "Red Hat Enterprise Linux Server"
+            basearch: "x86_64"
+            releasever: "7Server"
+            repo_name: "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server"
+        "Red Hat Satellite Client 6 (for RHEL 7 Server) (RPMs)":
+            label: "rhel-7-server-satellite-client-6-rpms"
+            product: "Red Hat Enterprise Linux Server"
+            basearch: "x86_64"
+            releasever: ""
+            repo_name: "Red Hat Satellite Client 6 for RHEL 7 Server RPMs x86_64"
+    stop_cmd: "satellite-maintain service stop"
+    start_cmd: "satellite-maintain service start"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ workshop_vars.myOrganization }} --foreman-initial-location {{ workshop_vars.myLocation }} --foreman-initial-admin-username {{ satellite_credentials.username }} --foreman-initial-admin-password {{ satellite_credentials.password }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
+    fs_data:
+      puppet:
+        lv:     "puppet"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/opt/puppetlabs"
+        size:   "5"
+      pulp:
+        lv:     "pulp"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/lib/pulp"
+        size:   "160"
+      pgsql:
+        lv:     "pgsql"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/lib/pgsql"
+        size:   "20"
+      cache:
+        lv:     "cache"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/cache"
+        size:   "10"
 
+  "6.17":
+    name: "satellite"
+    version: "6.17"
+    server_kickstart: "rhel96-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: "rhel-9-for-x86_64-baseos-rpms,rhel-9-for-x86_64-appstream-rpms,satellite-6.17-for-rhel-9-x86_64-rpms,satellite-maintenance-6.17-for-rhel-9-x86_64-rpms"
+    product_repos: "Red Hat Enterprise Linux 7 Server (RPMs),Red Hat Satellite Client 6 (for RHEL 7 Server) (RPMs)"
+    product_sets:
+        "Red Hat Enterprise Linux 7 Server (RPMs)":
+            label: "rhel-7-server-rpms"
+            product: "Red Hat Enterprise Linux Server"
+            basearch: "x86_64"
+            releasever: "7Server"
+            repo_name: "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server"
+        "Red Hat Satellite Client 6 (for RHEL 7 Server) (RPMs)":
+            label: "rhel-7-server-satellite-client-6-rpms"
+            product: "Red Hat Enterprise Linux Server"
+            basearch: "x86_64"
+            releasever: ""
+            repo_name: "Red Hat Satellite Client 6 for RHEL 7 Server RPMs x86_64"
+    stop_cmd: "satellite-maintain service stop"
+    start_cmd: "satellite-maintain service start"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ workshop_vars.myOrganization }} --foreman-initial-location {{ workshop_vars.myLocation }} --foreman-initial-admin-username {{ satellite_credentials.username }} --foreman-initial-admin-password {{ satellite_credentials.password }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
+    fs_data:
+      puppet:
+        lv:     "puppet"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/opt/puppetlabs"
+        size:   "5"
+      pulp:
+        lv:     "pulp"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/lib/pulp"
+        size:   "160"
+      pgsql:
+        lv:     "pgsql"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/lib/pgsql"
+        size:   "20"
+      cache:
+        lv:     "cache"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/cache"
+        size:   "10"
 
-
-
+  "6.18":
+    name: "satellite"
+    version: "6.18"
+    server_kickstart: "rhel96-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: "rhel-9-for-x86_64-baseos-rpms,rhel-9-for-x86_64-appstream-rpms,satellite-6.18-for-rhel-9-x86_64-rpms,satellite-maintenance-6.18-for-rhel-9-x86_64-rpms"
+    product_repos: "Red Hat Enterprise Linux 7 Server (RPMs),Red Hat Satellite Client 6 (for RHEL 7 Server) (RPMs)"
+    product_sets:
+        "Red Hat Enterprise Linux 7 Server (RPMs)":
+            label: "rhel-7-server-rpms"
+            product: "Red Hat Enterprise Linux Server"
+            basearch: "x86_64"
+            releasever: "7Server"
+            repo_name: "Red Hat Enterprise Linux 7 Server RPMs x86_64 7Server"
+        "Red Hat Satellite Client 6 (for RHEL 7 Server) (RPMs)":
+            label: "rhel-7-server-satellite-client-6-rpms"
+            product: "Red Hat Enterprise Linux Server"
+            basearch: "x86_64"
+            releasever: ""
+            repo_name: "Red Hat Satellite Client 6 for RHEL 7 Server RPMs x86_64"
+    stop_cmd: "satellite-maintain service stop"
+    start_cmd: "satellite-maintain service start"
+    install_cmd: "satellite-installer --scenario satellite --foreman-initial-organization {{ workshop_vars.myOrganization }} --foreman-initial-location {{ workshop_vars.myLocation }} --foreman-initial-admin-username {{ satellite_credentials.username }} --foreman-initial-admin-password {{ satellite_credentials.password }} --foreman-proxy-dns-managed=false --foreman-proxy-dhcp-managed=false"
+    fs_data:
+      puppet:
+        lv:     "puppet"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/opt/puppetlabs"
+        size:   "5"
+      pulp:
+        lv:     "pulp"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/lib/pulp"
+        size:   "160"
+      pgsql:
+        lv:     "pgsql"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/lib/pgsql"
+        size:   "20"
+      cache:
+        lv:     "cache"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/cache"
+        size:   "10"
+      pods:
+        lv:     "pods"
+        vg:     "{{ workshop_vars.myVG }}"
+        path:   "/var/lib/containers"
+        size:   "20"
 
 

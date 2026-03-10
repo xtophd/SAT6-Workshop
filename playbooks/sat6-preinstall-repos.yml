@@ -7,6 +7,10 @@
 
 ---
 - hosts: mySatellite, !myShelter
+  vars_files:
+    - vars-sat6.yml
+    - vars-sat6-attribs.yml
+
   tasks:
 
   - name: "SAT6-PREINSTALL-REPOS: disable all repos"
@@ -26,8 +30,10 @@
     with_items:
       - "{% for cv in sat6_assets[workshop_vars.satellite_version]['repos'].split(',') %} --enable={{ cv }}{% endfor %}"
 
-  - name: "SAT6-PREINSTALL-REPOS: enable dnf satellite module for version = 6.12"
+  - name: "SAT6-PREINSTALL-REPOS: enable RHEL 8 dnf satellite module for versions >= 6.12 and < 6.18"
     shell:
       cmd: dnf module enable -y satellite:el8
-    when: workshop_vars.satellite_version is version('6.12',operator='>=')
+    when: workshop_vars.satellite_version is version('6.12',operator='>=') and
+          workshop_vars.satellite_version is version('6.18',operator='<')
+    
     

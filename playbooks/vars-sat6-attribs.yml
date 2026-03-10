@@ -1,0 +1,416 @@
+
+
+##
+##    These vars should identify requirements to build
+##    the satellite and pool of clients.
+##
+
+
+sat6_attribs:
+
+  "6.3":
+    version: "6.3"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: 
+      - rhel-7-server-rpms
+      - rhel-7-server-satellite-6.3-rpms
+      - rhel-server-rhscl-7-rpms
+      - rhel-7-server-satellite-6.3-puppet4-rpms
+    fs_data:
+      mongodb:
+        path:   "/var/lib/mongodb"
+        size:   "50"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "100"
+      pgsql:
+        path:   "/var/lib/pgsql"
+        size:   "10"
+      squid:
+        path:   "/var/spool/squid"
+        size:   "10"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+
+  "6.4":
+    version: "6.4"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: 
+      - rhel-7-server-rpms
+      - rhel-7-server-satellite-6.4-rpms
+      - rhel-7-server-satellite-maintenance-6-rpms
+      - rhel-server-rhscl-7-rpms
+      - rhel-7-server-ansible-2.6-rpms
+    fs_data:
+      mongodb:
+        path:   "/var/lib/mongodb"
+        size:   "50"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "100"
+      pgsql:
+        path:   "/var/lib/pgsql"
+        size:   "10"
+      squid:
+        path:   "/var/spool/squid"
+        size:   "10"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+
+  "6.5":
+    version: "6.5"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: 
+      - rhel-7-server-rpms
+      - rhel-7-server-satellite-6.5-rpms
+      - rhel-7-server-satellite-maintenance-6-rpms
+      - rhel-server-rhscl-7-rpms
+      - rhel-7-server-ansible-2.6-rpms
+    fs_data:
+      mongodb:
+        path:   "/var/lib/mongodb"
+        size:   "50"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "100"
+      pgsql:
+        path:   "/var/lib/pgsql"
+        size:   "10"
+      squid:
+        path:   "/var/spool/squid"
+        size:   "10"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+
+  "6.6":
+    version: "6.6"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: 
+      - rhel-7-server-rpms
+      - rhel-7-server-satellite-6.6-rpms
+      - rhel-7-server-satellite-maintenance-6-rpms
+      - rhel-server-rhscl-7-rpms
+      - rhel-7-server-ansible-2.8-rpms
+    fs_data:
+      mongodb:
+        path:   "/var/lib/mongodb"
+        size:   "50"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "100"
+      pgsql:
+        path:   "/var/lib/pgsql"
+        size:   "10"
+      squid:
+        path:   "/var/spool/squid"
+        size:   "10"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+
+  "6.7":
+    version: "6.7"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: 
+      - rhel-7-server-rpms
+      - rhel-7-server-satellite-6.7-rpms
+      - rhel-7-server-satellite-maintenance-6-rpms
+      - rhel-server-rhscl-7-rpms
+      - rhel-7-server-ansible-2.8-rpms
+    fs_data:
+      mongodb:
+        path:   "/var/lib/mongodb"
+        size:   "50"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "100"
+      pgsql:
+        path:   "/var/lib/pgsql"
+        size:   "10"
+      squid:
+        path:   "/var/spool/squid"
+        size:   "10"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+
+  "6.8":
+    version: "6.8"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: 
+      - rhel-7-server-rpms
+      - rhel-7-server-satellite-6.8-rpms
+      - rhel-7-server-satellite-maintenance-6-rpms
+      - rhel-server-rhscl-7-rpms
+      - rhel-7-server-ansible-2.9-rpms
+    fs_data:
+      mongodb:
+        path:   "/var/lib/mongodb"
+        size:   "50"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "100"
+      pgsql:
+        path:   "/var/lib/pgsql"
+        size:   "10"
+      squid:
+        path:   "/var/spool/squid"
+        size:   "10"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+
+  "6.9":
+    version: "6.9"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: 
+      - rhel-7-server-rpms
+      - rhel-7-server-satellite-6.9-rpms
+      - rhel-7-server-satellite-maintenance-6-rpms
+      - rhel-server-rhscl-7-rpms
+      - rhel-7-server-ansible-2.9-rpms
+    fs_data:
+      mongodb:
+        path:   "/var/lib/mongodb"
+        size:   "50"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "100"
+      pgsql:
+        path:   "/var/opt/rh/rh-postgresql2"
+        size:   "10"
+      squid:
+        path:   "/var/spool/squid"
+        size:   "10"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+
+  "6.10":
+    version: "6.10"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: 
+      - rhel-7-server-rpms
+      - rhel-7-server-satellite-6.10-rpms
+      - rhel-7-server-satellite-maintenance-6-rpms
+      - rhel-server-rhscl-7-rpms
+      - rhel-7-server-ansible-2.9-rpms
+    fs_data:
+      mongodb:
+        path:   "/var/lib/mongodb"
+        size:   "50"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "100"
+      pgsql:
+        path:   "/var/opt/rh/rh-postgresql2"
+        size:   "10"
+      squid:
+        path:   "/var/spool/squid"
+        size:   "10"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+
+  "6.11":
+    version: "6.11"
+    server_kickstart: "rhel79-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: 
+      - rhel-7-server-rpms
+      - rhel-7-server-satellite-6.11-rpms
+      - rhel-7-server-satellite-maintenance-6-rpms
+      - rhel-server-rhscl-7-rpms
+      - rhel-7-server-ansible-2.9-rpms
+    fs_data:
+      mongodb:
+        path:   "/var/lib/mongodb"
+        size:   "50"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "100"
+      pgsql:
+        path:   "/var/opt/rh/rh-postgresql2"
+        size:   "10"
+      squid:
+        path:   "/var/spool/squid"
+        size:   "10"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+
+  "6.12":
+    version: "6.12"
+    server_kickstart: "rhel86-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: 
+      - rhel-8-for-x86_64-baseos-rpms
+      - rhel-8-for-x86_64-appstream-rpms
+      - satellite-6.12-for-rhel-8-x86_64-rpms
+      - satellite-maintenance-6.12-for-rhel-8-x86_64-rpms
+    fs_data:
+      puppet:
+        path:   "/opt/puppetlabs"
+        size:   "5"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "160"
+      pgsql:
+        path:   "/var/lib/pgsql"
+        size:   "20"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+
+  "6.13":
+    version: "6.13"
+    server_kickstart: "rhel86-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: 
+      - rhel-8-for-x86_64-baseos-rpms
+      - rhel-8-for-x86_64-appstream-rpms
+      - satellite-6.13-for-rhel-8-x86_64-rpms
+      - satellite-maintenance-6.13-for-rhel-8-x86_64-rpms
+    fs_data:
+      puppet:
+        path:   "/opt/puppetlabs"
+        size:   "5"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "160"
+      pgsql:
+        path:   "/var/lib/pgsql"
+        size:   "20"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+
+  "6.14":
+    version: "6.14"
+    server_kickstart: "rhel86-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: 
+      - rhel-8-for-x86_64-baseos-rpms
+      - rhel-8-for-x86_64-appstream-rpms
+      - satellite-6.14-for-rhel-8-x86_64-rpms
+      - satellite-maintenance-6.14-for-rhel-8-x86_64-rpms
+    fs_data:
+      puppet:
+        path:   "/opt/puppetlabs"
+        size:   "5"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "160"
+      pgsql:
+        path:   "/var/lib/pgsql"
+        size:   "20"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+
+  "6.15":
+    version: "6.15"
+    server_kickstart: "rhel96-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: 
+      - rhel-8-for-x86_64-baseos-rpms
+      - rhel-8-for-x86_64-appstream-rpms
+      - satellite-6.15-for-rhel-8-x86_64-rpms
+      - satellite-maintenance-6.15-for-rhel-8-x86_64-rpms
+    fs_data:
+      puppet:
+        path:   "/opt/puppetlabs"
+        size:   "5"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "160"
+      pgsql:
+        path:   "/var/lib/pgsql"
+        size:   "20"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+
+  "6.16":
+    version: "6.16"
+    server_kickstart: "rhel96-bootiso"
+    client_kickstart: "rhel79-bootiso"
+    repos: 
+      - rhel-9-for-x86_64-baseos-rpms
+      - rhel-9-for-x86_64-appstream-rpms
+      - satellite-6.16-for-rhel-9-x86_64-rpms
+      - satellite-maintenance-6.16-for-rhel-9-x86_64-rpms
+    fs_data:
+      puppet:
+        path:   "/opt/puppetlabs"
+        size:   "5"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "160"
+      pgsql:
+        path:   "/var/lib/pgsql"
+        size:   "20"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+
+  "6.17":
+    version: "6.17"
+    ks_for_server: "rhel96-bootiso"
+    ks_for_client: "rhel79-bootiso"
+    repos: 
+      - rhel-9-for-x86_64-baseos-rpms
+      - rhel-9-for-x86_64-appstream-rpms
+      - satellite-6.17-for-rhel-9-x86_64-rpms
+      - satellite-maintenance-6.17-for-rhel-9-x86_64-rpms
+    fs_data:
+      puppet:
+        path:   "/opt/puppetlabs"
+        size:   "5"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "160"
+      pgsql:
+        path:   "/var/lib/pgsql"
+        size:   "20"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+ 
+  "6.18":
+    version: "6.18"
+    ks_for_server: "rhel96-bootiso"
+    ks_for_client: "rhel79-bootiso"
+    repos: 
+      - rhel-9-for-x86_64-baseos-rpms
+      - rhel-9-for-x86_64-appstream-rpms
+      - satellite-6.18-for-rhel-9-x86_64-rpms
+      - satellite-maintenance-6.18-for-rhel-9-x86_64-rpms
+    fs_data:
+      puppet:
+        path:   "/opt/puppetlabs"
+        size:   "5"
+      pulp:
+        path:   "/var/lib/pulp"
+        size:   "160"
+      pgsql:
+        path:   "/var/lib/pgsql"
+        size:   "20"
+      cache:
+        path:   "/var/cache"
+        size:   "10"
+      pods:
+        path:   "/var/lib/containers"
+        size:   "20"
+

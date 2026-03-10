@@ -7,6 +7,10 @@
 
 ---
 - hosts: mySatellite, !myShelter
+  vars_files:
+    - vars-sat6.yml
+    - vars-sat6-attribs.yml
+
   tasks:
 
 
